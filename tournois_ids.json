@@ -3,6 +3,30 @@
     "tour": "atp",
     "id": 21364
   },
+  "ATP Kobe Challenger": {
+    "tour": "atp",
+    "id": 22206
+  },
+  "ATP Sydney Challenger": {
+    "tour": "atp",
+    "id": 22208
+  },
+  "ATP Orleans Challenger": {
+    "tour": "atp",
+    "id": 22196
+  },
+  "ATP Helsinki Challenger": {
+    "tour": "atp",
+    "id": 22203
+  },
+  "ATP Hersonissos 3 Challenger": {
+    "tour": "atp",
+    "id": 22201
+  },
+  "ATP Monastir 1 Challenger": {
+    "tour": "atp",
+    "id": 22202
+  },
   "ATP Matsuyama Challenger": {
     "tour": "atp",
     "id": 22200
@@ -19,29 +43,9 @@
     "tour": "atp",
     "id": 22198
   },
-  "ATP Orleans Challenger": {
-    "tour": "atp",
-    "id": 22196
-  },
-  "ATP Monastir 1 Challenger": {
-    "tour": "atp",
-    "id": 22202
-  },
-  "ATP BNP Paribas Nordic Open - Stockholm": {
-    "tour": "atp",
-    "id": 21363
-  },
-  "ATP Hersonissos 3 Challenger": {
-    "tour": "atp",
-    "id": 22201
-  },
   "WTA WTA Finals - Indian Wells": {
     "tour": "wta",
     "id": 16758
   },
-  "WTA Cundinamarca Open - Sopo": {
-    "tour": "wta",
-    "id": 17381
-  },
-  "_discovered_at": "2026-11-14T11:24:51.339752"
+  "_discovered_at": "2026-11-14T20:40:43.227449"
 }
