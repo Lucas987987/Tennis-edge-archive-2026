@@ -1,5 +1,5 @@
 {
-  "empreinte": "9226923d10777a8f5492eb10745ebc5b655994e9dc9b8cbf3438fe817e51180f",
+  "empreinte": "924fde95b68b95a74dc883b9aa595353ada80865283148c3bf9642ca815ec8ed",
   "choix": {
     "combinaison": {
       "adopte": true,
@@ -36,7 +36,7 @@
       "adopte": false,
       "juge_jusqua": "2026-11-13T17:00",
       "raison": "en attente : 14 nouveaux matchs depuis le dernier jugement (il en faut 30)",
-      "genere_le": "2026-11-14T20:45:34+00:00"
+      "genere_le": "2026-11-14T21:04:41+00:00"
     },
     "combinaison_feuilles": {
       "adopte": false,

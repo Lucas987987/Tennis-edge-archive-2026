@@ -1,7 +1,7 @@
 {
   "schema": "recap_apprentissage_v1",
   "semaine": "2026-W46",
-  "genere_le": "2026-11-14T20:45:34+00:00",
+  "genere_le": "2026-11-14T21:04:42+00:00",
   "statut": "a_verifier",
   "lecture_seule": true,
   "modifie_apprentissage": false,
@@ -33,7 +33,7 @@
     },
     "gouvernance": {
       "disponible": true,
-      "genere_le": "2026-11-14T20:45:34.164138+00:00"
+      "genere_le": "2026-11-14T21:04:41.961269+00:00"
     }
   },
   "sources_manquantes": [],
@@ -204,7 +204,7 @@
     "statut_gouvernance": "a_verifier",
     "initialisation": false,
     "empreinte_avant": "bb5a934368bd8be13b30aba7acd76f2056f62ff96b6bce9adabc8c104e452cc2",
-    "empreinte_apres": "9226923d10777a8f5492eb10745ebc5b655994e9dc9b8cbf3438fe817e51180f",
+    "empreinte_apres": "924fde95b68b95a74dc883b9aa595353ada80865283148c3bf9642ca815ec8ed",
     "modifie_cette_semaine": true,
     "promotions_demande_es": [],
     "promotions_retenues": [],
