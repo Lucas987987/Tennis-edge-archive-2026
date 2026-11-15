@@ -3002,6 +3002,14 @@
    "clv_pin": -10.573,
    "source_resultat": "feuille de match (TennisApi)"
   },
+  "H13|2026-11-15_jason_jung_herman_hoeyeraal|away": {
+   "gagne": null,
+   "pnl": null,
+   "pin_close": null,
+   "pin_close_adv": null,
+   "clv_pin": null,
+   "source_resultat": "inconnu"
+  },
   "H14|2026-10-16_juan_manuel_la_serna_franco_roncadelli|home": {
    "gagne": 1,
    "pnl": 1.1,
@@ -7306,6 +7314,30 @@
    "clv_pin": -4.484,
    "source_resultat": "feuille de match (TennisApi)"
   },
+  "H16B|2026-11-14_abdullah_shelbayh_daniel_milavsky|away": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.602,
+   "pin_close_adv": 2.44,
+   "clv_pin": 0.475,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16B|2026-11-14_clement_chidekh_michael_zheng|home": {
+   "gagne": 1,
+   "pnl": 0.73,
+   "pin_close": 1.763,
+   "pin_close_adv": 2.15,
+   "clv_pin": -4.533,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16B|2026-11-15_ajeet_rai_pavle_marinkov|away": {
+   "gagne": null,
+   "pnl": null,
+   "pin_close": null,
+   "pin_close_adv": null,
+   "clv_pin": null,
+   "source_resultat": "inconnu"
+  },
   "H16|2026-09-26_anna_bondar_elena_gabriela_ruse|away": {
    "gagne": 0,
    "pnl": -1.0,
@@ -9793,6 +9825,30 @@
    "pin_close_adv": 2.24,
    "clv_pin": -4.484,
    "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16|2026-11-14_abdullah_shelbayh_daniel_milavsky|away": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.602,
+   "pin_close_adv": 2.44,
+   "clv_pin": 0.475,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16|2026-11-14_clement_chidekh_michael_zheng|home": {
+   "gagne": 1,
+   "pnl": 0.73,
+   "pin_close": 1.763,
+   "pin_close_adv": 2.15,
+   "clv_pin": -4.533,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16|2026-11-15_ajeet_rai_pavle_marinkov|away": {
+   "gagne": null,
+   "pnl": null,
+   "pin_close": null,
+   "pin_close_adv": null,
+   "clv_pin": null,
+   "source_resultat": "inconnu"
   },
   "H17|2026-09-27_luca_staeheli_bruno_kuzuhara|away": {
    "gagne": 0,
