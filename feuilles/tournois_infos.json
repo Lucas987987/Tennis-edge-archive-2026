@@ -2057,6 +2057,20 @@
 "nom": "Asuncion 2, Paraguay",
 "points": null
 },
+"3546": {
+"2026": {
+"devise": "$",
+"dotation": 63000,
+"dotation_usd": 63000,
+"essais": 0,
+"joueurs": 26,
+"pays": "USA",
+"saison": 96796,
+"ville": "Champaign"
+},
+"nom": "Champaign, USA",
+"points": 75
+},
 "3554": {
 "2026": {
 "devise": "$",
