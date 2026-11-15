@@ -607,7 +607,7 @@
 "dotation": null,
 "dotation_usd": null,
 "essais": 0,
-"joueurs": 2,
+"joueurs": 26,
 "pays": null,
 "saison": 88325,
 "ville": null
@@ -2515,8 +2515,14 @@
 },
 "40049": {
 "2026": {
+"devise": "€",
+"dotation": 203900,
+"dotation_usd": 220212,
 "essais": 1,
-"saison": 108435
+"joueurs": 50,
+"pays": null,
+"saison": 108435,
+"ville": null
 },
 "nom": "Metz, France",
 "points": null
