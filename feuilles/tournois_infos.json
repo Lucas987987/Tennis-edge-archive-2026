@@ -2667,6 +2667,20 @@
 "nom": "Perugia, Italy",
 "points": null
 },
+"6591": {
+"2026": {
+"devise": null,
+"dotation": null,
+"dotation_usd": null,
+"essais": 0,
+"joueurs": null,
+"pays": "Japan",
+"saison": 96810,
+"ville": "Kobe"
+},
+"nom": "Kobe, Japan",
+"points": 100
+},
 "6626": {
 "2026": {
 "devise": "€",
