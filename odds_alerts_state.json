@@ -1851,7 +1851,7 @@
   "atp_challenger_helsinki_john_sperle_vs_moez_echargui": 11.7,
   "atp_challenger_drummondville_joshua_peck_vs_theodore_dean": 4.5,
   "atp_challenger_drummondville_adam_farag-cao_vs_hoyoung_roh": 33.9,
-  "atp_challenger_drummondville_ben_jones_vs_maximilian_marterer": 9.6,
+  "atp_challenger_drummondville_ben_jones_vs_maximilian_marterer": 15.3,
   "atp_challenger_helsinki_oskari_paldanius_vs_svyatoslav_gulin": 4.4,
   "atp_challenger_metz_jonas_forejtek_vs_lenny_couturier": 34.2,
   "atp_challenger_metz_martin_krumich_vs_matthew_william_donald": 11.3,
@@ -1872,5 +1872,10 @@
   "atp_challenger_helsinki_gabi_adrian_boitan_vs_kai_wehnelt": 4.5,
   "atp_challenger_montevideo_carlos_sanchez_jover_vs_ignacio_carou": 27.6,
   "atp_challenger_montevideo_nicolas_hollender_vs_ryan_nijboer": 31.6,
-  "atp_challenger_champaign_samuel_heredia_vs_zachary_viiala": 22.0
+  "atp_challenger_champaign_samuel_heredia_vs_zachary_viiala": 22.0,
+  "atp_challenger_kobe_masamichi_imamura_vs_yusuke_takahashi": 9.5,
+  "atp_challenger_kobe_dimitris_sakellaridis_vs_taisei_ichikawa": 5.2,
+  "atp_challenger_sydney_derek_pham_vs_pavle_marinkov": 4.3,
+  "atp_challenger_champaign_giles_hussey_vs_lucas_horve": 7.0,
+  "atp_challenger_champaign_kaylan_bigun_vs_sasha_colleu": 5.5
 }
