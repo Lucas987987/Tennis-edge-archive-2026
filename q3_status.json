@@ -1,6 +1,6 @@
 {
  "ecarts_gt_3pct": 179,
- "n_total": 2340,
+ "n_total": 2360,
  "pct_ecarts": 7.6,
  "seuil_pct": 30.0,
  "alerte": false
