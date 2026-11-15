@@ -1,13 +1,13 @@
 {
-  "n_matchs_closing": 2591,
-  "n_scorables": 1089,
-  "n_candidats": 667,
-  "n_avec_clv": 796,
-  "n_candidats_avec_clv": 505,
-  "n_clv_stale_exclus": 291,
+  "n_matchs_closing": 2626,
+  "n_scorables": 1095,
+  "n_candidats": 670,
+  "n_avec_clv": 800,
+  "n_candidats_avec_clv": 509,
+  "n_clv_stale_exclus": 292,
   "clv_close_max_mins": 60,
   "corr_score_clv": -0.015,
-  "candidats_clv_moyen": 0.5,
+  "candidats_clv_moyen": 0.53,
   "candidats_clv_pct_positif": 48.9,
   "non_candidats_clv_moyen": -0.49
 }
