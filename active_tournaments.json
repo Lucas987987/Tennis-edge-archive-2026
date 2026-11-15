@@ -1,7 +1,7 @@
 {
-  "3091": {
-    "name": "ATP Stockholm",
-    "cat": "ATP"
+  "3867": {
+    "name": "ATP Challenger Montevideo",
+    "cat": "Challenger"
   },
   "3915": {
     "name": "ATP Challenger Orleans",
@@ -9,6 +9,14 @@
   },
   "3951": {
     "name": "ATP Challenger Knoxville",
+    "cat": "Challenger"
+  },
+  "3975": {
+    "name": "ATP Challenger Champaign",
+    "cat": "Challenger"
+  },
+  "3987": {
+    "name": "ATP Challenger Helsinki",
     "cat": "Challenger"
   },
   "7793": {
@@ -19,13 +27,25 @@
     "name": "ATP Challenger Sydney",
     "cat": "Challenger"
   },
+  "12291": {
+    "name": "ATP Challenger Drummondville",
+    "cat": "Challenger"
+  },
   "13167": {
     "name": "ATP Challenger Kobe",
     "cat": "Challenger"
   },
+  "21406": {
+    "name": "ATP World Tour Finals Men Singles",
+    "cat": "ATP"
+  },
   "21422": {
     "name": "WTA Finals Women Singles",
     "cat": "WTA"
+  },
+  "31823": {
+    "name": "ATP Challenger Matsuyama",
+    "cat": "Challenger"
   },
   "47606": {
     "name": "ATP Challenger Hersonissos 3",
@@ -39,5 +59,9 @@
     "name": "ATP Challenger Brisbane 3",
     "cat": "Challenger"
   },
-  "_discovered_at": "2026-11-15T00:00:38.454994"
+  "52106": {
+    "name": "ATP Challenger Metz",
+    "cat": "Challenger"
+  },
+  "_discovered_at": "2026-11-15T06:00:44.787896"
 }
