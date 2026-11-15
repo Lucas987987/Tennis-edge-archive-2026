@@ -2099,6 +2099,20 @@
 "nom": "Liege, Belgium",
 "points": null
 },
+"3587": {
+"2026": {
+"devise": "$",
+"dotation": 107000,
+"dotation_usd": 107000,
+"essais": 0,
+"joueurs": 26,
+"pays": "Uruguay",
+"saison": 96790,
+"ville": "Montevideo"
+},
+"nom": "Montevideo, Uruguay",
+"points": 100
+},
 "35974": {
 "2026": {
 "devise": "$",
