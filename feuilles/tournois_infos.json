@@ -2113,6 +2113,20 @@
 "nom": "WTA Athens, Greece Women Singles",
 "points": 250
 },
+"3610": {
+"2026": {
+"devise": "€",
+"dotation": 203900,
+"dotation_usd": 220212,
+"essais": 0,
+"joueurs": 26,
+"pays": "Finland",
+"saison": 96798,
+"ville": "Helsinki"
+},
+"nom": "Helsinki, Finland",
+"points": 125
+},
 "3613": {
 "2026": {
 "devise": "$",
@@ -2497,6 +2511,14 @@
 "ville": null
 },
 "nom": "Sopo, Colombia",
+"points": null
+},
+"40049": {
+"2026": {
+"essais": 1,
+"saison": 108435
+},
+"nom": "Metz, France",
 "points": null
 },
 "4021": {
