@@ -2569,6 +2569,20 @@
 "nom": "Lima, Peru",
 "points": 75
 },
+"5474": {
+"2026": {
+"devise": null,
+"dotation": null,
+"dotation_usd": null,
+"essais": 0,
+"joueurs": null,
+"pays": "Australia",
+"saison": 96806,
+"ville": "Sydney"
+},
+"nom": "Sydney, Australia",
+"points": 75
+},
 "5485": {
 "2026": {
 "devise": "$",
