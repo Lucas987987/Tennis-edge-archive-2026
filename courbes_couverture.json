@@ -1,20 +1,20 @@
 {
- "ecrit_le": "2026-11-14T03:34:47",
+ "ecrit_le": "2026-11-15T03:05:17",
  "demandes": 1,
  "courbes": 1,
  "book_ne_cote_pas": 0,
- "paires_en_attente": 21125,
- "arret": "quota : 5965 restants, réservés au reste du projet (994/jour jusqu'au renouvellement)",
+ "paires_en_attente": 21589,
+ "arret": "quota : 5387 restants, réservés au reste du projet (765/jour jusqu'au renouvellement)",
  "quota": {
   "limit": 50000,
-  "remaining": 5965,
-  "reset_s": 550381
+  "remaining": 5387,
+  "reset_s": 465751
  },
- "capture_reservee_par_jour": 994,
- "conso_mesuree_par_jour": 765,
+ "capture_reservee_par_jour": 765,
+ "conso_mesuree_par_jour": 589,
  "quota_fin": {
-  "remaining": 5965,
-  "a": "2026-11-14T03:34:51"
+  "remaining": 5387,
+  "a": "2026-11-15T03:05:21"
  },
  "appris_ne_cote_jamais": [
   "pmu|Challenger",
