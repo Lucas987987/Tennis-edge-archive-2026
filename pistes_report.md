@@ -1,4 +1,4 @@
-# Pistes exploratoires — rapport du 2026-11-08
+# Pistes exploratoires — rapport du 2026-11-15
 
 ```
 ==============================================================
@@ -53,7 +53,7 @@ PISTE 3 — DÉCROISSANCE DU PRIX APRÈS ALERTE
 (exploratoire, protocole gelé le 2026-08-25 — voir frozen_pistes.json ;
  n<30 = suivi sans conclusion ; témoin = population concernée)
 ==============================================================
-  23 alertes appariées à au moins un book soft
+  0 alertes appariées à au moins un book soft
   trop tôt (<30 alertes appariées).
 
 ==============================================================
@@ -68,22 +68,15 @@ PISTE 6 — PROPAGATION ML -> MARCHÉ SET1
 (exploratoire, protocole gelé le 2026-08-25 — voir frozen_pistes.json ;
  n<30 = suivi sans conclusion ; témoin = population concernée)
 ==============================================================
-  123 paires (fenêtre alerte / fenêtre témoin même match, set1)
-  fenêtre alerte plus baissière que sa fenêtre témoin : 33/123 = 27% (IC95 20-35%)
-  IC95 entièrement > 50 % ET n>=30 -> propagation confirmée, à
-  geler alors en hypothèse de la famille principale.
-  ⚠️ RÉSULTAT INVERSE — lire avec le CONFONDEUR en tête : la
-  fenêtre témoin est plus loin du coup d'envoi que la fenêtre
-  alerte, or dérive et volatilité varient avec l'approche du
-  match. Avant toute conclusion, protocole v2 : témoin apparié
-  à la MÊME distance du match, sur des matchs SANS alerte.
+  0 paires (fenêtre alerte / fenêtre témoin même match, set1)
+  TROP TÔT (<30 paires) — protocole gelé, relance hebdomadaire.
 
 ==============================================================
 PISTE 2 — LEAD-LAG POLYMARKET vs PINNACLE
 (exploratoire, protocole gelé le 2026-08-25 — voir frozen_pistes.json ;
  n<30 = suivi sans conclusion ; témoin = population concernée)
 ==============================================================
-  28 marchés Polymarket avec ticks (fenêtre récente)
+  0 marchés Polymarket avec ticks (fenêtre récente)
   0 matchs appariés avec corrélation exploitable (|r|>0,15)
   TROP TÔT : verdict à n>=30 matchs — le protocole est gelé,
   la donnée s'accumule toute seule. Relance hebdomadaire.
@@ -93,7 +86,7 @@ CONFIRMATION PINNACLE — hypothèse ouverture précoce
 (exploratoire, protocole gelé le 2026-08-26 — voir frozen_pistes.json ;
  n<30 = suivi sans conclusion ; témoin = population concernée)
 ==============================================================
-  114 signaux POSTÉRIEURS au gel (les 62 signaux du 13-26/08 ayant servi à formuler le protocole sont exclus).
+  132 signaux POSTÉRIEURS au gel (les 62 signaux du 13-26/08 ayant servi à formuler le protocole sont exclus).
   72 signaux appariés (Pinnacle + book, fenêtre 60min)
     Pinnacle CONFIRME (>= 0.5pt en 60min)      n=  9 — sous 30, suivi sans verdict
     Pinnacle ne confirme pas                   n= 63 | CLV médian  +12.3% | refermeture 87% (IC95 77-93%)
