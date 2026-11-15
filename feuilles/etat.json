@@ -6,7 +6,7 @@
   },
   "debut": "2026-11-13",
   "fin": "2026-11-15",
-  "le": "2026-11-15T12:13:56+00:00",
+  "le": "2026-11-15T14:15:49+00:00",
   "quota_restant": 14826,
   "requetes": 23
  },
@@ -3598,7 +3598,7 @@
     }
    },
    "complet": false,
-   "maj": "2026-11-15T12:13:49+00:00",
+   "maj": "2026-11-15T14:15:41+00:00",
    "matchs": 34
   },
   "2026-11-14": {
@@ -3623,26 +3623,26 @@
     }
    },
    "complet": false,
-   "maj": "2026-11-15T12:13:51+00:00",
+   "maj": "2026-11-15T14:15:43+00:00",
    "matchs": 22
   },
   "2026-11-15": {
-   "a_reessayer": 3,
-   "avec_stats": 27,
+   "a_reessayer": 5,
+   "avec_stats": 31,
    "categories": {
     "Challenger": {
-     "avec_stats": 27,
-     "matchs": 30
+     "avec_stats": 31,
+     "matchs": 36
     }
    },
    "complet": false,
-   "maj": "2026-11-15T12:13:56+00:00",
-   "matchs": 30
+   "maj": "2026-11-15T14:15:49+00:00",
+   "matchs": 36
   }
  },
  "total": {
-  "avec_stats": 10947,
+  "avec_stats": 10951,
   "jours": 168,
-  "matchs": 11084
+  "matchs": 11090
  }
 }
