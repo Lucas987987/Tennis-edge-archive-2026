@@ -475,6 +475,20 @@
 "nom": "Villa Maria, Argentina",
 "points": null
 },
+"19567": {
+"2026": {
+"devise": "$",
+"dotation": 115000,
+"dotation_usd": 115000,
+"essais": 0,
+"joueurs": 28,
+"pays": "Chile",
+"saison": 105136,
+"ville": "Colina"
+},
+"nom": "Santiago, Chile",
+"points": 125
+},
 "19871": {
 "2026": {
 "devise": "$",
@@ -2694,6 +2708,20 @@
 },
 "nom": "Mouilleron-Le-Captif, France",
 "points": 100
+},
+"6382": {
+"2026": {
+"devise": "$",
+"dotation": 107000,
+"dotation_usd": 107000,
+"essais": 0,
+"joueurs": 26,
+"pays": "Canada",
+"saison": 96808,
+"ville": "Drummondville"
+},
+"nom": "Drummondville, Canada",
+"points": 75
 },
 "6475": {
 "2026": {
