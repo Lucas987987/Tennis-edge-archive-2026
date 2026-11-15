@@ -1,15 +1,15 @@
 {
  "schema_version": 2,
- "generated_at": "2026-11-14T11:56:48+00:00",
+ "generated_at": "2026-11-15T12:23:54+00:00",
  "sources": {
   "worker": {
    "source": "API Worker D1 /api/hypotheses (fetch_worker_snapshot.py)",
    "fichier": "worker_hypotheses_capture.json",
    "status": "ok",
-   "fetched_at": "2026-11-14T11:56:43Z",
-   "worker_generated_at": "2026-11-14T06:59:34Z"
+   "fetched_at": "2026-11-15T12:23:49Z",
+   "worker_generated_at": "2026-11-15T07:09:47Z"
   },
-  "suivi_officiel": "alertes en direct : h*_signal_log.jsonl + suivi_direct/resultats.json (verdicts_direct.json du 2026-11-14T11:56:48Z)",
+  "suivi_officiel": "alertes en direct : h*_signal_log.jsonl + suivi_direct/resultats.json (verdicts_direct.json du 2026-11-15T12:23:54Z)",
   "reconstruction": "moves_detail_hist.csv filtré par les règles gelées de validation_report.py (lignes jusqu'au 2026-11-01) — contrôle, ne juge pas",
   "rapprochement": "uid + joueur normalisé ; à défaut paire de joueurs + date ±1 jour"
  },
@@ -96,14 +96,14 @@
      "lead_moyen_h": 8.3,
      "periode": "2026-09-07 -> 2026-11-12",
      "verdict": "ne tranche pas",
-     "n_detectees": 375,
-     "n_envoyees": 374,
+     "n_detectees": 376,
+     "n_envoyees": 375,
      "n_doublons": 0,
      "n_non_envoyees_autres": 1,
      "n_denouees": 360,
-     "n_commencees": 375,
-     "n_sans_resultat": 15,
-     "sans_resultat_pct": 4,
+     "n_commencees": 376,
+     "n_sans_resultat": 16,
+     "sans_resultat_pct": 4.3,
      "verrouillable": true,
      "statut": "verrouillable (résultats complets à 96 %)"
     },
@@ -121,14 +121,14 @@
      -0.9
     ],
     "clv_n": 371,
-    "n_detectees": 375,
-    "n_envoyees": 374,
+    "n_detectees": 379,
+    "n_envoyees": 378,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 45.6,
-    "statut": "en attente de résultats (45,6 % sans résultat)",
+    "sans_resultat_pct": 45.9,
+    "statut": "en attente de résultats (45,9 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-14T11:56:48Z"
+    "genere_le": "2026-11-15T12:23:54Z"
    },
    "reconstruction": {
     "n": 243,
@@ -146,8 +146,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 375,
-    "direct_envoyees": 374,
+    "direct_detectees": 379,
+    "direct_envoyees": 378,
     "direct_doublons": 0,
     "direct_non_envoyees_autres": 1,
     "direct_denouees": 204,
@@ -159,12 +159,12 @@
      "apres_coup": 349,
      "cote_opposee_live": 1
     },
-    "direct_seule": 236,
+    "direct_seule": 240,
     "direct_seule_raisons": {
      "absent_reconstruction": 102,
      "cote_opposee_reco": 62,
      "prix_different": 11,
-     "pas_encore_reconstruit": 61
+     "pas_encore_reconstruit": 65
     },
     "inexpliques": 0
    },
@@ -8438,6 +8438,62 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-13, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Herman Hoeyeraal – Jason Jung",
+     "joueur": "Herman Hoeyeraal",
+     "uid": "2026-11-15_jason_jung_herman_hoeyeraal",
+     "cote": 2.0,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Matthew William Donald – Martin Krumich",
+     "joueur": "Matthew William Donald",
+     "uid": "2026-11-15_matthew_william_donald_martin_krumich",
+     "cote": 2.37,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Dominik Palan – Evan Zhu",
+     "joueur": "Dominik Palan",
+     "uid": "2026-11-15_evan_zhu_dominik_palan",
+     "cote": 2.8,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Filip Cristian Jianu – Carlos Taberner",
+     "joueur": "Filip Cristian Jianu",
+     "uid": "2026-11-15_filip_cristian_jianu_carlos_taberner",
+     "cote": 2.37,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -8490,14 +8546,14 @@
      1.4
     ],
     "clv_n": 137,
-    "n_detectees": 138,
-    "n_envoyees": 47,
-    "n_doublons": 91,
+    "n_detectees": 144,
+    "n_envoyees": 49,
+    "n_doublons": 95,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
     "sans_resultat_pct": 92.8,
     "statut": "en attente de résultats (92,8 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-14T11:56:48Z"
+    "genere_le": "2026-11-15T12:23:54Z"
    },
    "reconstruction": {
     "n": 193,
@@ -8515,9 +8571,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 138,
-    "direct_envoyees": 47,
-    "direct_doublons": 91,
+    "direct_detectees": 144,
+    "direct_envoyees": 49,
+    "direct_doublons": 95,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 10,
     "reconstruction_detectees": 335,
@@ -8529,12 +8585,12 @@
      "avant_canal": 189,
      "cote_opposee_live": 3
     },
-    "direct_seule": 114,
+    "direct_seule": 120,
     "direct_seule_raisons": {
      "cote_opposee_reco": 14,
      "absent_reconstruction": 37,
      "prix_different": 14,
-     "pas_encore_reconstruit": 49
+     "pas_encore_reconstruit": 55
     },
     "inexpliques": 0
    },
@@ -14554,6 +14610,90 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-13, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Nikola Slavic – Benjamin Thomas George",
+     "joueur": "Nikola Slavic",
+     "uid": "2026-11-15_benjamin_thomas_george_nikola_slavic",
+     "cote": 1.53,
+     "book": "bwin",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Colson Wells – Zach Stephens",
+     "joueur": "Colson Wells",
+     "uid": "2026-11-15_colson_wells_zach_stephens",
+     "cote": 1.54,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Liam Krall – Khololwam Montsi",
+     "joueur": "Liam Krall",
+     "uid": "2026-11-15_liam_krall_khololwam_montsi",
+     "cote": 6.2,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Dominik Palan – Evan Zhu",
+     "joueur": "Dominik Palan",
+     "uid": "2026-11-15_evan_zhu_dominik_palan",
+     "cote": 2.8,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Keshav Chopra – Nicholas Mekhael",
+     "joueur": "Keshav Chopra",
+     "uid": "2026-11-15_nicholas_mekhael_keshav_chopra",
+     "cote": 1.18,
+     "book": "bwin",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Takuya Kumasaka – Constantin Bittoun Kouzmine",
+     "joueur": "Takuya Kumasaka",
+     "uid": "2026-11-16_constantin_bittoun_kouzmine_takuya_kumasaka",
+     "cote": 1.77,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -14606,14 +14746,14 @@
      -0.4
     ],
     "clv_n": 127,
-    "n_detectees": 129,
+    "n_detectees": 130,
     "n_envoyees": 0,
-    "n_doublons": 129,
+    "n_doublons": 130,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
     "sans_resultat_pct": 72.9,
     "statut": "en attente de résultats (72,9 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-14T11:56:48Z"
+    "genere_le": "2026-11-15T12:23:54Z"
    },
    "reconstruction": {
     "n": 96,
@@ -14631,9 +14771,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 129,
+    "direct_detectees": 130,
     "direct_envoyees": 0,
-    "direct_doublons": 129,
+    "direct_doublons": 130,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 35,
     "reconstruction_detectees": 181,
@@ -14643,12 +14783,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 137
     },
-    "direct_seule": 85,
+    "direct_seule": 86,
     "direct_seule_raisons": {
      "absent_reconstruction": 24,
      "cote_opposee_reco": 16,
      "prix_different": 6,
-     "pas_encore_reconstruit": 39
+     "pas_encore_reconstruit": 40
     },
     "inexpliques": 0
    },
@@ -17826,6 +17966,20 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-13, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Dominik Palan – Evan Zhu",
+     "joueur": "Dominik Palan",
+     "uid": "2026-11-15_evan_zhu_dominik_palan",
+     "cote": 2.8,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -17837,35 +17991,35 @@
    "worker": {
     "gele_le": "2026-09-25",
     "out_of_sample": {
-     "n": 296,
-     "gains": 200,
-     "taux": 67.6,
+     "n": 298,
+     "gains": 201,
+     "taux": 67.4,
      "seuil": 67.8,
-     "ecart": -0.2,
-     "roi": -0.4,
-     "pnl": -1.3,
-     "cote_moyenne": 1.49,
+     "ecart": -0.3,
+     "roi": -0.5,
+     "pnl": -1.6,
+     "cote_moyenne": 1.5,
      "clv_moyen": -0.6,
      "clv_pin_moyen": -0.6,
-     "clv_pin_p": 0.9853,
-     "clv_n": 309,
-     "clv_positif": 40.1,
+     "clv_pin_p": 0.9871,
+     "clv_n": 311,
+     "clv_positif": 40.2,
      "lead_moyen_h": 7.7,
-     "periode": "2026-09-26 -> 2026-11-13",
+     "periode": "2026-09-26 -> 2026-11-14",
      "verdict": "ne tranche pas",
-     "n_detectees": 311,
-     "n_envoyees": 311,
+     "n_detectees": 314,
+     "n_envoyees": 314,
      "n_doublons": 0,
      "n_non_envoyees_autres": 0,
-     "n_denouees": 296,
-     "n_commencees": 311,
-     "n_sans_resultat": 15,
-     "sans_resultat_pct": 4.8,
+     "n_denouees": 298,
+     "n_commencees": 314,
+     "n_sans_resultat": 16,
+     "sans_resultat_pct": 5.1,
      "verrouillable": true,
      "statut": "verrouillable (résultats complets à 95 %)"
     },
-    "n": 296,
-    "roi": -0.4
+    "n": 298,
+    "roi": -0.5
    },
    "suivi_officiel": {
     "n": 117,
@@ -17877,15 +18031,15 @@
      -1.1,
      -0.1
     ],
-    "clv_n": 309,
-    "n_detectees": 311,
-    "n_envoyees": 311,
+    "clv_n": 311,
+    "n_detectees": 321,
+    "n_envoyees": 321,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 62.4,
-    "statut": "en attente de résultats (62,4 % sans résultat)",
+    "sans_resultat_pct": 62.9,
+    "statut": "en attente de résultats (62,9 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-14T11:56:48Z"
+    "genere_le": "2026-11-15T12:23:54Z"
    },
    "reconstruction": {
     "n": 264,
@@ -17903,8 +18057,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 311,
-    "direct_envoyees": 311,
+    "direct_detectees": 321,
+    "direct_envoyees": 321,
     "direct_doublons": 0,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 117,
@@ -17915,12 +18069,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 321
     },
-    "direct_seule": 208,
+    "direct_seule": 218,
     "direct_seule_raisons": {
      "cote_opposee_reco": 55,
      "absent_reconstruction": 62,
      "prix_different": 7,
-     "pas_encore_reconstruit": 84
+     "pas_encore_reconstruit": 94
     },
     "inexpliques": 0
    },
@@ -25396,6 +25550,146 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-13, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-14",
+     "match": "Daniel Milavsky – Abdullah Shelbayh",
+     "joueur": "Daniel Milavsky",
+     "uid": "2026-11-14_abdullah_shelbayh_daniel_milavsky",
+     "cote": 1.65,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-14, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-14",
+     "match": "Clement Chidekh – Michael Zheng",
+     "joueur": "Clement Chidekh",
+     "uid": "2026-11-14_clement_chidekh_michael_zheng",
+     "cote": 1.73,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-14, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Pavle Marinkov – Ajeet Rai",
+     "joueur": "Pavle Marinkov",
+     "uid": "2026-11-15_ajeet_rai_pavle_marinkov",
+     "cote": 1.37,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Nikola Slavic – Benjamin Thomas George",
+     "joueur": "Nikola Slavic",
+     "uid": "2026-11-15_benjamin_thomas_george_nikola_slavic",
+     "cote": 1.53,
+     "book": "bwin",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Colson Wells – Zach Stephens",
+     "joueur": "Colson Wells",
+     "uid": "2026-11-15_colson_wells_zach_stephens",
+     "cote": 1.54,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Gonzalo Villanueva – Nicolas Barrientos",
+     "joueur": "Gonzalo Villanueva",
+     "uid": "2026-11-15_gonzalo_villanueva_nicolas_barrientos",
+     "cote": 1.28,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Alexander Zverev – Rafael Jodar",
+     "joueur": "Alexander Zverev",
+     "uid": "2026-11-15_alexander_zverev_rafael_jodar",
+     "cote": 1.38,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Axel Nefve – David Bakonyi",
+     "joueur": "Axel Nefve",
+     "uid": "2026-11-15_david_bakonyi_axel_nefve",
+     "cote": 1.14,
+     "book": "bwin",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Moez Echargui – John Sperle",
+     "joueur": "Moez Echargui",
+     "uid": "2026-11-15_john_sperle_moez_echargui",
+     "cote": 1.2,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Keshav Chopra – Nicholas Mekhael",
+     "joueur": "Keshav Chopra",
+     "uid": "2026-11-15_nicholas_mekhael_keshav_chopra",
+     "cote": 1.18,
+     "book": "bwin",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -25407,35 +25701,35 @@
    "worker": {
     "gele_le": "2026-09-27",
     "out_of_sample": {
-     "n": 259,
-     "gains": 172,
-     "taux": 66.4,
+     "n": 261,
+     "gains": 173,
+     "taux": 66.3,
      "seuil": 65.9,
-     "ecart": 0.5,
-     "roi": 0.6,
-     "pnl": 1.4,
+     "ecart": 0.4,
+     "roi": 0.4,
+     "pnl": 1.2,
      "cote_moyenne": 1.53,
      "clv_moyen": -0.7,
      "clv_pin_moyen": -0.7,
-     "clv_pin_p": 0.9894,
-     "clv_n": 271,
-     "clv_positif": 38.4,
+     "clv_pin_p": 0.9908,
+     "clv_n": 273,
+     "clv_positif": 38.5,
      "lead_moyen_h": 7.8,
-     "periode": "2026-09-29 -> 2026-11-13",
+     "periode": "2026-09-29 -> 2026-11-14",
      "verdict": "ne tranche pas",
-     "n_detectees": 271,
-     "n_envoyees": 271,
+     "n_detectees": 274,
+     "n_envoyees": 274,
      "n_doublons": 0,
      "n_non_envoyees_autres": 0,
-     "n_denouees": 259,
-     "n_commencees": 271,
-     "n_sans_resultat": 12,
-     "sans_resultat_pct": 4.4,
+     "n_denouees": 261,
+     "n_commencees": 274,
+     "n_sans_resultat": 13,
+     "sans_resultat_pct": 4.7,
      "verrouillable": true,
-     "statut": "verrouillable (résultats complets à 96 %)"
+     "statut": "verrouillable (résultats complets à 95 %)"
     },
-    "n": 259,
-    "roi": 0.6
+    "n": 261,
+    "roi": 0.4
    },
    "suivi_officiel": {
     "n": 99,
@@ -25447,15 +25741,15 @@
      -1.2,
      -0.1
     ],
-    "clv_n": 271,
-    "n_detectees": 271,
-    "n_envoyees": 271,
+    "clv_n": 273,
+    "n_detectees": 277,
+    "n_envoyees": 277,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 63.5,
-    "statut": "en attente de résultats (63,5 % sans résultat)",
+    "sans_resultat_pct": 63.9,
+    "statut": "en attente de résultats (63,9 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-14T11:56:48Z"
+    "genere_le": "2026-11-15T12:23:54Z"
    },
    "reconstruction": {
     "n": 225,
@@ -25473,8 +25767,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 271,
-    "direct_envoyees": 271,
+    "direct_detectees": 277,
+    "direct_envoyees": 277,
     "direct_doublons": 0,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 99,
@@ -25485,12 +25779,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 257
     },
-    "direct_seule": 180,
+    "direct_seule": 186,
     "direct_seule_raisons": {
      "cote_opposee_reco": 50,
      "prix_different": 7,
      "absent_reconstruction": 50,
-     "pas_encore_reconstruit": 73
+     "pas_encore_reconstruit": 79
     },
     "inexpliques": 0
    },
@@ -31678,6 +31972,90 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-13, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-14",
+     "match": "Daniel Milavsky – Abdullah Shelbayh",
+     "joueur": "Daniel Milavsky",
+     "uid": "2026-11-14_abdullah_shelbayh_daniel_milavsky",
+     "cote": 1.65,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-14, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-14",
+     "match": "Clement Chidekh – Michael Zheng",
+     "joueur": "Clement Chidekh",
+     "uid": "2026-11-14_clement_chidekh_michael_zheng",
+     "cote": 1.73,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-14, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Pavle Marinkov – Ajeet Rai",
+     "joueur": "Pavle Marinkov",
+     "uid": "2026-11-15_ajeet_rai_pavle_marinkov",
+     "cote": 1.37,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Nikola Slavic – Benjamin Thomas George",
+     "joueur": "Nikola Slavic",
+     "uid": "2026-11-15_benjamin_thomas_george_nikola_slavic",
+     "cote": 1.53,
+     "book": "bwin",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Colson Wells – Zach Stephens",
+     "joueur": "Colson Wells",
+     "uid": "2026-11-15_colson_wells_zach_stephens",
+     "cote": 1.54,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Alexander Zverev – Rafael Jodar",
+     "joueur": "Alexander Zverev",
+     "uid": "2026-11-15_alexander_zverev_rafael_jodar",
+     "cote": 1.38,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -31737,7 +32115,7 @@
     "sans_resultat_pct": 60.4,
     "statut": "en attente de résultats (60,4 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-14T11:56:48Z"
+    "genere_le": "2026-11-15T12:23:54Z"
    },
    "reconstruction": {
     "n": 112,
@@ -35692,7 +36070,7 @@
     "sans_resultat_pct": 0.0,
     "statut": "verrouillable (résultats complets à 100 %)",
     "verrouillable": true,
-    "genere_le": "2026-11-14T11:56:48Z"
+    "genere_le": "2026-11-15T12:23:54Z"
    },
    "reconstruction": {
     "n": 51,
