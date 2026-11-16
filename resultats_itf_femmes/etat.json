@@ -2,11 +2,11 @@
  "dernier_passage": {
   "arret": null,
   "codes": {
-   "200": 8
+   "200": 6
   },
-  "le": "2026-11-16T01:19:52+00:00",
-  "quota_restant": 13913,
-  "requetes": 8
+  "le": "2026-11-16T03:21:58+00:00",
+  "quota_restant": 13842,
+  "requetes": 6
  },
  "jours": {
   "2026-05-25": {
@@ -707,11 +707,11 @@
   },
   "2026-11-15": {
    "complet": false,
-   "matchs": 145
+   "matchs": 146
   }
  },
  "total": {
   "jours": 175,
-  "matchs": 18794
+  "matchs": 18795
  }
 }
