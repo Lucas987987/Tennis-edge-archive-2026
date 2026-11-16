@@ -1,8 +1,8 @@
 {
- "genere_le": "2026-11-16T06:30:09",
+ "genere_le": "2026-11-16T07:29:59",
  "source": "canal_public_log.jsonl",
- "n_alertes": 664,
- "n_sans_ecart": 239,
+ "n_alertes": 665,
+ "n_sans_ecart": 240,
  "n_paris": 411,
  "n_regles": 266,
  "n_sans_resultat": 145,
