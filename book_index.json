@@ -1,48 +1,48 @@
 {
- "genere_le": "2026-11-09T17:02:30",
- "n_matchs": 4732,
- "n_mouvements": 1344,
+ "genere_le": "2026-11-16T16:40:42",
+ "n_matchs": 4707,
+ "n_mouvements": 1357,
  "min_obs": 100,
  "operateurs": [
   {
    "book": "coolbet",
-   "n_cotes": 2726,
-   "n_moves": 635,
+   "n_cotes": 2689,
+   "n_moves": 648,
    "marge_mediane": 5.33,
-   "marge_moyenne": 5.44,
+   "marge_moyenne": 5.43,
    "marge_ic": [
-    5.38,
-    5.5
+    5.37,
+    5.49
    ],
-   "retard_moyen": -0.06,
+   "retard_moyen": -0.15,
    "meilleur_prix": 82,
    "licence_fr": false
   },
   {
    "book": "unibet",
-   "n_cotes": 3252,
-   "n_moves": 822,
+   "n_cotes": 3165,
+   "n_moves": 828,
    "marge_mediane": 6.03,
-   "marge_moyenne": 6.06,
+   "marge_moyenne": 6.04,
    "marge_ic": [
-    6.03,
-    6.09
+    6.01,
+    6.06
    ],
-   "retard_moyen": 0.78,
-   "meilleur_prix": 372,
+   "retard_moyen": 0.75,
+   "meilleur_prix": 375,
    "licence_fr": false
   },
   {
    "book": "betway",
-   "n_cotes": 2594,
-   "n_moves": 615,
-   "marge_mediane": 6.06,
-   "marge_moyenne": 6.55,
+   "n_cotes": 2684,
+   "n_moves": 618,
+   "marge_mediane": 6.18,
+   "marge_moyenne": 6.59,
    "marge_ic": [
-    6.49,
-    6.6
+    6.54,
+    6.65
    ],
-   "retard_moyen": -0.78,
+   "retard_moyen": -0.81,
    "meilleur_prix": 94,
    "licence_fr": false
   },
@@ -62,55 +62,55 @@
   },
   {
    "book": "1xbet",
-   "n_cotes": 3500,
-   "n_moves": 776,
-   "marge_mediane": 7.97,
-   "marge_moyenne": 6.64,
+   "n_cotes": 3418,
+   "n_moves": 781,
+   "marge_mediane": 7.96,
+   "marge_moyenne": 6.62,
    "marge_ic": [
-    6.57,
-    6.71
+    6.56,
+    6.69
    ],
-   "retard_moyen": -0.67,
-   "meilleur_prix": 70,
+   "retard_moyen": -0.6,
+   "meilleur_prix": 72,
    "licence_fr": false
   },
   {
    "book": "leovegas",
-   "n_cotes": 2017,
-   "n_moves": 464,
+   "n_cotes": 1929,
+   "n_moves": 470,
    "marge_mediane": 6.43,
-   "marge_moyenne": 6.64,
+   "marge_moyenne": 6.63,
    "marge_ic": [
-    6.58,
-    6.7
+    6.57,
+    6.69
    ],
-   "retard_moyen": 0.42,
+   "retard_moyen": 0.37,
    "meilleur_prix": 2,
    "licence_fr": false
   },
   {
    "book": "888sport",
-   "n_cotes": 2781,
-   "n_moves": 637,
+   "n_cotes": 2739,
+   "n_moves": 645,
    "marge_mediane": 6.67,
    "marge_moyenne": 6.71,
    "marge_ic": [
     6.67,
     6.75
    ],
-   "retard_moyen": -2.21,
-   "meilleur_prix": 52,
+   "retard_moyen": -2.24,
+   "meilleur_prix": 53,
    "licence_fr": false
   },
   {
    "book": "winamax.fr",
-   "n_cotes": 1355,
+   "n_cotes": 1331,
    "n_moves": 298,
-   "marge_mediane": 6.66,
-   "marge_moyenne": 6.87,
+   "marge_mediane": 6.62,
+   "marge_moyenne": 6.82,
    "marge_ic": [
-    6.76,
-    6.98
+    6.71,
+    6.92
    ],
    "retard_moyen": -2.95,
    "meilleur_prix": 15,
@@ -118,71 +118,71 @@
   },
   {
    "book": "22bet",
-   "n_cotes": 3175,
-   "n_moves": 674,
+   "n_cotes": 3013,
+   "n_moves": 672,
    "marge_mediane": 7.96,
-   "marge_moyenne": 6.93,
+   "marge_moyenne": 6.88,
    "marge_ic": [
-    6.88,
-    6.98
+    6.83,
+    6.94
    ],
-   "retard_moyen": -0.71,
-   "meilleur_prix": 73,
+   "retard_moyen": -0.68,
+   "meilleur_prix": 74,
    "licence_fr": false
   },
   {
    "book": "bwin",
-   "n_cotes": 3543,
-   "n_moves": 781,
+   "n_cotes": 3512,
+   "n_moves": 790,
    "marge_mediane": 7.45,
-   "marge_moyenne": 7.28,
+   "marge_moyenne": 7.29,
    "marge_ic": [
-    7.24,
-    7.32
+    7.26,
+    7.33
    ],
-   "retard_moyen": -1.23,
+   "retard_moyen": -1.26,
    "meilleur_prix": 153,
    "licence_fr": false
   },
   {
    "book": "betsson",
-   "n_cotes": 3135,
-   "n_moves": 746,
-   "marge_mediane": 7.92,
-   "marge_moyenne": 7.47,
+   "n_cotes": 3123,
+   "n_moves": 755,
+   "marge_mediane": 7.94,
+   "marge_moyenne": 7.48,
    "marge_ic": [
-    7.42,
-    7.51
+    7.43,
+    7.53
    ],
-   "retard_moyen": -1.71,
-   "meilleur_prix": 60,
+   "retard_moyen": -1.7,
+   "meilleur_prix": 62,
    "licence_fr": false
   },
   {
    "book": "bet365",
-   "n_cotes": 3426,
-   "n_moves": 653,
+   "n_cotes": 3388,
+   "n_moves": 661,
    "marge_mediane": 7.35,
    "marge_moyenne": 7.68,
    "marge_ic": [
     7.48,
     7.87
    ],
-   "retard_moyen": 0.53,
-   "meilleur_prix": 160,
+   "retard_moyen": 0.55,
+   "meilleur_prix": 164,
    "licence_fr": false
   },
   {
    "book": "netbet",
-   "n_cotes": 1875,
+   "n_cotes": 1829,
    "n_moves": 333,
    "marge_mediane": 8.08,
    "marge_moyenne": 7.88,
    "marge_ic": [
-    7.83,
+    7.82,
     7.93
    ],
-   "retard_moyen": -3.4,
+   "retard_moyen": -3.38,
    "meilleur_prix": 1,
    "licence_fr": false
   },
@@ -202,13 +202,13 @@
   },
   {
    "book": "unibet.fr",
-   "n_cotes": 1294,
+   "n_cotes": 1296,
    "n_moves": 314,
    "marge_mediane": 8.9,
-   "marge_moyenne": 8.34,
+   "marge_moyenne": 8.33,
    "marge_ic": [
-    8.18,
-    8.5
+    8.17,
+    8.48
    ],
    "retard_moyen": -4.22,
    "meilleur_prix": 5,
@@ -216,26 +216,26 @@
   },
   {
    "book": "tipico",
-   "n_cotes": 2305,
-   "n_moves": 562,
+   "n_cotes": 2272,
+   "n_moves": 561,
    "marge_mediane": 9.89,
-   "marge_moyenne": 9.11,
+   "marge_moyenne": 9.12,
    "marge_ic": [
-    9.05,
-    9.17
+    9.06,
+    9.18
    ],
-   "retard_moyen": -2.6,
+   "retard_moyen": -2.59,
    "meilleur_prix": 40,
    "licence_fr": false
   },
   {
    "book": "pmu",
-   "n_cotes": 1320,
+   "n_cotes": 1294,
    "n_moves": 324,
-   "marge_mediane": 9.69,
+   "marge_mediane": 9.67,
    "marge_moyenne": 9.39,
    "marge_ic": [
-    9.3,
+    9.29,
     9.49
    ],
    "retard_moyen": -2.59,
@@ -244,15 +244,15 @@
   },
   {
    "book": "bet365.fr",
-   "n_cotes": 2712,
-   "n_moves": 540,
+   "n_cotes": 2673,
+   "n_moves": 548,
    "marge_mediane": 11.79,
-   "marge_moyenne": 11.6,
+   "marge_moyenne": 11.66,
    "marge_ic": [
-    11.35,
-    11.86
+    11.39,
+    11.92
    ],
-   "retard_moyen": -3.58,
+   "retard_moyen": -3.59,
    "meilleur_prix": 0,
    "licence_fr": true
   }
