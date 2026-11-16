@@ -1,5 +1,5 @@
 {
-  "empreinte": "5fb5af57cc299b104c9906c29408ebad6e4bc8577c9b5b197dcdfa5195d2dcd2",
+  "empreinte": "5d8e0ae715df04f6d2b8e2b42f262d3c0cce21571234862bb63043e3567a50b1",
   "choix": {
     "combinaison": {
       "adopte": true,
@@ -31,12 +31,12 @@
       "stabilite": "en place"
     },
     "combinaison_continue": {
-      "n": 1252,
+      "n": 1257,
       "min": 400,
       "adopte": false,
       "juge_jusqua": "2026-11-16T04:20",
-      "raison": "en attente : 1 nouveaux matchs depuis le dernier jugement (il en faut 30)",
-      "genere_le": "2026-11-16T14:03:50+00:00"
+      "raison": "en attente : 6 nouveaux matchs depuis le dernier jugement (il en faut 30)",
+      "genere_le": "2026-11-16T16:07:27+00:00"
     },
     "combinaison_feuilles": {
       "adopte": false,
