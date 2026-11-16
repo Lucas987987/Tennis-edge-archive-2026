@@ -12,5 +12,19 @@
   "book": "bet365",
   "envoye": false,
   "doublon_h13": true
+ },
+ "2026-11-17_arthur_nagel_dusan_lajovic": {
+  "t": "2026-11-16T20:58:14",
+  "cote": 2.65,
+  "book": "bwin",
+  "envoye": false,
+  "doublon_h13": true
+ },
+ "2026-11-17_derek_pham_hiroki_moriya": {
+  "t": "2026-11-16T20:58:14",
+  "cote": 2.63,
+  "book": "unibet",
+  "envoye": false,
+  "doublon_h13": true
  }
 }
