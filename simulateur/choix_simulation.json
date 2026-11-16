@@ -38,12 +38,12 @@
   "stabilite": "en place"
  },
  "combinaison_continue": {
-  "n": 1262,
+  "n": 1267,
   "min": 400,
   "adopte": false,
   "juge_jusqua": "2026-11-16T04:20",
-  "raison": "en attente : 11 nouveaux matchs depuis le dernier jugement (il en faut 30)",
-  "genere_le": "2026-11-16T18:10:27+00:00"
+  "raison": "en attente : 16 nouveaux matchs depuis le dernier jugement (il en faut 30)",
+  "genere_le": "2026-11-16T18:49:04+00:00"
  },
  "combinaison_feuilles": {
   "adopte": false,
