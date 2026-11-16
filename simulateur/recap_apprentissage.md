@@ -1,26 +1,26 @@
 # Récapitulatif de l’apprentissage — 2026-W47
 
-Généré le 2026-11-16T09:58:42+00:00 · état **a_verifier**.
+Généré le 2026-11-16T11:35:28+00:00 · état **a_verifier**.
 
 > Lecture seule des rapports hebdomadaires. Les populations restent séparées ; aucune adoption nouvelle n’est déclenchée par ce document et aucun gain de ROI n’est déduit.
 
 ## En bref
 
-- **Facteurs adoptés** : Adversaires communs, Contexte du tournoi, Durée, Face-à-face, Forme et fatigue, Matchup, Morphologie, Points importants, Pression, Profil de réaction, Styles, Vitesse du court, voyage.
-- **Candidats encore en attente** : dotation.
-- **Apprentissage sur nos propres pronostics** : adopte — 1248/400 matchs documentés ; sur les 35 matchs joués les plus récents : poids appris sur nos matchs 0.4439 contre poids de l'archive 0.4493 (Elo seul 0.4465) ; marge exigée 0.001 et Brier non dégradé
-- **Pronostics récents évalués** : 886 matchs ; exactitude de la combinaison 65.24 %.
+- **Facteurs adoptés** : Adversaires communs, Conditions, Contexte du tournoi, dotation, Durée, Face-à-face, Forme et fatigue, Matchup, Morphologie, Points importants, Pression, Profil de réaction, Styles, Vitesse du court, voyage.
+- **Candidats encore en attente** : Blessure.
+- **Apprentissage sur nos propres pronostics** : non_adopte — 1242/400 matchs documentés ; en attente : 29 nouveaux matchs depuis le dernier jugement (il en faut 30)
+- **Pronostics récents évalués** : 1244 matchs ; exactitude de la combinaison 65.76 %.
 - **Dérive** : accumulation ; 0 alerte(s).
 - **Champion modifié cette semaine** : oui.
 
 ## Facteurs : apprentissage et jugement
 
-Effectifs : **6949** matchs d’apprentissage et **2681** matchs de jugement.
+Effectifs : **7417** matchs d’apprentissage et **2606** matchs de jugement.
 
 | Mesure sur le jugement | Avant | Après | Variation favorable |
 |---|---:|---:|---:|
-| Log loss | 0.62849 | 0.61631 | 0.01218 |
-| Exactitude | 64.9 % | 65.7 % | 0.8 point(s) |
+| Log loss | 0.63499 | 0.6205 | 0.01449 |
+| Exactitude | 63.8 % | 65.2 % | 1.4 point(s) |
 
 La log loss est plus faible quand elle est meilleure. Ce avant/après appartient au jugement des facteurs ; il n’est pas mélangé avec les pronostics récents ci-dessous.
 
@@ -28,38 +28,36 @@ La log loss est plus faible quand elle est meilleure. Ce avant/après appartient
 
 | Groupe | Candidat brut | Statut |
 |---|---|---|
-| Blessure | non | pas adopté |
-| Match Charting | non | pas adopté |
-| Conditions | non | pas adopté |
-| densite_air | non | pas adopté |
-| dotation | oui | candidat (1/2) : adopté s'il fait encore mieux la semaine prochaine |
+| Blessure | oui | pas adopté (cumul : gain -0.0000 ± 0.0000, garde -0.0002 ± 0.0002, sur 2606 matchs ; il en faut 300 et 2 erreurs types) |
+| Match Charting | non | pas adopté (cumul : gain -0.0000 ± 0.0000, garde -0.0003 ± 0.0005, sur 2606 matchs ; il en faut 300 et 2 erreurs types) |
+| densite_air | non | pas adopté (cumul : gain +0.0000 ± 0.0000, garde -0.0001 ± 0.0000, sur 2606 matchs ; il en faut 300 et 2 erreurs types) |
 
 ## Performance des pronostics récents
 
 | Matchs | Log loss | Brier | Exactitude | Score exact | Erreur moyenne de jeux |
 |---:|---:|---:|---:|---:|---:|
-| 886 | 0.607769 | 0.21128 | 65.24 % | 2.49 % | 4.937259 |
+| 1244 | 0.602667 | 0.209654 | 65.76 % | 2.58 % | 4.914343 |
 
 ## Recalibrage : décisions séparées
 
-Direct : **890** pronostics sur **4** semaine(s). Rejoué : **5870** pronostics sur **15** semaine(s). Les deux populations ne sont jamais agrégées.
+Direct : **1248** pronostics sur **5** semaine(s). Rejoué : **6263** pronostics sur **16** semaine(s). Les deux populations ne sont jamais agrégées.
 
 | Population | Méthode | Statut | Gain pondéré de log loss | Fenêtres positives | Adopté |
 |---|---|---|---:|---:|---|
-| direct | Contraction hiérarchique | accumulation | — | 0/0 | non |
-| direct | Isotone | accumulation | — | 0/0 | non |
-| direct | Régression logistique | accumulation | — | 0/0 | non |
-| rejoue | Contraction hiérarchique | confirmation | -0.002609 | 3/7 | non |
-| rejoue | Isotone | confirmation | -0.061443 | 0/7 | non |
-| rejoue | Régression logistique | confirmation | -0.002606 | 2/7 | non |
+| direct | Contraction hiérarchique | accumulation | 7.7e-05 | 1/1 | non |
+| direct | Isotone | accumulation | -0.031115 | 0/1 | non |
+| direct | Régression logistique | accumulation | -0.000106 | 0/1 | non |
+| rejoue | Contraction hiérarchique | confirmation | -0.002251 | 4/7 | non |
+| rejoue | Isotone | confirmation | -0.05424 | 0/7 | non |
+| rejoue | Régression logistique | confirmation | -0.002291 | 2/7 | non |
 
 ## Gouvernance, dérive et champion
 
 - **Gouvernance** : a_verifier.
-- **Promotions retenues** : combinaison_continue.
-- **Promotions différées** : aucune.
-- **Dérive** : accumulation, sur 886 matchs ; alertes : aucune.
-- **Empreinte du champion** : `ee79b7493c4b9d889eddccf2e6adc130edb5a40f2297f42b67546ec0d424518b`.
+- **Promotions retenues** : modele_arbres_activite.
+- **Promotions différées** : combinaison_feuilles, combinaison_continue.
+- **Dérive** : accumulation, sur 1244 matchs ; alertes : aucune.
+- **Empreinte du champion** : `3b6df96a3f3560fc8611360eba67dd8894ea9bc9c3f9abb058d91a3bbd77537c`.
 - **Sources manquantes** : aucune.
 
 Ce récapitulatif décrit l’apprentissage et ses contrôles. Il ne constitue ni une preuve prospective supplémentaire ni une promesse d’amélioration future des vainqueurs, des scores ou du ROI.
