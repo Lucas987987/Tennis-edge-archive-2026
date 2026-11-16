@@ -3,24 +3,12 @@
     "name": "ATP Challenger Montevideo",
     "cat": "Challenger"
   },
-  "3915": {
-    "name": "ATP Challenger Orleans",
-    "cat": "Challenger"
-  },
-  "3951": {
-    "name": "ATP Challenger Knoxville",
-    "cat": "Challenger"
-  },
   "3975": {
     "name": "ATP Challenger Champaign",
     "cat": "Challenger"
   },
   "3987": {
     "name": "ATP Challenger Helsinki",
-    "cat": "Challenger"
-  },
-  "7793": {
-    "name": "ATP Challenger Lima",
     "cat": "Challenger"
   },
   "9461": {
@@ -39,29 +27,9 @@
     "name": "ATP World Tour Finals Men Singles",
     "cat": "ATP"
   },
-  "21422": {
-    "name": "WTA Finals Women Singles",
-    "cat": "WTA"
-  },
-  "31823": {
-    "name": "ATP Challenger Matsuyama",
-    "cat": "Challenger"
-  },
-  "47606": {
-    "name": "ATP Challenger Hersonissos 3",
-    "cat": "Challenger"
-  },
-  "48381": {
-    "name": "ATP Challenger Monastir",
-    "cat": "Challenger"
-  },
-  "48389": {
-    "name": "ATP Challenger Brisbane 3",
-    "cat": "Challenger"
-  },
   "52106": {
     "name": "ATP Challenger Metz",
     "cat": "Challenger"
   },
-  "_discovered_at": "2026-11-16T00:00:55.483059"
+  "_discovered_at": "2026-11-16T06:03:54.133419"
 }
