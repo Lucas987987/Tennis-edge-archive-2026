@@ -1,15 +1,15 @@
 {
  "schema_version": 2,
- "generated_at": "2026-11-15T12:23:54+00:00",
+ "generated_at": "2026-11-16T13:15:13+00:00",
  "sources": {
   "worker": {
    "source": "API Worker D1 /api/hypotheses (fetch_worker_snapshot.py)",
    "fichier": "worker_hypotheses_capture.json",
    "status": "ok",
-   "fetched_at": "2026-11-15T12:23:49Z",
-   "worker_generated_at": "2026-11-15T07:09:47Z"
+   "fetched_at": "2026-11-16T13:15:08Z",
+   "worker_generated_at": "2026-11-16T07:03:46Z"
   },
-  "suivi_officiel": "alertes en direct : h*_signal_log.jsonl + suivi_direct/resultats.json (verdicts_direct.json du 2026-11-15T12:23:54Z)",
+  "suivi_officiel": "alertes en direct : h*_signal_log.jsonl + suivi_direct/resultats.json (verdicts_direct.json du 2026-11-16T13:15:13Z)",
   "reconstruction": "moves_detail_hist.csv filtré par les règles gelées de validation_report.py (lignes jusqu'au 2026-11-01) — contrôle, ne juge pas",
   "rapprochement": "uid + joueur normalisé ; à défaut paire de joueurs + date ±1 jour"
  },
@@ -80,35 +80,35 @@
    "worker": {
     "gele_le": "2026-09-06",
     "out_of_sample": {
-     "n": 360,
-     "gains": 152,
-     "taux": 42.2,
+     "n": 364,
+     "gains": 153,
+     "taux": 42,
      "seuil": 41.7,
-     "ecart": 0.6,
-     "roi": 2,
-     "pnl": 7.1,
-     "cote_moyenne": 2.44,
+     "ecart": 0.4,
+     "roi": 1.5,
+     "pnl": 5.4,
+     "cote_moyenne": 2.43,
      "clv_moyen": -1.7,
      "clv_pin_moyen": -1.7,
      "clv_pin_p": 1,
-     "clv_n": 371,
-     "clv_positif": 36.1,
+     "clv_n": 376,
+     "clv_positif": 36.4,
      "lead_moyen_h": 8.3,
-     "periode": "2026-09-07 -> 2026-11-12",
+     "periode": "2026-09-07 -> 2026-11-15",
      "verdict": "ne tranche pas",
-     "n_detectees": 376,
-     "n_envoyees": 375,
+     "n_detectees": 382,
+     "n_envoyees": 381,
      "n_doublons": 0,
      "n_non_envoyees_autres": 1,
-     "n_denouees": 360,
-     "n_commencees": 376,
-     "n_sans_resultat": 16,
-     "sans_resultat_pct": 4.3,
+     "n_denouees": 364,
+     "n_commencees": 382,
+     "n_sans_resultat": 18,
+     "sans_resultat_pct": 4.7,
      "verrouillable": true,
-     "statut": "verrouillable (résultats complets à 96 %)"
+     "statut": "verrouillable (résultats complets à 95 %)"
     },
-    "n": 360,
-    "roi": 2
+    "n": 364,
+    "roi": 1.5
    },
    "suivi_officiel": {
     "n": 204,
@@ -120,15 +120,15 @@
      -2.5,
      -0.9
     ],
-    "clv_n": 371,
-    "n_detectees": 379,
-    "n_envoyees": 378,
+    "clv_n": 376,
+    "n_detectees": 383,
+    "n_envoyees": 382,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 45.9,
-    "statut": "en attente de résultats (45,9 % sans résultat)",
+    "sans_resultat_pct": 46.7,
+    "statut": "en attente de résultats (46,7 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-15T12:23:54Z"
+    "genere_le": "2026-11-16T13:15:13Z"
    },
    "reconstruction": {
     "n": 243,
@@ -146,8 +146,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 379,
-    "direct_envoyees": 378,
+    "direct_detectees": 383,
+    "direct_envoyees": 382,
     "direct_doublons": 0,
     "direct_non_envoyees_autres": 1,
     "direct_denouees": 204,
@@ -159,12 +159,12 @@
      "apres_coup": 349,
      "cote_opposee_live": 1
     },
-    "direct_seule": 240,
+    "direct_seule": 244,
     "direct_seule_raisons": {
      "absent_reconstruction": 102,
      "cote_opposee_reco": 62,
      "prix_different": 11,
-     "pas_encore_reconstruit": 65
+     "pas_encore_reconstruit": 69
     },
     "inexpliques": 0
    },
@@ -8494,6 +8494,62 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Yusuke Takahashi – Masamichi Imamura",
+     "joueur": "Yusuke Takahashi",
+     "uid": "2026-11-16_masamichi_imamura_yusuke_takahashi",
+     "cote": 2.39,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Kokoro Isomura – Jason Jung",
+     "joueur": "Kokoro Isomura",
+     "uid": "2026-11-16_kokoro_isomura_jason_jung",
+     "cote": 2.17,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Omar Jasika – Alex Bolt",
+     "joueur": "Omar Jasika",
+     "uid": "2026-11-16_omar_jasika_alex_bolt",
+     "cote": 2.2,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Cezar (2001) Cretu – Moez Echargui",
+     "joueur": "Cezar (2001) Cretu",
+     "uid": "2026-11-16_cezar_2001_cretu_moez_echargui",
+     "cote": 2.62,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -8505,55 +8561,55 @@
    "worker": {
     "gele_le": "2026-10-02",
     "out_of_sample": {
-     "n": 128,
-     "gains": 57,
-     "taux": 44.5,
-     "seuil": 40.8,
-     "ecart": 3.7,
-     "roi": 8.4,
-     "pnl": 10.8,
-     "cote_moyenne": 2.92,
-     "clv_moyen": -0.4,
-     "clv_pin_moyen": -0.4,
-     "clv_pin_p": 0.6519,
-     "clv_n": 137,
-     "clv_positif": 41.6,
-     "lead_moyen_h": 12.6,
-     "periode": "2026-10-16 -> 2026-11-13",
+     "n": 133,
+     "gains": 60,
+     "taux": 45.1,
+     "seuil": 41.6,
+     "ecart": 3.5,
+     "roi": 7.7,
+     "pnl": 10.3,
+     "cote_moyenne": 2.88,
+     "clv_moyen": -0.3,
+     "clv_pin_moyen": -0.3,
+     "clv_pin_p": 0.6564,
+     "clv_n": 143,
+     "clv_positif": 42.7,
+     "lead_moyen_h": 12.5,
+     "periode": "2026-10-16 -> 2026-11-15",
      "verdict": "ne tranche pas",
-     "n_detectees": 138,
-     "n_envoyees": 47,
-     "n_doublons": 91,
+     "n_detectees": 145,
+     "n_envoyees": 49,
+     "n_doublons": 96,
      "n_non_envoyees_autres": 0,
-     "n_denouees": 128,
-     "n_commencees": 138,
-     "n_sans_resultat": 10,
-     "sans_resultat_pct": 7.2,
+     "n_denouees": 133,
+     "n_commencees": 145,
+     "n_sans_resultat": 12,
+     "sans_resultat_pct": 8.3,
      "verrouillable": true,
-     "statut": "verrouillable (résultats complets à 93 %)"
+     "statut": "verrouillable (résultats complets à 92 %)"
     },
-    "n": 128,
-    "roi": 8.4
+    "n": 133,
+    "roi": 7.7
    },
    "suivi_officiel": {
     "n": 10,
     "gagnes": 4,
     "roi": -13.8,
     "pts": 4.0,
-    "clv_pin": -0.4,
+    "clv_pin": -0.3,
     "clv_pin_ic95": [
-     -2.1,
-     1.4
+     -2.0,
+     1.3
     ],
-    "clv_n": 137,
-    "n_detectees": 144,
+    "clv_n": 143,
+    "n_detectees": 145,
     "n_envoyees": 49,
-    "n_doublons": 95,
+    "n_doublons": 96,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 92.8,
-    "statut": "en attente de résultats (92,8 % sans résultat)",
+    "sans_resultat_pct": 93.1,
+    "statut": "en attente de résultats (93,1 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-15T12:23:54Z"
+    "genere_le": "2026-11-16T13:15:13Z"
    },
    "reconstruction": {
     "n": 193,
@@ -8571,9 +8627,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 144,
+    "direct_detectees": 145,
     "direct_envoyees": 49,
-    "direct_doublons": 95,
+    "direct_doublons": 96,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 10,
     "reconstruction_detectees": 335,
@@ -8585,12 +8641,12 @@
      "avant_canal": 189,
      "cote_opposee_live": 3
     },
-    "direct_seule": 120,
+    "direct_seule": 121,
     "direct_seule_raisons": {
      "cote_opposee_reco": 14,
      "absent_reconstruction": 37,
      "prix_different": 14,
-     "pas_encore_reconstruit": 55
+     "pas_encore_reconstruit": 56
     },
     "inexpliques": 0
    },
@@ -14694,6 +14750,20 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Yusuke Takahashi – Masamichi Imamura",
+     "joueur": "Yusuke Takahashi",
+     "uid": "2026-11-16_masamichi_imamura_yusuke_takahashi",
+     "cote": 2.39,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -14705,55 +14775,55 @@
    "worker": {
     "gele_le": "2026-09-25",
     "out_of_sample": {
-     "n": 119,
+     "n": 120,
      "gains": 45,
-     "taux": 37.8,
+     "taux": 37.5,
      "seuil": 36.9,
-     "ecart": 0.9,
-     "roi": 2.4,
-     "pnl": 2.9,
+     "ecart": 0.6,
+     "roi": 1.5,
+     "pnl": 1.9,
      "cote_moyenne": 2.73,
-     "clv_moyen": -1.6,
-     "clv_pin_moyen": -1.6,
-     "clv_pin_p": 0.9945,
-     "clv_n": 127,
-     "clv_positif": 37,
-     "lead_moyen_h": 9.1,
-     "periode": "2026-09-26 -> 2026-11-12",
+     "clv_moyen": -1.5,
+     "clv_pin_moyen": -1.5,
+     "clv_pin_p": 0.9941,
+     "clv_n": 128,
+     "clv_positif": 37.5,
+     "lead_moyen_h": 9.2,
+     "periode": "2026-09-26 -> 2026-11-15",
      "verdict": "ne tranche pas",
-     "n_detectees": 129,
+     "n_detectees": 130,
      "n_envoyees": 0,
-     "n_doublons": 129,
+     "n_doublons": 130,
      "n_non_envoyees_autres": 0,
-     "n_denouees": 119,
-     "n_commencees": 129,
+     "n_denouees": 120,
+     "n_commencees": 130,
      "n_sans_resultat": 10,
-     "sans_resultat_pct": 7.8,
+     "sans_resultat_pct": 7.7,
      "verrouillable": true,
      "statut": "verrouillable (résultats complets à 92 %)"
     },
-    "n": 119,
-    "roi": 2.4
+    "n": 120,
+    "roi": 1.5
    },
    "suivi_officiel": {
     "n": 35,
     "gagnes": 17,
     "roi": 30.4,
     "pts": 11.2,
-    "clv_pin": -1.6,
+    "clv_pin": -1.5,
     "clv_pin_ic95": [
-     -2.8,
-     -0.4
+     -2.7,
+     -0.3
     ],
-    "clv_n": 127,
-    "n_detectees": 130,
+    "clv_n": 128,
+    "n_detectees": 131,
     "n_envoyees": 0,
-    "n_doublons": 130,
+    "n_doublons": 131,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 72.9,
-    "statut": "en attente de résultats (72,9 % sans résultat)",
+    "sans_resultat_pct": 73.3,
+    "statut": "en attente de résultats (73,3 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-15T12:23:54Z"
+    "genere_le": "2026-11-16T13:15:13Z"
    },
    "reconstruction": {
     "n": 96,
@@ -14771,9 +14841,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 130,
+    "direct_detectees": 131,
     "direct_envoyees": 0,
-    "direct_doublons": 130,
+    "direct_doublons": 131,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 35,
     "reconstruction_detectees": 181,
@@ -14783,12 +14853,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 137
     },
-    "direct_seule": 86,
+    "direct_seule": 87,
     "direct_seule_raisons": {
      "absent_reconstruction": 24,
      "cote_opposee_reco": 16,
      "prix_different": 6,
-     "pas_encore_reconstruit": 40
+     "pas_encore_reconstruit": 41
     },
     "inexpliques": 0
    },
@@ -17980,6 +18050,20 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Cezar (2001) Cretu – Moez Echargui",
+     "joueur": "Cezar (2001) Cretu",
+     "uid": "2026-11-16_cezar_2001_cretu_moez_echargui",
+     "cote": 2.62,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -17991,34 +18075,34 @@
    "worker": {
     "gele_le": "2026-09-25",
     "out_of_sample": {
-     "n": 298,
-     "gains": 201,
-     "taux": 67.4,
-     "seuil": 67.8,
+     "n": 306,
+     "gains": 207,
+     "taux": 67.6,
+     "seuil": 68,
      "ecart": -0.3,
      "roi": -0.5,
      "pnl": -1.6,
-     "cote_moyenne": 1.5,
+     "cote_moyenne": 1.49,
      "clv_moyen": -0.6,
      "clv_pin_moyen": -0.6,
-     "clv_pin_p": 0.9871,
-     "clv_n": 311,
-     "clv_positif": 40.2,
+     "clv_pin_p": 0.987,
+     "clv_n": 320,
+     "clv_positif": 40.3,
      "lead_moyen_h": 7.7,
-     "periode": "2026-09-26 -> 2026-11-14",
+     "periode": "2026-09-26 -> 2026-11-15",
      "verdict": "ne tranche pas",
-     "n_detectees": 314,
-     "n_envoyees": 314,
+     "n_detectees": 326,
+     "n_envoyees": 326,
      "n_doublons": 0,
      "n_non_envoyees_autres": 0,
-     "n_denouees": 298,
-     "n_commencees": 314,
-     "n_sans_resultat": 16,
-     "sans_resultat_pct": 5.1,
+     "n_denouees": 306,
+     "n_commencees": 324,
+     "n_sans_resultat": 18,
+     "sans_resultat_pct": 5.6,
      "verrouillable": true,
-     "statut": "verrouillable (résultats complets à 95 %)"
+     "statut": "verrouillable (résultats complets à 94 %)"
     },
-    "n": 298,
+    "n": 306,
     "roi": -0.5
    },
    "suivi_officiel": {
@@ -18028,18 +18112,18 @@
     "pts": 1.9,
     "clv_pin": -0.6,
     "clv_pin_ic95": [
-     -1.1,
+     -1.0,
      -0.1
     ],
-    "clv_n": 311,
-    "n_detectees": 321,
-    "n_envoyees": 321,
+    "clv_n": 320,
+    "n_detectees": 327,
+    "n_envoyees": 327,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 62.9,
-    "statut": "en attente de résultats (62,9 % sans résultat)",
+    "sans_resultat_pct": 63.9,
+    "statut": "en attente de résultats (63,9 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-15T12:23:54Z"
+    "genere_le": "2026-11-16T13:15:13Z"
    },
    "reconstruction": {
     "n": 264,
@@ -18057,8 +18141,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 321,
-    "direct_envoyees": 321,
+    "direct_detectees": 327,
+    "direct_envoyees": 327,
     "direct_doublons": 0,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 117,
@@ -18069,12 +18153,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 321
     },
-    "direct_seule": 218,
+    "direct_seule": 224,
     "direct_seule_raisons": {
      "cote_opposee_reco": 55,
      "absent_reconstruction": 62,
      "prix_different": 7,
-     "pas_encore_reconstruit": 94
+     "pas_encore_reconstruit": 100
     },
     "inexpliques": 0
    },
@@ -25690,6 +25774,90 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Akira Santillan – Jake Delaney",
+     "joueur": "Akira Santillan",
+     "uid": "2026-11-16_jake_delaney_akira_santillan",
+     "cote": 1.8,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Yun Seong Chung – Benjamin Hassan",
+     "joueur": "Yun Seong Chung",
+     "uid": "2026-11-16_benjamin_hassan_yun_seong_chung",
+     "cote": 1.8,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Christopher O'Connell – Enzo Aguiard",
+     "joueur": "Christopher O'Connell",
+     "uid": "2026-11-16_enzo_aguiard_christopher_o_connell",
+     "cote": 1.12,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Bryce Nakashima – Shunsuke Mitsui",
+     "joueur": "Bryce Nakashima",
+     "uid": "2026-11-16_bryce_nakashima_shunsuke_mitsui",
+     "cote": 1.69,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Dino Prizmic – Diego Dedura",
+     "joueur": "Dino Prizmic",
+     "uid": "2026-11-16_diego_dedura_dino_prizmic",
+     "cote": 1.125,
+     "book": "888sport",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-17",
+     "match": "Benjamin Bonzi – Sascha Gueymard Wayenburg",
+     "joueur": "Benjamin Bonzi",
+     "uid": "2026-11-17_benjamin_bonzi_sascha_gueymard_wayenburg",
+     "cote": 1.4,
+     "book": "888sport",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -25701,35 +25869,35 @@
    "worker": {
     "gele_le": "2026-09-27",
     "out_of_sample": {
-     "n": 261,
-     "gains": 173,
-     "taux": 66.3,
+     "n": 265,
+     "gains": 176,
+     "taux": 66.4,
      "seuil": 65.9,
-     "ecart": 0.4,
-     "roi": 0.4,
-     "pnl": 1.2,
+     "ecart": 0.5,
+     "roi": 0.6,
+     "pnl": 1.5,
      "cote_moyenne": 1.53,
      "clv_moyen": -0.7,
      "clv_pin_moyen": -0.7,
-     "clv_pin_p": 0.9908,
-     "clv_n": 273,
-     "clv_positif": 38.5,
+     "clv_pin_p": 0.9917,
+     "clv_n": 277,
+     "clv_positif": 38.3,
      "lead_moyen_h": 7.8,
-     "periode": "2026-09-29 -> 2026-11-14",
+     "periode": "2026-09-29 -> 2026-11-15",
      "verdict": "ne tranche pas",
-     "n_detectees": 274,
-     "n_envoyees": 274,
+     "n_detectees": 281,
+     "n_envoyees": 281,
      "n_doublons": 0,
      "n_non_envoyees_autres": 0,
-     "n_denouees": 261,
-     "n_commencees": 274,
-     "n_sans_resultat": 13,
-     "sans_resultat_pct": 4.7,
+     "n_denouees": 265,
+     "n_commencees": 279,
+     "n_sans_resultat": 14,
+     "sans_resultat_pct": 5,
      "verrouillable": true,
      "statut": "verrouillable (résultats complets à 95 %)"
     },
-    "n": 261,
-    "roi": 0.4
+    "n": 265,
+    "roi": 0.6
    },
    "suivi_officiel": {
     "n": 99,
@@ -25741,15 +25909,15 @@
      -1.2,
      -0.1
     ],
-    "clv_n": 273,
-    "n_detectees": 277,
-    "n_envoyees": 277,
+    "clv_n": 277,
+    "n_detectees": 281,
+    "n_envoyees": 281,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 63.9,
-    "statut": "en attente de résultats (63,9 % sans résultat)",
+    "sans_resultat_pct": 64.5,
+    "statut": "en attente de résultats (64,5 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-15T12:23:54Z"
+    "genere_le": "2026-11-16T13:15:13Z"
    },
    "reconstruction": {
     "n": 225,
@@ -25767,8 +25935,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 277,
-    "direct_envoyees": 277,
+    "direct_detectees": 281,
+    "direct_envoyees": 281,
     "direct_doublons": 0,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 99,
@@ -25779,12 +25947,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 257
     },
-    "direct_seule": 186,
+    "direct_seule": 190,
     "direct_seule_raisons": {
      "cote_opposee_reco": 50,
      "prix_different": 7,
      "absent_reconstruction": 50,
-     "pas_encore_reconstruit": 79
+     "pas_encore_reconstruit": 83
     },
     "inexpliques": 0
    },
@@ -32056,6 +32224,62 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Akira Santillan – Jake Delaney",
+     "joueur": "Akira Santillan",
+     "uid": "2026-11-16_jake_delaney_akira_santillan",
+     "cote": 1.8,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Yun Seong Chung – Benjamin Hassan",
+     "joueur": "Yun Seong Chung",
+     "uid": "2026-11-16_benjamin_hassan_yun_seong_chung",
+     "cote": 1.8,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Bryce Nakashima – Shunsuke Mitsui",
+     "joueur": "Bryce Nakashima",
+     "uid": "2026-11-16_bryce_nakashima_shunsuke_mitsui",
+     "cote": 1.69,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-17",
+     "match": "Benjamin Bonzi – Sascha Gueymard Wayenburg",
+     "joueur": "Benjamin Bonzi",
+     "uid": "2026-11-17_benjamin_bonzi_sascha_gueymard_wayenburg",
+     "cote": 1.4,
+     "book": "888sport",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -32067,55 +32291,55 @@
    "worker": {
     "gele_le": "2026-09-25",
     "out_of_sample": {
-     "n": 97,
-     "gains": 56,
-     "taux": 57.7,
+     "n": 98,
+     "gains": 57,
+     "taux": 58.2,
      "seuil": 47,
-     "ecart": 10.8,
-     "roi": 27.4,
-     "pnl": 26.6,
-     "cote_moyenne": 2.6,
-     "clv_moyen": 2.6,
-     "clv_pin_moyen": 2.6,
+     "ecart": 11.1,
+     "roi": 28,
+     "pnl": 27.4,
+     "cote_moyenne": 2.59,
+     "clv_moyen": 2.8,
+     "clv_pin_moyen": 2.8,
      "clv_pin_p": 0,
-     "clv_n": 100,
-     "clv_positif": 70,
+     "clv_n": 102,
+     "clv_positif": 70.6,
      "lead_moyen_h": 7.5,
-     "periode": "2026-09-27 -> 2026-11-11",
+     "periode": "2026-09-27 -> 2026-11-15",
      "verdict": "SURVIT",
-     "n_detectees": 101,
-     "n_envoyees": 62,
+     "n_detectees": 105,
+     "n_envoyees": 66,
      "n_doublons": 39,
      "n_non_envoyees_autres": 0,
-     "n_denouees": 97,
-     "n_commencees": 101,
-     "n_sans_resultat": 4,
-     "sans_resultat_pct": 4,
+     "n_denouees": 98,
+     "n_commencees": 105,
+     "n_sans_resultat": 7,
+     "sans_resultat_pct": 6.7,
      "verrouillable": true,
-     "statut": "verrouillable (résultats complets à 96 %)"
+     "statut": "verrouillable (résultats complets à 93 %)"
     },
-    "n": 97,
-    "roi": 27.4
+    "n": 98,
+    "roi": 28
    },
    "suivi_officiel": {
     "n": 40,
     "gagnes": 24,
     "roi": 20.4,
     "pts": 12.4,
-    "clv_pin": 2.6,
+    "clv_pin": 2.8,
     "clv_pin_ic95": [
-     1.5,
-     3.8
+     1.6,
+     3.9
     ],
-    "clv_n": 100,
-    "n_detectees": 101,
-    "n_envoyees": 62,
-    "n_doublons": 39,
+    "clv_n": 102,
+    "n_detectees": 106,
+    "n_envoyees": 66,
+    "n_doublons": 40,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 60.4,
-    "statut": "en attente de résultats (60,4 % sans résultat)",
+    "sans_resultat_pct": 62.3,
+    "statut": "en attente de résultats (62,3 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-15T12:23:54Z"
+    "genere_le": "2026-11-16T13:15:13Z"
    },
    "reconstruction": {
     "n": 112,
@@ -32133,9 +32357,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 101,
-    "direct_envoyees": 62,
-    "direct_doublons": 39,
+    "direct_detectees": 106,
+    "direct_envoyees": 66,
+    "direct_doublons": 40,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 40,
     "reconstruction_detectees": 198,
@@ -32145,12 +32369,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 184
     },
-    "direct_seule": 87,
+    "direct_seule": 92,
     "direct_seule_raisons": {
      "absent_reconstruction": 17,
      "prix_different": 35,
      "cote_opposee_reco": 11,
-     "pas_encore_reconstruit": 24
+     "pas_encore_reconstruit": 29
     },
     "inexpliques": 0
    },
@@ -36014,6 +36238,76 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-12, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-15",
+     "match": "Zachary Viiala – Samuel Heredia",
+     "joueur": "Zachary Viiala",
+     "uid": "2026-11-15_zachary_viiala_samuel_heredia",
+     "cote": 1.84,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-15, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Akira Santillan – Jake Delaney",
+     "joueur": "Akira Santillan",
+     "uid": "2026-11-16_jake_delaney_akira_santillan",
+     "cote": 1.8,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Yun Seong Chung – Benjamin Hassan",
+     "joueur": "Yun Seong Chung",
+     "uid": "2026-11-16_benjamin_hassan_yun_seong_chung",
+     "cote": 1.8,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Christopher O'Connell – Enzo Aguiard",
+     "joueur": "Christopher O'Connell",
+     "uid": "2026-11-16_enzo_aguiard_christopher_o_connell",
+     "cote": 1.12,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-16",
+     "match": "Cezar (2001) Cretu – Moez Echargui",
+     "joueur": "Cezar (2001) Cretu",
+     "uid": "2026-11-16_cezar_2001_cretu_moez_echargui",
+     "cote": 2.62,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-16, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -36035,22 +36329,22 @@
      "cote_moyenne": 1.53,
      "clv_moyen": 1.6,
      "clv_pin_moyen": 1.6,
-     "clv_pin_p": 0.0008,
-     "clv_n": 35,
-     "clv_positif": 71.4,
+     "clv_pin_p": 0.0006,
+     "clv_n": 36,
+     "clv_positif": 72.2,
      "lead_moyen_h": 7.3,
      "periode": "2026-09-29 -> 2026-11-11",
-     "verdict": "ne tranche pas",
-     "n_detectees": 35,
-     "n_envoyees": 35,
+     "verdict": "en attente de résultats (10,5 % sans résultat)",
+     "n_detectees": 38,
+     "n_envoyees": 38,
      "n_doublons": 0,
      "n_non_envoyees_autres": 0,
      "n_denouees": 34,
-     "n_commencees": 35,
-     "n_sans_resultat": 1,
-     "sans_resultat_pct": 2.9,
-     "verrouillable": true,
-     "statut": "verrouillable (résultats complets à 97 %)"
+     "n_commencees": 38,
+     "n_sans_resultat": 4,
+     "sans_resultat_pct": 10.5,
+     "verrouillable": false,
+     "statut": "en attente de résultats (10,5 % sans résultat)"
     },
     "n": 34,
     "roi": 19.9
@@ -36070,7 +36364,7 @@
     "sans_resultat_pct": 0.0,
     "statut": "verrouillable (résultats complets à 100 %)",
     "verrouillable": true,
-    "genere_le": "2026-11-15T12:23:54Z"
+    "genere_le": "2026-11-16T13:15:13Z"
    },
    "reconstruction": {
     "n": 51,
