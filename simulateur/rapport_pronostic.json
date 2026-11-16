@@ -1,5 +1,5 @@
 {
- "genere_le": "2026-11-16T01:04:14+00:00",
+ "genere_le": "2026-11-16T03:06:56+00:00",
  "objectif": "deviner le vainqueur et le score (pas battre Pinnacle)",
  "elo": "FiveThirtyEight (Kovalchik 2016) : K = 250/(n+5)^0,4, ×1,1 en Grand Chelem ; général + surface à parts égales ; aucun réglage",
  "variantes": {
@@ -312,7 +312,7 @@
     "ajoutes": 10,
     "non_reconnus": 306,
     "doublons_ecartes": 1534,
-    "feuilles_ajoutees": 8015,
+    "feuilles_ajoutees": 8021,
     "feuilles_doublons": 2825,
     "noms_relie": 3383,
     "noms_ambigu": 305,
@@ -377,7 +377,7 @@
     "ajoutes": 10,
     "non_reconnus": 306,
     "doublons_ecartes": 1534,
-    "feuilles_ajoutees": 45968,
+    "feuilles_ajoutees": 46393,
     "feuilles_doublons": 2825,
     "noms_relie": 3383,
     "noms_ambigu": 305,
@@ -417,7 +417,7 @@
    "ajoutes": 10,
    "non_reconnus": 306,
    "doublons_ecartes": 1534,
-   "feuilles_ajoutees": 8015,
+   "feuilles_ajoutees": 8021,
    "feuilles_doublons": 2825,
    "noms_relie": 3383,
    "noms_ambigu": 305,
@@ -429,9 +429,9 @@
  },
  "itf_dans_elo": {
   "applique": true,
-  "matchs": 96213,
+  "matchs": 96632,
   "avant_archive": 57230,
-  "apres_archive": 37953,
+  "apres_archive": 38372,
   "decision": "Lucas, 28/10/2026 (étude : etude_itf_elo.json) ; retiré si l'étude échoue 2 semaines de suite",
   "suivi": "nos matchs : log loss 0.6205 avec l'ITF contre 0.6245 sans ; ATP/WTA 2024–2026 0.6065 contre 0.6069"
  },
@@ -476,14 +476,14 @@
    "note": "en place"
   }
  },
- "joueurs_relies_nom_different": 138,
+ "joueurs_relies_nom_different": 139,
  "sackmann_jusqu_au": "2026-06-02",
  "nos_matchs": 2859,
  "resultats_tennis_data_ajoutes": {
   "ajoutes": 10,
   "non_reconnus": 306,
   "doublons_ecartes": 1534,
-  "feuilles_ajoutees": 45968,
+  "feuilles_ajoutees": 46393,
   "feuilles_doublons": 2825,
   "noms_relie": 3383,
   "noms_ambigu": 305,
@@ -1060,5 +1060,5 @@
   },
   "periode": "2026-06-07 → 2026-10-22"
  },
- "duree_s": 133
+ "duree_s": 117
 }
