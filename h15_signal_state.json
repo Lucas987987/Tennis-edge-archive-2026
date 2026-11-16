@@ -16,5 +16,23 @@
   "book": "bet365",
   "envoye": true,
   "doublon": "h13"
+ },
+ "2026-11-17_arthur_nagel_dusan_lajovic": {
+  "t": "2026-11-16T20:58:14",
+  "commence": "2026-11-17T10:00:00",
+  "cote": 2.65,
+  "pin_open": 2.93,
+  "book": "bwin",
+  "envoye": true,
+  "doublon": "h13"
+ },
+ "2026-11-17_derek_pham_hiroki_moriya": {
+  "t": "2026-11-16T20:58:14",
+  "commence": "2026-11-17T00:30:00",
+  "cote": 2.63,
+  "pin_open": 2.68,
+  "book": "unibet",
+  "envoye": true,
+  "doublon": "h13"
  }
 }
