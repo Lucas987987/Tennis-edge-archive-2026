@@ -1,254 +1,105 @@
 {
- "genere_le": "2026-11-09T12:35:49+00:00",
+ "genere_le": "2026-11-16T11:34:59+00:00",
  "regle": "appris avant la dernière semaine complète, jugé sur elle ; gagnant si l'erreur de couverture baisse d'au moins 2 points, l'écart moyen ne monte pas et aucune case ne s'éloigne de 80 % de plus de 5 points ; adopté après deux semaines gagnantes de suite",
  "cas": {
-  "apprentissage": 1344,
-  "jugement": 2920,
-  "total": 4416
+  "apprentissage": 4264,
+  "jugement": 2872,
+  "total": 7224
  },
  "jugement": {
   "sans_recalage": {
    "cases": {
     "ATP|aces": {
-     "n": 128,
-     "couverture": 82.0,
-     "ecart": 2.887
+     "n": 50,
+     "couverture": 80.0,
+     "ecart": 2.57
     },
     "ATP|doubles_fautes": {
-     "n": 128,
-     "couverture": 92.2,
-     "ecart": 1.429
+     "n": 50,
+     "couverture": 92.0,
+     "ecart": 1.214
     },
     "ATP|premiere_pct": {
-     "n": 128,
-     "couverture": 74.2,
-     "ecart": 6.279
+     "n": 50,
+     "couverture": 78.0,
+     "ecart": 6.057
     },
     "ATP|breaks": {
-     "n": 128,
-     "couverture": 90.6,
-     "ecart": 1.207
-    },
-    "WTA|aces": {
-     "n": 110,
-     "couverture": 89.1,
-     "ecart": 1.454
-    },
-    "WTA|doubles_fautes": {
-     "n": 110,
-     "couverture": 84.5,
-     "ecart": 1.944
-    },
-    "WTA|premiere_pct": {
-     "n": 110,
-     "couverture": 67.3,
-     "ecart": 7.241
-    },
-    "WTA|breaks": {
-     "n": 110,
-     "couverture": 90.0,
-     "ecart": 1.425
+     "n": 50,
+     "couverture": 92.0,
+     "ecart": 1.056
     },
     "CH|aces": {
-     "n": 492,
-     "couverture": 80.3,
-     "ecart": 2.213
+     "n": 642,
+     "couverture": 80.4,
+     "ecart": 2.379
     },
     "CH|doubles_fautes": {
-     "n": 492,
-     "couverture": 90.4,
-     "ecart": 1.389
+     "n": 642,
+     "couverture": 85.8,
+     "ecart": 1.625
     },
     "CH|premiere_pct": {
-     "n": 492,
-     "couverture": 80.5,
-     "ecart": 5.831
+     "n": 642,
+     "couverture": 83.3,
+     "ecart": 5.629
     },
     "CH|breaks": {
-     "n": 492,
-     "couverture": 92.3,
-     "ecart": 1.358
+     "n": 642,
+     "couverture": 89.7,
+     "ecart": 1.323
     }
    },
-   "erreur_couverture": 7.53,
-   "ecart_moyen": 2.8881
+   "erreur_couverture": 5.65,
+   "ecart_moyen": 2.7316
   },
   "avec_recalage": {
    "cases": {
     "ATP|aces": {
-     "n": 128,
-     "couverture": 89.8,
-     "ecart": 2.894
+     "n": 50,
+     "couverture": 80.0,
+     "ecart": 2.678
     },
     "ATP|doubles_fautes": {
-     "n": 128,
-     "couverture": 79.7,
-     "ecart": 1.273
+     "n": 50,
+     "couverture": 78.0,
+     "ecart": 1.13
     },
     "ATP|premiere_pct": {
-     "n": 128,
-     "couverture": 81.2,
-     "ecart": 5.356
+     "n": 50,
+     "couverture": 74.0,
+     "ecart": 6.161
     },
     "ATP|breaks": {
-     "n": 128,
-     "couverture": 75.8,
-     "ecart": 1.207
-    },
-    "WTA|aces": {
-     "n": 110,
-     "couverture": 84.5,
-     "ecart": 1.434
-    },
-    "WTA|doubles_fautes": {
-     "n": 110,
-     "couverture": 84.5,
-     "ecart": 1.885
-    },
-    "WTA|premiere_pct": {
-     "n": 110,
-     "couverture": 80.9,
-     "ecart": 6.918
-    },
-    "WTA|breaks": {
-     "n": 110,
-     "couverture": 90.0,
-     "ecart": 1.425
+     "n": 50,
+     "couverture": 88.0,
+     "ecart": 1.04
     },
     "CH|aces": {
-     "n": 492,
-     "couverture": 80.3,
-     "ecart": 2.225
+     "n": 642,
+     "couverture": 80.4,
+     "ecart": 2.386
     },
     "CH|doubles_fautes": {
-     "n": 492,
-     "couverture": 82.7,
-     "ecart": 1.329
+     "n": 642,
+     "couverture": 76.8,
+     "ecart": 1.541
     },
     "CH|premiere_pct": {
-     "n": 492,
-     "couverture": 81.7,
-     "ecart": 5.659
+     "n": 642,
+     "couverture": 80.7,
+     "ecart": 5.638
     },
     "CH|breaks": {
-     "n": 492,
-     "couverture": 80.3,
-     "ecart": 1.355
+     "n": 642,
+     "couverture": 81.9,
+     "ecart": 1.318
     }
    },
-   "erreur_couverture": 3.37,
-   "ecart_moyen": 2.7467
+   "erreur_couverture": 2.78,
+   "ecart_moyen": 2.7365
   },
   "coefs_juges": {
-   "ATP": {
-    "aces": {
-     "delta": 0.549,
-     "largeur": 1.25,
-     "n": 84
-    },
-    "doubles_fautes": {
-     "delta": -0.289,
-     "largeur": 0.65,
-     "n": 84
-    },
-    "premiere_pct": {
-     "delta": 2.077,
-     "largeur": 1.05,
-     "n": 84
-    },
-    "breaks": {
-     "delta": -0.046,
-     "largeur": 0.7,
-     "n": 84
-    }
-   },
-   "WTA": {
-    "aces": {
-     "delta": -0.115,
-     "largeur": 0.8,
-     "n": 70
-    },
-    "doubles_fautes": {
-     "delta": -0.288,
-     "largeur": 1.0,
-     "n": 70
-    },
-    "premiere_pct": {
-     "delta": 1.678,
-     "largeur": 1.3,
-     "n": 70
-    },
-    "breaks": {
-     "delta": 0.046,
-     "largeur": 1.0,
-     "n": 70
-    }
-   },
-   "CH": {
-    "aces": {
-     "delta": 0.091,
-     "largeur": 1.0,
-     "n": 182
-    },
-    "doubles_fautes": {
-     "delta": -0.302,
-     "largeur": 0.7,
-     "n": 182
-    },
-    "premiere_pct": {
-     "delta": 1.146,
-     "largeur": 1.0,
-     "n": 182
-    },
-    "breaks": {
-     "delta": -0.204,
-     "largeur": 0.75,
-     "n": 182
-    }
-   }
-  }
- },
- "direct": {
-  "ATP|premiere_pct": {
-   "cas_semaine": 128,
-   "ecart_sans": 6.279,
-   "ecart_avec": 5.356,
-   "semaines_pires": 0,
-   "retire": false
-  },
-  "WTA|premiere_pct": {
-   "cas_semaine": 110,
-   "ecart_sans": 7.241,
-   "ecart_avec": 6.918,
-   "semaines_pires": 0,
-   "retire": false
-  },
-  "CH|premiere_pct": {
-   "cas_semaine": 492,
-   "ecart_sans": 5.831,
-   "ecart_avec": 5.659,
-   "semaines_pires": 0,
-   "retire": false
-  },
-  "ATP|aces": {
-   "cas_semaine": 128,
-   "ecart_sans": 2.887,
-   "ecart_avec": 2.894,
-   "semaines_pires": 1,
-   "retire": false
-  },
-  "WTA|aces": {
-   "cas_semaine": 110,
-   "ecart_sans": 1.454,
-   "ecart_avec": 1.434,
-   "semaines_pires": 0,
-   "retire": false
-  }
- },
- "decision": {
-  "adopte": false,
-  "raison": "semaine du 2026-11-02 (2920 cas) : erreur de couverture 7.53 → 3.37 (gain +4.16) ; écart moyen 2.8881 → 2.7467 ; pire case +7.8 pts — pas adopté",
-  "coefs": {
    "ATP": {
     "aces": {
      "delta": 0.535,
@@ -256,13 +107,13 @@
      "n": 212
     },
     "doubles_fautes": {
-     "delta": -0.56,
-     "largeur": 0.55,
+     "delta": -0.233,
+     "largeur": 0.7,
      "n": 212
     },
     "premiere_pct": {
-     "delta": 3.024,
-     "largeur": 1.0,
+     "delta": 2.209,
+     "largeur": 0.95,
      "n": 212
     },
     "breaks": {
@@ -313,6 +164,368 @@
      "delta": -0.175,
      "largeur": 0.75,
      "n": 674
+    }
+   }
+  }
+ },
+ "direct": {
+  "ATP|premiere_pct": {
+   "cas_semaine": 50,
+   "ecart_sans": 6.057,
+   "ecart_avec": 6.161,
+   "semaines_pires": 1,
+   "retire": false
+  },
+  "WTA|premiere_pct": {
+   "cas_semaine": 26,
+   "ecart_sans": 7.241,
+   "ecart_avec": 6.918,
+   "semaines_pires": 0,
+   "retire": false,
+   "note": "trop peu de cas : inchangé"
+  },
+  "CH|premiere_pct": {
+   "cas_semaine": 642,
+   "ecart_sans": 5.629,
+   "ecart_avec": 5.638,
+   "semaines_pires": 1,
+   "retire": false
+  },
+  "ATP|aces": {
+   "cas_semaine": 50,
+   "ecart_sans": 2.57,
+   "ecart_avec": 2.678,
+   "semaines_pires": 2,
+   "retire": true
+  },
+  "WTA|aces": {
+   "cas_semaine": 26,
+   "ecart_sans": 1.454,
+   "ecart_avec": 1.434,
+   "semaines_pires": 0,
+   "retire": false,
+   "note": "trop peu de cas : inchangé"
+  }
+ },
+ "amplification_profils": {
+  "depuis": "2026-11-12",
+  "cases": {
+   "ATP|premiere_pct": {
+    "cas": 16,
+    "pente": 1.825,
+    "erreur_type": 0.452
+   },
+   "ATP|doubles_fautes": {
+    "cas": 16,
+    "pente": 0.28,
+    "erreur_type": 1.049
+   },
+   "ATP|breaks": {
+    "cas": 16,
+    "pente": 0.425,
+    "erreur_type": 0.621
+   },
+   "WTA|premiere_pct": {
+    "cas": 12,
+    "pente": -0.311,
+    "erreur_type": 1.606
+   },
+   "WTA|doubles_fautes": {
+    "cas": 12,
+    "pente": 1.625,
+    "erreur_type": 0.841
+   },
+   "WTA|breaks": {
+    "cas": 12,
+    "pente": 0.361,
+    "erreur_type": 0.809
+   },
+   "CH|premiere_pct": {
+    "cas": 286,
+    "pente": 0.945,
+    "erreur_type": 0.136
+   },
+   "CH|aces": {
+    "cas": 286,
+    "pente": 0.855,
+    "erreur_type": 0.066
+   },
+   "CH|doubles_fautes": {
+    "cas": 286,
+    "pente": 0.856,
+    "erreur_type": 0.17
+   },
+   "CH|breaks": {
+    "cas": 286,
+    "pente": 0.917,
+    "erreur_type": 0.101
+   }
+  },
+  "retirees": []
+ },
+ "salle": {
+  "depuis": "2026-11-12",
+  "cases": {
+   "ATP|doubles_fautes": {
+    "cas_en_salle": 16,
+    "ecart_avec": 1.185,
+    "ecart_sans": 1.488,
+    "retire": false
+   },
+   "ATP|premiere_pct": {
+    "cas_en_salle": 16,
+    "ecart_avec": 4.567,
+    "ecart_sans": 4.752,
+    "retire": false
+   }
+  }
+ },
+ "cases": {
+  "ATP|aces": {
+   "variante": "sans",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "semaine": {
+    "sans": {
+     "couverture": 80.0,
+     "ecart": 2.57
+    },
+    "delta": {
+     "couverture": 80.0,
+     "ecart": 2.678
+    },
+    "complet": {
+     "couverture": 80.0,
+     "ecart": 2.678
+    }
+   }
+  },
+  "ATP|doubles_fautes": {
+   "variante": "complet",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "semaine": {
+    "sans": {
+     "couverture": 92.0,
+     "ecart": 1.214
+    },
+    "delta": {
+     "couverture": 92.0,
+     "ecart": 1.13
+    },
+    "complet": {
+     "couverture": 78.0,
+     "ecart": 1.13
+    }
+   }
+  },
+  "ATP|premiere_pct": {
+   "variante": "sans",
+   "depuis": "2026-11-16",
+   "semaines_pires": 0,
+   "semaine": {
+    "sans": {
+     "couverture": 78.0,
+     "ecart": 6.057
+    },
+    "delta": {
+     "couverture": 76.0,
+     "ecart": 6.161
+    },
+    "complet": {
+     "couverture": 74.0,
+     "ecart": 6.161
+    }
+   }
+  },
+  "ATP|breaks": {
+   "variante": "complet",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "semaine": {
+    "sans": {
+     "couverture": 92.0,
+     "ecart": 1.056
+    },
+    "delta": {
+     "couverture": 92.0,
+     "ecart": 1.04
+    },
+    "complet": {
+     "couverture": 88.0,
+     "ecart": 1.04
+    }
+   }
+  },
+  "WTA|aces": {
+   "variante": "complet",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "note": "semaine : 26 cas, inchangé"
+  },
+  "WTA|doubles_fautes": {
+   "variante": "sans",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "note": "semaine : 26 cas, inchangé"
+  },
+  "WTA|premiere_pct": {
+   "variante": "complet",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "note": "semaine : 26 cas, inchangé"
+  },
+  "WTA|breaks": {
+   "variante": "sans",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "note": "semaine : 26 cas, inchangé"
+  },
+  "CH|aces": {
+   "variante": "sans",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "semaine": {
+    "sans": {
+     "couverture": 80.4,
+     "ecart": 2.379
+    },
+    "delta": {
+     "couverture": 80.4,
+     "ecart": 2.386
+    },
+    "complet": {
+     "couverture": 80.4,
+     "ecart": 2.386
+    }
+   }
+  },
+  "CH|doubles_fautes": {
+   "variante": "complet",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "semaine": {
+    "sans": {
+     "couverture": 85.8,
+     "ecart": 1.625
+    },
+    "delta": {
+     "couverture": 85.8,
+     "ecart": 1.541
+    },
+    "complet": {
+     "couverture": 76.8,
+     "ecart": 1.541
+    }
+   }
+  },
+  "CH|premiere_pct": {
+   "variante": "delta",
+   "depuis": "2026-11-11",
+   "semaines_pires": 1,
+   "semaine": {
+    "sans": {
+     "couverture": 83.3,
+     "ecart": 5.629
+    },
+    "delta": {
+     "couverture": 82.1,
+     "ecart": 5.638
+    },
+    "complet": {
+     "couverture": 80.7,
+     "ecart": 5.638
+    }
+   }
+  },
+  "CH|breaks": {
+   "variante": "complet",
+   "depuis": "2026-11-11",
+   "semaines_pires": 0,
+   "semaine": {
+    "sans": {
+     "couverture": 89.7,
+     "ecart": 1.323
+    },
+    "delta": {
+     "couverture": 89.7,
+     "ecart": 1.318
+    },
+    "complet": {
+     "couverture": 81.9,
+     "ecart": 1.318
+    }
+   }
+  }
+ },
+ "decision": {
+  "adopte": false,
+  "raison": "semaine du 2026-11-09 (2872 cas) : erreur de couverture 5.65 → 2.78 (gain +2.87) ; écart moyen 2.7316 → 2.7365 ; pire case +4.0 pts — pas adopté",
+  "coefs": {
+   "ATP": {
+    "aces": {
+     "delta": 0.44,
+     "largeur": 1.0,
+     "n": 262
+    },
+    "doubles_fautes": {
+     "delta": -0.246,
+     "largeur": 0.7,
+     "n": 262
+    },
+    "premiere_pct": {
+     "delta": 2.042,
+     "largeur": 1.0,
+     "n": 262
+    },
+    "breaks": {
+     "delta": -0.108,
+     "largeur": 0.7,
+     "n": 262
+    }
+   },
+   "WTA": {
+    "aces": {
+     "delta": -0.128,
+     "largeur": 0.75,
+     "n": 206
+    },
+    "doubles_fautes": {
+     "delta": -0.225,
+     "largeur": 1.0,
+     "n": 206
+    },
+    "premiere_pct": {
+     "delta": 1.788,
+     "largeur": 1.3,
+     "n": 206
+    },
+    "breaks": {
+     "delta": 0.0,
+     "largeur": 0.8,
+     "n": 206
+    }
+   },
+   "CH": {
+    "aces": {
+     "delta": 0.246,
+     "largeur": 0.95,
+     "n": 1316
+    },
+    "doubles_fautes": {
+     "delta": -0.374,
+     "largeur": 0.7,
+     "n": 1316
+    },
+    "premiere_pct": {
+     "delta": 1.048,
+     "largeur": 0.95,
+     "n": 1316
+    },
+    "breaks": {
+     "delta": -0.171,
+     "largeur": 0.75,
+     "n": 1316
     }
    }
   },

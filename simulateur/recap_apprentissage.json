@@ -1,7 +1,7 @@
 {
   "schema": "recap_apprentissage_v1",
   "semaine": "2026-W47",
-  "genere_le": "2026-11-16T09:58:42+00:00",
+  "genere_le": "2026-11-16T11:35:28+00:00",
   "statut": "a_verifier",
   "lecture_seule": true,
   "modifie_apprentissage": false,
@@ -9,11 +9,11 @@
   "sources": {
     "facteurs": {
       "disponible": true,
-      "genere_le": "2026-11-09T11:34:48+00:00"
+      "genere_le": "2026-11-16T10:56:28+00:00"
     },
     "choix": {
       "disponible": true,
-      "genere_le": "2026-11-09T11:03:02+00:00"
+      "genere_le": "2026-11-16T10:37:08+00:00"
     },
     "stabilite": {
       "disponible": true,
@@ -21,32 +21,34 @@
     },
     "evaluation": {
       "disponible": true,
-      "genere_le": "2026-11-09T12:36:22.534361+00:00"
+      "genere_le": "2026-11-16T11:35:23.034952+00:00"
     },
     "recalibrage": {
       "disponible": true,
-      "genere_le": "2026-11-09T12:36:22.271987+00:00"
+      "genere_le": "2026-11-16T11:35:22.820739+00:00"
     },
     "derive": {
       "disponible": true,
-      "genere_le": "2026-11-09T12:36:22+00:00"
+      "genere_le": "2026-11-16T11:35:23+00:00"
     },
     "gouvernance": {
       "disponible": true,
-      "genere_le": "2026-11-16T09:58:42.226997+00:00"
+      "genere_le": "2026-11-16T11:35:28.237165+00:00"
     }
   },
   "sources_manquantes": [],
   "facteurs": {
-    "apprentissage_n": 6949,
-    "jugement_n": 2681,
+    "apprentissage_n": 7417,
+    "jugement_n": 2606,
     "fenetres": {
       "apprentissage": "2026-06-01",
-      "jugement": "2026-09-28"
+      "jugement": "2026-10-05"
     },
     "adoptes": [
       "adversaires_communs",
+      "conditions",
       "contexte_tournoi",
+      "dotation",
       "duree",
       "face_a_face",
       "forme_fatigue",
@@ -63,44 +65,32 @@
       {
         "nom": "blessure",
         "libelle": "Blessure",
-        "adopte_brut": false,
-        "statut": "pas adopté"
+        "adopte_brut": true,
+        "statut": "pas adopté (cumul : gain -0.0000 ± 0.0000, garde -0.0002 ± 0.0002, sur 2606 matchs ; il en faut 300 et 2 erreurs types)"
       },
       {
         "nom": "charting",
         "libelle": "Match Charting",
         "adopte_brut": false,
-        "statut": "pas adopté"
-      },
-      {
-        "nom": "conditions",
-        "libelle": "Conditions",
-        "adopte_brut": false,
-        "statut": "pas adopté"
+        "statut": "pas adopté (cumul : gain -0.0000 ± 0.0000, garde -0.0003 ± 0.0005, sur 2606 matchs ; il en faut 300 et 2 erreurs types)"
       },
       {
         "nom": "densite_air",
         "libelle": "densite_air",
         "adopte_brut": false,
-        "statut": "pas adopté"
-      },
-      {
-        "nom": "dotation",
-        "libelle": "dotation",
-        "adopte_brut": true,
-        "statut": "candidat (1/2) : adopté s'il fait encore mieux la semaine prochaine"
+        "statut": "pas adopté (cumul : gain +0.0000 ± 0.0000, garde -0.0001 ± 0.0000, sur 2606 matchs ; il en faut 300 et 2 erreurs types)"
       }
     ],
     "candidats_en_attente": [
-      "dotation"
+      "blessure"
     ],
     "avant_apres_jugement": {
-      "log_loss_avant": 0.62849,
-      "log_loss_apres": 0.61631,
-      "gain_log_loss": 0.01218,
-      "exactitude_avant_pct": 64.9,
-      "exactitude_apres_pct": 65.7,
-      "gain_exactitude_points": 0.8
+      "log_loss_avant": 0.63499,
+      "log_loss_apres": 0.6205,
+      "gain_log_loss": 0.01449,
+      "exactitude_avant_pct": 63.8,
+      "exactitude_apres_pct": 65.2,
+      "gain_exactitude_points": 1.4
     },
     "population": "évaluation des facteurs, distincte des seuls pronostics directs récents"
   },
@@ -134,60 +124,60 @@
     "population": "premiers pronostics figés avec simulation et Elo, résultats ultérieurs"
   },
   "performance_recente": {
-    "matchs": 886,
-    "log_loss": 0.607769,
-    "brier": 0.21128,
-    "exactitude": 0.65237,
-    "score_exact": 0.024915,
-    "jeux_mae": 4.937259,
+    "matchs": 1244,
+    "log_loss": 0.602667,
+    "brier": 0.209654,
+    "exactitude": 0.657556,
+    "score_exact": 0.025786,
+    "jeux_mae": 4.914343,
     "population": "pronostics récents évalués ; ne pas confondre avec le jugement des facteurs"
   },
   "recalibrage": {
     "direct": {
-      "n": 890,
-      "semaines": 4,
+      "n": 1248,
+      "semaines": 5,
       "decisions": [
         {
           "nom": "contraction_hierarchique",
           "libelle": "Contraction hiérarchique",
           "adopte": false,
           "statut": "accumulation",
-          "gain_log_loss_pondere": null,
-          "fenetres_positives": 0,
-          "fenetres": 0
+          "gain_log_loss_pondere": 7.7e-05,
+          "fenetres_positives": 1,
+          "fenetres": 1
         },
         {
           "nom": "isotone",
           "libelle": "Isotone",
           "adopte": false,
           "statut": "accumulation",
-          "gain_log_loss_pondere": null,
+          "gain_log_loss_pondere": -0.031115,
           "fenetres_positives": 0,
-          "fenetres": 0
+          "fenetres": 1
         },
         {
           "nom": "logistique",
           "libelle": "Régression logistique",
           "adopte": false,
           "statut": "accumulation",
-          "gain_log_loss_pondere": null,
+          "gain_log_loss_pondere": -0.000106,
           "fenetres_positives": 0,
-          "fenetres": 0
+          "fenetres": 1
         }
       ],
       "champion_actif_modifie": false
     },
     "rejoue": {
-      "n": 5870,
-      "semaines": 15,
+      "n": 6263,
+      "semaines": 16,
       "decisions": [
         {
           "nom": "contraction_hierarchique",
           "libelle": "Contraction hiérarchique",
           "adopte": false,
           "statut": "confirmation",
-          "gain_log_loss_pondere": -0.002609,
-          "fenetres_positives": 3,
+          "gain_log_loss_pondere": -0.002251,
+          "fenetres_positives": 4,
           "fenetres": 7
         },
         {
@@ -195,7 +185,7 @@
           "libelle": "Isotone",
           "adopte": false,
           "statut": "confirmation",
-          "gain_log_loss_pondere": -0.061443,
+          "gain_log_loss_pondere": -0.05424,
           "fenetres_positives": 0,
           "fenetres": 7
         },
@@ -204,7 +194,7 @@
           "libelle": "Régression logistique",
           "adopte": false,
           "statut": "confirmation",
-          "gain_log_loss_pondere": -0.002606,
+          "gain_log_loss_pondere": -0.002291,
           "fenetres_positives": 2,
           "fenetres": 7
         }
@@ -214,38 +204,31 @@
   },
   "derive": {
     "statut": "accumulation",
-    "n": 886,
-    "date_de_reference": "2026-11-09",
+    "n": 1244,
+    "date_de_reference": "2026-11-16",
     "alertes": []
   },
   "champion": {
     "statut_gouvernance": "a_verifier",
     "initialisation": false,
     "empreinte_avant": "994d5e11a1ee0563527bcf6cb82dcf457a2bdbd24a1c955a46a07141994413f1",
-    "empreinte_apres": "ee79b7493c4b9d889eddccf2e6adc130edb5a40f2297f42b67546ec0d424518b",
+    "empreinte_apres": "3b6df96a3f3560fc8611360eba67dd8894ea9bc9c3f9abb058d91a3bbd77537c",
     "modifie_cette_semaine": true,
     "promotions_demande_es": [
+      "modele_arbres_activite",
+      "combinaison_feuilles",
       "combinaison_continue"
     ],
     "promotions_retenues": [
+      "modele_arbres_activite"
+    ],
+    "promotions_differees": [
+      "combinaison_feuilles",
       "combinaison_continue"
     ],
-    "promotions_differees": [],
     "periodes": {
       "juge_jusqua": "2026-11-16T04:20",
-      "jugement_courant": {
-        "n": 35,
-        "depuis": "2026-11-15T17:10",
-        "jusqua": "2026-11-16T04:20",
-        "log_loss_continu": 0.44392,
-        "log_loss_poids_archive": 0.44935,
-        "log_loss_elo_seul": 0.4465,
-        "brier_continu": 0.13948,
-        "brier_poids_archive": 0.14158,
-        "brier_elo_seul": 0.14169,
-        "gain_log_loss": 0.005429,
-        "marge_requise": 0.001
-      },
+      "jugement_courant": {},
       "minimum_nouveaux_matchs": 30,
       "n_nouveaux": 35,
       "ok": true,
@@ -255,6 +238,7 @@
       "nouveaux_venus",
       "modele_arbres",
       "classement",
+      "modele_arbres_activite",
       "modele_arbres_points",
       "classement_relatif"
     ]
