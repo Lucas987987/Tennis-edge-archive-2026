@@ -1,13 +1,13 @@
 {
-  "last_run_at": "2026-11-16T14:37:13.203Z",
+  "last_run_at": "2026-11-16T14:55:14.425Z",
   "running": false,
-  "updated_at": "2026-11-16T14:52:15.247Z",
-  "last_discovery": "2026-11-16T14:52:15.245Z",
+  "updated_at": "2026-11-16T15:10:16.644Z",
+  "last_discovery": "2026-11-16T15:10:16.641Z",
   "discovered_events": 78,
-  "tracked_markets": 25,
+  "tracked_markets": 23,
   "connected": false,
-  "stopped_at": "2026-11-16T14:52:15.247Z",
-  "subscribed_assets": 50,
-  "connected_at": "2026-11-16T14:44:47.372Z",
+  "stopped_at": "2026-11-16T15:10:16.644Z",
+  "subscribed_assets": 46,
+  "connected_at": "2026-11-16T15:02:48.806Z",
   "last_error": "Connection to remote host was lost."
 }
