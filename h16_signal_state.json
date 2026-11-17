@@ -1,27 +1,9 @@
 {
- "2026-11-15_benjamin_thomas_george_nikola_slavic": {
-  "t": "2026-11-15T06:58:11",
-  "commence": "2026-11-15T16:00:00",
-  "cote": 1.53,
-  "pin_open": 1.598,
-  "book": "bwin",
-  "envoye": true,
-  "doublon": ""
- },
  "2026-11-15_colson_wells_zach_stephens": {
   "t": "2026-11-15T06:58:11",
   "commence": "2026-11-15T17:10:00",
   "cote": 1.54,
   "pin_open": 1.549,
-  "book": "betsson",
-  "envoye": true,
-  "doublon": ""
- },
- "2026-11-15_gonzalo_villanueva_nicolas_barrientos": {
-  "t": "2026-11-15T07:43:06",
-  "commence": "2026-11-15T16:00:00",
-  "cote": 1.28,
-  "pin_open": 1.283,
   "book": "betsson",
   "envoye": true,
   "doublon": ""
