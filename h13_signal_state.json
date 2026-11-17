@@ -106,5 +106,14 @@
   "book": "unibet",
   "envoye": true,
   "doublon": ""
+ },
+ "2026-11-17_jonas_forejtek_pierre_hugues_herbert": {
+  "t": "2026-11-17T11:07:38",
+  "commence": "2026-11-17T13:50:00",
+  "cote": 2.15,
+  "pin_open": 2.32,
+  "book": "bwin",
+  "envoye": true,
+  "doublon": ""
  }
 }
