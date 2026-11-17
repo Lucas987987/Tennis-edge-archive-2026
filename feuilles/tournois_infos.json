@@ -883,14 +883,8 @@
 },
 "2426": {
 "2026": {
-"devise": null,
-"dotation": null,
-"dotation_usd": null,
-"essais": 0,
-"joueurs": 28,
-"pays": null,
-"saison": 81982,
-"ville": null
+"essais": 1,
+"saison": null
 },
 "nom": "Umag",
 "points": 250
