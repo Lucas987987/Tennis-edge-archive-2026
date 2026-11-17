@@ -1,11 +1,11 @@
 {
- "genere_le": "2026-11-17T11:47:43",
+ "genere_le": "2026-11-17T12:02:31",
  "source": "canal_public_log.jsonl",
- "n_alertes": 672,
+ "n_alertes": 673,
  "n_sans_ecart": 245,
- "n_paris": 413,
+ "n_paris": 414,
  "n_regles": 266,
- "n_sans_resultat": 147,
+ "n_sans_resultat": 148,
  "resume": {
   "par ALERTE": {
    "n": 266,
