@@ -1,7 +1,7 @@
 {
  "ecarts_gt_3pct": 184,
- "n_total": 2438,
- "pct_ecarts": 7.5,
+ "n_total": 2495,
+ "pct_ecarts": 7.4,
  "seuil_pct": 30.0,
  "alerte": false
 }
