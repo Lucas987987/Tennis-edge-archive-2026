@@ -1,23 +1,15 @@
 {
-  "ATP Nitto ATP Finals - Turin": {
-    "tour": "atp",
-    "id": 21364
-  },
-  "ATP Helsinki Challenger": {
-    "tour": "atp",
-    "id": 22203
-  },
-  "ATP Metz Challenger": {
-    "tour": "atp",
-    "id": 22204
-  },
   "ATP Kobe Challenger": {
     "tour": "atp",
     "id": 22206
   },
-  "ATP Montevideo Challenger": {
+  "ATP Sydney Challenger": {
     "tour": "atp",
-    "id": 22207
+    "id": 22208
+  },
+  "ATP Nitto ATP Finals - Turin": {
+    "tour": "atp",
+    "id": 21364
   },
   "ATP Champaign Challenger": {
     "tour": "atp",
@@ -27,13 +19,21 @@
     "tour": "atp",
     "id": 22205
   },
-  "ATP Sydney Challenger": {
+  "ATP Helsinki Challenger": {
     "tour": "atp",
-    "id": 22208
+    "id": 22203
+  },
+  "ATP Metz Challenger": {
+    "tour": "atp",
+    "id": 22204
+  },
+  "ATP Montevideo Challenger": {
+    "tour": "atp",
+    "id": 22207
   },
   "WTA LP Open by IND - Colina": {
     "tour": "wta",
     "id": 17382
   },
-  "_discovered_at": "2026-11-17T00:12:35.530826"
+  "_discovered_at": "2026-11-17T13:14:57.048689"
 }
