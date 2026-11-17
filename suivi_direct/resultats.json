@@ -3034,15 +3034,47 @@
    "clv_pin": 9.796,
    "source_resultat": "feuille de match (TennisApi)"
   },
+  "H13|2026-11-16_cezar_2001_cretu_moez_echargui|home": {
+   "gagne": 1,
+   "pnl": 1.62,
+   "pin_close": 2.45,
+   "pin_close_adv": 1.574,
+   "clv_pin": 0.608,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
   "H13|2026-11-16_kokoro_isomura_jason_jung|home": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 1,
+   "pnl": 1.17,
    "pin_close": 2.18,
    "pin_close_adv": 1.675,
    "clv_pin": -6.922,
-   "source_resultat": "inconnu"
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H13|2026-11-16_masamichi_imamura_yusuke_takahashi|away": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 2.39,
+   "pin_close_adv": 1.568,
+   "clv_pin": -7.451,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H13|2026-11-16_matheus_pucinelli_de_almeida_nicolas_jarry|away": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 2.14,
+   "pin_close_adv": 1.735,
+   "clv_pin": -3.141,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H13|2026-11-16_omar_jasika_alex_bolt|home": {
+   "gagne": 1,
+   "pnl": 1.2,
+   "pin_close": 2.08,
+   "pin_close_adv": 1.763,
+   "clv_pin": 0.268,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H13|2026-11-17_arthur_nagel_dusan_lajovic|home": {
    "gagne": null,
    "pnl": null,
    "pin_close": null,
@@ -3050,12 +3082,28 @@
    "clv_pin": null,
    "source_resultat": "inconnu"
   },
-  "H13|2026-11-16_omar_jasika_alex_bolt|home": {
+  "H13|2026-11-17_derek_pham_hiroki_moriya|home": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 2.31,
+   "pin_close_adv": 1.641,
+   "clv_pin": 7.815,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H13|2026-11-17_isaac_becroft_blake_ellis|home": {
+   "gagne": 1,
+   "pnl": 1.14,
+   "pin_close": 2.06,
+   "pin_close_adv": 1.793,
+   "clv_pin": -0.896,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H13|2026-11-17_kaichi_uchida_benjamin_hassan|home": {
    "gagne": null,
    "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
+   "pin_close": 2.14,
+   "pin_close_adv": 1.735,
+   "clv_pin": -0.031,
    "source_resultat": "inconnu"
   },
   "H14|2026-10-16_juan_manuel_la_serna_franco_roncadelli|home": {
@@ -4211,6 +4259,14 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H14|2026-11-16_masamichi_imamura_yusuke_takahashi|away": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 2.39,
+   "pin_close_adv": 1.568,
+   "clv_pin": -7.451,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H14|2026-11-17_arthur_nagel_dusan_lajovic|home": {
    "gagne": null,
    "pnl": null,
    "pin_close": null,
@@ -5256,6 +5312,30 @@
    "pin_close": 2.53,
    "pin_close_adv": 1.512,
    "clv_pin": 1.677,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H15|2026-11-16_cezar_2001_cretu_moez_echargui|home": {
+   "gagne": 1,
+   "pnl": 1.62,
+   "pin_close": 2.45,
+   "pin_close_adv": 1.574,
+   "clv_pin": 0.608,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H15|2026-11-17_arthur_nagel_dusan_lajovic|home": {
+   "gagne": null,
+   "pnl": null,
+   "pin_close": null,
+   "pin_close_adv": null,
+   "clv_pin": null,
+   "source_resultat": "inconnu"
+  },
+  "H15|2026-11-17_derek_pham_hiroki_moriya|home": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 2.31,
+   "pin_close_adv": 1.641,
+   "clv_pin": 7.815,
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-10-01_abdullah_shelbayh_daniil_ostapenkov|home": {
@@ -7475,30 +7555,46 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-11-16_benjamin_hassan_yun_seong_chung|away": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.641,
+   "pin_close_adv": 2.24,
+   "clv_pin": 5.074,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-11-16_bryce_nakashima_shunsuke_mitsui|home": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.54,
+   "pin_close_adv": 2.45,
+   "clv_pin": 5.472,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-11-16_jake_delaney_akira_santillan|away": {
    "gagne": null,
    "pnl": null,
+   "pin_close": 1.746,
+   "pin_close_adv": 2.1,
+   "clv_pin": -1.102,
+   "source_resultat": "inconnu"
+  },
+  "H16B|2026-11-17_august_holmgren_dhakshineswar_suresh|home": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.442,
+   "pin_close_adv": 2.86,
+   "clv_pin": 1.341,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16B|2026-11-17_benjamin_bonzi_sascha_gueymard_wayenburg|home": {
+   "gagne": null,
+   "pnl": null,
    "pin_close": null,
    "pin_close_adv": null,
    "clv_pin": null,
    "source_resultat": "inconnu"
   },
-  "H16B|2026-11-17_benjamin_bonzi_sascha_gueymard_wayenburg|home": {
+  "H16B|2026-11-17_daniel_michalski_taro_daniel|away": {
    "gagne": null,
    "pnl": null,
    "pin_close": null,
@@ -10075,38 +10171,62 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-16_benjamin_hassan_yun_seong_chung|away": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.641,
+   "pin_close_adv": 2.24,
+   "clv_pin": 5.074,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-16_bryce_nakashima_shunsuke_mitsui|home": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.54,
+   "pin_close_adv": 2.45,
+   "clv_pin": 5.472,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16|2026-11-16_diego_dedura_dino_prizmic|away": {
+   "gagne": 1,
+   "pnl": 0.125,
+   "pin_close": 1.13,
+   "pin_close_adv": 6.57,
+   "clv_pin": -1.662,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-16_enzo_aguiard_christopher_o_connell|away": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 0,
+   "pnl": -1.0,
    "pin_close": 1.085,
    "pin_close_adv": 7.44,
    "clv_pin": 1.661,
-   "source_resultat": "inconnu"
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-16_jake_delaney_akira_santillan|away": {
    "gagne": null,
    "pnl": null,
+   "pin_close": 1.746,
+   "pin_close_adv": 2.1,
+   "clv_pin": -1.102,
+   "source_resultat": "inconnu"
+  },
+  "H16|2026-11-17_august_holmgren_dhakshineswar_suresh|home": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.442,
+   "pin_close_adv": 2.86,
+   "clv_pin": 1.341,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16|2026-11-17_benjamin_bonzi_sascha_gueymard_wayenburg|home": {
+   "gagne": null,
+   "pnl": null,
    "pin_close": null,
    "pin_close_adv": null,
    "clv_pin": null,
    "source_resultat": "inconnu"
   },
-  "H16|2026-11-17_benjamin_bonzi_sascha_gueymard_wayenburg|home": {
+  "H16|2026-11-17_daniel_michalski_taro_daniel|away": {
    "gagne": null,
    "pnl": null,
    "pin_close": null,
@@ -10931,28 +11051,44 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H17|2026-11-16_benjamin_hassan_yun_seong_chung|away": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.641,
+   "pin_close_adv": 2.24,
+   "clv_pin": 5.074,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H17|2026-11-16_cezar_2001_cretu_moez_echargui|home": {
+   "gagne": 1,
+   "pnl": 1.62,
+   "pin_close": 2.45,
+   "pin_close_adv": 1.574,
+   "clv_pin": 0.608,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H17|2026-11-16_enzo_aguiard_christopher_o_connell|away": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 0,
+   "pnl": -1.0,
    "pin_close": 1.085,
    "pin_close_adv": 7.44,
    "clv_pin": 1.661,
-   "source_resultat": "inconnu"
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H17|2026-11-16_jake_delaney_akira_santillan|away": {
    "gagne": null,
    "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
+   "pin_close": 1.746,
+   "pin_close_adv": 2.1,
+   "clv_pin": -1.102,
    "source_resultat": "inconnu"
+  },
+  "H17|2026-11-17_august_holmgren_dhakshineswar_suresh|home": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.442,
+   "pin_close_adv": 2.86,
+   "clv_pin": 1.341,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H18|2026-10-01_henry_bernet_dominic_stricker|away": {
    "gagne": 0,
@@ -11235,28 +11371,36 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H18|2026-11-16_benjamin_hassan_yun_seong_chung|away": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.641,
+   "pin_close_adv": 2.24,
+   "clv_pin": 5.074,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H18|2026-11-16_enzo_aguiard_christopher_o_connell|away": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 0,
+   "pnl": -1.0,
    "pin_close": 1.085,
    "pin_close_adv": 7.44,
    "clv_pin": 1.661,
-   "source_resultat": "inconnu"
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H18|2026-11-16_jake_delaney_akira_santillan|away": {
    "gagne": null,
    "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
+   "pin_close": 1.746,
+   "pin_close_adv": 2.1,
+   "clv_pin": -1.102,
    "source_resultat": "inconnu"
+  },
+  "H18|2026-11-17_august_holmgren_dhakshineswar_suresh|home": {
+   "gagne": 0,
+   "pnl": -1.0,
+   "pin_close": 1.442,
+   "pin_close_adv": 2.86,
+   "clv_pin": 1.341,
+   "source_resultat": "feuille de match (TennisApi)"
   }
  }
 }
