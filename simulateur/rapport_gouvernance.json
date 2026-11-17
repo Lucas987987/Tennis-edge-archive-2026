@@ -1,31 +1,15 @@
 {
   "semaine": "2026-W47",
   "initialisation": false,
-  "promotions_demande_es": [
-    "combinaison_continue"
-  ],
-  "promotions_retenues": [
-    "combinaison_continue"
-  ],
+  "promotions_demande_es": [],
+  "promotions_retenues": [],
   "promotions_differees": [],
   "regle_promotion": "Au plus une nouvelle règle adoptée par semaine ; priorité au plus grand gain de log loss.",
   "periodes": {
     "juge_jusqua": "2026-11-17T13:00",
-    "jugement_courant": {
-      "n": 36,
-      "depuis": "2026-11-16T19:30",
-      "jusqua": "2026-11-17T13:00",
-      "log_loss_continu": 0.59629,
-      "log_loss_poids_archive": 0.59991,
-      "log_loss_elo_seul": 0.61144,
-      "brier_continu": 0.20207,
-      "brier_poids_archive": 0.20413,
-      "brier_elo_seul": 0.20915,
-      "gain_log_loss": 0.003612,
-      "marge_requise": 0.001
-    },
+    "jugement_courant": {},
     "minimum_nouveaux_matchs": 30,
-    "n_nouveaux": 36,
+    "n_nouveaux": null,
     "ok": true,
     "problemes": []
   },
@@ -37,8 +21,8 @@
     "modele_arbres_points",
     "classement_relatif"
   ],
-  "champion_avant": "64f650d569e831907e2e6072b6e7e835af3af612fa97d85f83cacb1306a97126",
-  "champion_apres": "0289e43f15c02f6097480180afe76018ca4705cda6f9bfac851a3f015f29f781",
+  "champion_avant": "0289e43f15c02f6097480180afe76018ca4705cda6f9bfac851a3f015f29f781",
+  "champion_apres": "68e143118338624ec2fe277f3ac0d7345ad3890edac91d7b4f5055ce6125aa44",
   "statut": "a_verifier",
-  "genere_le": "2026-11-17T19:56:01.881337+00:00"
+  "genere_le": "2026-11-17T21:21:35.085749+00:00"
 }
