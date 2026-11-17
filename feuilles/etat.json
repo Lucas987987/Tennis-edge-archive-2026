@@ -2,13 +2,13 @@
  "dernier_passage": {
   "arret": null,
   "codes": {
-   "200": 23
+   "200": 32
   },
   "debut": "2026-11-15",
   "fin": "2026-11-17",
-  "le": "2026-11-17T04:33:47+00:00",
-  "quota_restant": 14029,
-  "requetes": 23
+  "le": "2026-11-17T06:36:48+00:00",
+  "quota_restant": 13893,
+  "requetes": 32
  },
  "jours": {
   "2026-06-01": {
@@ -3648,7 +3648,7 @@
     }
    },
    "complet": false,
-   "maj": "2026-11-17T04:33:36+00:00",
+   "maj": "2026-11-17T06:36:34+00:00",
    "matchs": 93
   },
   "2026-11-16": {
@@ -3669,26 +3669,26 @@
     }
    },
    "complet": false,
-   "maj": "2026-11-17T04:33:39+00:00",
+   "maj": "2026-11-17T06:36:36+00:00",
    "matchs": 76
   },
   "2026-11-17": {
-   "a_reessayer": 4,
-   "avec_stats": 3,
+   "a_reessayer": 1,
+   "avec_stats": 12,
    "categories": {
     "Challenger": {
-     "avec_stats": 3,
-     "matchs": 7
+     "avec_stats": 12,
+     "matchs": 13
     }
    },
    "complet": false,
-   "maj": "2026-11-17T04:33:47+00:00",
-   "matchs": 7
+   "maj": "2026-11-17T06:36:48+00:00",
+   "matchs": 13
   }
  },
  "total": {
-  "avec_stats": 11088,
+  "avec_stats": 11097,
   "jours": 170,
-  "matchs": 11230
+  "matchs": 11236
  }
 }
