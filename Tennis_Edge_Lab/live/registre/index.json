@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "generated_at": "2026-11-17T14:01:58+00:00",
+ "generated_at": "2026-11-18T13:45:28+00:00",
  "mois": [
   {
    "mois": "2026-05",
@@ -40,12 +40,12 @@
   },
   {
    "mois": "2026-11",
-   "matchs": 1131,
+   "matchs": 1179,
    "fichier": "registre_2026-11.json.gz",
-   "octets": 207710
+   "octets": 231962
   }
  ],
- "matchs": 6316,
+ "matchs": 6364,
  "points": [
   "open",
   "24h",

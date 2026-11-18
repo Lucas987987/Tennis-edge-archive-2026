@@ -1,15 +1,15 @@
 {
  "schema_version": 2,
- "generated_at": "2026-11-17T14:02:20+00:00",
+ "generated_at": "2026-11-18T13:45:52+00:00",
  "sources": {
   "worker": {
    "source": "API Worker D1 /api/hypotheses (fetch_worker_snapshot.py)",
    "fichier": "worker_hypotheses_capture.json",
    "status": "ok",
-   "fetched_at": "2026-11-17T14:02:14Z",
+   "fetched_at": "2026-11-18T13:45:44Z",
    "worker_generated_at": "2026-11-17T08:28:18Z"
   },
-  "suivi_officiel": "alertes en direct : h*_signal_log.jsonl + suivi_direct/resultats.json (verdicts_direct.json du 2026-11-17T14:02:20Z)",
+  "suivi_officiel": "alertes en direct : h*_signal_log.jsonl + suivi_direct/resultats.json (verdicts_direct.json du 2026-11-18T13:45:52Z)",
   "reconstruction": "moves_detail_hist.csv filtré par les règles gelées de validation_report.py (lignes jusqu'au 2026-11-01) — contrôle, ne juge pas",
   "rapprochement": "uid + joueur normalisé ; à défaut paire de joueurs + date ±1 jour"
  },
@@ -120,15 +120,15 @@
      -2.5,
      -0.9
     ],
-    "clv_n": 383,
-    "n_detectees": 392,
-    "n_envoyees": 391,
+    "clv_n": 389,
+    "n_detectees": 395,
+    "n_envoyees": 394,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 47.7,
-    "statut": "en attente de résultats (47,7 % sans résultat)",
+    "sans_resultat_pct": 48.1,
+    "statut": "en attente de résultats (48,1 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-17T14:02:20Z"
+    "genere_le": "2026-11-18T13:45:52Z"
    },
    "reconstruction": {
     "n": 243,
@@ -146,8 +146,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 392,
-    "direct_envoyees": 391,
+    "direct_detectees": 395,
+    "direct_envoyees": 394,
     "direct_doublons": 0,
     "direct_non_envoyees_autres": 1,
     "direct_denouees": 204,
@@ -159,12 +159,12 @@
      "apres_coup": 349,
      "cote_opposee_live": 1
     },
-    "direct_seule": 253,
+    "direct_seule": 256,
     "direct_seule_raisons": {
      "absent_reconstruction": 102,
      "cote_opposee_reco": 62,
      "prix_different": 11,
-     "pas_encore_reconstruit": 78
+     "pas_encore_reconstruit": 81
     },
     "inexpliques": 0
    },
@@ -8652,6 +8652,20 @@
     {
      "sens": "direct seule",
      "date": "2026-11-17",
+     "match": "Franco Roncadelli – Marcelo Tomas Barrios Vera",
+     "joueur": "Franco Roncadelli",
+     "uid": "2026-11-17_franco_roncadelli_marcelo_tomas_barrios_vera",
+     "cote": 2.7,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-17",
      "match": "Lukas Neumayer – Alexander Ritschard",
      "joueur": "Lukas Neumayer",
      "uid": "2026-11-17_lukas_neumayer_alexander_ritschard",
@@ -8675,6 +8689,34 @@
      "raison": "pas_encore_reconstruit",
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Aidan McHugh – Shunsuke Mitsui",
+     "joueur": "Aidan McHugh",
+     "uid": "2026-11-18_aidan_mchugh_shunsuke_mitsui",
+     "cote": 2.38,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Genaro Alberto Olivieri – Tristan Boyer",
+     "joueur": "Genaro Alberto Olivieri",
+     "uid": "2026-11-18_genaro_alberto_olivieri_tristan_boyer",
+     "cote": 3.0,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
      "explique": true
     }
    ]
@@ -8722,20 +8764,20 @@
     "gagnes": 4,
     "roi": -13.8,
     "pts": 4.0,
-    "clv_pin": -0.4,
+    "clv_pin": -0.2,
     "clv_pin_ic95": [
-     -2.1,
-     1.3
+     -1.9,
+     1.4
     ],
-    "clv_n": 144,
-    "n_detectees": 148,
-    "n_envoyees": 50,
-    "n_doublons": 98,
+    "clv_n": 149,
+    "n_detectees": 152,
+    "n_envoyees": 53,
+    "n_doublons": 99,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 93.2,
-    "statut": "en attente de résultats (93,2 % sans résultat)",
+    "sans_resultat_pct": 93.3,
+    "statut": "en attente de résultats (93,3 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-17T14:02:20Z"
+    "genere_le": "2026-11-18T13:45:52Z"
    },
    "reconstruction": {
     "n": 193,
@@ -8753,9 +8795,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 148,
-    "direct_envoyees": 50,
-    "direct_doublons": 98,
+    "direct_detectees": 152,
+    "direct_envoyees": 53,
+    "direct_doublons": 99,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 10,
     "reconstruction_detectees": 335,
@@ -8767,12 +8809,12 @@
      "avant_canal": 189,
      "cote_opposee_live": 3
     },
-    "direct_seule": 124,
+    "direct_seule": 128,
     "direct_seule_raisons": {
      "cote_opposee_reco": 14,
      "absent_reconstruction": 37,
      "prix_different": 14,
-     "pas_encore_reconstruit": 59
+     "pas_encore_reconstruit": 63
     },
     "inexpliques": 0
    },
@@ -14922,6 +14964,20 @@
     {
      "sens": "direct seule",
      "date": "2026-11-17",
+     "match": "Harry Wendelken – Giles Hussey",
+     "joueur": "Harry Wendelken",
+     "uid": "2026-11-17_harry_wendelken_giles_hussey",
+     "cote": 1.76,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-17",
      "match": "Franco Roncadelli – Marcelo Tomas Barrios Vera",
      "joueur": "Franco Roncadelli",
      "uid": "2026-11-17_franco_roncadelli_marcelo_tomas_barrios_vera",
@@ -14931,6 +14987,48 @@
      "raison": "pas_encore_reconstruit",
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "David Jorda Sanchis – Yu Hsiou Hsu",
+     "joueur": "David Jorda Sanchis",
+     "uid": "2026-11-18_david_jorda_sanchis_yu_hsiou_hsu",
+     "cote": 3.55,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Genaro Alberto Olivieri – Tristan Boyer",
+     "joueur": "Genaro Alberto Olivieri",
+     "uid": "2026-11-18_genaro_alberto_olivieri_tristan_boyer",
+     "cote": 3.2,
+     "book": "bwin",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Duncan Chan – Maks Kasnikowski",
+     "joueur": "Duncan Chan",
+     "uid": "2026-11-18_maks_kasnikowski_duncan_chan",
+     "cote": 3.25,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
      "explique": true
     }
    ]
@@ -14978,20 +15076,20 @@
     "gagnes": 17,
     "roi": 30.4,
     "pts": 11.2,
-    "clv_pin": -1.4,
+    "clv_pin": -1.6,
     "clv_pin_ic95": [
-     -2.6,
-     -0.3
+     -2.8,
+     -0.4
     ],
-    "clv_n": 130,
-    "n_detectees": 134,
+    "clv_n": 133,
+    "n_detectees": 136,
     "n_envoyees": 0,
-    "n_doublons": 134,
+    "n_doublons": 136,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 73.7,
-    "statut": "en attente de résultats (73,7 % sans résultat)",
+    "sans_resultat_pct": 74.1,
+    "statut": "en attente de résultats (74,1 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-17T14:02:20Z"
+    "genere_le": "2026-11-18T13:45:52Z"
    },
    "reconstruction": {
     "n": 96,
@@ -15009,9 +15107,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 134,
+    "direct_detectees": 136,
     "direct_envoyees": 0,
-    "direct_doublons": 134,
+    "direct_doublons": 136,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 35,
     "reconstruction_detectees": 181,
@@ -15021,12 +15119,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 137
     },
-    "direct_seule": 90,
+    "direct_seule": 92,
     "direct_seule_raisons": {
      "absent_reconstruction": 24,
      "cote_opposee_reco": 16,
      "prix_different": 6,
-     "pas_encore_reconstruit": 44
+     "pas_encore_reconstruit": 46
     },
     "inexpliques": 0
    },
@@ -18274,6 +18372,34 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-17",
+     "match": "Franco Roncadelli – Marcelo Tomas Barrios Vera",
+     "joueur": "Franco Roncadelli",
+     "uid": "2026-11-17_franco_roncadelli_marcelo_tomas_barrios_vera",
+     "cote": 2.7,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Genaro Alberto Olivieri – Tristan Boyer",
+     "joueur": "Genaro Alberto Olivieri",
+     "uid": "2026-11-18_genaro_alberto_olivieri_tristan_boyer",
+     "cote": 3.0,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -18325,15 +18451,15 @@
      -1.0,
      -0.0
     ],
-    "clv_n": 325,
-    "n_detectees": 338,
-    "n_envoyees": 338,
+    "clv_n": 338,
+    "n_detectees": 341,
+    "n_envoyees": 340,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 64.5,
-    "statut": "en attente de résultats (64,5 % sans résultat)",
+    "sans_resultat_pct": 65.7,
+    "statut": "en attente de résultats (65,7 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-17T14:02:20Z"
+    "genere_le": "2026-11-18T13:45:52Z"
    },
    "reconstruction": {
     "n": 264,
@@ -18351,10 +18477,10 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 338,
-    "direct_envoyees": 338,
+    "direct_detectees": 341,
+    "direct_envoyees": 340,
     "direct_doublons": 0,
-    "direct_non_envoyees_autres": 0,
+    "direct_non_envoyees_autres": 1,
     "direct_denouees": 117,
     "reconstruction_detectees": 424,
     "reconstruction_reglees": 264,
@@ -18363,12 +18489,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 321
     },
-    "direct_seule": 235,
+    "direct_seule": 238,
     "direct_seule_raisons": {
      "cote_opposee_reco": 55,
      "absent_reconstruction": 62,
      "prix_different": 7,
-     "pas_encore_reconstruit": 111
+     "pas_encore_reconstruit": 114
     },
     "inexpliques": 0
    },
@@ -26211,12 +26337,54 @@
     },
     {
      "sens": "direct seule",
+     "date": "2026-11-17",
+     "match": "Luca Nardi – Thomas Faurel",
+     "joueur": "Luca Nardi",
+     "uid": "2026-11-17_luca_nardi_thomas_faurel",
+     "cote": 1.41,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-17",
+     "match": "Alex Barrena – Matias Soto",
+     "joueur": "Alex Barrena",
+     "uid": "2026-11-17_matias_soto_alex_barrena",
+     "cote": 1.47,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
      "date": "2026-11-18",
      "match": "Geoffrey Blancaneaux – Zachary Viiala",
      "joueur": "Geoffrey Blancaneaux",
      "uid": "2026-11-18_zachary_viiala_geoffrey_blancaneaux",
      "cote": 1.52,
      "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Jacob Fearnley – Laslo Djere",
+     "joueur": "Jacob Fearnley",
+     "uid": "2026-11-18_laslo_djere_jacob_fearnley",
+     "cote": 1.36,
+     "book": "unibet",
      "statut": "non dénouée",
      "raison": "pas_encore_reconstruit",
      "libelle": "Pas encore dans la reconstruction",
@@ -26270,18 +26438,18 @@
     "pts": 0.8,
     "clv_pin": -0.6,
     "clv_pin_ic95": [
-     -1.2,
+     -1.1,
      -0.1
     ],
-    "clv_n": 281,
-    "n_detectees": 288,
-    "n_envoyees": 288,
+    "clv_n": 290,
+    "n_detectees": 291,
+    "n_envoyees": 291,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 65.1,
-    "statut": "en attente de résultats (65,1 % sans résultat)",
+    "sans_resultat_pct": 66.0,
+    "statut": "en attente de résultats (66,0 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-17T14:02:20Z"
+    "genere_le": "2026-11-18T13:45:52Z"
    },
    "reconstruction": {
     "n": 225,
@@ -26299,8 +26467,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 288,
-    "direct_envoyees": 288,
+    "direct_detectees": 291,
+    "direct_envoyees": 291,
     "direct_doublons": 0,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 99,
@@ -26311,12 +26479,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 257
     },
-    "direct_seule": 197,
+    "direct_seule": 200,
     "direct_seule_raisons": {
      "cote_opposee_reco": 50,
      "prix_different": 7,
      "absent_reconstruction": 50,
-     "pas_encore_reconstruit": 90
+     "pas_encore_reconstruit": 93
     },
     "inexpliques": 0
    },
@@ -32731,12 +32899,54 @@
     },
     {
      "sens": "direct seule",
+     "date": "2026-11-17",
+     "match": "Luca Nardi – Thomas Faurel",
+     "joueur": "Luca Nardi",
+     "uid": "2026-11-17_luca_nardi_thomas_faurel",
+     "cote": 1.41,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-17",
+     "match": "Alex Barrena – Matias Soto",
+     "joueur": "Alex Barrena",
+     "uid": "2026-11-17_matias_soto_alex_barrena",
+     "cote": 1.47,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
      "date": "2026-11-18",
      "match": "Geoffrey Blancaneaux – Zachary Viiala",
      "joueur": "Geoffrey Blancaneaux",
      "uid": "2026-11-18_zachary_viiala_geoffrey_blancaneaux",
      "cote": 1.52,
      "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Jacob Fearnley – Laslo Djere",
+     "joueur": "Jacob Fearnley",
+     "uid": "2026-11-18_laslo_djere_jacob_fearnley",
+     "cote": 1.36,
+     "book": "unibet",
      "statut": "non dénouée",
      "raison": "pas_encore_reconstruit",
      "libelle": "Pas encore dans la reconstruction",
@@ -32793,15 +33003,15 @@
      1.6,
      3.8
     ],
-    "clv_n": 106,
-    "n_detectees": 110,
-    "n_envoyees": 69,
+    "clv_n": 110,
+    "n_detectees": 111,
+    "n_envoyees": 70,
     "n_doublons": 41,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 62.6,
-    "statut": "en attente de résultats (62,6 % sans résultat)",
+    "sans_resultat_pct": 64.0,
+    "statut": "en attente de résultats (64,0 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-17T14:02:20Z"
+    "genere_le": "2026-11-18T13:45:52Z"
    },
    "reconstruction": {
     "n": 112,
@@ -32819,8 +33029,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 110,
-    "direct_envoyees": 69,
+    "direct_detectees": 111,
+    "direct_envoyees": 70,
     "direct_doublons": 41,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 40,
@@ -32831,12 +33041,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 184
     },
-    "direct_seule": 96,
+    "direct_seule": 97,
     "direct_seule_raisons": {
      "absent_reconstruction": 17,
      "prix_different": 35,
      "cote_opposee_reco": 11,
-     "pas_encore_reconstruit": 33
+     "pas_encore_reconstruit": 34
     },
     "inexpliques": 0
    },
@@ -36826,6 +37036,20 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-17",
+     "match": "Alex Barrena – Matias Soto",
+     "joueur": "Alex Barrena",
+     "uid": "2026-11-17_matias_soto_alex_barrena",
+     "cote": 1.47,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -36882,7 +37106,7 @@
     "sans_resultat_pct": 0.0,
     "statut": "verrouillable (résultats complets à 100 %)",
     "verrouillable": true,
-    "genere_le": "2026-11-17T14:02:20Z"
+    "genere_le": "2026-11-18T13:45:52Z"
    },
    "reconstruction": {
     "n": 51,
