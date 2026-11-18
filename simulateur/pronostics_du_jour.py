@@ -217,6 +217,79 @@ def charger_poids_circuit(racine):
             if isinstance(v, dict) and not v.get('retire') and v.get('elo') is not None and v.get('simulation') is not None}
 
 
+# 18/11/2026 (paquet 274, DÉCISION DE LUCAS après etude_outsiders_gagnants.py, paquet 273) — deux situations où
+# l'outsider (15 à 45 %) gagne plus qu'annoncé en CHALLENGER, apprises sur 2018–2022 et jugées sur 2023 → juin 2026 :
+#   favori fatigué : le favori sort d'un match en 3 sets dans ce tournoi, l'outsider non (40,0 % pour 34,4 %, 2 583 matchs) ;
+#   outsider mieux classé que le favori (43,1 % pour 37,0 %, 5 244 matchs).
+# Décalage (logit) vers l'outsider = β appris (simulateur/outsiders_ch.json). Retrait automatique : outsiders_ch.py.
+OUTSIDERS_CH = {}
+DERNIERS_MATCHS = None
+
+
+def charger_outsiders(racine):
+    try:
+        with open(os.path.join(racine, 'simulateur', 'outsiders_ch.json'), encoding='utf-8') as f:
+            doc = json.load(f)
+    except (OSError, ValueError):
+        return {}
+    return {k: float(v['beta']) for k, v in (doc.get('signaux') or {}).items()
+            if isinstance(v, dict) and v.get('beta') is not None and not v.get('retire')}
+
+
+def charger_derniers_matchs(racine, cle, aujourdhui=None):
+    """{joueur: [(début, ville, sets joués)]} des matchs terminés des 10 derniers jours (feuilles TennisApi)."""
+    import feuilles as FE_
+    debut = ((aujourdhui or dt.date.today()) - dt.timedelta(days=10)).isoformat()
+    out = {}
+    for r in FE_.lire(racine, depuis=debut):
+        if r.get('vainqueur') not in (1, 2) or not r.get('debut'):
+            continue
+        sh, sa = (r.get('score_home') or {}).get('sets') or [], (r.get('score_away') or {}).get('sets') or []
+        n = sum(1 for a, b in zip(sh, sa) if a is not None and b is not None and (a or b))
+        ville = str(r.get('tournoi') or '').split(',')[0].strip().lower()
+        for cote in ('home', 'away'):
+            k = cle((r.get(cote) or {}).get('nom'))
+            if k:
+                out.setdefault(k, []).append((float(r['debut']), ville, n))
+    for L in out.values():
+        L.sort()
+    return out
+
+
+def dernier_match_ici(k, tournoi, ts):
+    """Le match précédent du joueur s'il a eu lieu DANS CE tournoi (même ville) ces 10 derniers jours, sinon None."""
+    L = [x for x in (DERNIERS_MATCHS or {}).get(k) or () if x[0] < ts - 1800 and ts - x[0] <= 10 * 86400]
+    if not L or not L[-1][1] or L[-1][1] not in str(tournoi or '').lower():
+        return None
+    return L[-1]
+
+
+def signaux_outsiders(c, p_base, h, a, tournoi, debut):
+    """{signal: décalage logit vers home} des deux situations d'outsider en place (Challenger seulement)."""
+    if c != 'CH' or not OUTSIDERS_CH or p_base is None:
+        return {}
+    if 0.15 <= p_base <= 0.45:
+        o, f, s = h, a, 1.0
+    elif 0.55 <= p_base <= 0.85:
+        o, f, s = a, h, -1.0
+    else:
+        return {}
+    d = {}
+    ts = (debut.replace(tzinfo=dt.timezone.utc).timestamp() if debut.tzinfo is None else debut.timestamp()) \
+        if isinstance(debut, dt.datetime) else float(debut)
+    if 'favori_fatigue' in OUTSIDERS_CH and DERNIERS_MATCHS:
+        lf, lo = dernier_match_ici(f, tournoi, ts), dernier_match_ici(o, tournoi, ts)
+        if lf and lf[2] >= 3 and (lo is None or lo[2] < 3):
+            d['outsider_favori_fatigue'] = s * OUTSIDERS_CH['favori_fatigue']
+    if 'outsider_mieux_classe' in OUTSIDERS_CH:
+        r = rangs_actuels_du_match(h, a, debut)
+        if r and all(isinstance(v, int) and v > 0 for v in r):
+            ro, rf = (r[0], r[1]) if o == h else (r[1], r[0])
+            if ro < rf:
+                d['outsider_mieux_classe'] = s * OUTSIDERS_CH['outsider_mieux_classe']
+    return d
+
+
 def poids_de(c):
     """Poids du mélange pour ce circuit : ceux du circuit s'ils sont en place, sinon les poids communs."""
     if not COMBINAISON:
@@ -1448,8 +1521,15 @@ def construire(racine, maintenant=None, uids=None, pentes_forcees=None):
     REGLAGES = charger_reglages(racine)
     CHOIX = charger_choix(racine)
     COMBINAISON = charger_combinaison(racine)
-    global POIDS_CIRCUIT
+    global POIDS_CIRCUIT, OUTSIDERS_CH, DERNIERS_MATCHS
     POIDS_CIRCUIT = charger_poids_circuit(racine) if COMBINAISON else {}
+    OUTSIDERS_CH = charger_outsiders(racine)
+    try:
+        _ald = dict(etat.get('alias') or {})
+        DERNIERS_MATCHS = charger_derniers_matchs(racine, lambda n: _ald.get(E.cle(n), E.cle(n)) if n else None) if OUTSIDERS_CH else None
+    except Exception as e_:  # noqa: BLE001
+        print(f"::warning::derniers matchs (outsiders) non chargés : {type(e_).__name__}: {e_}")
+        DERNIERS_MATCHS = None
     AJUSTEMENTS.clear()
     AJUSTEMENTS.update(charger_ajustements(racine))
     global CLASSEMENTS
@@ -1588,6 +1668,9 @@ def construire(racine, maintenant=None, uids=None, pentes_forcees=None):
                                        controle_grand_chelem(p_base, stats['p_home'], c, x['tournoi'], tour_),
                                        controle_qualifs_gc(p_base, stats['p_home'], c, x['tournoi'], tour_))
                 adoptes_ici = tuple(k for k, v in SIGNAUX_CIRCUIT.items() if c in (v or []))
+                so_ = signaux_outsiders(c, p_base, h, a, x['tournoi'], x['debut'])      # paquet 274
+                if so_:
+                    sh_ = dict(sh_ or {}, **so_)
                 pf_ = (pentes_forcees or {}).get(uid)
                 if pf_:                     # 18/11/2026 (paquet 270) : correction du niveau de fiabilité, en dernier
                     q0_ = min(max(p_base, 1e-6), 1 - 1e-6)
@@ -1600,6 +1683,10 @@ def construire(racine, maintenant=None, uids=None, pentes_forcees=None):
                                        p_simulation=round(p_sim, 4), p_elo=stats['p_home'])
                     sig_ctl = {'appliques': sorted(sh_), 'p_home_sans': round(p_base, 4),
                                'decalages': {k: round(v, 4) for k, v in sh_.items()}}
+                if so_ and combinaison:          # paquet 274 : les deux %, gardés pour la règle de retrait
+                    qo_ = min(max(combinaison['p_home'], 1e-6), 1 - 1e-6)
+                    combinaison['outsiders'] = {'decalages': {k: round(v, 4) for k, v in so_.items()}, 'p_home_avec': combinaison['p_home'],
+                                                'p_home_sans': round(sig(math.log(qo_ / (1 - qo_)) - sum(so_.values())), 4)}
                 if d_poids_ is not None and combinaison:
                     qf_ = min(max(combinaison['p_home'], 1e-6), 1 - 1e-6)
                     combinaison['poids_circuit'] = {'circuit': c, 'poids': POIDS_CIRCUIT[c], 'p_home_avec': combinaison['p_home'],
@@ -2315,6 +2402,9 @@ def main(argv):
         pc_ = (m.get('combinaison') or {}).get('poids_circuit')
         if pc_ and m.get('fiabilite'):
             m['fiabilite'] = dict(m['fiabilite'], poids_circuit=pc_)
+        oc_ = (m.get('combinaison') or {}).get('outsiders')
+        if oc_ and m.get('fiabilite'):
+            m['fiabilite'] = dict(m['fiabilite'], outsiders=oc_)
     os.makedirs(os.path.join(racine, 'Tennis_Edge_Lab', 'live'), exist_ok=True)
     with open(os.path.join(racine, SORTIE), 'w', encoding='utf-8') as f:
         json.dump(doc, f, ensure_ascii=False, indent=1)
