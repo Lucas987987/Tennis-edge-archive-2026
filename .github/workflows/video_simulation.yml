@@ -12,6 +12,10 @@ name: Vidéo — simulation du match du jour
 # 24/10/2026 : + une CARTE DE STATS (PNG 1080×1350, FR et EN) à poster en réponse à la vidéo (X ne mélange pas
 # vidéo et image dans un même post).
 # Lancement à la main : choisir la langue, un autre match (uid du site) ou un autre tirage (seed).
+# 18/11/2026 (paquet 276) : VIDÉO EN 3D par défaut — les moments forts du match représentatif joués dans le stade 3D
+# du site, habillage télé, son de stade (~60–75 s). Rendu sans carte graphique, donc plus long : FR et EN tournent en
+# PARALLÈLE (deux jobs), 50 min au plus chacun. « rendu = 2d » remet l'ancienne vidéo (borne d'arcade).
+# Retrait : remettre ce fichier, scripts/video_simulation.py et scripts/sons.py du paquet 275 (la page garde la 2D).
 
 on:
   workflow_dispatch:
@@ -33,6 +37,11 @@ on:
         type: choice
         options: ['9x16', '4x5']
         default: '9x16'
+      rendu:
+        description: "3d : le stade (défaut) ; 2d : la borne d'arcade"
+        type: choice
+        options: ['3d', '2d']
+        default: '3d'
   schedule:
     - cron: '5 7 * * *'
 
@@ -46,7 +55,11 @@ concurrency:
 jobs:
   video:
     runs-on: ubuntu-24.04   # 05/11/2026 : image figée (ubuntu-latest est passé à 26.04)
-    timeout-minutes: 30
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        lang: [fr, en]
     steps:
       - uses: actions/checkout@v5
         with:
@@ -112,11 +125,10 @@ jobs:
       - name: Enregistrer (FR puis EN)
         if: steps.mdj.outputs.ok == '1'
         run: |
-          for lang in fr en; do
-            python scripts/video_simulation.py --lang "$lang" --uid "${{ inputs.uid }}" --seed "${{ inputs.seed }}" --format "${{ inputs.format || '9x16' }}" ${{ inputs.adresse && '--adresse' || '' }} --sortie videos
-            # 24/10/2026 : carte de stats du match (PNG pour X, en réponse à la vidéo)
-            python scripts/video_simulation.py --lang "$lang" --uid "${{ inputs.uid }}" --carte --sortie videos || echo "::warning::carte ${lang} non faite"
-          done
+          lang="${{ matrix.lang }}"
+          python scripts/video_simulation.py --lang "$lang" --uid "${{ inputs.uid }}" --seed "${{ inputs.seed }}" --format "${{ inputs.format || '9x16' }}" --rendu "${{ inputs.rendu || '3d' }}" --ips "${{ (inputs.rendu || '3d') == '3d' && '25' || '30' }}" ${{ inputs.adresse && '--adresse' || '' }} --sortie videos
+          # 24/10/2026 : carte de stats du match (PNG pour X, en réponse à la vidéo)
+          python scripts/video_simulation.py --lang "$lang" --uid "${{ inputs.uid }}" --carte --sortie videos || echo "::warning::carte ${lang} non faite"
           ls -la videos
 
       - name: Envoyer sur le Telegram privé
@@ -129,7 +141,7 @@ jobs:
         run: |
           if [ -z "${TELEGRAM_TOKEN}" ] || [ -z "${TELEGRAM_CHAT_ID}" ]; then echo '::error::Telegram non configuré : vidéos non envoyées.'; exit 1; fi
           suffixe=""; [ "${{ inputs.format || '9x16' }}" = "4x5" ] && suffixe="_4x5"
-          for lang in fr en; do
+          for lang in ${{ matrix.lang }}; do
             test -s "videos/simulation_${lang}${suffixe}.mp4"
             curl --fail-with-body -sS -o /dev/null -w "Telegram ${lang} : HTTP %{http_code}\n" \
               -F chat_id="${TELEGRAM_CHAT_ID}" -F supports_streaming=true \
