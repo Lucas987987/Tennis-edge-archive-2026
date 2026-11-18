@@ -22,6 +22,12 @@ dans le stade 3D du site (plan derrière le serveur, vue télé, gros plans, ral
 télé, son de stade. Rendu sans carte graphique (SwiftShader) : l'image 3D est calculée à 67 % puis agrandie, les
 textes restent nets. Sans WebGL ou sans scénario tiré, la page repasse seule à la vidéo 2D (borne d'arcade).
 --rendu 2d garde l'ancienne vidéo.
+
+18/11/2026 (paquet 277) — FINITION : étalonnage de l'image par ffmpeg (netteté après agrandissement, contraste,
+couleurs un peu plus chaudes, grain très léger), bande-son stéréo de stade (scripts/sons_stade.py : public,
+raquette placée à gauche ou à droite, réverbération de grande salle) et voix de l'arbitre par synthèse vocale
+(scripts/voix.py, Piper) ; volume réglé comme les réseaux sociaux (−16 LUFS). Chaque pièce a son repli : sans
+numpy/scipy, l'ancienne bande-son ; sans Piper, pas de voix.
 """
 import argparse
 import functools
@@ -112,12 +118,17 @@ def enregistrer(url, dossier_tmp, max_s=120, taille=(LARGEUR, HAUTEUR)):
     return chemin, [(e['t'] / 1000 - t0, e['type']) for e in sons]
 
 
-def enregistrer_images(url, mp4, ips=IPS, max_s=150, taille=(LARGEUR, HAUTEUR), attendre_pret=False):
+# 18/11/2026 (paquet 277) : l'étalonnage « télé » de la vidéo 3D (le texte reste net : grain et netteté très légers)
+ETALONNAGE = ('unsharp=5:5:0.45:5:5:0.0,eq=contrast=1.045:saturation=1.07:gamma=0.985,'
+              'colorbalance=rs=0.015:bs=-0.012:rh=0.02:bh=-0.02,noise=alls=2:allf=t')
+
+
+def enregistrer_images(url, mp4, ips=IPS, max_s=150, taille=(LARGEUR, HAUTEUR), attendre_pret=False, filtre=None):
     """Capture image par image (horloge virtuelle) → MP4 muet ; renvoie (durée en s, événements sonores [(s, nom)],
     ambiance sonore). attendre_pret : le temps virtuel avance sans capture tant que la page charge (3D)."""
     from playwright.sync_api import sync_playwright
     ff = subprocess.Popen(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', str(ips), '-c:v', 'mjpeg',
-                           '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p',
+                           '-i', '-', *(['-vf', filtre] if filtre else []), '-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p',
                            '-r', str(ips), '-movflags', '+faststart', '-an', mp4], stdin=subprocess.PIPE)
     n = 0
     try:
@@ -156,7 +167,25 @@ def enregistrer_images(url, mp4, ips=IPS, max_s=150, taille=(LARGEUR, HAUTEUR), 
         ff.wait()
     if ff.returncode:
         raise RuntimeError('ffmpeg a échoué (capture image par image)')
-    return n / ips, [((e['t'] - t0) / 1000.0, e['type']) for e in sons], ambiance
+    return n / ips, [((e['t'] - t0) / 1000.0, e['type'], {k: v for k, v in e.items() if k not in ('t', 'type')}) for e in sons], ambiance
+
+
+def bande_son_stade(sons, duree, wav, lang, voix_ok=True):
+    """Bande-son stéréo de stade + voix de l'arbitre ; False si numpy/scipy manquent (on garde l'ancienne)."""
+    try:
+        import sons_stade
+    except ImportError as e:
+        print(f'Bande-son de stade indisponible ({e}) : ancienne bande-son.')
+        return False
+    try:
+        import voix
+        parle = (lambda tx: voix.dire(tx, lang)) if voix_ok and voix.disponible(lang) else None
+    except Exception:
+        parle = None
+    evts = [dict(x, t=t, type=n) for t, n, x in sons]
+    dites = sons_stade.piste(evts, duree, wav, voix=parle)
+    print(f"Bande-son de stade : {len(evts)} sons, voix de l'arbitre : {dites} phrase(s)" + ('' if parle else ' (Piper absent)'))
+    return True
 
 
 def carte(url, chemin):
@@ -204,6 +233,7 @@ def main(argv):
     ap.add_argument('--format', default='9x16', choices=sorted(FORMATS), help='9x16 (défaut) ou 4x5 (fil de X)')
     ap.add_argument('--rendu', default='3d', choices=['3d', '2d'], help='3d : le stade (défaut) ; 2d : la borne d\'arcade')
     ap.add_argument('--ips', type=int, default=IPS, help='images par seconde (30 par défaut)')
+    ap.add_argument('--sans-voix', action='store_true', help="vidéo 3D sans la voix de l'arbitre")
     ap.add_argument('--sortie', default=os.path.join(RACINE, 'videos'))
     a = ap.parse_args(argv[1:])
     algo = os.path.join(RACINE, 'algo')
@@ -252,17 +282,21 @@ def main(argv):
     if a.capture == 'images':
         try:
             muet = os.path.join(tmp, 'images.mp4')
-            duree, sons, ambiance = enregistrer_images(url, muet, ips=a.ips, taille=taille, attendre_pret=a.rendu == '3d')
+            duree, sons, ambiance = enregistrer_images(url, muet, ips=a.ips, taille=taille, attendre_pret=a.rendu == '3d',
+                                                       filtre=ETALONNAGE if a.rendu == '3d' else None)
         finally:
             srv.shutdown()
         if a.muet:
             shutil.move(muet, mp4)
         else:
-            import sons as SN
             wav = os.path.join(tmp, 'son.wav')
-            SN.piste(sons, duree, wav, ambiance=ambiance)
+            stade = ambiance == 'stade' and bande_son_stade(sons, duree, wav, a.lang, voix_ok=not a.sans_voix)
+            if not stade:
+                import sons as SN
+                SN.piste([(t, n) for t, n, _ in sons], duree, wav, ambiance=ambiance)
             subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', muet, '-i', wav, '-map', '0:v', '-map', '1:a',
-                            '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', mp4],
+                            '-c:v', 'copy', *(['-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-ar', '48000'] if stade else []),
+                            '-c:a', 'aac', '-b:a', '192k' if stade else '160k', '-shortest', '-movflags', '+faststart', mp4],
                            check=True)
         shutil.rmtree(tmp, ignore_errors=True)
         print(f"Vidéo : {mp4} ({os.path.getsize(mp4) / 1e6:.1f} Mo, {duree:.1f} s, image par image à {a.ips} i/s, son {ambiance})")

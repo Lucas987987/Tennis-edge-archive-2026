@@ -14,7 +14,7 @@ name: Vidéo — simulation du match du jour
 # Lancement à la main : choisir la langue, un autre match (uid du site) ou un autre tirage (seed).
 # 18/11/2026 (paquet 276) : VIDÉO EN 3D par défaut — les moments forts du match représentatif joués dans le stade 3D
 # du site, habillage télé, son de stade (~60–75 s). Rendu sans carte graphique, donc plus long : FR et EN tournent en
-# PARALLÈLE (deux jobs), 50 min au plus chacun. « rendu = 2d » remet l'ancienne vidéo (borne d'arcade).
+# PARALLÈLE (deux jobs), 100 min au plus chacun (paquet 277). « rendu = 2d » remet l'ancienne vidéo (borne d'arcade).
 # Retrait : remettre ce fichier, scripts/video_simulation.py et scripts/sons.py du paquet 275 (la page garde la 2D).
 
 on:
@@ -37,6 +37,10 @@ on:
         type: choice
         options: ['9x16', '4x5']
         default: '9x16'
+      arbitre:
+        description: "Vidéo 3D : la voix de l'arbitre (synthèse vocale)"
+        type: boolean
+        default: true
       rendu:
         description: "3d : le stade (défaut) ; 2d : la borne d'arcade"
         type: choice
@@ -55,7 +59,7 @@ concurrency:
 jobs:
   video:
     runs-on: ubuntu-24.04   # 05/11/2026 : image figée (ubuntu-latest est passé à 26.04)
-    timeout-minutes: 50
+    timeout-minutes: 100
     strategy:
       fail-fast: false
       matrix:
@@ -70,6 +74,8 @@ jobs:
             /scripts/video_simulation.py
             /scripts/installer_video.sh
             /scripts/sons.py
+            /scripts/sons_stade.py
+            /scripts/voix.py
 
       - uses: actions/setup-python@v6
         with:
@@ -79,6 +85,8 @@ jobs:
         run: |
           # 05/11/2026 (paquet 194) : plus d'apt (miroir Ubuntu trop lent, vidéo annulée) — voir le script.
           bash scripts/installer_video.sh
+        env:
+          TE_SON_STADE: '1'     # 18/11/2026 (paquet 277) : bande-son de stade et voix de l'arbitre
 
       - name: Y a-t-il un match du jour ?
         id: mdj
@@ -126,7 +134,7 @@ jobs:
         if: steps.mdj.outputs.ok == '1'
         run: |
           lang="${{ matrix.lang }}"
-          python scripts/video_simulation.py --lang "$lang" --uid "${{ inputs.uid }}" --seed "${{ inputs.seed }}" --format "${{ inputs.format || '9x16' }}" --rendu "${{ inputs.rendu || '3d' }}" --ips "${{ (inputs.rendu || '3d') == '3d' && '25' || '30' }}" ${{ inputs.adresse && '--adresse' || '' }} --sortie videos
+          python scripts/video_simulation.py --lang "$lang" --uid "${{ inputs.uid }}" --seed "${{ inputs.seed }}" --format "${{ inputs.format || '9x16' }}" --rendu "${{ inputs.rendu || '3d' }}" --ips "${{ (inputs.rendu || '3d') == '3d' && '25' || '30' }}" ${{ inputs.adresse && '--adresse' || '' }} ${{ inputs.arbitre == false && '--sans-voix' || '' }} --sortie videos
           # 24/10/2026 : carte de stats du match (PNG pour X, en réponse à la vidéo)
           python scripts/video_simulation.py --lang "$lang" --uid "${{ inputs.uid }}" --carte --sortie videos || echo "::warning::carte ${lang} non faite"
           ls -la videos

@@ -103,7 +103,7 @@ class Chaine(unittest.TestCase):
 
     def test_workflow_en_parallele(self):
         self.assertIn('lang: [fr, en]', YML)
-        self.assertIn('timeout-minutes: 50', YML)
+        self.assertIn('timeout-minutes: 100', YML)
         self.assertIn('--rendu "${{ inputs.rendu || \'3d\' }}"', YML)
         self.assertIn("for lang in ${{ matrix.lang }}; do", YML)
         self.assertIn("--ips \"${{ (inputs.rendu || '3d') == '3d' && '25' || '30' }}\"", YML)   # 25 i/s en 3D : rendu sans carte graphique
@@ -114,12 +114,81 @@ class Chaine(unittest.TestCase):
         for nom in ('service', 'rebond', 'filet', 'applaudissements', 'ovation', 'foule_entree', 'volet', 'frappe0', 'frappe1'):
             self.assertTrue(nom in sons.SONS or nom in sons.STADE, nom)
         for nom in re.findall(r"son\('([a-z_0-9]+)'", FILM):
-            self.assertTrue(nom in sons.SONS or nom in sons.STADE, nom)
+            self.assertTrue(nom in sons.SONS or nom in sons.STADE or nom in ('voix', 'musique_intro', 'musique_fin'), nom)
         with tempfile.TemporaryDirectory() as d:
             f = os.path.join(d, 's.wav')
             sons.piste([(0.5, 'service'), (1.0, 'rebond'), (1.2, 'ovation')], 3, f, ambiance='stade')
             with wave.open(f) as w:
                 self.assertEqual(w.getnframes(), 3 * sons.TAUX)
+
+
+try:
+    import scipy  # noqa: F401
+    SCIPY = True
+except ImportError:
+    SCIPY = False
+
+
+@unittest.skipUnless(SCIPY, 'scipy absent')
+class BandeSonStade(unittest.TestCase):
+    """Paquet 277 : stéréo, public, raquette placée dans l'image, réverbération, voix de l'arbitre (Piper)."""
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(RACINE / 'scripts'))
+        import sons_stade, voix
+        cls.S, cls.V = sons_stade, voix
+
+    def test_tous_les_sons_de_la_video_existent(self):
+        noms = set(re.findall(r"son\('([a-z_0-9]+)'", FILM)) | set(re.findall(r"FILM\.son\('([a-z_0-9]+)'", HTML))
+        for nom in noms - {'voix', 'musique_intro', 'musique_fin'}:
+            self.assertIn(nom, self.S.SONS, nom)
+
+    def test_stereo_niveau_et_voix(self):
+        import numpy as np
+        from scipy.io import wavfile
+        dites = []
+        ev = [{'t': 0.2, 'type': 'service', 'pan': -0.8}, {'t': 0.8, 'type': 'frappe1', 'pan': 0.8}, {'t': 1.0, 'type': 'voix', 'texte': 'Jeu, Alcaraz'},
+              {'t': 1.5, 'type': 'ovation'}, {'t': 0, 'type': 'musique_intro', 'duree': 3}, {'t': 2.0, 'type': 'inconnu'}] + [{'t': 0.1 * k, 'type': 'crisse'} for k in range(30)]
+        with tempfile.TemporaryDirectory() as d:
+            f = os.path.join(d, 's.wav')
+            n = self.S.piste(ev, 4, f, voix=lambda tx: dites.append(tx) or 0.2 * np.sin(np.arange(9000) / 9))
+            sr, x = wavfile.read(f)
+        self.assertEqual((sr, x.shape), (48000, (4 * 48000, 2)))
+        self.assertEqual((n, dites), (1, ['Jeu, Alcaraz']))
+        self.assertLess(np.abs(x).max(), 32767)
+        self.assertGreater(np.abs(x).mean(), 200)                                 # jamais une piste muette
+        g, dr = np.abs(x[int(0.2 * sr):int(0.3 * sr)]).mean(axis=0)               # le service à gauche
+        self.assertGreater(g, dr)
+
+    def test_sans_piper_pas_de_voix(self):
+        self.V.DOSSIER = '/nulle/part'
+        self.assertIsNone(self.V.dire('Jeu, set et match', 'fr'))
+        self.assertFalse(self.V.disponible('en'))
+
+
+class Finition(unittest.TestCase):
+    def test_image(self):
+        self.assertIn("ETALONNAGE = ('unsharp=", SCRIPT)
+        self.assertIn("filtre=ETALONNAGE if a.rendu == '3d' else None", SCRIPT)
+        self.assertIn("loudnorm=I=-16", SCRIPT)
+        self.assertIn("ap.add_argument('--sans-voix'", SCRIPT)
+        self.assertIn("${{ inputs.arbitre == false && '--sans-voix' || '' }}", YML)
+        self.assertIn('uniform float uHalo, uFoc, uDof;', HTML)                   # flou d'arrière-plan des plans serrés
+        self.assertIn('pow(1.0 - max(dot(n, v), 0.0), 3.0) * uRim', HTML)        # contre-jour sur les joueurs
+        self.assertIn("if (C.nom === 'portrait')", HTML)
+
+    def test_installation_seulement_pour_la_video(self):
+        sh = (RACINE / 'scripts' / 'installer_video.sh').read_text(encoding='utf-8')
+        self.assertIn('if [ "${TE_SON_STADE:-0}" = "1" ]; then', sh)
+        self.assertIn('piper-tts==1.2.0', sh)
+        self.assertIn("TE_SON_STADE: '1'", YML)
+        for f in ('/scripts/sons_stade.py', '/scripts/voix.py'):
+            self.assertIn(f, YML)
+
+    def test_arbitre_dit_le_score(self):
+        self.assertIn("son('voix', 450, { texte: arbitre.score(x.avant) });", FILM)
+        self.assertIn('Jeu, set et match, ${n}', FILM)
+        self.assertIn('Game, set and match, ${n}', FILM)
 
 
 class RapportPublic(unittest.TestCase):
