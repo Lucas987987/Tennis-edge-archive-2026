@@ -89,7 +89,8 @@ export async function modele(req, pathname) {
   try {
     // 18/11/2026 (paquet 282) : seules les réponses réussies sont gardées un jour ; une absence (404) n'est jamais
     // mise en cache, sinon le fichier enfin publié resterait invisible jusqu'au lendemain
-    const r = await fetch(ORIGINE + pathname.slice(1), { cf: { cacheTtlByStatus: { '200-299': 86400, '404': 0, '500-599': 0 }, cacheEverything: true } });
+    // 283 : « ?v=283 » change la clé du cache de Cloudflare, qui gardait l'ancienne réponse « absent » (404) jusqu'à un jour
+    const r = await fetch(ORIGINE + pathname.slice(1) + '?v=283', { cf: { cacheTtlByStatus: { '200-299': 86400, '404': 0, '500-599': 0 }, cacheEverything: true } });
     const n = Number(r.headers.get('content-length')) || 0;
     if (r.ok && !(n && n < cfg.min) && !(r.headers.get('content-type') || '').includes('text/html'))
       return new Response(req.method === 'HEAD' ? null : r.body, { headers: { ...SECURITE, 'Content-Type': cfg.type,
