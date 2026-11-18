@@ -4446,13 +4446,17 @@ const G3D = (() => {
     try {
       // 18/11/2026 (paquet 281) : 3 essais (réseau mobile capricieux) au lieu d'un seul, sinon les joueurs, l'arbitre,
       // les juges de ligne et les ramasseurs restaient en version simplifiée jusqu'au rechargement de la page
+      // 283 : chaque essai abandonne au bout de 25 s (sinon un téléchargement bloqué laissait « chargement… » sans fin)
       let r = null; const URL_MOD = 'modeles/joueurs3d.bin?v=265', lire = o => (o ? fetch(URL_MOD, o) : fetch('modeles/joueurs3d.bin?v=265'));
       for (let essai = 0; essai < 3; essai++) {
-        try { r = await lire(essai ? { cache: 'reload' } : undefined); if (r.ok) break; } catch (e) { r = null; }
+        const stop = typeof AbortController !== 'undefined' ? new AbortController() : null, minuterie = stop && setTimeout(() => stop.abort(), 25000);
+        try { r = await lire(stop || essai ? { ...(essai ? { cache: 'reload' } : {}), ...(stop ? { signal: stop.signal } : {}) } : undefined);
+          if (r.ok) { MOD.buf = await r.arrayBuffer(); clearTimeout(minuterie); break; } } catch (e) { r = null; MOD.erreur = stop && stop.signal.aborted ? 'délai dépassé' : 'réseau'; }
+        clearTimeout(minuterie); if (r && !r.ok) MOD.erreur = 'statut ' + r.status;
         await new Promise(ok => setTimeout(ok, [1500, 4000, 0][essai]));
       }
-      if (!r || !r.ok) throw new Error('statut ' + (r ? r.status : 'réseau'));
-      const buf = await r.arrayBuffer(), dv = new DataView(buf);
+      if (!r || !r.ok || !MOD.buf) throw new Error(MOD.erreur || 'réseau');
+      const buf = MOD.buf, dv = new DataView(buf); MOD.buf = null;
       if (String.fromCharCode(...new Uint8Array(buf, 0, 4)) !== 'TEJ3') throw new Error('format');
       const n = dv.getUint32(4, true), J = JSON.parse(new TextDecoder().decode(new Uint8Array(buf, 8, n))), B = 8 + n;
       const prim = q => {
@@ -4479,7 +4483,7 @@ const G3D = (() => {
         MOD.clips[nom] = { ...c, Q: new Int16Array(buf.slice(B + c.q, B + c.q + c.nf * 23 * 8)), T: new Float32Array(buf.slice(B + c.t, B + c.t + c.nf * 12)) };
       MOD.clipsBassin = J.clips_bassin || 0.917;
       MOD.etat = 'pret';
-    } catch (e) { MOD.etat = 'absent'; MOD.erreur = String(e && e.message || e).slice(0, 80); }
+    } catch (e) { MOD.etat = 'absent'; MOD.erreur = String(e && e.message || e).slice(0, 60); }
   }
   // tenue et allure d'un joueur : maillot, côtés, short, liseré, blanc, semelle, bandeau (null = peau)
   function allure(m, i) {
@@ -5455,7 +5459,7 @@ const G3D = (() => {
   let boite3d = null, tab = null, msgEl = null, verEl = null; const TRACE = [];
   function message(t) {
     if (verEl) {                                                                 // paquet 281 : version et état des joueurs 3D
-      const v = `3D ${VERSION_3D} · ${tr(MOD.etat === 'pret' ? 'g3_mod_ok' : MOD.etat === 'absent' ? 'g3_mod_absent' : 'g3_mod_charge')}`;
+      const v = `3D ${VERSION_3D} · ${tr(MOD.etat === 'pret' ? 'g3_mod_ok' : MOD.etat === 'absent' ? 'g3_mod_absent' : 'g3_mod_charge')}${MOD.etat === 'absent' && MOD.erreur ? ` (${MOD.erreur})` : ''}`;
       if (verEl.textContent !== v) verEl.textContent = v;
     }
     if (!msgEl) return;
@@ -5513,7 +5517,7 @@ const G3D = (() => {
     return true;
   }
   let MATCH = null; const ALLURE = [null, null];
-  const VERSION_3D = 'v281';
+  const VERSION_3D = 'v283';
   // ── LE FILM (paquet 276) : la vidéo du jour en 3D. La page choisit les moments forts du match simulé et les fait
   // jouer ici un par un ; public en panneaux et image un peu réduite (la vidéo est rendue sans carte graphique).
   const FILM = { actif: false, echelle: 1, son: null, cam: null, t: 0, focale: 0 };
