@@ -1284,6 +1284,13 @@
    "paquet": 281,
    "quoi": "DIRECT 3D : LES PERSONNAGES SE CHARGENT MIEUX, ET ON VOIT LA VERSION (paquet 281, Lucas : « je ne pense pas que ce soit la bonne version »). Le site sert bien le moteur des paquets 275–277 (sol vert autour du court), mais sur son téléphone les juges de ligne et les ramasseurs restaient en blocs : les modèles 3D des personnages (fichier de 1,2 Mo) n'étaient pas chargés, et un seul échec suffisait à garder la version simplifiée jusqu'au rechargement de la page. Le chargement est maintenant retenté 3 fois (après 1,5 s puis 4 s, sans cache au 2e essai). Une petite étiquette en bas à gauche de la vue 3D indique la version du moteur (v281) et l'état des joueurs : chargés, en cours de chargement, ou simplifiés si les modèles sont indisponibles. Pas dans la vidéo. Affichage seulement : le % ne change pas.",
    "garde_fou": "Retrait : remettre algo/index.html du paquet 277 (fichier identique hors chargement des modèles et étiquette)."
+  },
+  {
+   "date": "2026-11-18",
+   "statut": "production",
+   "paquet": 282,
+   "quoi": "LES PERSONNAGES 3D ARRIVENT ENFIN SUR LE SITE (paquet 282). L'étiquette ajoutée au paquet 281 a montré « joueurs simplifiés : modèles 3D indisponibles » : le fichier des modèles (algo/modeles/joueurs3d.bin, 1,2 Mo, CC0) n'avait jamais été copié dans la publication GitHub Pages, seulement la page et ses données. Depuis le paquet 264, le direct 3D du site montrait donc les personnages simplifiés dessinés par le code (et des blocs pour les juges de ligne et les ramasseurs), alors que les vidéos, fabriquées depuis le dépôt, avaient les vrais modèles. La publication copie maintenant le dossier des modèles (échec explicite s'il manque) ; le worker ne garde plus en cache une absence du fichier (seules les réponses réussies sont gardées un jour). Affichage seulement : le % ne change pas.",
+   "garde_fou": "Vérification : l'étiquette de la vue 3D doit afficher « joueurs 3D chargés ». Retrait : remettre .github/workflows/pages.yml et workers/algo/worker.js du paquet 281 (le site repasse aux personnages simplifiés)."
   }
  ]
 }
