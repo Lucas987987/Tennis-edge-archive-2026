@@ -24,6 +24,10 @@ RÈGLES FIXÉES AVANT DE REGARDER LES RÉSULTATS (ne pas les modifier après cou
     moitié ; sinon « pas de correction ». Jugé en tout et circuit par circuit ; un circuit ne reprend pas le verdict
     d'un autre. Rien n'est appliqué automatiquement : une correction passe ensuite par un paquet, avec sa règle de
     retrait.
+  — RETRAIT d'une correction en place (paquet 270, simulateur/correction_niveaux.json) : sur les matchs corrigés jugés
+    (circuit et niveau de la correction), log loss AVEC et SANS la correction (les deux % sont gardés dans la fiche) ;
+    avec au moins 100 matchs, si la log loss AVEC dépasse celle SANS d'au moins 0,001, la correction est retirée
+    (retiree = true dans le fichier, lu à chaque passage des pronostics).
 Sortie publique : simulateur/rapport_niveaux_fiabilite.json (aucun nom, aucune cote). Descriptif.
 Usage : python simulateur/etude_niveaux_fiabilite.py [racine]
 """
@@ -137,6 +141,40 @@ def etude_niveau(X):
     return out
 
 
+N_RETRAIT, PERTE_RETRAIT = 100, 0.001
+
+
+def suivi_corrections(racine, M):
+    """Règle de retrait de l'en-tête ; renvoie (suivi, document du fichier modifié ou None)."""
+    chemin = os.path.join(racine, 'simulateur', 'correction_niveaux.json')
+    try:
+        with open(chemin, encoding='utf-8') as f:
+            doc = json.load(f)
+    except (OSError, ValueError):
+        return {}, None
+    suivi, change = {}, False
+    for c, nv in (doc.get('corrections') or {}).items():
+        for n, v in (nv or {}).items():
+            avec, sans = [], []
+            for x in M:
+                k = ((x['m'].get('fiabilite') or {}).get('correction_niveau')) or {}
+                if x['circuit'] != c or k.get('niveau') != n or k.get('p_home_avec_correction') is None:
+                    continue
+                y = (x['m'].get('reel') or {}).get('gagnant') == 'home'
+                for L, q in ((avec, k['p_home_avec_correction']), (sans, k['p_home_sans_correction'])):
+                    q = min(max(float(q), EPS), 1 - EPS)
+                    L.append(-math.log(q if y else 1 - q))
+            r = {'pente': v.get('pente'), 'retiree': bool(v.get('retiree')), 'n': len(avec)}
+            if avec:
+                r['log_loss_avec'], r['log_loss_sans'] = round(sum(avec) / len(avec), 4), round(sum(sans) / len(sans), 4)
+            if len(avec) >= N_RETRAIT and not v.get('retiree') and r['log_loss_avec'] - r['log_loss_sans'] >= PERTE_RETRAIT:
+                v['retiree'], v['retiree_le'] = True, dt.date.today().isoformat()
+                r['retiree'], change = True, True
+            r['verdict'] = 'retirée' if r['retiree'] else ('trop tôt' if len(avec) < N_RETRAIT else 'gardée')
+            suivi[f'{c}|{n}'] = r
+    return suivi, (doc if change else None)
+
+
 def rapport(racine, M=None):
     M = AB.matchs(racine) if M is None else M
     return {'genere_le': dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds'), 'paquet': 269,
@@ -145,14 +183,21 @@ def rapport(racine, M=None):
             'regles': __doc__.split('RÈGLES FIXÉES AVANT DE REGARDER LES RÉSULTATS (ne pas les modifier après coup) :')[1]
             .split('Sortie publique')[0].replace('\n', ' ').strip(),
             'descriptif': 'le % de victoire ne change pas', 'matchs': len(M),
-            'niveaux': {nv: etude_niveau([x for x in M if x['niveau'] == nv]) for nv in NIVEAUX}}
+            'niveaux': {nv: etude_niveau([x for x in M if x['niveau'] == nv]) for nv in NIVEAUX},
+            'corrections_en_place': suivi_corrections(racine, M)[0]}
 
 
 if __name__ == '__main__':
     racine = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ICI, '..')
-    r = rapport(racine)
+    M = AB.matchs(racine)
+    r = rapport(racine, M)
     with open(os.path.join(racine, 'simulateur', 'rapport_niveaux_fiabilite.json'), 'w', encoding='utf-8') as f:
         json.dump(r, f, ensure_ascii=False, indent=1)
+    _, nouveau = suivi_corrections(racine, M)
+    if nouveau:                                      # règle de retrait déclenchée : le fichier est réécrit
+        with open(os.path.join(racine, 'simulateur', 'correction_niveaux.json'), 'w', encoding='utf-8') as f:
+            json.dump(nouveau, f, ensure_ascii=False, indent=1)
+        print('Correction retirée :', {k: v for k, v in r['corrections_en_place'].items()})
     for nv, e in r['niveaux'].items():
         m, c = e['ensemble'] or {}, e['correction']
         print(f"{nv:8s} n={m.get('n')} réel {m.get('reussite_reelle_pct')} / annoncé {m.get('reussite_annoncee_pct')} "
