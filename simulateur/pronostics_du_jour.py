@@ -199,6 +199,29 @@ def charger_combinaison(racine):
 
 
 COMBINAISON = None
+# 18/11/2026 (paquet 273, DÉCISION DE LUCAS : étude « par circuit », paquet 255, partie B) — poids du mélange PROPRES
+# AU CIRCUIT (simulateur/poids_circuit.json) : ATP Elo 0,7339 / simulation 0,3036, appris sur 2024 et jugés sur
+# 2025 → janvier 2026 (log loss +0,0014 ± 0,0006 sur 2 259 matchs ; +0,0004 sur 2024). Les autres circuits gardent les
+# poids communs. Retrait automatique par simulateur/poids_circuit.py (règle dans son en-tête).
+POIDS_CIRCUIT = {}
+
+
+def charger_poids_circuit(racine):
+    try:
+        with open(os.path.join(racine, 'simulateur', 'poids_circuit.json'), encoding='utf-8') as f:
+            doc = json.load(f)
+    except (OSError, ValueError):
+        return {}
+    return {c: {'elo': float(v['elo']), 'simulation': float(v['simulation'])}
+            for c, v in (doc.get('circuits') or {}).items()
+            if isinstance(v, dict) and not v.get('retire') and v.get('elo') is not None and v.get('simulation') is not None}
+
+
+def poids_de(c):
+    """Poids du mélange pour ce circuit : ceux du circuit s'ils sont en place, sinon les poids communs."""
+    if not COMBINAISON:
+        return COMBINAISON
+    return dict(COMBINAISON, **POIDS_CIRCUIT[c], source_circuit=c) if c in POIDS_CIRCUIT else COMBINAISON
 ACTIVITE = None       # 29/10/2026 : activité récente des joueurs (activite.py), chargée par construire()
 ECHANGES = None       # 30/10/2026 : longueur des échanges (Match Charting Project), affichage seul
 STYLES_MATCHS = {}    # 01/11/2026 : styles service–retour figés avant match (styles_descriptifs.json), fantôme seul
@@ -843,7 +866,7 @@ def controle_format(p_home, p_elo, c, sg):
     if not k or p_home is None or p_elo is None:
         return None
     lg = lambda q: math.log(min(max(q, 1e-6), 1 - 1e-6) / (1 - min(max(q, 1e-6), 1 - 1e-6)))
-    w = float((COMBINAISON or {}).get('elo', 1.0))
+    w = float((poids_de(c) or {}).get('elo', 1.0))
     d = w * (k - 1.0) * lg(p_elo)
     if abs(d) < 1e-4:
         return None
@@ -872,7 +895,7 @@ def controle_grand_chelem(p_home, p_elo, c, tournoi, tour):
     if not tour or 'qualif' in str(tour).lower():
         return None
     lg = lambda q: math.log(min(max(q, 1e-6), 1 - 1e-6) / (1 - min(max(q, 1e-6), 1 - 1e-6)))
-    w = float((COMBINAISON or {}).get('elo', 1.0))
+    w = float((poids_de(c) or {}).get('elo', 1.0))
     d = w * (k - 1.0) * lg(p_elo)
     if abs(d) < 1e-4:
         return None
@@ -912,7 +935,7 @@ def controle_qualifs_gc(p_home, p_elo, c, tournoi, tour):
     if not k or p_home is None or p_elo is None or not qualification_gc(tournoi, tour):
         return None
     lg = lambda q: math.log(min(max(q, 1e-6), 1 - 1e-6) / (1 - min(max(q, 1e-6), 1 - 1e-6)))
-    w = float((COMBINAISON or {}).get('elo', 1.0))
+    w = float((poids_de(c) or {}).get('elo', 1.0))
     d = w * (k - 1.0) * lg(p_elo)
     if abs(d) < 1e-4:
         return None
@@ -1004,7 +1027,7 @@ def controle_forme_service(cH, cA, vh, va, c, s, sg, p_elo, p_sim, n_h, n_a, sit
         return None
     cH2, cA2 = MS.appliquer_facteurs(cH, dh), MS.appliquer_facteurs(cA, da)
     p_sim2 = MS.victoire_pure(cH2, cA2, sg, sigma_sim())
-    p2 = MS.melange_contexte(COMBINAISON, MS.contexte_match(s, c, 2 * sg - 1), p_elo, p_sim2)
+    p2 = MS.melange_contexte(poids_de(c), MS.contexte_match(s, c, 2 * sg - 1), p_elo, p_sim2)
     p2 = MS.calibrer(p2, COMBINAISON.get('calibration'))
     p2 = ajuster_combinaison(p2, c, p_elo, p_sim2, n_h, n_a, sit, s, 2 * sg - 1)
     return {'p_home': round(p2, 4), 'p_simulation': round(p_sim2, 4), 'p_simulation_sans': round(p_sim, 4),
@@ -1425,6 +1448,8 @@ def construire(racine, maintenant=None, uids=None, pentes_forcees=None):
     REGLAGES = charger_reglages(racine)
     CHOIX = charger_choix(racine)
     COMBINAISON = charger_combinaison(racine)
+    global POIDS_CIRCUIT
+    POIDS_CIRCUIT = charger_poids_circuit(racine) if COMBINAISON else {}
     AJUSTEMENTS.clear()
     AJUSTEMENTS.update(charger_ajustements(racine))
     global CLASSEMENTS
@@ -1502,8 +1527,15 @@ def construire(racine, maintenant=None, uids=None, pentes_forcees=None):
                 # match est ensuite joué avec les statistiques des deux joueurs, à ce niveau.
                 cH, cA = avec_facteurs(*composantes_du_match(PR, h, a, c, s, pure=True)[:2], fct)
                 p_sim = MS.victoire_pure(cH, cA, sg, sigma_sim())
-                p_c = MS.melange_contexte(COMBINAISON, MS.contexte_match(s, c, 2 * sg - 1), stats['p_home'], p_sim)
+                ctx_ = MS.contexte_match(s, c, 2 * sg - 1)
+                p_c = MS.melange_contexte(poids_de(c), ctx_, stats['p_home'], p_sim)
                 p_c = MS.calibrer(p_c, COMBINAISON.get('calibration'))     # excès de confiance (si adopté)
+                # 18/11/2026 (paquet 273) : le même % avec les poids communs, pour la règle de retrait des poids du circuit
+                d_poids_ = None
+                if c in POIDS_CIRCUIT:
+                    p_cc_ = MS.calibrer(MS.melange_contexte(COMBINAISON, ctx_, stats['p_home'], p_sim), COMBINAISON.get('calibration'))
+                    lgq_ = lambda q: math.log(min(max(q, 1e-6), 1 - 1e-6) / (1 - min(max(q, 1e-6), 1 - 1e-6)))  # noqa: E731
+                    d_poids_ = lgq_(p_c) - lgq_(p_cc_)
                 sit = situations_du_match(h, a, x['tournoi'], x['debut'], s)
                 tr_ = tour_du_match(h, a, x['debut'])            # 29/10/2026 : tour du tableau (programme TennisApi)
                 if tr_:
@@ -1568,6 +1600,10 @@ def construire(racine, maintenant=None, uids=None, pentes_forcees=None):
                                        p_simulation=round(p_sim, 4), p_elo=stats['p_home'])
                     sig_ctl = {'appliques': sorted(sh_), 'p_home_sans': round(p_base, 4),
                                'decalages': {k: round(v, 4) for k, v in sh_.items()}}
+                if d_poids_ is not None and combinaison:
+                    qf_ = min(max(combinaison['p_home'], 1e-6), 1 - 1e-6)
+                    combinaison['poids_circuit'] = {'circuit': c, 'poids': POIDS_CIRCUIT[c], 'p_home_avec': combinaison['p_home'],
+                                                    'p_home_poids_communs': round(sig(math.log(qf_ / (1 - qf_)) - d_poids_), 4)}
             # 22/10/2026 — EN DIRECT (direct.py, Lab) : points de service des deux joueurs pour la version
             # principale (simulation + Elo si adoptée, sinon simulation pure), avant toute forme du jour.
             cH0, cA0 = avec_facteurs(*composantes_du_match(PR, h, a, c, s, pure=not combinaison)[:2], fct)
@@ -2275,6 +2311,10 @@ def main(argv):
             print(f"Correction par niveau de fiabilité : {nc} matchs refaits ({CORRECTIONS_NIVEAUX})")
     except Exception as e:  # noqa: BLE001 — la correction ne doit jamais bloquer les pronostics
         print(f"::warning::correction par niveau non appliquée : {type(e).__name__}: {e}")
+    for m in doc['matchs']:                  # 18/11/2026 (paquet 273) : les deux %, gardés pour la règle de retrait
+        pc_ = (m.get('combinaison') or {}).get('poids_circuit')
+        if pc_ and m.get('fiabilite'):
+            m['fiabilite'] = dict(m['fiabilite'], poids_circuit=pc_)
     os.makedirs(os.path.join(racine, 'Tennis_Edge_Lab', 'live'), exist_ok=True)
     with open(os.path.join(racine, SORTIE), 'w', encoding='utf-8') as f:
         json.dump(doc, f, ensure_ascii=False, indent=1)
