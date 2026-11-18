@@ -15,6 +15,8 @@ Plans : vue télé, gros plan avec flou d'arrière-plan. Moteurs : Cycles sur le
 si la machine le permet, EEVEE.
 
 Lancement : blender -b --factory-startup -P scripts/blender_essai.py -- --sortie essai_blender [--echantillons 24] [--moteur eevee]
+18/11/2026 (paquet 279) : 1er essai — Cycles 44,5 s par image (26 h par vidéo), EEVEE planté faute de libEGL. EEVEE est
+réessayé avec l'OpenGL logiciel de Mesa (llvmpipe) dans un écran virtuel (xvfb), sur les trois plans.
 Sortie : PNG + temps.json (secondes par image, par moteur et par plan).
 """
 import json
@@ -32,10 +34,10 @@ HL = L / 2
 
 def args():
     a = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
-    o = {'sortie': 'essai_blender', 'echantillons': 24, 'largeur': 1080, 'hauteur': 1350, 'moteur': 'cycles'}
+    o = {'sortie': 'essai_blender', 'echantillons': 24, 'largeur': 1080, 'hauteur': 1350, 'moteur': 'cycles', 'echantillons_eevee': 16}
     for k in range(0, len(a) - 1, 2):
         o[a[k].lstrip('-')] = a[k + 1]
-    for k in ('echantillons', 'largeur', 'hauteur'):
+    for k in ('echantillons', 'largeur', 'hauteur', 'echantillons_eevee'):
         o[k] = int(o[k])
     return o
 
@@ -294,6 +296,11 @@ def rendre(chemin, moteur, o):
         except Exception:
             pass
         sc.render.use_persistent_data = True
+    else:                                                                       # EEVEE (paquet 279) : rendu OpenGL logiciel
+        try:
+            sc.eevee.taa_render_samples = o['echantillons_eevee']
+        except Exception:
+            pass
     t0 = time.time()
     bpy.ops.render.render(write_still=True)
     return round(time.time() - t0, 2)
@@ -306,7 +313,7 @@ def main():
            'echantillons_cycles': o['echantillons'], 'rendus': []}
     t0 = time.time()
     eevee = o['moteur'] == 'eevee'
-    for jour in ((False,) if eevee else (False, True)):
+    for jour in (False, True):
         bpy.ops.wm.read_factory_settings(use_empty=True)
         court()
         res['spectateurs'] = stade()
@@ -322,8 +329,6 @@ def main():
         for nom, cam in plans:
             bpy.context.scene.camera = cam
             for moteur in (('BLENDER_EEVEE_NEXT', 'BLENDER_EEVEE') if eevee else ('CYCLES',)):
-                if eevee and nom != 'tv':
-                    continue                                                  # EEVEE : un seul essai
                 f = os.path.join(o['sortie'], f'{ambiance}_{nom}_{moteur.lower()}.png')
                 try:
                     s = rendre(f, moteur, o)

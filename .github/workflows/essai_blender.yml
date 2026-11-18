@@ -9,6 +9,10 @@ name: Essai — Blender pour la vidéo 3D
 # Règle de décision, écrite avant l'essai : Blender ne remplace le moteur du site pour la vidéo du jour que si une
 # vidéo complète tient en moins de 3 h de machine par langue ET si l'image est jugée nettement meilleure par Lucas ;
 # sinon on garde le moteur du site (paquet 277) et ce workflow reste un essai manuel.
+# 18/11/2026 (paquet 279) — RÉSULTAT DU 1er ESSAI : Cycles 40,6 / 55,7 / 37,2 s par image (44,5 s en moyenne) → 26,3 h
+# par vidéo et par langue : Cycles est écarté par la règle (3 h). EEVEE a planté (libEGL.so.1 absent : apt sans mise à
+# jour de l'index). 2e essai : index apt à jour, Mesa (OpenGL logiciel llvmpipe) et écran virtuel xvfb ; Cycles ne
+# repasse que si on coche la case.
 
 on:
   workflow_dispatch:
@@ -17,6 +21,10 @@ on:
         description: "Cycles : échantillons par pixel (plus = plus propre et plus lent)"
         required: false
         default: '24'
+      cycles:
+        description: "Refaire aussi Cycles (déjà mesuré : 44,5 s par image)"
+        type: boolean
+        default: false
       version:
         description: "Version de Blender (série LTS 4.2)"
         required: false
@@ -45,7 +53,10 @@ jobs:
         run: |
           set -euo pipefail
           # bibliothèques système de Blender (souvent déjà là) : 6 min au plus, non bloquant
-          timeout 360 sudo apt-get install -y --no-install-recommends libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libsm6 libxkbcommon0 libegl1 \
+          # 279 : l'index apt d'abord (sinon 404), puis Mesa (OpenGL logiciel) et l'écran virtuel pour EEVEE
+          timeout 240 sudo apt-get update -q || echo "::warning::index apt non mis à jour"
+          timeout 480 sudo apt-get install -y --no-install-recommends libxi6 libxxf86vm1 libxfixes3 libxrender1 libgl1 libsm6 libxkbcommon0 \
+            libegl1 libegl-mesa0 libgl1-mesa-dri libglx-mesa0 xvfb xauth \
             || echo "::warning::bibliothèques apt incomplètes"
           v="${{ inputs.version || '4.2.3' }}"; serie="${v%.*}"
           for essai in "$v" "${serie}.0"; do
@@ -57,13 +68,16 @@ jobs:
           "$HOME/blender/blender" -b --factory-startup --version | head -3
 
       - name: Rendre avec Cycles (processeur)
+        if: inputs.cycles
         run: |
           "$HOME/blender/blender" -b --factory-startup -P scripts/blender_essai.py -- --sortie essai_blender --echantillons "${{ inputs.echantillons || '24' }}"
 
       - name: Essayer EEVEE (peut échouer sans carte graphique)
         continue-on-error: true
         run: |
-          timeout 900 "$HOME/blender/blender" -b --factory-startup -P scripts/blender_essai.py -- --sortie essai_blender --moteur eevee \
+          export LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe LP_NUM_THREADS=4
+          timeout 2400 xvfb-run -a -s "-screen 0 1920x1080x24" "$HOME/blender/blender" -b --factory-startup --gpu-backend opengl \
+            -P scripts/blender_essai.py -- --sortie essai_blender --moteur eevee \
             || echo "::warning::EEVEE ne tourne pas sur cette machine"
 
       - name: Résumé (temps seulement)
