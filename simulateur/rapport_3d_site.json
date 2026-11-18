@@ -1,0 +1,11 @@
+{
+ "paquet": 281,
+ "version_3d": "v281",
+ "essais_de_chargement_des_modeles": 3,
+ "attentes_s": [
+  1.5,
+  4
+ ],
+ "quoi": "Direct 3D du site : les modèles des personnages sont chargés en 3 essais ; une étiquette affiche la version du moteur et l'état des joueurs 3D (chargés, en cours, indisponibles).",
+ "note": "Affichage seulement : le % ne change pas. Aucun nom de joueur, aucune cote."
+}
