@@ -1298,6 +1298,13 @@
    "paquet": 283,
    "quoi": "PERSONNAGES 3D DU SITE : DERNIER VERROU (paquet 283). Après le paquet 282, l'étiquette restait sur « chargement des joueurs 3D… ». Deux causes possibles, toutes deux traitées : 1) Cloudflare gardait en cache, jusqu'à un jour, l'ancienne réponse « fichier absent » de GitHub Pages ; le worker demande maintenant le fichier sous une nouvelle clé (?v=283), donc la version publiée ; 2) un téléchargement bloqué laissait « chargement… » sans fin : chaque essai abandonne au bout de 25 s, et l'étiquette affiche la cause en cas d'échec (délai dépassé, réseau, statut HTTP). Étiquette : v283. Affichage seulement : le % ne change pas.",
    "garde_fou": "Vérification : l'étiquette doit afficher « 3D v283 · joueurs 3D chargés ». Retrait : remettre algo/index.html et workers/algo/worker.js du paquet 282."
+  },
+  {
+   "date": "2026-11-18",
+   "statut": "production",
+   "paquet": 284,
+   "quoi": "LE DÉPLOIEMENT DU WORKER REPASSE AU VERT (paquet 284). Le workflow « Déployer le worker algo » échouait avant d'atteindre Cloudflare : un de ses tests (« direct : la page redemande les scores toutes les 3 s ») lit algo/index.html, absent de la copie partielle du dépôt faite par le workflow. Conséquence : les changements du worker des paquets 282 et 283 (pas de cache pour un fichier absent, nouvelle clé pour les modèles 3D) n'étaient pas en ligne, d'où les personnages 3D toujours absents du site. La copie inclut maintenant la page. Rien d'autre ne change.",
+   "garde_fou": "Vérification : le run « Déployer le worker algo » est vert, puis l'étiquette de la vue 3D affiche « 3D v283 · joueurs 3D chargés ». Retrait : remettre .github/workflows/deploy_algo.yml du paquet 283."
   }
  ]
 }
