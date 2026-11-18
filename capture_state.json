@@ -1,12 +1,12 @@
 {
-  "last_capture_at": "2026-11-18T10:18:44.107522",
-  "captured": 12,
-  "matches": 176,
+  "last_capture_at": "2026-11-18T10:36:43.486928",
+  "captured": 4,
+  "matches": 180,
   "requetes_ce_run": 1,
-  "requetes_cumul_jour": 263,
+  "requetes_cumul_jour": 270,
   "rapport_envoye_pour": "2026-11-17",
   "declencheur": "repository_dispatch",
   "passages_par_declencheur": {
-    "repository_dispatch": 207
+    "repository_dispatch": 213
   }
 }
