@@ -51,7 +51,7 @@ def main():
     res = mesurer()
     types = Counter(q for x in res for q in x['quoi'])
     longueurs = Counter(len(x['quoi']) for x in res)
-    rapport = {'paquet': 276, 'quoi': "Vidéo du jour en 3D : moments forts retenus sur 300 matchs tirés au hasard par le moteur du site.",
+    rapport = {'paquet': 277, 'quoi': "Vidéo du jour en 3D : moments forts retenus sur 300 matchs tirés au hasard par le moteur du site.",
                'note': "Échanges illustratifs : seul le vainqueur de chaque point vient de la simulation ; le % ne change pas.",
                'matchs': len(res), 'moments_par_video': {str(k): v for k, v in sorted(longueurs.items())},
                'types_de_moments': dict(types.most_common()), 'balle_de_match_toujours_en_dernier': all(x['fin_ok'] for x in res),
