@@ -1,5 +1,5 @@
 {
- "genere_le": "2026-11-18T08:08:56Z",
+ "genere_le": "2026-11-18T10:10:38Z",
  "pronostiques": 2236,
  "joues_avec_resultat": 1,
  "tous": {
@@ -69,84 +69,84 @@
   }
  ],
  "match_simule_contre_feuille": {
-  "n": 1645,
+  "n": 1648,
   "stats": {
    "aces": {
-    "n": 3290,
-    "prevu": 4.76,
+    "n": 3296,
+    "prevu": 4.77,
     "reel": 5.02,
     "ecart_moyen": 2.35,
     "dans_fourchette_pct": 80.4
    },
    "doubles_fautes": {
-    "n": 3290,
+    "n": 3296,
     "prevu": 3.03,
     "reel": 2.58,
     "ecart_moyen": 1.58,
     "dans_fourchette_pct": 87.6
    },
    "premiere_pct": {
-    "n": 3290,
+    "n": 3296,
     "prevu": 62.37,
     "reel": 64.06,
-    "ecart_moyen": 6.08,
-    "dans_fourchette_pct": 74.7
+    "ecart_moyen": 6.07,
+    "dans_fourchette_pct": 74.8
    },
    "gagnes_1re_pct": {
-    "n": 3290,
+    "n": 3296,
     "prevu": 68.38,
-    "reel": 69.29,
-    "ecart_moyen": 7.29,
+    "reel": 69.31,
+    "ecart_moyen": 7.3,
     "dans_fourchette_pct": 76.0
    },
    "gagnes_2e_pct": {
-    "n": 3290,
+    "n": 3296,
     "prevu": 49.41,
-    "reel": 50.06,
-    "ecart_moyen": 9.18,
+    "reel": 50.08,
+    "ecart_moyen": 9.19,
     "dans_fourchette_pct": 77.9
    },
    "breaks": {
-    "n": 3290,
+    "n": 3296,
     "prevu": 2.86,
     "reel": 2.67,
     "ecart_moyen": 1.36,
     "dans_fourchette_pct": 90.1
    },
    "jeux": {
-    "n": 3290,
+    "n": 3296,
     "prevu": 11.49,
-    "reel": 11.47,
+    "reel": 11.46,
     "ecart_moyen": 2.94,
-    "dans_fourchette_pct": 84.1
+    "dans_fourchette_pct": 84.2
    },
    "balles_break_obtenues": {
-    "n": 1494,
+    "n": 1500,
     "prevu": 6.7,
-    "reel": 6.64,
+    "reel": 6.63,
     "ecart_moyen": 3.02,
     "dans_fourchette_pct": 84.1
    },
    "jeux_service_gagnes_pct": {
-    "n": 1494,
+    "n": 1500,
     "prevu": 73.63,
-    "reel": 75.55,
-    "ecart_moyen": 13.0,
+    "reel": 75.59,
+    "ecart_moyen": 13.01,
     "dans_fourchette_pct": 86.7
    },
    "points_gagnes": {
-    "n": 1494,
-    "prevu": 71.59,
-    "reel": 73.23,
+    "n": 1500,
+    "prevu": 71.58,
+    "reel": 73.16,
     "ecart_moyen": 17.12,
     "dans_fourchette_pct": 82.3
    },
    "total_jeux": {
-    "n": 1645,
+    "n": 1648,
     "prevu": 22.99,
     "reel": 22.93,
     "ecart_moyen": 4.97,
-    "dans_fourchette_pct": 84.4
+    "dans_fourchette_pct": 84.5
    }
   }
  }
