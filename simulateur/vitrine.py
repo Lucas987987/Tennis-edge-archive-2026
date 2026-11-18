@@ -767,10 +767,16 @@ def retirer_annules(matchs, racine, maintenant):
     try:
         import feuilles as FE
         depuis = (maintenant.date() - dt.timedelta(days=2)).isoformat()
-        idx = FE.Index(FE.lire(racine, depuis=depuis))
+        fiches_ = FE.lire(racine, depuis=depuis)
+        idx = FE.Index(fiches_)
     except Exception as e:  # noqa: BLE001
         print(f'::warning::feuilles illisibles, forfaits non filtrés : {e}')
-        return matchs
+        return dedoublonner_site(matchs)
+    try:
+        import controle_donnees as CD
+        idx_j = CD.ParJoueur(fiches_)
+    except Exception:  # noqa: BLE001
+        idx_j = None
     out = []
     for m in matchs:
         try:
@@ -781,8 +787,49 @@ def retirer_annules(matchs, racine, maintenant):
         if txt in ANNULES:
             print(f"Retiré de la liste du jour ({txt}) : {m.get('home')} – {m.get('away')}")
             continue
+        # 18/11/2026 (paquet 272) : pas de feuille pour la paire, mais un des joueurs joue un AUTRE adversaire à ± 3 h
+        # de l'horaire annoncé (repêché, remplaçant) : le match annoncé n'aura pas lieu (ex. Carabelli – Meligeni Alves)
+        if fi is None and m.get('debut') and _remplace(m, idx_j):
+            print(f"Retiré de la liste du jour (adversaire remplacé) : {m.get('home')} – {m.get('away')}")
+            continue
         out.append(m)
-    return out
+    return dedoublonner_site(out)
+
+
+def _remplace(m, idx_j):
+    try:
+        return bool(idx_j and idx_j.remplace(m))
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def dedoublonner_site(matchs):
+    """18/11/2026 (paquet 272) — un match reprogrammé (autre jour, autre uid) apparaissait deux fois : même paire à
+    moins de 48 h, on garde l'horaire le plus récent connu (le dernier publié par la source), sinon le plus tardif."""
+    import elo as E
+    def cle(m):                          # même circuit, même tournoi, mêmes joueurs (clés Elo, sinon les noms)
+        c = m.get('cles') or []
+        j = frozenset(c) if len(c) == 2 and all(c) else frozenset((E.cle(m.get('home') or ''), E.cle(m.get('away') or '')))
+        return (m.get('circuit'), str(m.get('tournoi') or '').lower(), j)
+    jeter = set()
+    G = {}
+    for m in matchs:
+        if m.get('home') and m.get('away') and m.get('debut'):
+            G.setdefault(cle(m), []).append(m)
+    for L in G.values():
+        if len(L) < 2:
+            continue
+        L = sorted(L, key=lambda m: (not m.get('commence_garde'), str(m.get('debut'))))
+        garde = L[-1]
+        for m in L[:-1]:
+            try:
+                proche = abs((_utc(garde['debut']) - _utc(m['debut'])).total_seconds()) < 48 * 3600
+            except (TypeError, ValueError):
+                proche = False
+            if proche:
+                jeter.add(id(m))
+                print(f"Doublon retiré (match reprogrammé) : {m.get('uid')} → {garde.get('uid')}")
+    return [m for m in matchs if id(m) not in jeter]
 
 
 GARDER_COMMENCES_H = 24
@@ -801,7 +848,7 @@ def garder_commences(lignes, ancien_doc, maintenant, racine=None):
              and maintenant - dt.timedelta(hours=GARDER_COMMENCES_H) < _utc(l['debut']) <= maintenant]
     if garde and racine:
         garde = retirer_annules(garde, racine, maintenant)
-    return sorted(lignes + garde, key=lambda l: (str(l.get('debut')), str(l.get('uid'))))
+    return dedoublonner_site(sorted(lignes + garde, key=lambda l: (str(l.get('debut')), str(l.get('uid')))))   # paquet 272
 
 
 def live_reevaluation(racine):

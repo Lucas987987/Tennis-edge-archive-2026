@@ -1221,6 +1221,13 @@
    "paquet": 271,
    "quoi": "« MATCHS TERMINÉS » ET JOURNAL DES CHANGEMENTS REPLIÉS PAR DÉFAUT (paquet 271, remarque de Lucas). Un match commencé depuis plus de 3 h et absent du direct compte désormais comme terminé, même si son résultat n'est pas encore reçu ou s'il a été reprogrammé sous un autre horaire. Avant, ces matchs restaient affichés sous le groupe replié, comme s'il ne se repliait pas. Le groupe est replié par défaut et ne reste ouvert que si le visiteur l'ouvre. Le journal des changements est lui aussi replié par défaut (« Voir le journal »). Le % de victoire ne change pas.",
    "garde_fou": "Retrait : remettre algo/index.html du paquet 270."
+  },
+  {
+   "date": "2026-11-18",
+   "statut": "production",
+   "paquet": 272,
+   "quoi": "QUALITÉ DES DONNÉES : CONTRÔLE QUOTIDIEN ET DEUX RÉPARATIONS SUR LE SITE (paquet 272, demande de Lucas). Nouveau contrôle chaque matin (simulateur/controle_donnees.py) : chaque match pronostiqué des 30 derniers jours est rangé par cause, et le rapport public (simulateur/rapport_qualite_donnees.json) ne contient que des comptes. Premier bilan sur 2 152 matchs : 1 434 résolus ; 386 doublons d'un match reprogrammé (déjà comptés une seule fois dans les bilans) ; 178 restes d'adversaires fictifs d'avant le 04/11 ; 57 adversaires remplacés (le match annoncé n'a pas eu lieu) ; 55 abandons ou forfaits (volontairement non jugés) ; 42 sans aucune feuille, soit 2,6 % de vrais défauts. Aucune feuille terminée sans résultat, aucun match compté deux fois. Réparations sur le site : un match reprogrammé n'apparaît plus qu'une fois (le dernier horaire connu), et un match dont un joueur affronte en fait un autre adversaire au même horaire est retiré. Une alerte part sur le canal privé si les défauts de la veille dépassent 10 %. Descriptif : le % de victoire ne change pas.",
+   "garde_fou": "Retrait : remettre simulateur/vitrine.py du paquet 271 ; supprimer simulateur/controle_donnees.py et .github/workflows/qualite_donnees.yml."
   }
  ]
 }
