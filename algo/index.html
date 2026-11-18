@@ -3840,8 +3840,8 @@ const G3D = (() => {
 
   // ── textures dessinées par le code ────────────────────────────────────────────────────────────────────────
   const SURFACES = {
-    Hard: { in: '#1f4282', out: '#24599c', bruit: 9 }, Clay: { in: '#a9512e', out: '#a24c2b', bruit: 20 },
-    Grass: { in: '#4f8f45', out: '#47833e', bruit: 14, bandes: true }, Carpet: { in: '#3f6f8a', out: '#2f5a73', bruit: 8 },
+    Hard: { in: '#2a5ea8', out: '#3a7a5c', bruit: 9, use: 'rgba(255,255,255,.05)' }, Clay: { in: '#b4562f', out: '#9a4627', bruit: 20, use: 'rgba(230,170,120,.10)' },
+    Grass: { in: '#5a9a4c', out: '#4b8740', bruit: 14, bandes: true, use: 'rgba(170,140,80,.28)' }, Carpet: { in: '#3f6f8a', out: '#2b4f66', bruit: 8, use: 'rgba(255,255,255,.04)' },
   };
   function texSol(surface) {
     const s = SURFACES[surface] || SURFACES.Hard, PX = 40;                       // 40 px par mètre
@@ -3855,6 +3855,10 @@ const G3D = (() => {
       for (let k = 0; k < d.length; k += 4) { const v = (Math.random() - 0.5) * s.bruit; d[k] += v; d[k + 1] += v; d[k + 2] += v; }
       c.putImageData(im, 0, 0);
       if (surface === 'Clay') { c.fillStyle = 'rgba(120,50,20,.10)'; for (let k = 0; k < 400; k++) { c.beginPath(); c.ellipse(Math.random() * w, Math.random() * h, rnd(6, 30), rnd(2, 8), rnd(0, 3), 0, 7); c.fill(); } }
+      if (s.use) for (const zf of [-HL - 1.2, HL + 1.2]) {                         // usure : le sol est plus clair là où l'on court
+        const g = c.createRadialGradient(X(0), Z(zf), 0, X(0), Z(zf), 4.5 * PX); g.addColorStop(0, s.use); g.addColorStop(1, 'rgba(0,0,0,0)');
+        c.save(); c.translate(X(0), Z(zf)); c.scale(1.4, 0.55); c.translate(-X(0), -Z(zf)); c.fillStyle = g; c.fillRect(X(-9), Z(zf - 6), 18 * PX, 12 * PX); c.restore();
+      }
       c.strokeStyle = 'rgba(255,255,255,.95)'; c.lineWidth = 0.05 * PX; c.lineCap = 'butt';
       const ligne = (x1, z1, x2, z2) => { c.beginPath(); c.moveTo(X(x1), Z(z1)); c.lineTo(X(x2), Z(z2)); c.stroke(); };
       ligne(-W / 2, -HL, W / 2, -HL); ligne(-W / 2, HL, W / 2, HL);
@@ -4018,19 +4022,21 @@ const G3D = (() => {
     // bancs des joueurs, de l'autre côté
     for (const s of [-1, 1]) { ch.ajoute(boite(0.6, 0.45, 1.6, hex('#2b2b55')), M4.tr(xP + 2.4, 0.22, s * 1.6)); ch.ajoute(boite(0.12, 0.5, 1.6, hex('#2b2b55')), M4.tr(xP + 2.68, 0.7, s * 1.6)); }
     // ramasseurs : accroupis au filet, debout au fond
+    const off = new Geo();
     const ram = (x, z, accroupi) => {
       const y = accroupi ? 0 : 0.35;
-      ch.ajoute(boite(0.34, 0.42, 0.26, hex('#2EE6FF').map(v => v * 0.75)), M4.tr(x, 0.55 + y, z));
-      ch.ajoute(sphere(0.11, 8, hex('#c99474')), M4.tr(x, 0.88 + y, z));
-      ch.ajoute(boite(0.32, accroupi ? 0.34 : 0.7, 0.3, hex('#151530')), M4.tr(x, accroupi ? 0.17 : 0.35, z));
+      off.ajoute(boite(0.34, 0.42, 0.26, hex('#2EE6FF').map(v => v * 0.75)), M4.tr(x, 0.55 + y, z));
+      off.ajoute(sphere(0.11, 8, hex('#c99474')), M4.tr(x, 0.88 + y, z));
+      off.ajoute(boite(0.32, accroupi ? 0.34 : 0.7, 0.3, hex('#151530')), M4.tr(x, accroupi ? 0.17 : 0.35, z));
     };
     for (const s of [-1, 1]) { ram(s * (W / 2 + 1.1), 0.6, true); ram(s * (W / 2 + 1.1), -0.6, true); ram(s * 3.2, HL + 4.6, false); ram(s * 3.2, -HL - 4.6, false); }
     // juges de ligne assis le long du court
     for (const [x, z] of [[-(W / 2 + 2.6), -SL], [W / 2 + 2.6, SL], [-(W / 2 + 2.6), HL - 1], [W / 2 + 2.6, -HL + 1]]) {
       ch.ajoute(boite(0.45, 0.45, 0.45, hex('#2b2b55')), M4.tr(x, 0.22, z));
-      ch.ajoute(boite(0.4, 0.55, 0.3, hex('#e8e8f2')), M4.tr(x, 0.72, z)); ch.ajoute(sphere(0.11, 8, hex('#d9a988')), M4.tr(x, 1.1, z));
+      off.ajoute(boite(0.4, 0.55, 0.3, hex('#e8e8f2')), M4.tr(x, 0.72, z)); off.ajoute(sphere(0.11, 8, hex('#d9a988')), M4.tr(x, 1.1, z));
     }
     scene.fixes.push({ m: maillage(ch), spec: 0.15, ombre: true, recoit: true });
+    scene.officiels = { m: maillage(off), spec: 0.15, ombre: true, recoit: true };   // blocs : seulement sans le vrai modèle (paquet 275)
     // projecteurs du toit (petits disques lumineux)
     const proj = new Geo();
     const yToit = 1.1 + rangs * haut + 1.8;
@@ -4547,14 +4553,117 @@ const G3D = (() => {
     if (fp[1 - i] && fp[1 - i].doubles_fautes != null) p.doubles_fautes_adverses = Math.max(0.3, +fp[1 - i].doubles_fautes);
     return p;
   }
+  // ── LA BALLE (paquet 275, Lucas : « les échanges ne sont pas réalistes ») : une vraie physique. Pesanteur, freinage
+  // de l'air et effet Magnus (lift qui plonge, slice qui flotte), rebond qui dépend de la surface (terre lente et haute,
+  // gazon rapide et bas) et de l'effet. Chaque coup est « visé » : on cherche l'angle de départ qui fait tomber la balle
+  // sur la cible en passant le filet ; après le rebond, la balle file jusqu'au point où l'adversaire la frappe (en
+  // redescendant à hauteur de hanche, ou au sommet si elle rebondit bas). Les durées des échanges en découlent.
+  const PHY = { g: 9.81, kd: 0.0195, km: 0.0068, pas: 1 / 120 };
+  const SURF_REBOND = { Clay: { e: 0.76, f: 0.52 }, Hard: { e: 0.76, f: 0.60 }, Grass: { e: 0.70, f: 0.72 }, Carpet: { e: 0.74, f: 0.64 } };
+  const hauteurFilet = x => 0.914 + 0.156 * Math.min(1, Math.abs(x) / (W / 2 + 0.914));
+  function voler(p0, v0, s, ax, stop, tmax = 4) {
+    let p = [p0.x, p0.y, p0.z], v = v0.slice(), t = 0;
+    const pts = [[0, p[0], p[1], p[2]]];
+    const acc = (v) => {
+      const n = Math.hypot(v[0], v[1], v[2]);
+      const cx = ax[1] * v[2] - ax[2] * v[1], cy = ax[2] * v[0] - ax[0] * v[2], cz = ax[0] * v[1] - ax[1] * v[0];
+      return [-PHY.kd * n * v[0] + PHY.km * s * n * cx, -PHY.g - PHY.kd * n * v[1] + PHY.km * s * n * cy, -PHY.kd * n * v[2] + PHY.km * s * n * cz];
+    };
+    while (t < tmax) {
+      const a = acc(v), q = p.slice();
+      v = [v[0] + a[0] * PHY.pas, v[1] + a[1] * PHY.pas, v[2] + a[2] * PHY.pas];
+      p = [p[0] + v[0] * PHY.pas, p[1] + v[1] * PHY.pas, p[2] + v[2] * PHY.pas];
+      t += PHY.pas;
+      if (q[2] * p[2] < 0 && p[1] < hauteurFilet(p[0])) {                       // dans le filet
+        p[2] = Math.sign(q[2]) * 0.02; pts.push([t, p[0], Math.max(p[1], 0.05), p[2]]);
+        return { pts, p, v, t, raison: 'filet' };
+      }
+      if (p[1] <= 0) {                                                             // point d'impact exact (entre deux pas)
+        const f = q[1] / ((q[1] - p[1]) || 1); p = [q[0] + (p[0] - q[0]) * f, 0, q[2] + (p[2] - q[2]) * f]; t += (f - 1) * PHY.pas;
+        pts.push([t, p[0], 0, p[2]]); return { pts, p, v, t, raison: 'sol' };
+      }
+      pts.push([t, p[0], p[1], p[2]]);
+      const r = stop && stop(p, v, q);
+      if (r) return { pts, p, v, t, raison: r };
+    }
+    return { pts, p, v, t, raison: 'temps' };
+  }
+  // l'angle de départ qui fait tomber la balle en b (vitesse V, effet s) ; ralentit si le filet n'est pas franchi
+  function viser(a, b, V, s, dansLeFilet, haut) {
+    const dx = b.x - a.x, dz = b.z - a.z, D = Math.hypot(dx, dz) || 1, d = [dx / D, 0, dz / D], ax = [d[2], 0, -d[0]];
+    const essai = (th, Vv) => {
+      const v0 = [Vv * Math.cos(th) * d[0], Vv * Math.sin(th), Vv * Math.cos(th) * d[2]];
+      let hf = null;
+      const r = voler(a, v0, s, ax, (p, v, q) => { if (q[2] * p[2] <= 0 && hf === null) hf = p[1]; return null; });
+      const port = ((r.p[0] - a.x) * d[0] + (r.p[2] - a.z) * d[2]);
+      return { v0, port: r.raison === 'filet' ? Math.abs(a.z) * 0.99 : port, hf: r.raison === 'filet' ? r.p[1] : hf, raison: r.raison };
+    };
+    if (dansLeFilet) {                                                             // faute au filet : la balle touche la bande
+      const vise = hauteurFilet(b.x) - 0.22; let lo = -0.3, hi = 0.6;
+      const hfDe = th => { const e = essai(th, V); return e.hf === null ? -1 : e.hf; };
+      for (let it = 0; it < 26; it++) { const m = (lo + hi) / 2; if (hfDe(m) < vise) lo = m; else hi = m; }
+      return { v0: essai((lo + hi) / 2, V).v0, ax, s, d };
+    }
+    let Vv = V, best = null;
+    for (let tour = 0; tour < 10; tour++) {
+      let lo = haut ? 1.3 : -0.45, hi = null;
+      for (let th = haut ? 1.2 : -0.35; haut ? th >= 0.3 : th <= 1.3; th += haut ? -0.1 : 0.1) {   // 1er angle qui va assez loin
+        const e = essai(th, Vv);
+        if (e.port >= D) { hi = th; break; }
+        lo = th;
+      }
+      if (hi === null) { Vv *= 1.12; continue; }
+      for (let it = 0; it < 22; it++) { const m = (lo + hi) / 2; if (essai(m, Vv).port < D) lo = m; else hi = m; }
+      best = essai((lo + hi) / 2, Vv);
+      const passe = best.hf === null || best.hf >= hauteurFilet(b.x) + 0.05;
+      if (dansLeFilet || passe) break;
+      Vv *= 0.92;                                                                 // trop tendu : moins vite, plus haut
+    }
+    return { v0: best ? best.v0 : [d[0] * V * 0.7, V * 0.3, d[2] * V * 0.7], ax, s, d };
+  }
+  // un coup de a vers la cible b. mode 'rebond' : la balle file après le rebond jusqu'au point où l'adversaire la
+  // frappe (hauteur opt.hc) ; 'volee' : prise avant le rebond à |z| = opt.zv ; 'fin' : après le rebond, elle file au
+  // fond ; 'filet' : visée au pied du filet. Renvoie les vols (a, b, d, pts) et le prochain point de frappe.
+  function coupPhysique(a, b, V, s, mode, opt = {}) {
+    const vi = viser(a, b, V, s, mode === 'filet', opt.haut);
+    const sens = Math.sign(b.z - a.z) || 1;
+    const stop = mode === 'volee' ? (p => (sens * p[2] >= opt.zv ? 'volee' : null)) : null;
+    const pre = voler(a, vi.v0, s, vi.ax, stop);
+    const v1 = { a, b: { x: pre.p[0], y: pre.raison === 'sol' ? 0 : pre.p[1], z: pre.p[2] }, d: Math.max(pre.t, PHY.pas), pts: pre.pts };
+    if (pre.raison !== 'sol') return { vols: [v1], ex: v1.b, raison: pre.raison };
+    const RB = SURF_REBOND[E.surface] || SURF_REBOND.Hard, d = vi.d;
+    const vb = [pre.v[0] * RB.f + d[0] * s * 0.8, -pre.v[1] * RB.e * (1 + 0.1 * s), pre.v[2] * RB.f + d[2] * s * 0.8];   // le lift « saute »
+    const b0 = { x: pre.p[0], y: 0, z: pre.p[2] };
+    const stop2 = mode === 'fin'
+      ? (p => (Math.abs(p[2]) > HL + 6 || Math.abs(p[0]) > W / 2 + 3.2 ? 'bord' : null))
+      : ((p, v) => ((v[1] <= 0 && p[1] <= opt.hc) || (Math.abs(p[2]) > HL + 1.4 && p[1] >= 0.7 && (p[1] <= 1.45 || (v[1] <= 0 && p[1] <= 1.8)))
+          || Math.abs(p[2]) > HL + 2.8 || Math.abs(p[0]) > W / 2 + 1.4 ? 'frappe' : null));   // balle profonde : prise plus tôt
+    const post = voler(b0, vb, s * 0.4, vi.ax, stop2, mode === 'fin' ? 1.6 : 3);
+    const v2 = { a: b0, b: { x: post.p[0], y: post.p[1], z: post.p[2] }, d: Math.max(post.t, PHY.pas), pts: post.pts };
+    return { vols: [v1, v2], ex: v2.b, raison: 'sol' };
+  }
+  // vitesse (m/s) et effet des coups, selon le circuit (les joueuses frappent un peu moins vite et moins lifté)
+  function styleCoup(qui, genre) {
+    const f = E.circuit === 'WTA' ? 0.9 : 1;
+    if (genre === 'service') return { V: (E.circuit === 'WTA' ? 44 : 50) * rnd(0.94, 1.04), s: 0.25 };
+    if (genre === 'second') return { V: (E.circuit === 'WTA' ? 36 : 41) * rnd(0.95, 1.03), s: 0.7 };
+    if (genre === 'gagnant') return { V: rnd(34, 39) * f, s: 0.5 };
+    if (genre === 'slice') return { V: rnd(21, 25) * f, s: -0.6 };
+    if (genre === 'amorti') return { V: rnd(11, 13.5), s: -0.9 };
+    if (genre === 'lob') return { V: rnd(16, 19), s: 0.4 };
+    if (genre === 'volee') return { V: rnd(20, 25), s: -0.3 };
+    if (genre === 'approche') return { V: rnd(23, 27) * f, s: -0.5 };
+    return { V: rnd(27, 32) * f, s: E.circuit === 'WTA' ? 0.5 : 0.7 };       // échange lifté
+  }
   // un service : depuis le bon côté, vers le carré en diagonale ; bon = dans le carré, sinon faute (filet ou long)
-  function service(s, droite, t, bon, filet) {
+  function service(s, droite, t, bon, filet, second) {
     const sens = s === 0 ? 1 : -1, droiteX = -sens, cote = droite ? 1 : -1;
     const a = { x: droiteX * cote * rnd(0.4, 1.0), y: 2.75, z: -sens * (HL + 0.15) };
     const prec = Math.random() < 0.5 ? rnd(0.25, 0.9) : rnd(S / 2 - 1.1, S / 2 - 0.3);       // au T ou extérieur
     let b = { x: -droiteX * cote * prec, y: 0, z: sens * rnd(SL - 1.4, SL - 0.25) };
-    if (!bon) b = filet ? { x: b.x * 0.6, y: 0.55, z: sens * 0.02 } : { x: b.x, y: 0, z: sens * rnd(SL + 0.3, SL + 1.2) };
-    return { a, b, h: bon || !filet ? 0.35 : 0.1, d: 0.6, qui: s, type: 'service', faute: !bon, t };
+    if (!bon) b = filet ? { x: b.x * 0.6, y: 0, z: sens * 0.05 } : { x: b.x, y: 0, z: sens * rnd(SL + 0.3, SL + 1.2) };
+    const st = styleCoup(s, second ? 'second' : 'service');
+    return { a, b, st, qui: s, type: 'service', faute: !bon, t };
   }
   function nouveauPoint(P, t0) {
     PLANS.length = 0; GESTE[0] = GESTE[1] = null;
@@ -4563,19 +4672,26 @@ const G3D = (() => {
     const vols = [];
     let t = t0 + 1.3;
     const pousse = v => { v.t = t; t += v.d; vols.push(v); return v; };
-    const finVol = (der, court) => {
-      const fx = der.b.x - der.a.x, fz = der.b.z - der.a.z, fn = Math.hypot(fx, fz) || 1, fl = court ? 0.9 : Math.min(3, fn * 0.35);
-      return { a: der.b, b: { x: der.b.x + fx / fn * fl, y: 0, z: der.b.z + fz / fn * fl }, h: court ? 0.35 : 0.7, d: court ? 0.45 : 0.6, qui: -1, type: 'fin' };
+    const hc = () => rnd(0.85, 1.15);
+    // pose les vols d'un coup physique : le premier porte le frappeur et le type
+    const jouer = (a, b, st, mode, entete, opt) => {
+      const c = coupPhysique(a, b, st.V, st.s, mode, opt || { hc: hc() });
+      const v1 = pousse(Object.assign(c.vols[0], entete));
+      if (c.vols[1]) pousse(Object.assign(c.vols[1], { qui: -1, type: mode === 'fin' ? 'fin' : 'rebond' }));
+      return { v1, ex: c.ex, raison: c.raison };
     };
+    const chute = der => pousse({ a: der.b, b: { x: der.b.x, y: 0, z: der.b.z * 4 + (der.b.z > 0 ? -0.3 : 0.3) }, h: 0.1, d: 0.35, qui: -1, type: 'fin' });
     if (fin === 'doubles_fautes_adverses') {
-      const f1 = pousse(service(s, P.droite, 0, false, Math.random() < 0.6));
-      pousse({ a: f1.b, b: { x: f1.b.x, y: 0, z: f1.b.z * (f1.b.y > 0.3 ? 0.4 : 1.15) }, h: 0.2, d: 0.4, qui: -1, type: 'fin' });
+      const f1 = service(s, P.droite, 0, false, Math.random() < 0.6);
+      const r1 = jouer(f1.a, f1.b, f1.st, f1.b.z * (s === 0 ? 1 : -1) < 1 ? 'filet' : 'fin', { qui: s, type: 'service', faute: true });
+      if (r1.raison === 'filet') chute(r1.v1);
       t += 2.2;                                                                   // la balle suivante, le second service
-      const f2 = pousse(service(s, P.droite, 0, false, Math.random() < 0.4));
-      pousse(finVol(f2, f2.b.y > 0.3));
+      const f2 = service(s, P.droite, 0, false, Math.random() < 0.4, true);
+      const r2 = jouer(f2.a, f2.b, f2.st, f2.b.z * (s === 0 ? 1 : -1) < 1 ? 'filet' : 'fin', { qui: s, type: 'service', faute: true });
+      if (r2.raison === 'filet') chute(r2.v1);
     } else {
-      const sv = pousse(service(s, P.droite, 0, true));
-      if (fin === 'aces') { const f = finVol(sv); f.b = { x: f.b.x * 1.3, y: 0, z: f.a.z + (f.b.z - f.a.z) * 2.2 }; f.d = 0.7; pousse(f); }
+      const sv = service(s, P.droite, 0, true);
+      if (fin === 'aces') jouer(sv.a, sv.b, sv.st, 'fin', { qui: s, type: 'service', faute: false });
       else {
         // longueur de l'échange : plus long sur terre battue, plus court sur gazon ; parité fixée par qui frappe en dernier
         const moy = { Clay: 4.6, Hard: 3.6, Grass: 2.6, Carpet: 3 }[E.surface] || 3.6;
@@ -4585,43 +4701,37 @@ const G3D = (() => {
         if (fin === 'filet' && L < 3) L = 3;
         const frappeur = k => (k % 2 === 0 ? s : 1 - s);
         if (frappeur(L) !== dernierFrappeur) L++;
-        let prev = sv;
+        const voleeFinale = fin === 'filet';
+        let r = jouer(sv.a, sv.b, sv.st, voleeFinale && L === 1 ? 'volee' : 'rebond', { qui: s, type: 'service', faute: false },
+                      voleeFinale && L === 1 ? { zv: rnd(1.8, 2.8) } : { hc: hc() });
         for (let k = 1; k <= L; k++) {
-          const qui = frappeur(k), sq = qui === 0 ? 1 : -1, dernier = k === L;
-          const dx = prev.b.x - prev.a.x, dz = prev.b.z - prev.a.z, dn = Math.hypot(dx, dz) || 1;
-          let ex;
-          if (dernier && fin === 'filet') {                                       // volée : sans rebond, près du filet
-            ex = { x: cl(prev.a.x + dx * 0.75, -S / 2, S / 2), y: rnd(0.9, 1.3), z: -sq * rnd(1.8, 2.8) };
-            prev.b = ex; prev.d = Math.max(prev.d, 1.05); prev.h = 0.9;
-          } else {
-            const ext = prev.type === 'service' ? rnd(5.2, 7) : rnd(2.2, 4.2);
-            ex = { x: cl(prev.b.x + dx / dn * ext, -W / 2 - 1.5, W / 2 + 1.5), y: rnd(0.75, 1.1), z: cl(prev.b.z + dz / dn * ext, -HL - 3, HL + 3) };
-            pousse({ a: prev.b, b: ex, h: rnd(0.5, 1.0), d: rnd(0.26, 0.38), qui: -1, type: 'rebond' });
-          }
-          let tx = Math.random() < 0.55 ? -ex.x * rnd(0.6, 1.1) : ex.x * rnd(0.5, 1), tz = sq * rnd(HL - 4.5, HL - 0.8), h = rnd(1.5, 2.5), d = rnd(0.78, 1.0);
-          let cd;
-          if (!dernier && fin === 'filet' && k === L - 2) { tz = sq * rnd(HL - 3, HL - 1.5); h = 1.6; d = 0.95; }        // la montée
-          if (!dernier && fin === 'fautes_provoquees' && k === L - 1) { tx = Math.sign(-ex.x || 1) * rnd(S / 2 - 1, S / 2 - 0.3); h = 1.2; d = 0.7; }
+          const qui = frappeur(k), sq = qui === 0 ? 1 : -1, dernier = k === L, ex = r.ex;
+          let tx = Math.random() < 0.55 ? -ex.x * rnd(0.6, 1.1) : ex.x * rnd(0.5, 1), tz = sq * rnd(HL - 5.5, HL - 2.2);
+          let genre = Math.random() < 0.18 ? 'slice' : 'echange', mode = 'rebond', opt = { hc: hc() }, cd, haut = false;
+          if (!dernier && voleeFinale && k === L - 2) { tz = sq * rnd(HL - 3, HL - 1.5); genre = 'approche'; }       // la montée
+          if (!dernier && voleeFinale && k === L - 1) { mode = 'volee'; opt = { zv: rnd(1.8, 2.8) }; genre = 'gagnant';  // le passing, pris à la volée
+            tx = (Math.random() < 0.5 ? -1 : 1) * rnd(1.5, S / 2 - 0.6); }
+          if (!dernier && fin === 'fautes_provoquees' && k === L - 1) { tx = Math.sign(-ex.x || 1) * rnd(S / 2 - 1, S / 2 - 0.3); genre = 'gagnant'; }
           if (dernier) {
-            if (fin === 'coup_droit' || fin === 'revers') { tx = (Math.random() < 0.5 ? -1 : 1) * rnd(S / 2 - 0.9, S / 2 - 0.25); tz = sq * rnd(HL - 3.5, HL - 0.7); h = rnd(1.2, 1.7); d = rnd(0.62, 0.75); cd = fin === 'coup_droit'; }
-            else if (fin === 'filet') { tx = (Math.random() < 0.5 ? -1 : 1) * rnd(S / 2 - 1.6, S / 2 - 0.3); tz = sq * rnd(3, 7); h = 0.5; d = 0.45; }
-            else if (fin === 'amorti') { tz = sq * rnd(1.0, 2.2); h = rnd(1.0, 1.4); d = rnd(1.0, 1.25); tx = cl(tx, -S / 2 + 0.5, S / 2 - 0.5); }
-            else if (fin === 'lob') { tz = sq * rnd(HL - 2.2, HL - 0.8); h = rnd(5.5, 7); d = rnd(1.7, 2.1); }
+            mode = 'fin';
+            if (fin === 'coup_droit' || fin === 'revers') { tx = (Math.random() < 0.5 ? -1 : 1) * rnd(S / 2 - 0.9, S / 2 - 0.25); tz = sq * rnd(HL - 3.5, HL - 0.7); genre = 'gagnant'; cd = fin === 'coup_droit'; }
+            else if (fin === 'filet') { tx = (Math.random() < 0.5 ? -1 : 1) * rnd(S / 2 - 1.6, S / 2 - 0.3); tz = sq * rnd(3, 6); genre = 'volee'; }
+            else if (fin === 'amorti') { tz = sq * rnd(1.2, 2.4); tx = cl(tx, -S / 2 + 0.6, S / 2 - 0.6); genre = 'amorti'; }
+            else if (fin === 'lob') { tz = sq * rnd(HL - 2.2, HL - 0.8); genre = 'lob'; haut = true; }
             else if (erreur) {
-              if (Math.random() < 0.45) { tz = sq * 0.02; h = 0.55; d = 0.5; }                                  // dans le filet
+              if (Math.random() < 0.45) { tz = sq * 0.05; mode = 'filet'; }                                 // dans le filet
               else if (Math.random() < 0.6) tz = sq * rnd(HL + 0.3, HL + 1.4);                               // long
               else { tx = Math.sign(tx || 1) * rnd(S / 2 + 0.3, S / 2 + 1.1); }                               // large
             }
           }
-          if (!(dernier && (erreur))) tx = cl(tx, -S / 2 + 0.25, S / 2 - 0.25);
-          const v = pousse({ a: ex, b: { x: tx, y: tz === sq * 0.02 ? 0.5 : 0, z: tz }, h, d, qui, type: 'frappe' });
-          if (cd !== undefined) v.cd = cd;
-          prev = v;
+          if (!(dernier && erreur)) tx = cl(tx, -S / 2 + 0.3, S / 2 - 0.3);
+          const st = styleCoup(qui, genre);
+          r = jouer(ex, { x: tx, y: 0, z: tz }, st, mode, { qui, type: 'frappe' }, Object.assign(opt, { haut }));
+          if (cd !== undefined) r.v1.cd = cd;
+          if (st.s < 0 && genre !== 'volee') r.v1.genre = 'slice';
+          if (dernier && r.raison === 'filet') chute(r.v1);
+          else if (dernier && r.raison === 'volee') pousse({ a: r.ex, b: { x: r.ex.x, y: 0, z: r.ex.z + sq * 1.5 }, h: 0.3, d: 0.5, qui: -1, type: 'fin' });
         }
-        const der = vols[vols.length - 1];
-        if (der.b.y > 0.3) pousse({ a: der.b, b: { x: der.b.x, y: 0, z: der.b.z * 4 + (der.b.z > 0 ? -0.3 : 0.3) }, h: 0.1, d: 0.35, qui: -1, type: 'fin' });
-        else if (fin === 'amorti') { const f = finVol(der, true); pousse(f); pousse(finVol(f, true)); }
-        else pousse(finVol(der));
       }
     }
     R = { vols, gagnant: g, fin, lancer: t0, debut: t0, finT: t + 1.2, annonce: false, J0: J.map(j => ({ x: j.x, z: j.z, cap: j.cap })),
@@ -4636,6 +4746,12 @@ const G3D = (() => {
         return { x: v.a.x + 0.05, y: 1.3 + Math.sin(u * Math.PI) * 2.2 * (1 - u * 0.25) + (v.a.y - 1.3) * u * u, z: v.a.z + 0.25 * (v.a.z < 0 ? 1 : -1) * (1 - u) };
       }
       if (t >= v.t && t < v.t + v.d) {
+        if (v.pts) {                                                                   // trajectoire calculée (paquet 275)
+          const f = (t - v.t) / PHY.pas, i = Math.min(Math.floor(f), v.pts.length - 2), w = cl(f - i, 0, 1);
+          if (i < 0) return { x: v.pts[0][1], y: v.pts[0][2], z: v.pts[0][3] };
+          const A = v.pts[i], B = v.pts[i + 1];
+          return { x: A[1] + (B[1] - A[1]) * w, y: Math.max(0, A[2] + (B[2] - A[2]) * w), z: A[3] + (B[3] - A[3]) * w };
+        }
         const u = (t - v.t) / v.d;
         return { x: v.a.x + (v.b.x - v.a.x) * u, y: v.a.y + (v.b.y - v.a.y) * u + 4 * v.h * u * (1 - u), z: v.a.z + (v.b.z - v.a.z) * u };
       }
@@ -4643,10 +4759,15 @@ const G3D = (() => {
     return null;
   }
   // où se placer pour frapper : la balle à 0,75 m sur le côté (coup droit à droite, revers à gauche)
+  // 18/11/2026 (paquet 275) : le joueur se place pour que la TÊTE DE RAQUETTE soit sur la balle au moment de la frappe :
+  // point de contact de chaque coup (repère du joueur : x vers sa gauche, z devant lui), tiré des poses clés
+  const CONTACT = { cd: [-0.88, 0.49], rv: [0.53, 0.61], sl: [0.60, 0.65], vd: [-0.67, 0.79], vr: [0.42, 0.81] };
   function coupDe(i, v) {
     const j = J[i], face = i === 0 ? 1 : -1, droiteX = -face;
     const cd = v.cd !== undefined ? v.cd : (v.a.x - j.x) * droiteX >= -0.2;
-    return { cd, x: v.a.x - droiteX * (cd ? 0.78 : -0.72), z: v.a.z - face * 0.25 };
+    const volee = Math.abs(v.a.z) < 4.5 && v.a.y > 0.8;
+    const k = volee ? (cd ? 'vd' : 'vr') : cd ? 'cd' : (v.genre === 'slice' ? 'sl' : 'rv'), o = CONTACT[k];
+    return { cd, x: v.a.x - face * o[0], z: v.a.z - face * o[1] };
   }
   // places entre deux points : le serveur à sa ligne de fond, du bon côté ; le relanceur en face, en diagonale
   function placesAttente(i) {
@@ -4679,7 +4800,7 @@ const G3D = (() => {
       const b = posBalle(t), capBase = i === 0 ? 0 : Math.PI;
       const vise = b ? Math.atan2(b.x - j.x, (b.z - j.z) * face) * 0.35 : 0;
       const capFilet = capBase + cl(vise, -0.6, 0.6) * (i === 0 ? 1 : -1), vit = Math.hypot(j.vx, j.vz);
-      const wc = (MOD.etat === 'pret') ? (enJeu ? cl((vit - 2.0) / 1.2, 0, 1) : cl((vit - 0.5) / 0.5, 0, 1)) : 0;
+      const wc = (MOD.etat === 'pret') ? (enJeu ? cl((vit - seuilCourse(i)) / 1.2, 0, 1) : cl((vit - 0.5) / 0.5, 0, 1)) : 0;
       let capCourse = Math.atan2(j.vx, j.vz), dA = capCourse - capFilet; dA = Math.atan2(Math.sin(dA), Math.cos(dA));
       const vise2 = capFilet + dA * wc;                                                // tourné vers sa course quand il court
       let dc = vise2 - (j.capL ?? vise2); dc = Math.atan2(Math.sin(dc), Math.cos(dc));
@@ -4693,9 +4814,26 @@ const G3D = (() => {
     if (!cd && (R && R.fin === 'amorti' && v === R.vols.filter(x => x.qui >= 0).pop() || v.a.y < 0.8 || Math.random() < 0.25)) return 'slice';
     return 'lift';
   }
+  // pas chassés (paquet 275) : face au filet, le joueur se déplace de côté en écartant puis rapprochant les pieds,
+  // genoux fléchis, petits bonds ; la course « en avant » ne sert plus que pour avancer ou reculer
+  const laterale = i => { const j = J[i], v = Math.hypot(j.vx, j.vz); return v > 0.05 ? cl((Math.abs(j.vx) / v - 0.55) / 0.3, 0, 1) : 0; };
+  const seuilCourse = i => 2.0 + 1.0 * laterale(i);                                   // de côté : pas chassés jusqu'à 3 m/s
+  function poseChasse(t, vl) {
+    const p = poseAttente(t), a = cl(Math.abs(vl) / 2.2, 0, 1), s = Math.sign(vl) || 1;
+    const ph = t * Math.PI * 2 * (1.8 + 0.6 * a), ouv = (0.5 + 0.5 * Math.sin(ph)) * 0.32 * a;
+    p.accroupi = 0.1 + 0.04 * a; p.tronc = [0.28, 0, -0.07 * s * a];
+    p.hancheD = [-0.4, 0, 0.1 + ouv]; p.hancheG = [-0.4, 0, -0.1 - ouv];
+    p.genouD = 0.75 + 0.15 * Math.max(0, Math.cos(ph)) * a; p.genouG = 0.75 + 0.15 * Math.max(0, -Math.cos(ph)) * a;
+    p.piedD = -0.2; p.piedG = -0.2;
+    p.saut = 0.035 * Math.max(0, Math.sin(ph + Math.PI / 2)) * a;
+    p.epG = [-0.5, 0, -0.35]; p.coudeG = 1.3; p.epD = [-0.55, 0.2, 0.35]; p.coudeD = 1.1;      // raquette devant, bras gauche en balancier
+    return p;
+  }
   function poseDe(i, t) {
     const j = J[i], v = Math.hypot(j.vx, j.vz);
-    let p = v > 0.6 ? melange(poseAttente(t), poseCourse(t, v), cl((v - 0.6) / 2, 0, 1)) : poseAttente(t);
+    const vl = j.vx * (i === 0 ? -1 : 1), lat = laterale(i);
+    const bouge = v > 0.6 ? (lat > 0 && v < 3.4 ? melange(poseCourse(t, v), poseChasse(t, vl), lat) : poseCourse(t, v)) : null;
+    let p = bouge ? melange(poseAttente(t), bouge, cl((v - 0.6) / 2, 0, 1)) : poseAttente(t);
     if (!R || t > R.finT) {
       // entre les points : le serveur fait rebondir la balle, le relanceur se balance
       if (E.srv === i && v < 0.3 && !E.fini) { p.epG = [-0.5 + Math.abs(Math.sin(t * 4)) * 0.4, 0, -0.2]; p.coudeG = 0.6; p.accroupi = 0.05; p.tronc = [0.2, 0, 0]; }
@@ -4735,7 +4873,7 @@ const G3D = (() => {
     vc = tot ? vc / tot : 1;
     const dur = (MOD.clips && MOD.clips[L.mix[0][0]] ? MOD.clips[L.mix[0][0]].dur : 1);
     L.phase += dt * Math.max(v, 0.3) / Math.max(vc * dur, 0.3);                     // pas calés sur la vitesse : pas de glissade
-    const cible = enJeu ? cl((v - 2.0) / 1.2, 0, 1) : cl((v - 0.5) / 0.5, 0, 1);       // en jeu : on court (sinon pas chassés)
+    const cible = enJeu ? cl((v - seuilCourse(i)) / 1.2, 0, 1) : cl((v - 0.5) / 0.5, 0, 1);   // en jeu : on court (sinon pas chassés)
     L.w = lerp(L.w, cible, dt > 0 ? 1 - Math.exp(-dt * 10) : 1);
   }
   function poseLisse(i, t, dt) {
@@ -4940,9 +5078,41 @@ const G3D = (() => {
     return p;
   }
   let teteArbitre = 0;
+  // ── juges de ligne et ramasseurs (paquet 275) : le vrai modèle, posé une fois pour toutes, au lieu des blocs
+  const TENUE_JUGE = ['#e9e9f1', '#c9cad8', '#262b40', '#1d2444', '#20203a', '#17171f', '#f4f4f8'].map(hex);
+  const TENUE_RAM = ['#4a5470', '#2e3548', '#1c2030', '#c9d2e8', '#f4f4f8', '#2f2f3a', '#f4f4f8'].map(hex);
+  function poseJuge() {                                                           // assis sur une chaise basse, mains sur les cuisses
+    const p = poseArbitre(0, null); p.saut = 1.16 - 1.755; p.tete = [0.05, 0, 0]; return p;
+  }
+  function poseRamasseur(accroupi) {
+    const p = POSE0();
+    if (!accroupi) { p.epD = [0.25, 0, 0.12]; p.coudeD = 0.5; p.epG = [0.25, 0, -0.12]; p.coudeG = 0.5; return p; }   // debout, mains dans le dos
+    p.saut = -0.42; p.tronc = [0.38, 0, 0];                                         // accroupi, prêt à courir chercher la balle
+    p.hancheD = [-1.5, 0, 0.18]; p.genouD = 2.1; p.piedD = 0.5; p.hancheG = [-1.1, 0, -0.18]; p.genouG = 2.3; p.piedG = 0.7;
+    p.epD = [-0.55, 0, 0.1]; p.coudeD = 0.6; p.epG = [-0.55, 0, -0.1]; p.coudeG = 0.6;
+    return p;
+  }
+  const OFFICIELS = [
+    ...[[-(W / 2 + 2.6), -SL], [W / 2 + 2.6, SL], [-(W / 2 + 2.6), HL - 1], [W / 2 + 2.6, -HL + 1]].map(([x, z], k) =>
+      ({ x, z, cap: x < 0 ? Math.PI / 2 : -Math.PI / 2, vx: 0, vz: 0, juge: true, sexe: k % 2 ? 'F' : 'H', k })),
+    ...[-1, 1].flatMap(s => [[s * (W / 2 + 1.1), 0.6, true], [s * (W / 2 + 1.1), -0.6, true], [s * 3.2, HL + 4.6, false], [s * 3.2, -HL - 4.6, false]])
+      .map(([x, z, acc], k) => ({ x, z, cap: acc ? (x < 0 ? Math.PI / 2 : -Math.PI / 2) : (z > 0 ? Math.PI : 0), vx: 0, vz: 0, acc, sexe: k % 3 ? 'H' : 'F', k: k + 4 })),
+  ];
+  let OFF_POSES = null;
+  function officielsPoses() {
+    if (OFF_POSES) return OFF_POSES;
+    const coiffes = { H: ['court', 'ras'], F: ['chignon', 'long'] }, chev = ['#3a2618', '#1b1410', '#5a3a1e', '#b88a4a', '#2a1a10'];
+    OFF_POSES = OFFICIELS.map(o => {
+      const pose = o.juge ? poseJuge() : poseRamasseur(o.acc), { skin } = osModele(o, pose, null);
+      return { skin: new Float32Array(skin), sexe: o.sexe, peau: `peau_${o.sexe}_${o.k % 3 === 1 ? 'fonce' : 'clair'}`,
+        coiffe: coiffes[o.sexe][o.k % 2], sourcils: 'sourcils_' + o.sexe, cheveux: hex(chev[o.k % 5]).map(v => v * 1.9),
+        tenue: [[o.sexe === 'F' ? 0.66 : 0.6, o.sexe === 'F' ? 1.668 : 1.752, 0], ...(o.juge ? TENUE_JUGE : TENUE_RAM)].map((c, k) => k === 7 ? [-1, -1, -1] : c) };
+    });
+    return OFF_POSES;
+  }
 
   // ── caméra et rendu ───────────────────────────────────────────────────────────────────────────────────────
-  const VUES = { tv: { yaw: 0, pitch: 0.47, dist: 33, fov: 0.62, suivre: true, real: true }, cote: { yaw: 0.95, pitch: 0.36, dist: 33, fov: 0.62, suivre: false, real: false }, haut: { yaw: Math.PI / 2, pitch: 1.3, dist: 38, fov: 0.62, suivre: false, real: false },
+  const VUES = { tv: { yaw: 0, pitch: 0.31, dist: 27, fov: 0.62, suivre: true, real: true }, cote: { yaw: 0.95, pitch: 0.36, dist: 33, fov: 0.62, suivre: false, real: false }, haut: { yaw: Math.PI / 2, pitch: 1.3, dist: 38, fov: 0.62, suivre: false, real: false },
     joueur: { yaw: 0, pitch: 0.22, dist: 9.5, fov: 0.75, suivre: false, focus: 0, real: false } };
   const cam = { ...VUES.tv };
   const COULEURS = [{ maillot: '#22c8e0', short: '#14234f', cheveux: '#3a2a20', peau: '#d09a78' }, { maillot: '#e2449a', short: '#ececf2', cheveux: '#1d1712', peau: '#b07850' }];
@@ -5032,6 +5202,11 @@ const G3D = (() => {
       const A = ALLURE_ARBITRE, { skin } = osModele(ARBITRE, pa, null), C = MOD.corps.H;
       dyn.push([C.corps, M4.id(), false, skin, { tex: MOD.tex[A.peau], tenue: A.tenue.map((c, k) => k === 7 ? [-1, -1, -1] : c) }], [C.yeux, M4.id(), false, skin, { tex: MOD.tex.yeux }]);
       for (const c of [A.coiffe, A.sourcils]) { const H = MOD.cheveux[c]; if (H) dyn.push([H, M4.id(), false, skin, { tex: MOD.tex[H.tex], col: A.cheveux }]); }
+      for (const o of officielsPoses()) {
+        const Co = MOD.corps[o.sexe] || C;
+        dyn.push([Co.corps, M4.id(), false, o.skin, { tex: MOD.tex[o.peau], tenue: o.tenue }], [Co.yeux, M4.id(), false, o.skin, { tex: MOD.tex.yeux }]);
+        for (const c of [o.coiffe, o.sourcils]) { const H = MOD.cheveux[c]; if (H) dyn.push([H, M4.id(), false, o.skin, { tex: MOD.tex[H.tex], col: o.cheveux }]); }
+      }
     }
     // 1) ombres
     gl.bindFramebuffer(gl.FRAMEBUFFER, smFbo); gl.viewport(0, 0, SM, SM); gl.clear(gl.DEPTH_BUFFER_BIT);
@@ -5041,7 +5216,7 @@ const G3D = (() => {
     const passeO = (m, mat, peau) => { gl.uniformMatrix4fv(UO.uM, false, mat); gl.uniform1i(UO.uPeau, peau ? 1 : 0); if (peau) gl.uniformMatrix4fv(UO.uOs, false, peau);
       gl.bindVertexArray(m.vao); gl.drawElements(gl.TRIANGLES, m.n, m.type || gl.UNSIGNED_INT, 0); };
     for (const o of scene.fixes) if (o.ombre) passeO(o.m, M4.id());
-    const arbBlocs = scene.arbitre && !(MOD.etat === 'pret' && MATCH); if (arbBlocs) passeO(scene.arbitre.m, M4.id());
+    const arbBlocs = scene.arbitre && !(MOD.etat === 'pret' && MATCH); if (arbBlocs) { passeO(scene.arbitre.m, M4.id()); if (scene.officiels) passeO(scene.officiels.m, M4.id()); }
     for (const o of scene.transp) if (o.ombre) passeO(o.m, M4.id());
     for (const [m, mat, tr, peau] of dyn) if (!tr) passeO(m, mat, peau);
     if (b) passeO(BALLE, M4.tr(b.x, b.y, b.z));
@@ -5067,7 +5242,7 @@ const G3D = (() => {
       gl.uniform1i(U.uPeau, o.peau ? 1 : 0); if (o.peau) gl.uniformMatrix4fv(U.uOs, false, o.peau); gl.bindVertexArray(o.m.vao);
       if (inst) gl.drawElementsInstanced(gl.TRIANGLES, o.m.n, gl.UNSIGNED_INT, 0, o.m.ni); else gl.drawElements(gl.TRIANGLES, o.m.n, o.m.type || gl.UNSIGNED_INT, 0); };
     for (const o of scene.fixes) passe(o, M4.id());
-    if (arbBlocs) passe(scene.arbitre, M4.id());
+    if (arbBlocs) { passe(scene.arbitre, M4.id()); if (scene.officiels) passe(scene.officiels, M4.id()); }
     passe({ ...scene.public, recoit: false }, M4.id(), true);
     if (scene.led) passe({ ...scene.led, decal: [-(t * 0.06) % 1, 0] }, M4.id());
     if (scene.ecran) { majEcran(); passe(scene.ecran, M4.id()); }
@@ -5214,7 +5389,7 @@ const G3D = (() => {
     if (gl && MOD.etat === 'rien') chargerModeles();
     const x = r.x, H = r.inverse ? x.score_away : x.score_home, A = r.inverse ? x.score_home : x.score_away;
     E.noms = [court(m.home), court(m.away)]; E.sets = [H.sets || [], A.sets || []]; E.pts = [H.point ?? '0', A.point ?? '0'];
-    E.srv = x.serveur ? (((x.serveur === 'home') !== r.inverse) ? 0 : 1) : null; E.fini = !!fini; E.surface = SURFACES[m.surface] ? m.surface : 'Hard';
+    E.srv = x.serveur ? (((x.serveur === 'home') !== r.inverse) ? 0 : 1) : null; E.fini = !!fini; E.surface = SURFACES[m.surface] ? m.surface : 'Hard'; E.circuit = m.circuit || 'ATP';
     const i = E.sets[0].length - 1, tb = +E.sets[0][i] === 6 && +E.sets[1][i] === 6;
     const v = s => { const u = String(s ?? '0').toUpperCase(); return tb ? (parseInt(u, 10) || 0) : ({ '0': 0, '15': 1, '30': 2, '40': 3, 'A': 4, 'AD': 4 })[u] ?? 0; };
     E.droite = (v(E.pts[0]) + v(E.pts[1])) % 2 === 0;
@@ -5258,6 +5433,7 @@ const G3D = (() => {
       return osModele({ x: 0, z: 0, cap: 0 }, pose || POSE_T(), arguments[2]); },
     _post: () => !!(POST.ok && POST.ms && QUALITE === 'haute'),
     _squelette: (pose) => os({ x: 0, z: 0, cap: 0 }, pose || POSE0()), _inverse: inverseRigide,
+    _phys: { viser, voler, coupPhysique, PHY, SURF_REBOND, hauteurFilet, styleCoup, laterale, seuilCourse, officiels: () => OFFICIELS, surface: s => { E.surface = s; } },
     _plans: PLANS, _gestes: GESTE, _son: SON, _scoreParle: scoreParle, _poseGeste: poseGeste,
     _cam: cam, _maj: maj, _etat: E, _J: J, _R: () => R, _poses: { poseAttente, poseCourse, poseCoupDroit, poseRevers, poseService, poseSlice, poseVolee },
   };
