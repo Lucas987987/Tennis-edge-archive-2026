@@ -59,6 +59,12 @@ BALLES_CONNU = 500          # profil « connu » : au moins 500 balles de servic
 # 3 jours avant (avant : 36 h). Surtout utile en début de tournoi ; ensuite les matchs sont fixés la veille. Plafond de
 # sécurité : au plus PLAFOND_MATCHS matchs par passage, les plus proches d'abord (le run reste sous son délai).
 HORIZON_H = int(os.environ.get('HORIZON_H', '72'))
+# 18/11/2026 (paquet 270, DÉCISION DE LUCAS après etude_niveaux_fiabilite.py) : correction par niveau de fiabilité et
+# par circuit (simulateur/correction_niveaux.json). Seule en place : Challenger « correct », pente 1,142 apprise sur la
+# 1re moitié de nos pronostics en direct et validée sur la 2de (log loss −0,0026). Le niveau est celui du pronostic SANS
+# la correction (pas de boucle) ; la pente s'applique en dernier, avant la simulation, donc sets, scores et feuille
+# suivent. Retrait automatique par etude_niveaux_fiabilite.py (règle dans son en-tête).
+CORRECTIONS_NIVEAUX = 'simulateur/correction_niveaux.json'
 PLAFOND_MATCHS = int(os.environ.get('PLAFOND_MATCHS', '220'))
 LOG = 'simulateur/pronostics_log.jsonl'
 # 22/10/2026 — TOUT est enregistré pour l'analyse a posteriori :
@@ -1299,7 +1305,8 @@ def matchs_a_venir(racine, maintenant, avec_couverture=False):
     return (out, couverture) if avec_couverture else out
 
 
-def construire(racine, maintenant=None):
+def construire(racine, maintenant=None, uids=None, pentes_forcees=None):
+    """uids : ne refaire que ces matchs ; pentes_forcees : {uid: pente} de la correction par niveau (paquet 270)."""
     maintenant = maintenant or dt.datetime.utcnow()
     etat = E.migrer_etat(json.load(open(os.path.join(racine, 'simulateur', 'elo_etat.json'), encoding='utf-8')))
     elo = E.Elo.importer(etat['joueurs'], etat.get('options'))
@@ -1464,6 +1471,8 @@ def construire(racine, maintenant=None):
         pa0, pb0 = S.service(h, a, c, s)
         stats = pronostic(elo.proba(h, a, s), c, sg, pa0, pb0)
         uid = f"{x['debut'].date()}_{NR.slug(x['home'])}_{NR.slug(x['away'])}"
+        if uids is not None and uid not in uids:
+            continue
         simulation = combinaison = direct = forme_ctl = fsv_ctl = None
         sig_ctl, adoptes_ici = None, ()
         fsv = None
@@ -1547,6 +1556,11 @@ def construire(racine, maintenant=None):
                                        controle_grand_chelem(p_base, stats['p_home'], c, x['tournoi'], tour_),
                                        controle_qualifs_gc(p_base, stats['p_home'], c, x['tournoi'], tour_))
                 adoptes_ici = tuple(k for k, v in SIGNAUX_CIRCUIT.items() if c in (v or []))
+                pf_ = (pentes_forcees or {}).get(uid)
+                if pf_:                     # 18/11/2026 (paquet 270) : correction du niveau de fiabilité, en dernier
+                    q0_ = min(max(p_base, 1e-6), 1 - 1e-6)
+                    L0_ = math.log(q0_ / (1 - q0_)) + sum((sh_ or {}).values())
+                    sh_ = dict(sh_ or {}, niveau_fiabilite=(float(pf_) - 1.0) * L0_)
                 if sh_:
                     q_ = min(max(p_base, 1e-6), 1 - 1e-6)
                     p_new = sig(math.log(q_ / (1 - q_)) + sum(sh_.values()))
@@ -2202,9 +2216,48 @@ def resoudre(racine, maintenant=None):
     return dedoublonner(out)
 
 
+def corrections_niveaux(racine):
+    """{circuit: {niveau: pente}} des corrections en place (non retirées), {} si le fichier manque."""
+    try:
+        with open(os.path.join(racine, CORRECTIONS_NIVEAUX), encoding='utf-8') as f:
+            doc = json.load(f)
+    except (OSError, ValueError):
+        return {}
+    out = {}
+    for c, nv in (doc.get('corrections') or {}).items():
+        for n, v in (nv or {}).items():
+            if isinstance(v, dict) and v.get('pente') and not v.get('retiree'):
+                out.setdefault(c, {})[n] = float(v['pente'])
+    return out
+
+
+def appliquer_corrections_niveaux(racine, doc, maintenant, anciens_resultats, construire_=None):
+    """Refait les matchs concernés avec leur pente ; garde la fiabilité du pronostic SANS correction (paquet 270)."""
+    C = corrections_niveaux(racine)
+    viser = {m['uid']: C[m.get('circuit')][(m.get('fiabilite') or {}).get('niveau')] for m in doc['matchs']
+             if m.get('combinaison') and (m.get('fiabilite') or {}).get('niveau') in C.get(m.get('circuit'), {})}
+    if not viser:
+        return 0
+    doc2 = (construire_ or construire)(racine, maintenant, uids=set(viser), pentes_forcees=viser)
+    par_uid = {m['uid']: m for m in doc2['matchs']}
+    for i, m in enumerate(doc['matchs']):
+        m2 = par_uid.get(m['uid'])
+        if not m2 or not m2.get('combinaison'):
+            continue
+        f = dict(m['fiabilite'])
+        f['correction_niveau'] = {'pente': viser[m['uid']], 'niveau': f.get('niveau'), 'circuit': m.get('circuit'),
+                                  'p_home_sans_correction': (m.get('combinaison') or {}).get('p_home'),
+                                  'p_home_avec_correction': m2['combinaison'].get('p_home'), 'source': CORRECTIONS_NIVEAUX}
+        m2['fiabilite'] = f
+        m2['p_premier'] = m.get('p_premier')
+        doc['matchs'][i] = m2
+    return len(viser)
+
+
 def main(argv):
     racine = argv[1] if len(argv) > 1 else os.path.join(ICI, '..')
-    doc = construire(racine)
+    maintenant = dt.datetime.utcnow()
+    doc = construire(racine, maintenant)
     # Seuls les résultats déjà publiés entrent dans la note : aucun résultat du match à venir,
     # ni résolution nouvellement calculée pendant ce passage, ne peut fuiter dans le pronostic.
     try:
@@ -2216,6 +2269,12 @@ def main(argv):
     for m, p0 in zip(doc['matchs'], premiers_pronostics(racine, [m['uid'] for m in doc['matchs']])):
         m['p_premier'] = p0
     FI.ajouter(doc['matchs'], anciens_resultats)
+    try:
+        nc = appliquer_corrections_niveaux(racine, doc, maintenant, anciens_resultats)
+        if nc:
+            print(f"Correction par niveau de fiabilité : {nc} matchs refaits ({CORRECTIONS_NIVEAUX})")
+    except Exception as e:  # noqa: BLE001 — la correction ne doit jamais bloquer les pronostics
+        print(f"::warning::correction par niveau non appliquée : {type(e).__name__}: {e}")
     os.makedirs(os.path.join(racine, 'Tennis_Edge_Lab', 'live'), exist_ok=True)
     with open(os.path.join(racine, SORTIE), 'w', encoding='utf-8') as f:
         json.dump(doc, f, ensure_ascii=False, indent=1)
