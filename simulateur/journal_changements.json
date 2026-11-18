@@ -1305,6 +1305,13 @@
    "paquet": 284,
    "quoi": "LE DÉPLOIEMENT DU WORKER REPASSE AU VERT (paquet 284). Le workflow « Déployer le worker algo » échouait avant d'atteindre Cloudflare : un de ses tests (« direct : la page redemande les scores toutes les 3 s ») lit algo/index.html, absent de la copie partielle du dépôt faite par le workflow. Conséquence : les changements du worker des paquets 282 et 283 (pas de cache pour un fichier absent, nouvelle clé pour les modèles 3D) n'étaient pas en ligne, d'où les personnages 3D toujours absents du site. La copie inclut maintenant la page. Rien d'autre ne change.",
    "garde_fou": "Vérification : le run « Déployer le worker algo » est vert, puis l'étiquette de la vue 3D affiche « 3D v283 · joueurs 3D chargés ». Retrait : remettre .github/workflows/deploy_algo.yml du paquet 283."
+  },
+  {
+   "date": "2026-11-18",
+   "statut": "production",
+   "paquet": 285,
+   "quoi": "DIRECT 3D : LUMIÈRE DU JOUR, CAMÉRA PLUS PROCHE, JOUEURS QUI SE REPLACENT (paquet 285, Lucas : rendu du direct et mouvements des joueurs). 1) Les matchs en plein air joués entre 8 h et 18 h (heure locale, fiche météo du match) passent en lumière de jour : soleil plus franc, ciel et brume clairs, tribunes en béton et sièges clairs, néons atténués, sans faisceaux de projecteurs ; la nuit et la salle gardent l'ambiance de stade éclairé. 2) La caméra télé du direct est plus proche et cadre mieux le joueur du bas. 3) Entre deux frappes, chaque joueur se replace vers le milieu (un peu du côté où il a joué) puis part vers la balle quand l'adversaire frappe, au lieu de filer d'un coup au prochain point d'impact ; au filet, il reste au filet. Les vidéos profitent de la lumière du jour et du replacement. Étiquette : v285. Affichage seulement : le % ne change pas.",
+   "garde_fou": "Retrait : remettre algo/index.html du paquet 283 (l'étiquette repasse à v283)."
   }
  ]
 }
