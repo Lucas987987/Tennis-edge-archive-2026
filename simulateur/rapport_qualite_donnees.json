@@ -1,0 +1,140 @@
+{
+ "genere_le": "2026-11-18T10:49:18+00:00",
+ "paquet": 272,
+ "fenetre_jours": 30,
+ "regle": "résolu                 — présent dans Tennis_Edge_Lab/live/pronostics_resultats.json ;   adversaire fictif      — « R16P3 », « QF7 »… (vainqueur à venir ; filtré depuis le 04/11, restes du journal) ;   doublon reprogrammé    — même paire de joueurs sous un autre uid à moins de 48 h (match déplacé) : une seule fois                            dans les bilans, rien à réparer ;   abandon / forfait      — feuille TennisApi « Retired » / « Walkover » : volontairement non jugés ;   annulé ou reporté      — feuille « Canceled », « Postponed »… ;   feuille terminée non résolue — feuille « Ended » trouvée mais pas de résultat : DÉFAUT à corriger ;   adversaire remplacé    — pas de feuille pour la paire, mais un des joueurs a joué un autre adversaire à ± 3 h de                            l'horaire prévu (repêché, forfait remplacé) : le match annoncé n'a pas eu lieu ;   aucune feuille         — rien du tout : TROU DE COLLECTE (ou match pas encore relevé). Aussi : paires affichées deux fois sur le site (algo/donnees.json) et paires résolues deux fois (bilans faussés). ALERTE (Telegram privé) si, sur la veille, « aucune feuille » + « feuille terminée non résolue » dépassent 10 % des matchs réels (hors adversaires fictifs et doublons), ou si une paire est résolue deux fois.",
+ "matchs": 2152,
+ "causes": {
+  "résolu": 1434,
+  "adversaire fictif": 178,
+  "doublon reprogrammé": 386,
+  "abandon / forfait": 55,
+  "annulé ou reporté": 0,
+  "feuille terminée non résolue": 0,
+  "adversaire remplacé": 57,
+  "aucune feuille": 42
+ },
+ "par_circuit": {
+  "ATP": {
+   "résolu": 213,
+   "adversaire fictif": 46,
+   "doublon reprogrammé": 76,
+   "abandon / forfait": 9,
+   "annulé ou reporté": 0,
+   "feuille terminée non résolue": 0,
+   "adversaire remplacé": 11,
+   "aucune feuille": 6
+  },
+  "WTA": {
+   "résolu": 200,
+   "adversaire fictif": 37,
+   "doublon reprogrammé": 46,
+   "abandon / forfait": 6,
+   "annulé ou reporté": 0,
+   "feuille terminée non résolue": 0,
+   "adversaire remplacé": 13,
+   "aucune feuille": 10
+  },
+  "CH": {
+   "résolu": 1021,
+   "adversaire fictif": 95,
+   "doublon reprogrammé": 264,
+   "abandon / forfait": 40,
+   "annulé ou reporté": 0,
+   "feuille terminée non résolue": 0,
+   "adversaire remplacé": 33,
+   "aucune feuille": 26
+  }
+ },
+ "defauts_pct": 2.6,
+ "veille": {
+  "jour": "2026-11-17",
+  "causes": {
+   "résolu": 69,
+   "adversaire fictif": 0,
+   "doublon reprogrammé": 19,
+   "abandon / forfait": 1,
+   "annulé ou reporté": 0,
+   "feuille terminée non résolue": 0,
+   "adversaire remplacé": 1,
+   "aucune feuille": 0
+  },
+  "defauts_pct": 0.0
+ },
+ "par_jour": {
+  "2026-11-04": {
+   "matchs": 114,
+   "resolus": 50,
+   "defauts_pct": 0.0
+  },
+  "2026-11-05": {
+   "matchs": 55,
+   "resolus": 38,
+   "defauts_pct": 0.0
+  },
+  "2026-11-06": {
+   "matchs": 33,
+   "resolus": 31,
+   "defauts_pct": 0.0
+  },
+  "2026-11-07": {
+   "matchs": 24,
+   "resolus": 22,
+   "defauts_pct": 0.0
+  },
+  "2026-11-08": {
+   "matchs": 104,
+   "resolus": 89,
+   "defauts_pct": 0.0
+  },
+  "2026-11-09": {
+   "matchs": 128,
+   "resolus": 72,
+   "defauts_pct": 3.9
+  },
+  "2026-11-10": {
+   "matchs": 105,
+   "resolus": 91,
+   "defauts_pct": 0.0
+  },
+  "2026-11-11": {
+   "matchs": 50,
+   "resolus": 39,
+   "defauts_pct": 0.0
+  },
+  "2026-11-12": {
+   "matchs": 40,
+   "resolus": 30,
+   "defauts_pct": 0.0
+  },
+  "2026-11-13": {
+   "matchs": 34,
+   "resolus": 32,
+   "defauts_pct": 0.0
+  },
+  "2026-11-14": {
+   "matchs": 20,
+   "resolus": 18,
+   "defauts_pct": 0.0
+  },
+  "2026-11-15": {
+   "matchs": 105,
+   "resolus": 81,
+   "defauts_pct": 2.2
+  },
+  "2026-11-16": {
+   "matchs": 119,
+   "resolus": 68,
+   "defauts_pct": 5.5
+  },
+  "2026-11-17": {
+   "matchs": 90,
+   "resolus": 69,
+   "defauts_pct": 0.0
+  }
+ },
+ "paires_resolues_deux_fois": 0,
+ "paires_en_double_sur_le_site": 1,
+ "alerte": [],
+ "descriptif": "le % de victoire ne change pas"
+}
