@@ -87,7 +87,9 @@ export async function modele(req, pathname) {
   const cfg = MODELES[pathname];
   if (req.method !== 'GET' && req.method !== 'HEAD') return new Response(null, { status: 405, headers: SECURITE });
   try {
-    const r = await fetch(ORIGINE + pathname.slice(1), { cf: { cacheTtl: 86400, cacheEverything: true } });
+    // 18/11/2026 (paquet 282) : seules les réponses réussies sont gardées un jour ; une absence (404) n'est jamais
+    // mise en cache, sinon le fichier enfin publié resterait invisible jusqu'au lendemain
+    const r = await fetch(ORIGINE + pathname.slice(1), { cf: { cacheTtlByStatus: { '200-299': 86400, '404': 0, '500-599': 0 }, cacheEverything: true } });
     const n = Number(r.headers.get('content-length')) || 0;
     if (r.ok && !(n && n < cfg.min) && !(r.headers.get('content-type') || '').includes('text/html'))
       return new Response(req.method === 'HEAD' ? null : r.body, { headers: { ...SECURITE, 'Content-Type': cfg.type,

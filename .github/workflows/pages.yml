@@ -218,6 +218,12 @@ jobs:
           mkdir -p _site/algo
           cp algo/index.html _site/algo/ || echo "❌ MANQUANT : algo/index.html"
           cp algo/donnees.json _site/algo/ 2>/dev/null || echo "⚠️ algo/donnees.json absent (prochain passage des pronostics)"
+          # 18/11/2026 (paquet 282) : les modèles 3D des personnages (joueurs, arbitre, juges de ligne, ramasseurs).
+          # Ils n'avaient jamais été publiés : sur le site, le direct 3D restait en personnages simplifiés (les vidéos,
+          # faites depuis le dépôt, les avaient). Échec explicite s'ils manquent.
+          mkdir -p _site/algo/modeles
+          cp algo/modeles/joueurs3d.bin algo/modeles/LICENCE.txt _site/algo/modeles/
+          test -s _site/algo/modeles/joueurs3d.bin
 
           # V9.2 : 3D auto-hébergée ; échec explicite si les fichiers sont absents.
           mkdir -p _site/algo/vendor
