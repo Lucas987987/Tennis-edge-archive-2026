@@ -3782,7 +3782,7 @@ const G3D = (() => {
   precision highp float; precision highp sampler2DShadow;
   in vec3 vW, vN, vC, vB; in vec2 vU; in vec4 vL; in float vCls;
   uniform int uHabit, uFaisceau; uniform vec3 uTenue[8]; uniform highp int uInst;
-  uniform vec3 uCol, uSun, uEye, uCiel, uSol, uBrume; uniform float uAlpha, uSpec, uEmis, uRim; uniform int uTex, uOmbre;
+  uniform vec3 uCol, uSun, uEye, uCiel, uSol, uBrume; uniform float uAlpha, uSpec, uEmis, uRim; uniform int uTex, uOmbre; uniform vec3 uLum;
   uniform sampler2D uTx; uniform sampler2DShadow uSM;
   layout(location=0) out vec4 o; layout(location=1) out vec4 oE;
   float ombre(){
@@ -3821,7 +3821,7 @@ const G3D = (() => {
     vec3 amb = mix(uSol, uCiel, n.y * 0.5 + 0.5);
     vec3 v = normalize(uEye - vW), h = normalize(uSun + v);
     float sp = pow(max(dot(n, h), 0.0), 48.0) * uSpec * sh;
-    vec3 col = base * (amb * 0.85 + d * sh * vec3(1.0, 0.96, 0.88) * 0.95) + sp + base * uEmis;
+    vec3 col = base * (amb * 0.85 + d * sh * uLum) + sp + base * uEmis;
     if (uRim > 0.0) col += vec3(0.62, 0.78, 1.0) * pow(1.0 - max(dot(n, v), 0.0), 3.0) * uRim;      // contre-jour des projecteurs (paquet 277)
     float f = clamp((length(uEye - vW) - 38.0) / 70.0, 0.0, 0.55);
     col = mix(col, uBrume, f);
@@ -4020,7 +4020,7 @@ const G3D = (() => {
       mur.ajoute(boite(lx, 1.0, lz, BLANC), M4.tr(x, 0.5, z));
     scene.fixes.push({ m: maillage(mur), tex: TX.pan, spec: 0.1, recoit: true, ombre: true });
     // tribunes en gradins : côtés et fonds, sièges sombres
-    const trib = new Geo(), siege = hex('#26244a'), marche = hex('#3a3866');
+    const trib = new Geo(), siege = hex(E.jour ? '#5d6b82' : '#26244a'), marche = hex(E.jour ? '#9aa3b2' : '#3a3866'), socle = hex(E.jour ? '#4f5869' : '#1a1838');   // de jour : béton et sièges clairs
     const rangs = 14, pas = 0.8, haut = 0.42;
     const gradins = (cote) => {             // cote : 0 = gauche (x<0), 1 = droite, 2 = fond loin (z>0), 3 = fond près
       for (let r = 0; r < rangs; r++) {
@@ -4029,8 +4029,8 @@ const G3D = (() => {
         else { const s = cote === 2 ? 1 : -1; trib.ajoute(boite(LX + 2.4 + d * 2, haut, pas, r % 2 ? siege : marche), M4.tr(0, y - haut / 2, s * (bz + 1.2 + d))); }
       }
       // base pleine sous les gradins
-      if (cote < 2) { const s = cote ? 1 : -1; trib.ajoute(boite(rangs * pas, 1.1, LZ + 6 + rangs * pas * 2, hex('#1a1838')), M4.tr(s * (bx + 0.8 + rangs * pas / 2), 0.55, 0)); }
-      else { const s = cote === 2 ? 1 : -1; trib.ajoute(boite(LX + 2.4 + rangs * pas * 2, 1.1, rangs * pas, hex('#1a1838')), M4.tr(0, 0.55, s * (bz + 0.8 + rangs * pas / 2))); }
+      if (cote < 2) { const s = cote ? 1 : -1; trib.ajoute(boite(rangs * pas, 1.1, LZ + 6 + rangs * pas * 2, socle), M4.tr(s * (bx + 0.8 + rangs * pas / 2), 0.55, 0)); }
+      else { const s = cote === 2 ? 1 : -1; trib.ajoute(boite(LX + 2.4 + rangs * pas * 2, 1.1, rangs * pas, socle), M4.tr(0, 0.55, s * (bz + 0.8 + rangs * pas / 2))); }
     };
     [0, 1, 2, 3].forEach(gradins);
     // toit et poutres (stade fermé, éclairage)
@@ -4147,7 +4147,7 @@ const G3D = (() => {
     for (let k = 1; k < ecr.u.length; k += 2) ecr.u[k] = 1 - ecr.u[k];                   // texte à l'endroit
     scene.ecran = { m: maillage(ecr), tex: ECRAN.tex, emis: 0.95, spec: 0, recoit: false };
     scene.fixes.push({ m: maillage(cadreE), spec: 0.1 });
-    surfaceFaite = surface;
+    surfaceFaite = surface + (E.jour ? ':jour' : ':nuit');
   }
 
   // ── LES JOUEURS (paquet 262) : un corps d'un seul tenant qui se plie aux articulations ─────────────────────
@@ -4889,7 +4889,17 @@ const G3D = (() => {
         vmax = 7.5; urg = 1.5; cible = { x: 0, z: -face * (HL + 0.9) };
         const proch = R.vols.find(v => v.qui === i && v.t > t - 0.05);
         if (proch && proch.type === 'service') cible = { x: proch.a.x, z: proch.a.z - face * 0.05 };
-        else if (proch) cible = coupDe(i, proch);
+        else if (proch) {
+          // paquet 285 : comme un vrai joueur — après sa frappe, il se replace (milieu, un peu du côté où il a joué) et
+          // fait son pas d'allant quand l'adversaire frappe ; seulement ensuite il part vers la balle
+          const adv = R.vols.find(v => v.qui === 1 - i && v.t > t - 0.02 && v.t < proch.t);
+          const mien = R.vols.filter(v => v.qui === i && v.t <= t).pop();
+          if (adv && mien && proch.type !== 'service' && adv.type !== 'service') {
+            const loin = Math.abs(mien.a.z) > 4.5;                                      // au fond (sinon : au filet, il y reste)
+            cible = loin ? { x: cl(mien.b.x * 0.3, -2.2, 2.2), z: -face * (HL + 0.7) } : { x: mien.a.x * 0.6, z: mien.a.z };
+            urg = cl(adv.t - t, 0.35, 3);
+          } else cible = coupDe(i, proch);
+        }
         else if (t < R.vols[0].t) cible = placesAttente(i);
         else if (i !== R.gagnant) {                                              // le perdant court après la dernière balle
           const b = posBalle(t); if (b && Math.sign(b.z) === -face) cible = { x: b.x, z: b.z }; else cible = { x: j.x, z: j.z };
@@ -5221,7 +5231,7 @@ const G3D = (() => {
   }
 
   // ── caméra et rendu ───────────────────────────────────────────────────────────────────────────────────────
-  const VUES = { tv: { yaw: 0, pitch: 0.31, dist: 27, fov: 0.62, suivre: true, real: true }, cote: { yaw: 0.95, pitch: 0.36, dist: 33, fov: 0.62, suivre: false, real: false }, haut: { yaw: Math.PI / 2, pitch: 1.3, dist: 38, fov: 0.62, suivre: false, real: false },
+  const VUES = { tv: { yaw: 0, pitch: 0.33, dist: 23.5, fov: 0.62, suivre: true, real: true }, cote: { yaw: 0.95, pitch: 0.36, dist: 33, fov: 0.62, suivre: false, real: false }, haut: { yaw: Math.PI / 2, pitch: 1.3, dist: 38, fov: 0.62, suivre: false, real: false },
     joueur: { yaw: 0, pitch: 0.22, dist: 9.5, fov: 0.75, suivre: false, focus: 0, real: false } };
   const cam = { ...VUES.tv };
   const COULEURS = [{ maillot: '#22c8e0', short: '#14234f', cheveux: '#3a2a20', peau: '#d09a78' }, { maillot: '#e2449a', short: '#ececf2', cheveux: '#1d1712', peau: '#b07850' }];
@@ -5231,7 +5241,7 @@ const G3D = (() => {
     gl = cv.getContext('webgl2', { antialias: true, alpha: false, powerPreference: 'high-performance' });
     if (!gl) return false;
     prog = shader(VS, FS); progO = shader(VS_OMBRE, FS_OMBRE);
-    for (const k of ['uM', 'uVP', 'uLVP', 'uInst', 'uPeau', 'uOs', 'uHabit', 'uTenue', 'uT', 'uClap', 'uDebout', 'uBalle', 'uFaisceau', 'uDecal', 'uCol', 'uSun', 'uEye', 'uCiel', 'uSol', 'uBrume', 'uAlpha', 'uSpec', 'uEmis', 'uTex', 'uOmbre', 'uTx', 'uSM', 'uRim']) U[k] = gl.getUniformLocation(prog, k);
+    for (const k of ['uM', 'uVP', 'uLVP', 'uInst', 'uPeau', 'uOs', 'uHabit', 'uTenue', 'uT', 'uClap', 'uDebout', 'uBalle', 'uFaisceau', 'uDecal', 'uCol', 'uSun', 'uEye', 'uCiel', 'uSol', 'uBrume', 'uAlpha', 'uSpec', 'uEmis', 'uTex', 'uOmbre', 'uTx', 'uSM', 'uRim', 'uLum']) U[k] = gl.getUniformLocation(prog, k);
     for (const k of ['uM', 'uLVP', 'uInst', 'uPeau', 'uOs']) UO[k] = gl.getUniformLocation(progO, k);
     try {
       POST.reduit = shader(VS_ECRAN, FS_REDUIT); POST.flou = shader(VS_ECRAN, FS_FLOU); POST.final = shader(VS_ECRAN, FS_FINAL);
@@ -5271,7 +5281,7 @@ const G3D = (() => {
       if (FILM.actif && pl.type !== 'public') { const c = pl.type === 'dos' ? [J[pl.i].x, 1.2, J[pl.i].z] : v.cible; FILM.focale = Math.hypot(v.eye[0] - c[0], v.eye[1] - c[1], v.eye[2] - c[2]); }
       return projeter(w, h, FILM.actif && pl.type !== 'dos' ? tremble(v.eye) : v.eye, v.cible, v.fov); }
     const cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
-    let cible = [cam.cx || 0, 0, -1.5 + Math.sin(cam.pitch) * 0.8 + (FILM.actif ? -2.6 : 0)];          // film : le joueur du bas dans le cadre
+    let cible = [cam.cx || 0, 0, -1.5 + Math.sin(cam.pitch) * 0.8 + (FILM.actif ? -2.6 : -1.6)];          // film : le joueur du bas dans le cadre
     if (cam.focus !== undefined) {                                                // vue « près » : derrière le joueur proche
       const j = J[cam.focus]; cam.fx = lerp(cam.fx ?? j.x, j.x, 0.08); cam.fz = lerp(cam.fz ?? j.z, j.z, 0.08);
       cible = [cam.fx * 0.8, 0.9, cam.fz + 5];
@@ -5300,7 +5310,7 @@ const G3D = (() => {
   }
   function dessiner(t, dt) {
     const w = cv.width, h = cv.height; if (!w || !h) return;
-    if (surfaceFaite !== E.surface) construireDecor(E.surface);
+    if (surfaceFaite !== E.surface + (E.jour ? ':jour' : ':nuit')) construireDecor(E.surface);
     const tReel = t; [t, dt] = horloge(t, dt); FILM.t = t;
     avancer(t, dt);
     const bv = E.fini ? null : posBalle(t), b = bv || (R ? null : balleEnMain(t));
@@ -5352,14 +5362,15 @@ const G3D = (() => {
     const post = POST.ok && QUALITE === 'haute' && cibles(w, h);
     if (post) {
       gl.bindFramebuffer(gl.FRAMEBUFFER, POST.ms); gl.drawBuffers([gl.COLOR_ATTACHMENT0, gl.COLOR_ATTACHMENT1]); gl.viewport(0, 0, w, h);
-      gl.clearBufferfv(gl.COLOR, 0, [0.06, 0.05, 0.16, 1]); gl.clearBufferfv(gl.COLOR, 1, [0, 0, 0, 1]); gl.clear(gl.DEPTH_BUFFER_BIT);
+      gl.clearBufferfv(gl.COLOR, 0, [...AMBIANCES[E.jour ? 'jour' : 'nuit'].fond, 1]); gl.clearBufferfv(gl.COLOR, 1, [0, 0, 0, 1]); gl.clear(gl.DEPTH_BUFFER_BIT);
     } else {
       gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, w, h);
-      gl.clearColor(0.06, 0.05, 0.16, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.clearColor(...AMBIANCES[E.jour ? 'jour' : 'nuit'].fond, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     }
     gl.useProgram(prog);
     gl.uniformMatrix4fv(U.uVP, false, vp); gl.uniformMatrix4fv(U.uLVP, false, lvp); gl.uniform3fv(U.uSun, SOLEIL); gl.uniform3fv(U.uEye, eye);
-    gl.uniform3fv(U.uCiel, [0.62, 0.64, 0.82]); gl.uniform3fv(U.uSol, [0.28, 0.26, 0.36]); gl.uniform3fv(U.uBrume, [0.08, 0.07, 0.2]);
+    const A = AMBIANCES[E.jour ? 'jour' : 'nuit'];                                // paquet 285 : match de jour en plein air, ou nuit / salle
+    gl.uniform3fv(U.uCiel, A.ciel); gl.uniform3fv(U.uSol, A.sol); gl.uniform3fv(U.uBrume, A.brume); gl.uniform3fv(U.uLum, A.lum);
     gl.uniform1f(U.uT, tReel); gl.uniform1f(U.uClap, RAL.actif ? 0 : cl(Math.exp(-(t - applaudir) * 0.7), 0, 1));
     gl.uniform1f(U.uDebout, RAL.actif ? 0 : cl(Math.exp(-(t - applaudir) * 0.5), 0, 1) * (grandPoint ? 1 : 0));
     const bAff = bv || { x: (J[0].x + J[1].x) / 2, y: 1, z: 0 }; BALLE_VUE.x = lerp(BALLE_VUE.x, bAff.x, 0.15); BALLE_VUE.z = lerp(BALLE_VUE.z, bAff.z, 0.15);
@@ -5371,7 +5382,7 @@ const G3D = (() => {
     for (const o of scene.fixes) passe(o, M4.id());
     if (arbBlocs) { passe(scene.arbitre, M4.id()); if (scene.officiels) passe(scene.officiels, M4.id()); }
     passe({ ...scene.public, recoit: false }, M4.id(), true);
-    if (scene.led) passe({ ...scene.led, decal: [-(t * 0.06) % 1, 0] }, M4.id());
+    if (scene.led) passe({ ...scene.led, decal: [-(t * 0.06) % 1, 0], emis: (scene.led.emis || 0) * (E.jour ? 0.35 : 1) }, M4.id());
     if (scene.ecran) { majEcran(); passe(scene.ecran, M4.id()); }
     for (const [m, mat, tr, peau, opt] of dyn) if (!tr) {
       if (opt) gl.enable(gl.CULL_FACE);                                                  // modèles fermés : faces arrière cachées
@@ -5396,7 +5407,7 @@ const G3D = (() => {
         passe({ m: BALLE, col, alpha: 0.35 * (1 - age / 0.9), spec: 0, recoit: false },
           chaine(M4.tr(rb.x + Math.cos(a) * r, 0.04 + age * 0.25, rb.z + Math.sin(a) * r), M4.sc(1.5 + age * 6, 1.2 + age * 4, 1.5 + age * 6))); }
     }
-    if (scene.faisceaux && QUALITE === 'haute') {
+    if (scene.faisceaux && QUALITE === 'haute' && !E.jour) {                         // de jour : pas de faisceaux
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE); gl.uniform1i(U.uFaisceau, 1);
       passe({ m: scene.faisceaux.m, recoit: false, spec: 0 }, M4.id());
       gl.uniform1i(U.uFaisceau, 0); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -5517,7 +5528,12 @@ const G3D = (() => {
     return true;
   }
   let MATCH = null; const ALLURE = [null, null];
-  const VERSION_3D = 'v283';
+  // ── LUMIÈRE (paquet 285) : nuit ou salle (projecteurs, néons) / jour en plein air (ciel, soleil franc, brume claire)
+  const AMBIANCES = {
+    nuit: { fond: [0.06, 0.05, 0.16], ciel: [0.62, 0.64, 0.82], sol: [0.28, 0.26, 0.36], brume: [0.08, 0.07, 0.2], lum: [0.95, 0.912, 0.836] },
+    jour: { fond: [0.53, 0.71, 0.92], ciel: [0.78, 0.86, 1.0], sol: [0.46, 0.42, 0.36], brume: [0.64, 0.76, 0.93], lum: [1.32, 1.24, 1.08] },
+  };
+  const VERSION_3D = 'v285';
   // ── LE FILM (paquet 276) : la vidéo du jour en 3D. La page choisit les moments forts du match simulé et les fait
   // jouer ici un par un ; public en panneaux et image un peu réduite (la vidéo est rendue sans carte graphique).
   const FILM = { actif: false, echelle: 1, son: null, cam: null, t: 0, focale: 0 };
@@ -5558,6 +5574,8 @@ const G3D = (() => {
     const x = r.x, H = r.inverse ? x.score_away : x.score_home, A = r.inverse ? x.score_home : x.score_away;
     E.noms = [court(m.home), court(m.away)]; E.sets = [H.sets || [], A.sets || []]; E.pts = [H.point ?? '0', A.point ?? '0'];
     E.srv = x.serveur ? (((x.serveur === 'home') !== r.inverse) ? 0 : 1) : null; E.fini = !!fini; E.surface = SURFACES[m.surface] ? m.surface : 'Hard'; E.circuit = m.circuit || 'ATP';
+    { const mt = m.meteo || {}, hh = mt.heure && Number(mt.heure.h);                // jour : plein air, entre 8 h et 18 h (heure locale)
+      E.jour = !mt.interieur && !m.en_salle && Number.isFinite(hh) && hh >= 8 && hh < 18; }
     const i = E.sets[0].length - 1, tb = +E.sets[0][i] === 6 && +E.sets[1][i] === 6;
     const v = s => { const u = String(s ?? '0').toUpperCase(); return tb ? (parseInt(u, 10) || 0) : ({ '0': 0, '15': 1, '30': 2, '40': 3, 'A': 4, 'AD': 4 })[u] ?? 0; };
     E.droite = (v(E.pts[0]) + v(E.pts[1])) % 2 === 0;
