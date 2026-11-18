@@ -27,6 +27,14 @@ class EssaiBlender(unittest.TestCase):
         self.assertIn('-P scripts/blender_essai.py', YML)
         self.assertIn('continue-on-error: true', YML)                          # EEVEE sans carte graphique : non bloquant
 
+    def test_eevee_en_opengl_logiciel(self):                                     # paquet 279
+        self.assertIn('sudo apt-get update', YML)
+        self.assertIn('libgl1-mesa-dri', YML)
+        self.assertIn('xvfb-run -a', YML)
+        self.assertIn('LIBGL_ALWAYS_SOFTWARE=1', YML)
+        self.assertIn('if: inputs.cycles', YML)
+        self.assertIn('sc.eevee.taa_render_samples', PY)
+
     def test_regle_de_decision_ecrite_avant(self):
         self.assertIn("moins de 3 h de machine par langue", YML)
 
@@ -39,7 +47,8 @@ class EssaiBlender(unittest.TestCase):
 
     def test_rapport_public(self):
         d = json.loads((RACINE / 'simulateur' / 'rapport_essai_blender.json').read_text(encoding='utf-8'))
-        self.assertEqual(d['paquet'], 278)
+        self.assertEqual(d['paquet'], 279)
+        self.assertEqual(d['essai_1']['cycles_s_par_image']['moyenne'], 44.5)
         self.assertIn('regle_decision', d)
 
 
