@@ -1,8 +1,8 @@
 {
- "genere_le": "2026-11-18T09:34:27+00:00",
+ "genere_le": "2026-11-18T09:55:22+00:00",
  "paquet": 269,
  "definition": "A = joueur donné gagnant par l'algo au premier pronostic ; pente 1 = % justes ; < 1 = trop sûrs ; > 1 = trop prudents",
- "regles": "— anatomie : un critère est « à étudier sur l'archive » si, avec au moins 30 matchs sur chacune des deux moitiés     chronologiques, A y réussit moins que prévu de plus de 1,96 erreur type sur les DEUX moitiés ; « trop tôt » sous     60 matchs ;   — correction du niveau : la pente a est ajustée sur la 1re moitié chronologique et appliquée à la 2de. « Correction     à proposer » si, avec au moins 100 matchs par moitié, la log loss de la 2de moitié baisse d'au moins 0,001 ET la     pente ajustée sur la 2de moitié est du même côté de 1 que celle de la 1re ; « trop tôt » sous 100 matchs par     moitié ; sinon « pas de correction ». Jugé en tout et circuit par circuit ; un circuit ne reprend pas le verdict     d'un autre. Rien n'est appliqué automatiquement : une correction passe ensuite par un paquet, avec sa règle de     retrait.",
+ "regles": "— anatomie : un critère est « à étudier sur l'archive » si, avec au moins 30 matchs sur chacune des deux moitiés     chronologiques, A y réussit moins que prévu de plus de 1,96 erreur type sur les DEUX moitiés ; « trop tôt » sous     60 matchs ;   — correction du niveau : la pente a est ajustée sur la 1re moitié chronologique et appliquée à la 2de. « Correction     à proposer » si, avec au moins 100 matchs par moitié, la log loss de la 2de moitié baisse d'au moins 0,001 ET la     pente ajustée sur la 2de moitié est du même côté de 1 que celle de la 1re ; « trop tôt » sous 100 matchs par     moitié ; sinon « pas de correction ». Jugé en tout et circuit par circuit ; un circuit ne reprend pas le verdict     d'un autre. Rien n'est appliqué automatiquement : une correction passe ensuite par un paquet, avec sa règle de     retrait.   — RETRAIT d'une correction en place (paquet 270, simulateur/correction_niveaux.json) : sur les matchs corrigés jugés     (circuit et niveau de la correction), log loss AVEC et SANS la correction (les deux % sont gardés dans la fiche) ;     avec au moins 100 matchs, si la log loss AVEC dépasse celle SANS d'au moins 0,001, la correction est retirée     (retiree = true dans le fichier, lu à chaque passage des pronostics).",
  "descriptif": "le % de victoire ne change pas",
  "matchs": 1130,
  "niveaux": {
@@ -990,6 +990,14 @@
      "verdict": "trop tôt"
     }
    }
+  }
+ },
+ "corrections_en_place": {
+  "CH|correct": {
+   "pente": 1.142,
+   "retiree": false,
+   "n": 0,
+   "verdict": "trop tôt"
   }
  }
 }

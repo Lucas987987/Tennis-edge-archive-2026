@@ -1,5 +1,5 @@
 {
- "genere_le": "2026-11-18T07:50:01+00:00",
+ "genere_le": "2026-11-18T09:52:50+00:00",
  "objectif": "deviner le vainqueur et le score (pas battre Pinnacle)",
  "elo": "FiveThirtyEight (Kovalchik 2016) : K = 250/(n+5)^0,4, ×1,1 en Grand Chelem ; général + surface à parts égales ; aucun réglage",
  "variantes": {
@@ -1060,5 +1060,5 @@
   },
   "periode": "2026-06-07 → 2026-10-22"
  },
- "duree_s": 166
+ "duree_s": 161
 }
