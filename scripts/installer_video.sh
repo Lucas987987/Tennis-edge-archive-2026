@@ -10,6 +10,31 @@
 #   — police emoji (drapeaux) : fichier de Google Fonts sur GitHub, 2 min au plus, sinon on continue sans.
 set -euo pipefail
 pip install --quiet playwright==1.48.0 imageio-ffmpeg==0.6.0
+# 18/11/2026 (paquet 277) : bande-son de stade (numpy, scipy) et voix de l'arbitre (Piper, synthèse vocale libre et
+# hors ligne, voix génériques fr_FR-tom-medium et en_GB-alan-medium). Rien n'est bloquant : sans eux, l'ancienne
+# bande-son, ou pas de voix.
+# Seulement pour la vidéo (TE_SON_STADE=1 dans son workflow) : les cartes bilan n'en ont pas besoin.
+if [ "${TE_SON_STADE:-0}" = "1" ]; then
+pip install --quiet numpy scipy || echo "::warning::numpy/scipy absents : ancienne bande-son"
+VOIX="$HOME/.cache/te_voix"; mkdir -p "$VOIX"
+if timeout 240 pip install --quiet piper-tts==1.2.0; then
+  HF=https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0
+  for v in "fr fr/fr_FR/tom/medium/fr_FR-tom-medium" "en en/en_GB/alan/medium/en_GB-alan-medium"; do
+    set -- $v
+    curl -fsSL --retry 3 --max-time 180 -o "$VOIX/$1.onnx" "$HF/$2.onnx" \
+      && curl -fsSL --retry 3 --max-time 60 -o "$VOIX/$1.onnx.json" "$HF/$2.onnx.json" \
+      || { echo "::warning::voix $1 non téléchargée : vidéo sans arbitre"; rm -f "$VOIX/$1.onnx" "$VOIX/$1.onnx.json"; }
+  done
+  python - <<'PY' || echo "::warning::Piper ne parle pas : vidéo sans arbitre"
+import sys; sys.path.insert(0, 'scripts')
+import voix
+x = voix.dire('Jeu, set et match', 'fr')
+print('Voix de l arbitre :', 'oui' if x is not None and len(x) > 1000 else 'non')
+PY
+else
+  echo "::warning::Piper non installé : vidéo sans arbitre"
+fi
+fi
 python -m playwright install chromium
 
 if ! python - <<'PY'
