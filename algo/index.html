@@ -542,6 +542,7 @@ body.carte #video{display:block;width:1080px;height:1350px}
 .g3d-l.a .g3d-n{color:#2EE6FF}.g3d-l.b .g3d-n{color:#FF4FAE}.g3d-srv{width:8px;color:#D4FF3A;font-size:.6rem}
 .g3d-s{min-width:12px;text-align:center;color:#ABA3D6}.g3d-s.c{color:#F4F1FF}.g3d-p{min-width:18px;text-align:center;color:#D4FF3A;background:rgba(212,255,58,.14);border-radius:4px}
 .g3d-son{position:absolute;right:6px;bottom:6px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(10,8,30,.82);color:#F4F1FF;font-size:16px;line-height:1;cursor:pointer}
+.g3d-ver{position:absolute;left:6px;bottom:6px;font:500 10px/1.3 Barlow,system-ui,sans-serif;color:rgba(244,241,255,.55);pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.6)}
 .g3d-msg{position:absolute;right:6px;top:6px;max-width:58%;background:rgba(10,8,30,.82);border:1px solid rgba(212,255,58,.35);border-radius:6px;padding:2px 7px;font:600 11px/1.4 Barlow,system-ui,sans-serif;color:#D4FF3A;pointer-events:none}
 .te3d-vues{display:flex;gap:6px}.te3d-v,.te3d-bascule{padding:3px 10px;font-size:.72rem}.te3d-bascule{margin-left:auto}
 .lv-fil li.fl-now{border-top-color:var(--ball);color:var(--ball);font-weight:600}.lv-btn-fil{margin-top:8px}
@@ -1015,6 +1016,7 @@ const T = {
   lv_imp_BB:(n,ok)=>`Balle de break pour ${n} : ${ok?'convertie':'sauvée'}`, lv_imp_BS:(n,ok)=>`Balle de set pour ${n} : ${ok?'convertie':'sauvée'}`,
   t3_tv:'TV', t3_joueur:'Près', t3_cote:'Côté', t3_haut:'Dessus', t3_2d:'Vue 2D', t3_3d:'Vue 3D',
   t3_note:'Glisse pour tourner autour du terrain · score réel ; chaque point est rejoué avec son vrai vainqueur, la façon de le gagner suit ses habitudes, les trajectoires sont reconstituées',
+  g3_mod_ok:'joueurs 3D chargés', g3_mod_charge:'chargement des joueurs 3D…', g3_mod_absent:'joueurs simplifiés : modèles 3D indisponibles',
   g3_rejoue:'▶ Le point qui vient de se jouer', g3_point:n=>`Point ${n}`, g3_attente:'En attente du prochain point', g3_ralenti:'↺ Ralenti du point', g3_son_on:'Activer le son du direct 3D', g3_son_off:'Couper le son du direct 3D',
   fl_titre:'Fil du match', fl_now:'EN CE MOMENT', fl_tout:n=>`Tout le fil (${n})`, fl_moins:'Réduire le fil',
   fl_now_BB:(n,sc)=>`Balle de break pour ${n} (${sc})`, fl_now_BS:(n,sc)=>`Balle de set pour ${n} (${sc})`, fl_now_BM:(n,sc)=>`Balle de match pour ${n} (${sc})`,
@@ -1303,6 +1305,7 @@ const T = {
   lv_imp_BB:(n,ok)=>`Break point for ${n}: ${ok?'converted':'saved'}`, lv_imp_BS:(n,ok)=>`Set point for ${n}: ${ok?'converted':'saved'}`,
   t3_tv:'TV', t3_joueur:'Close', t3_cote:'Side', t3_haut:'Top', t3_2d:'2D view', t3_3d:'3D view',
   t3_note:'Swipe to turn around the court · real score; each point is replayed with its real winner, how it is won follows the player’s habits, paths are reconstructed',
+  g3_mod_ok:'3D players loaded', g3_mod_charge:'loading 3D players…', g3_mod_absent:'simplified players: 3D models unavailable',
   g3_rejoue:'▶ The point just played', g3_point:n=>`Point ${n}`, g3_attente:'Waiting for the next point', g3_ralenti:'↺ Slow-motion replay', g3_son_on:'Turn on the 3D live sound', g3_son_off:'Turn off the 3D live sound',
   fl_titre:'Match feed', fl_now:'RIGHT NOW', fl_tout:n=>`Full feed (${n})`, fl_moins:'Shorter feed',
   fl_now_BB:(n,sc)=>`Break point for ${n} (${sc})`, fl_now_BS:(n,sc)=>`Set point for ${n} (${sc})`, fl_now_BM:(n,sc)=>`Match point for ${n} (${sc})`,
@@ -4441,8 +4444,14 @@ const G3D = (() => {
   async function chargerModeles() {
     if (MOD.etat !== 'rien') return; MOD.etat = 'charge';
     try {
-      const r = await fetch('modeles/joueurs3d.bin?v=265');
-      if (!r.ok) throw new Error('statut ' + r.status);
+      // 18/11/2026 (paquet 281) : 3 essais (réseau mobile capricieux) au lieu d'un seul, sinon les joueurs, l'arbitre,
+      // les juges de ligne et les ramasseurs restaient en version simplifiée jusqu'au rechargement de la page
+      let r = null; const URL_MOD = 'modeles/joueurs3d.bin?v=265', lire = o => (o ? fetch(URL_MOD, o) : fetch('modeles/joueurs3d.bin?v=265'));
+      for (let essai = 0; essai < 3; essai++) {
+        try { r = await lire(essai ? { cache: 'reload' } : undefined); if (r.ok) break; } catch (e) { r = null; }
+        await new Promise(ok => setTimeout(ok, [1500, 4000, 0][essai]));
+      }
+      if (!r || !r.ok) throw new Error('statut ' + (r ? r.status : 'réseau'));
       const buf = await r.arrayBuffer(), dv = new DataView(buf);
       if (String.fromCharCode(...new Uint8Array(buf, 0, 4)) !== 'TEJ3') throw new Error('format');
       const n = dv.getUint32(4, true), J = JSON.parse(new TextDecoder().decode(new Uint8Array(buf, 8, n))), B = 8 + n;
@@ -4470,7 +4479,7 @@ const G3D = (() => {
         MOD.clips[nom] = { ...c, Q: new Int16Array(buf.slice(B + c.q, B + c.q + c.nf * 23 * 8)), T: new Float32Array(buf.slice(B + c.t, B + c.t + c.nf * 12)) };
       MOD.clipsBassin = J.clips_bassin || 0.917;
       MOD.etat = 'pret';
-    } catch (e) { MOD.etat = 'absent'; }
+    } catch (e) { MOD.etat = 'absent'; MOD.erreur = String(e && e.message || e).slice(0, 80); }
   }
   // tenue et allure d'un joueur : maillot, côtés, short, liseré, blanc, semelle, bandeau (null = peau)
   function allure(m, i) {
@@ -5443,8 +5452,12 @@ const G3D = (() => {
   }
 
   // ── tableau d'affichage (HTML par-dessus la 3D) ───────────────────────────────────────────────────────────
-  let boite3d = null, tab = null, msgEl = null; const TRACE = [];
+  let boite3d = null, tab = null, msgEl = null, verEl = null; const TRACE = [];
   function message(t) {
+    if (verEl) {                                                                 // paquet 281 : version et état des joueurs 3D
+      const v = `3D ${VERSION_3D} · ${tr(MOD.etat === 'pret' ? 'g3_mod_ok' : MOD.etat === 'absent' ? 'g3_mod_absent' : 'g3_mod_charge')}`;
+      if (verEl.textContent !== v) verEl.textContent = v;
+    }
     if (!msgEl) return;
     let txt = '';
     if (RAL.actif) txt = tr('g3_ralenti');
@@ -5483,11 +5496,12 @@ const G3D = (() => {
     boite3d = document.createElement('div'); boite3d.className = 'g3d';
     tab = document.createElement('div'); tab.className = 'g3d-tab';
     msgEl = document.createElement('div'); msgEl.className = 'g3d-msg'; msgEl.hidden = true;
+    verEl = document.createElement('div'); verEl.className = 'g3d-ver';
     const bSon = document.createElement('button'); bSon.type = 'button'; bSon.className = 'g3d-son';
     const majSon = () => { bSon.textContent = SON.actif ? '🔊' : '🔈'; bSon.setAttribute('aria-label', tr(SON.actif ? 'g3_son_off' : 'g3_son_on')); bSon.setAttribute('aria-pressed', SON.actif ? 'true' : 'false'); };
     bSon.addEventListener('click', e => { e.stopPropagation(); SON.basculer(); majSon(); }); majSon();
     if (SON.voulu()) boite3d.addEventListener('pointerdown', () => { if (!SON.actif) { SON.basculer(true); majSon(); } }, { once: true });   // l'audio n'a le droit de démarrer qu'après un toucher
-    boite3d.append(cv, tab, msgEl, bSon);
+    boite3d.append(cv, tab, msgEl, bSon, verEl);
     cv.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY, yaw: cam.yaw, pitch: cam.pitch }; });
     cv.addEventListener('pointermove', e => { if (!drag) return;
       cam.yaw = drag.yaw - (e.clientX - drag.x) * 0.008; cam.pitch = cl(drag.pitch + (e.clientY - drag.y) * 0.006, 0.08, 1.4); });
@@ -5499,6 +5513,7 @@ const G3D = (() => {
     return true;
   }
   let MATCH = null; const ALLURE = [null, null];
+  const VERSION_3D = 'v281';
   // ── LE FILM (paquet 276) : la vidéo du jour en 3D. La page choisit les moments forts du match simulé et les fait
   // jouer ici un par un ; public en panneaux et image un peu réduite (la vidéo est rendue sans carte graphique).
   const FILM = { actif: false, echelle: 1, son: null, cam: null, t: 0, focale: 0 };
@@ -5606,6 +5621,7 @@ const G3D = (() => {
       etat() { return { t: FILM.t, R: !!R, ralenti: RAL.actif || !!RAL.prevu, actif: RAL.actif, file: FILE.length,
         plans: PLANS.reduce((x, p) => Math.max(x, p.t1), 0), gestes: GESTE.reduce((x, g) => Math.max(x, g ? g.t0 + g.d : 0), 0) }; },
     },
+    _modeles: () => MOD.etat,
     _phys: { viser, voler, coupPhysique, PHY, SURF_REBOND, hauteurFilet, styleCoup, laterale, seuilCourse, officiels: () => OFFICIELS, surface: s => { E.surface = s; } },
     _plans: PLANS, _gestes: GESTE, _son: SON, _scoreParle: scoreParle, _poseGeste: poseGeste,
     _cam: cam, _maj: maj, _etat: E, _J: J, _R: () => R, _poses: { poseAttente, poseCourse, poseCoupDroit, poseRevers, poseService, poseSlice, poseVolee },
