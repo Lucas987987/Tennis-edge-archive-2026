@@ -55,7 +55,11 @@ SIGMA = 0.15
 SIMULATIONS = int(os.environ.get('SIMULATIONS', '20000'))
 STABILITE_BLOCS = int(os.environ.get('STABILITE_BLOCS', '2'))
 BALLES_CONNU = 500          # profil « connu » : au moins 500 balles de service (pondérées) dans l'archive
-HORIZON_H = 36
+# 18/11/2026 (paquet 268-269, Lucas) : les matchs arrivent sur le site de l'algo dès qu'ils sortent en cote, jusqu'à
+# 3 jours avant (avant : 36 h). Surtout utile en début de tournoi ; ensuite les matchs sont fixés la veille. Plafond de
+# sécurité : au plus PLAFOND_MATCHS matchs par passage, les plus proches d'abord (le run reste sous son délai).
+HORIZON_H = int(os.environ.get('HORIZON_H', '72'))
+PLAFOND_MATCHS = int(os.environ.get('PLAFOND_MATCHS', '220'))
 LOG = 'simulateur/pronostics_log.jsonl'
 # 22/10/2026 — TOUT est enregistré pour l'analyse a posteriori :
 #   INSTANTANES : chaque passage (toutes les 6 h), chaque match, chaque version (%, sets, scores,
@@ -1284,7 +1288,9 @@ def matchs_a_venir(racine, maintenant, avec_couverture=False):
                                    'fuseau': 'UTC', 'interpole': False, 'fin_utc': None},
                     'home': h, 'away': a, 'tournoi': m.get('sport_title') or ''})
     out.sort(key=lambda x: x['debut'])
-    couverture = {'n_source': len(L), 'horodatages_valides': valides,
+    coupes = max(0, len(out) - PLAFOND_MATCHS)
+    out = out[:PLAFOND_MATCHS]                                   # les plus lointains attendent le passage suivant
+    couverture = {'n_source': len(L), 'horodatages_valides': valides, 'horizon_h': HORIZON_H, 'coupes_par_plafond': coupes,
                   'couverture_pct': round(100 * valides / len(L), 2) if L else None,
                   'matchs_dans_fenetre': len(out), 'horodatages_invalides': invalides,
                   'nature': 'débuts planifiés avec fuseau, pas heures de fin constatées',
