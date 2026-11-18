@@ -1273,10 +1273,17 @@
   },
   {
    "date": "2026-11-18",
-   "statut": "essai",
-   "paquet": 279,
-   "quoi": "RÉSULTAT DU 1er ESSAI BLENDER ET 2e ESSAI (paquet 279). Sur la machine gratuite de GitHub (4 processeurs, pas de carte graphique), Blender 4.2.3 rend notre court en 1080×1350 avec Cycles en 40,6 s (nuit, vue télé), 55,7 s (nuit, gros plan) et 37,2 s (jour, vue télé) par image : 44,5 s en moyenne, soit 26,3 h pour une vidéo de 85 s à 25 images/s, par langue. La règle écrite avant l'essai (3 h au plus) ÉCARTE Cycles pour la vidéo du jour. EEVEE n'a pas démarré (bibliothèque libEGL absente : l'installation apt avait échoué faute de mise à jour de l'index). 2e essai : index apt à jour, OpenGL logiciel de Mesa (llvmpipe) et écran virtuel (xvfb), EEVEE sur les trois plans ; Cycles ne repasse que si on coche la case. Rien ne change sur le site ni dans la vidéo du jour (paquet 277).",
-   "garde_fou": "Même règle : EEVEE ne remplace le moteur du site que si une vidéo complète tient en moins de 3 h par langue et si l'image est nettement meilleure. Retrait : supprimer .github/workflows/essai_blender.yml et scripts/blender_essai.py."
+   "statut": "abandon",
+   "paquet": 280,
+   "quoi": "PISTE BLENDER ABANDONNÉE (paquet 280, décision de Lucas après l'essai du paquet 278). Sur la machine gratuite de GitHub (4 processeurs, pas de carte graphique), Blender 4.2.3 rend la scène d'essai en 1080×1350 avec Cycles en 40,6 s (nuit, vue télé), 55,7 s (nuit, gros plan) et 37,2 s (jour, vue télé) par image : 44,5 s en moyenne, soit 26,3 h pour une vidéo de 85 s à 25 images/s, par langue. La règle écrite avant l'essai (3 h au plus) écarte Cycles ; EEVEE n'a pas démarré (bibliothèque libEGL absente). Les images d'essai (joueurs et public en formes simples, éclairage délavé) ont été jugées très mauvaises par Lucas : elles mesuraient le temps, pas ce que Blender peut rendre avec de vrais modèles, mais approcher TopSpin demanderait des joueurs modélisés et animés et un stade complet, pour un temps de rendu déjà hors règle. La vidéo du jour reste faite par le moteur 3D du site (paquets 276–277). Le 2e essai prévu (paquet 279) n'est pas appliqué. Les fichiers de l'essai sont retirés du dépôt à la main.",
+   "garde_fou": "Fichiers retirés à la main : .github/workflows/essai_blender.yml, scripts/blender_essai.py, tests/test_essai_blender.py. Le rapport simulateur/rapport_essai_blender.json garde les temps mesurés. Rouvrir la piste seulement avec une machine à carte graphique ou de vrais modèles 3D, et la même règle des 3 h par langue."
+  },
+  {
+   "date": "2026-11-18",
+   "statut": "production",
+   "paquet": 281,
+   "quoi": "DIRECT 3D : LES PERSONNAGES SE CHARGENT MIEUX, ET ON VOIT LA VERSION (paquet 281, Lucas : « je ne pense pas que ce soit la bonne version »). Le site sert bien le moteur des paquets 275–277 (sol vert autour du court), mais sur son téléphone les juges de ligne et les ramasseurs restaient en blocs : les modèles 3D des personnages (fichier de 1,2 Mo) n'étaient pas chargés, et un seul échec suffisait à garder la version simplifiée jusqu'au rechargement de la page. Le chargement est maintenant retenté 3 fois (après 1,5 s puis 4 s, sans cache au 2e essai). Une petite étiquette en bas à gauche de la vue 3D indique la version du moteur (v281) et l'état des joueurs : chargés, en cours de chargement, ou simplifiés si les modèles sont indisponibles. Pas dans la vidéo. Affichage seulement : le % ne change pas.",
+   "garde_fou": "Retrait : remettre algo/index.html du paquet 277 (fichier identique hors chargement des modèles et étiquette)."
   }
  ]
 }
