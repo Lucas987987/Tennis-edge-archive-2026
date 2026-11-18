@@ -1,11 +1,16 @@
 {
- "paquet": 281,
+ "paquet": 282,
  "version_3d": "v281",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
   4
  ],
- "quoi": "Direct 3D du site : les modèles des personnages sont chargés en 3 essais ; une étiquette affiche la version du moteur et l'état des joueurs 3D (chargés, en cours, indisponibles).",
+ "modeles_publies_sur_pages": true,
+ "cache_worker": {
+  "reussite_s": 86400,
+  "absence_s": 0
+ },
+ "quoi": "Direct 3D du site : le fichier des modèles des personnages est publié avec la page ; une absence n'est plus gardée en cache.",
  "note": "Affichage seulement : le % ne change pas. Aucun nom de joueur, aucune cote."
 }

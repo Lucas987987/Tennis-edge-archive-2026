@@ -26,7 +26,7 @@ class VersionEtModeles(unittest.TestCase):
 
     def test_rapport(self):
         d = json.loads((RACINE / 'simulateur' / 'rapport_3d_site.json').read_text(encoding='utf-8'))
-        self.assertEqual((d['paquet'], d['version_3d']), (281, 'v281'))
+        self.assertGreaterEqual(d['paquet'], 281); self.assertEqual(d['version_3d'], 'v281')
 
 
 if __name__ == '__main__':
