@@ -1312,6 +1312,13 @@
    "paquet": 285,
    "quoi": "DIRECT 3D : LUMIÈRE DU JOUR, CAMÉRA PLUS PROCHE, JOUEURS QUI SE REPLACENT (paquet 285, Lucas : rendu du direct et mouvements des joueurs). 1) Les matchs en plein air joués entre 8 h et 18 h (heure locale, fiche météo du match) passent en lumière de jour : soleil plus franc, ciel et brume clairs, tribunes en béton et sièges clairs, néons atténués, sans faisceaux de projecteurs ; la nuit et la salle gardent l'ambiance de stade éclairé. 2) La caméra télé du direct est plus proche et cadre mieux le joueur du bas. 3) Entre deux frappes, chaque joueur se replace vers le milieu (un peu du côté où il a joué) puis part vers la balle quand l'adversaire frappe, au lieu de filer d'un coup au prochain point d'impact ; au filet, il reste au filet. Les vidéos profitent de la lumière du jour et du replacement. Étiquette : v285. Affichage seulement : le % ne change pas.",
    "garde_fou": "Retrait : remettre algo/index.html du paquet 283 (l'étiquette repasse à v283)."
+  },
+  {
+   "date": "2026-11-18",
+   "statut": "production",
+   "paquet": 286,
+   "quoi": "LE PIPELINE DU SOIR NE PERD PLUS SES RÉSULTATS SUR UN PUSH REFUSÉ (paquet 286). Alerte Telegram du 18/11 : « Verdicts en direct : pas de mise à jour depuis 36 h ». Le run « Steam Pipeline » du 18/11 avait bien calculé les verdicts et les journaux, mais son unique tentative d'envoi a été refusée parce qu'un autre workflow venait de pousser sur le dépôt ; le commit est parti avec la machine du run (le message « récupérable au prochain run » était faux). L'envoi est maintenant retenté jusqu'à 6 fois (nouvelle synchro, puis envoi, attente croissante) ; jamais de push forcé ; en cas de conflit, arrêt sans rien écraser. Le prochain run régénère les verdicts. Note : le run reste rouge pour une autre raison, l'alerte de taille du dépôt (6,97 Go pour un seuil de 4 Go) du verrou qualité, sans lien avec les verdicts.",
+   "garde_fou": "Vérification : dans le journal du prochain run, « ✅ PUSH OK (essai n) » et l'alerte Telegram des verdicts disparaît. Retrait : remettre .github/workflows/steam_pipeline.yml du paquet 285."
   }
  ]
 }
