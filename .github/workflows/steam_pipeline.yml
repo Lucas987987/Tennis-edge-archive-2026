@@ -442,13 +442,23 @@ jobs:
           # alors que fetch_set_results.py venait d'ajouter 62 lignes). Un
           # "merge" en conflit ÉCHOUE BRUYAMMENT au lieu de perdre le commit
           # local en silence -- le commit reste dans l'historique local même
-          # si le push suivant échoue, récupérable au prochain run.
-          git fetch origin main 2>&1 || echo "⚠️ fetch échoué"
-          git merge origin/main --no-edit 2>&1 || echo "⚠️ merge en conflit -- le commit local N'EST PAS perdu, voir prochain run"
-          if git push 2>&1; then
-            echo "✅ PUSH OK"
-          else
-            echo "❌ PUSH ÉCHOUÉ -- le commit local reste dans l'historique, récupérable au prochain run."
+          # si le push suivant échoue (mais il disparaît avec la machine du run : d'où les 6 essais plus bas).
+          # 18/11/2026 (paquet 286) : le push n'était tenté QU'UNE fois. Le 18/11, un autre workflow a poussé entre
+          # la synchro et le push (dépôt très actif) : push refusé, et le commit local a disparu avec le runner
+          # (chaque run repart d'une machine neuve : rien n'est rattrapé au run suivant). Verdicts en direct
+          # figés 36 h. Désormais : jusqu'à 6 essais (synchro + push), avec une attente croissante.
+          ok=0
+          for essai in 1 2 3 4 5 6; do
+            git fetch origin main 2>&1 || echo "⚠️ fetch échoué"
+            if ! git merge origin/main --no-edit 2>&1; then
+              echo "❌ merge en conflit : arrêt (rien n'est écrasé)"; git merge --abort 2>/dev/null || true; break
+            fi
+            if git push 2>&1; then echo "✅ PUSH OK (essai $essai)"; ok=1; break; fi
+            echo "↻ push refusé (essai $essai) : le dépôt a bougé entre-temps, nouvelle synchro"
+            sleep $((essai * 8))
+          done
+          if [ "$ok" != "1" ]; then
+            echo "❌ PUSH ÉCHOUÉ -- les fichiers de ce run ne sont PAS sur GitHub (la machine du run est effacée)."
             echo "   Si pipeline_status.md n'apparaît pas sur GitHub alors que ce run s'est"
             echo "   terminé, c'est ICI que ça bloque (et nulle part ailleurs)."
             exit 1
