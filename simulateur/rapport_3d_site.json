@@ -1,6 +1,6 @@
 {
- "paquet": 282,
- "version_3d": "v281",
+ "paquet": 283,
+ "version_3d": "v283",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
@@ -12,5 +12,7 @@
   "absence_s": 0
  },
  "quoi": "Direct 3D du site : le fichier des modèles des personnages est publié avec la page ; une absence n'est plus gardée en cache.",
- "note": "Affichage seulement : le % ne change pas. Aucun nom de joueur, aucune cote."
+ "note": "Affichage seulement : le % ne change pas. Aucun nom de joueur, aucune cote.",
+ "delai_max_par_essai_s": 25,
+ "cle_cache_worker": "?v=283"
 }
