@@ -1291,6 +1291,13 @@
    "paquet": 282,
    "quoi": "LES PERSONNAGES 3D ARRIVENT ENFIN SUR LE SITE (paquet 282). L'étiquette ajoutée au paquet 281 a montré « joueurs simplifiés : modèles 3D indisponibles » : le fichier des modèles (algo/modeles/joueurs3d.bin, 1,2 Mo, CC0) n'avait jamais été copié dans la publication GitHub Pages, seulement la page et ses données. Depuis le paquet 264, le direct 3D du site montrait donc les personnages simplifiés dessinés par le code (et des blocs pour les juges de ligne et les ramasseurs), alors que les vidéos, fabriquées depuis le dépôt, avaient les vrais modèles. La publication copie maintenant le dossier des modèles (échec explicite s'il manque) ; le worker ne garde plus en cache une absence du fichier (seules les réponses réussies sont gardées un jour). Affichage seulement : le % ne change pas.",
    "garde_fou": "Vérification : l'étiquette de la vue 3D doit afficher « joueurs 3D chargés ». Retrait : remettre .github/workflows/pages.yml et workers/algo/worker.js du paquet 281 (le site repasse aux personnages simplifiés)."
+  },
+  {
+   "date": "2026-11-18",
+   "statut": "production",
+   "paquet": 283,
+   "quoi": "PERSONNAGES 3D DU SITE : DERNIER VERROU (paquet 283). Après le paquet 282, l'étiquette restait sur « chargement des joueurs 3D… ». Deux causes possibles, toutes deux traitées : 1) Cloudflare gardait en cache, jusqu'à un jour, l'ancienne réponse « fichier absent » de GitHub Pages ; le worker demande maintenant le fichier sous une nouvelle clé (?v=283), donc la version publiée ; 2) un téléchargement bloqué laissait « chargement… » sans fin : chaque essai abandonne au bout de 25 s, et l'étiquette affiche la cause en cas d'échec (délai dépassé, réseau, statut HTTP). Étiquette : v283. Affichage seulement : le % ne change pas.",
+   "garde_fou": "Vérification : l'étiquette doit afficher « 3D v283 · joueurs 3D chargés ». Retrait : remettre algo/index.html et workers/algo/worker.js du paquet 282."
   }
  ]
 }
