@@ -1,6 +1,6 @@
 {
- "paquet": 283,
- "version_3d": "v283",
+ "paquet": 285,
+ "version_3d": "v285",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
@@ -14,5 +14,14 @@
  "quoi": "Direct 3D du site : le fichier des modèles des personnages est publié avec la page ; une absence n'est plus gardée en cache.",
  "note": "Affichage seulement : le % ne change pas. Aucun nom de joueur, aucune cote.",
  "delai_max_par_essai_s": 25,
- "cle_cache_worker": "?v=283"
+ "cle_cache_worker": "?v=283",
+ "lumiere": {
+  "jour": "plein air, 8 h–18 h locales",
+  "nuit": "salle ou soir"
+ },
+ "camera_tv": {
+  "tangage_rad": 0.33,
+  "distance_m": 23.5
+ },
+ "replacement": "entre deux frappes, retour vers le milieu jusqu'à la frappe adverse"
 }
