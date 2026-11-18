@@ -1,4 +1,8 @@
 {
+  "ATP Helsinki Challenger": {
+    "tour": "atp",
+    "id": 22203
+  },
   "ATP Sydney Challenger": {
     "tour": "atp",
     "id": 22208
@@ -6,6 +10,10 @@
   "ATP Nitto ATP Finals - Turin": {
     "tour": "atp",
     "id": 21364
+  },
+  "ATP Metz Challenger": {
+    "tour": "atp",
+    "id": 22204
   },
   "ATP Champaign Challenger": {
     "tour": "atp",
@@ -19,14 +27,6 @@
     "tour": "atp",
     "id": 22207
   },
-  "ATP Helsinki Challenger": {
-    "tour": "atp",
-    "id": 22203
-  },
-  "ATP Metz Challenger": {
-    "tour": "atp",
-    "id": 22204
-  },
   "ATP Kobe Challenger": {
     "tour": "atp",
     "id": 22206
@@ -35,5 +35,5 @@
     "tour": "wta",
     "id": 17382
   },
-  "_discovered_at": "2026-11-18T12:58:38.193511"
+  "_discovered_at": "2026-11-18T22:56:03.797031"
 }
