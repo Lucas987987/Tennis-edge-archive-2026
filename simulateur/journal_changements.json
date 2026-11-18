@@ -1270,6 +1270,13 @@
    "paquet": 278,
    "quoi": "ESSAI BLENDER (paquet 278, Lucas : « Installe blender »). Blender ne peut pas s'installer dans la session de Claude (réseau fermé) ; il s'installe sur la machine gratuite de GitHub par le workflow « Essai — Blender pour la vidéo 3D » (lancement à la main). L'essai reconstruit notre court dans Blender (dimensions réglementaires, filet, tribunes, 3 000 spectateurs, deux joueurs en mannequins, balle en mouvement), de nuit et de jour, en vue télé et en gros plan avec flou d'arrière-plan, le rend avec Cycles sur le processeur (débruitage) puis tente EEVEE, et mesure les secondes par image. Résumé du run : les temps seulement ; images sur le Telegram privé. Rien ne change sur le site ni dans la vidéo du jour.",
    "garde_fou": "Règle de décision écrite avant l'essai : Blender ne remplace le moteur du site pour la vidéo du jour que si une vidéo complète tient en moins de 3 h de machine par langue ET si l'image est jugée nettement meilleure ; sinon on garde le paquet 277. Retrait : supprimer .github/workflows/essai_blender.yml et scripts/blender_essai.py."
+  },
+  {
+   "date": "2026-11-18",
+   "statut": "essai",
+   "paquet": 279,
+   "quoi": "RÉSULTAT DU 1er ESSAI BLENDER ET 2e ESSAI (paquet 279). Sur la machine gratuite de GitHub (4 processeurs, pas de carte graphique), Blender 4.2.3 rend notre court en 1080×1350 avec Cycles en 40,6 s (nuit, vue télé), 55,7 s (nuit, gros plan) et 37,2 s (jour, vue télé) par image : 44,5 s en moyenne, soit 26,3 h pour une vidéo de 85 s à 25 images/s, par langue. La règle écrite avant l'essai (3 h au plus) ÉCARTE Cycles pour la vidéo du jour. EEVEE n'a pas démarré (bibliothèque libEGL absente : l'installation apt avait échoué faute de mise à jour de l'index). 2e essai : index apt à jour, OpenGL logiciel de Mesa (llvmpipe) et écran virtuel (xvfb), EEVEE sur les trois plans ; Cycles ne repasse que si on coche la case. Rien ne change sur le site ni dans la vidéo du jour (paquet 277).",
+   "garde_fou": "Même règle : EEVEE ne remplace le moteur du site que si une vidéo complète tient en moins de 3 h par langue et si l'image est nettement meilleure. Retrait : supprimer .github/workflows/essai_blender.yml et scripts/blender_essai.py."
   }
  ]
 }
