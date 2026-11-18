@@ -9,6 +9,10 @@ bruitages calés sur le déroulé de la vidéo : chaque frappe de balle, l'impac
 break, de set, de match), le BREAK, le set, le combo, la victoire avec la foule. La page (algo/index.html, mode
 vidéo) note chaque événement et son heure ; scripts/video_simulation.py les place sur la piste.
 Bibliothèque standard seulement (math, random, struct, wave).
+
+18/11/2026 (paquet 276) — AMBIANCE « STADE » pour la vidéo en 3D : pas de musique 8 bits, mais la rumeur d'un
+stade, le « pop » de la raquette, le rebond, le filet, les applaudissements et l'ovation sur les grands points,
+un souffle sur les transitions. Toujours fabriqué ici, sans aucun enregistrement.
 """
 import math
 import random
@@ -99,6 +103,82 @@ def foule(duree=2.5, vol=0.5, rnd=None):
     return out
 
 
+def _filtre_bas(x, a):
+    """Passe-bas simple (a petit = plus sourd)."""
+    out, y = [], 0.0
+    for v in x:
+        y += a * (v - y)
+        out.append(y)
+    return out
+
+
+def pop(fort=1.0, rnd=None):
+    """Raquette : claquement bref (bruit) + résonance aiguë des cordes qui s'éteint vite."""
+    rnd = rnd or random.Random(3)
+    n = int(0.09 * TAUX)
+    f = 820 * (0.9 + 0.2 * rnd.random()) * (1.1 if fort > 1 else 1)
+    return [fort * (0.55 * (rnd.random() * 2 - 1) * math.exp(-i / 90) + 0.45 * math.sin(2 * math.pi * f * i / TAUX) * math.exp(-i / 420)
+                    + 0.25 * math.sin(2 * math.pi * 180 * i / TAUX) * math.exp(-i / 700)) for i in range(n)]
+
+
+def rebond(rnd=None):
+    rnd = rnd or random.Random(4)
+    n = int(0.07 * TAUX)
+    return [0.32 * (0.6 * math.sin(2 * math.pi * 150 * i / TAUX) + 0.4 * (rnd.random() * 2 - 1) * math.exp(-i / 60)) * math.exp(-i / 380) for i in range(n)]
+
+
+def filet(rnd=None):
+    rnd = rnd or random.Random(5)
+    n = int(0.35 * TAUX)
+    br = _filtre_bas([rnd.random() * 2 - 1 for _ in range(n)], 0.15)
+    return [0.5 * (0.7 * math.sin(2 * math.pi * 95 * i / TAUX) * math.exp(-i / 1500) + br[i] * math.exp(-i / 2600)) for i in range(n)]
+
+
+def applaudir(duree=2.6, vol=0.5, rnd=None, densite=55):
+    """Applaudissements : des centaines de claquements très courts, aléatoires, qui montent puis s'éteignent."""
+    rnd = rnd or random.Random(6)
+    n = int(duree * TAUX)
+    out = [0.0] * n
+    clap = [(rnd.random() * 2 - 1) * math.exp(-i / 70) for i in range(int(0.012 * TAUX))]
+    nb = int(densite * duree)
+    for _ in range(nb):
+        t = rnd.random() ** 0.8
+        d0 = int(t * n)
+        g = vol * 0.22 * (0.4 + 0.6 * rnd.random()) * min(1.0, t * 8) * (1 - t) ** 0.7
+        for i, v in enumerate(clap):
+            if d0 + i < n:
+                out[d0 + i] += g * v
+    return out
+
+
+def acclamation(duree=3.5, vol=0.5, rnd=None):
+    """Ovation : applaudissements nourris + clameur (bruit filtré qui gonfle puis retombe)."""
+    rnd = rnd or random.Random(8)
+    n = int(duree * TAUX)
+    cl = _filtre_bas([rnd.random() * 2 - 1 for _ in range(n)], 0.09)
+    cl = [v - w for v, w in zip(cl, _filtre_bas(cl, 0.01))]                         # garde la bande des voix
+    env = [min(1.0, i / (0.25 * TAUX)) * (1 - i / n) ** 1.2 for i in range(n)]
+    return _mix(applaudir(duree, vol * 1.3, rnd, densite=110), [vol * 1.6 * cl[i] * env[i] for i in range(n)])
+
+
+def souffle(duree=0.5, rnd=None):
+    """Transition : souffle qui balaie l'image."""
+    rnd = rnd or random.Random(10)
+    n = int(duree * TAUX)
+    x = _filtre_bas([rnd.random() * 2 - 1 for _ in range(n)], 0.25)
+    return [0.35 * x[i] * math.sin(math.pi * i / n) ** 2 for i in range(n)]
+
+
+def rumeur(duree, rnd=None):
+    """Fond de stade : brouhaha sourd qui respire lentement."""
+    rnd = rnd or random.Random(11)
+    n = int(duree * TAUX)
+    x = _filtre_bas([rnd.random() * 2 - 1 for _ in range(n)], 0.05)
+    x = [v - w for v, w in zip(x, _filtre_bas(x, 0.004))]
+    fondu = int(1.2 * TAUX)
+    return [0.9 * x[i] * (0.75 + 0.25 * math.sin(2 * math.pi * 0.13 * i / TAUX)) * min(1.0, i / fondu, (n - 1 - i) / fondu) for i in range(n)]
+
+
 def _mix(*pistes):
     n = max(len(x) for x in pistes)
     return [sum(x[i] for x in pistes if i < len(x)) for i in range(n)]
@@ -115,6 +195,14 @@ SONS = {
     'set': lambda r: arpege([NOTES['do2'], NOTES['mi2'], NOTES['sol2'], NOTES['do3']], pas=0.08, tenue=0.45, vol=0.3),
     'jeu_decisif': lambda r: montee(0.5),
     'combo': lambda r: piece(),
+    # ambiance stade (vidéo 3D)
+    'service': lambda r: pop(1.35, r),
+    'rebond': lambda r: rebond(r),
+    'filet': lambda r: filet(r),
+    'applaudissements': lambda r: applaudir(2.4, 0.5, r),
+    'ovation': lambda r: acclamation(3.6, 0.55, r),
+    'foule_entree': lambda r: acclamation(4.2, 0.4, r),
+    'volet': lambda r: souffle(0.55, r),
     'fin': lambda r: _mix(impact(r), arpege([NOTES['do2'], NOTES['mi2'], NOTES['sol2'], NOTES['do3'], NOTES['sol2'],
                                             NOTES['do3']], pas=0.12, tenue=0.8, vol=0.32), foule(3.2, 0.55, r)),
 }
@@ -158,17 +246,22 @@ def musique(duree):
     return out
 
 
-def piste(evenements, duree, chemin, volume_musique=0.6):
-    """evenements : [(secondes, nom)] — écrit un WAV mono 16 bits de `duree` secondes."""
+STADE = {'frappe0': lambda r: pop(1.0, r), 'frappe1': lambda r: pop(0.95, r)}   # en 3D : la vraie raquette
+
+
+def piste(evenements, duree, chemin, volume_musique=0.6, ambiance='arcade'):
+    """evenements : [(secondes, nom)] — écrit un WAV mono 16 bits de `duree` secondes.
+    ambiance 'stade' (vidéo 3D) : rumeur du public au lieu de la musique, raquette réaliste."""
     n = int(duree * TAUX)
-    mix = [v * volume_musique for v in musique(duree)]
+    mix = [v * 0.22 for v in rumeur(duree)] if ambiance == 'stade' else [v * volume_musique for v in musique(duree)]
+    sons = dict(SONS, **STADE) if ambiance == 'stade' else SONS
     rnd = random.Random(7)
     cache = {}
     for t, nom in evenements:
-        if nom not in SONS or t < 0 or t >= duree:
+        if nom not in sons or t < 0 or t >= duree:
             continue
-        if nom not in cache or nom.startswith('frappe'):
-            cache[nom] = SONS[nom](rnd)
+        if nom not in cache or nom.startswith('frappe') or nom in ('service', 'rebond', 'applaudissements'):
+            cache[nom] = sons[nom](rnd)
         s, d0 = cache[nom], int(t * TAUX)
         for i, v in enumerate(s):
             if d0 + i >= n:

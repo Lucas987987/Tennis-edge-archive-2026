@@ -16,6 +16,12 @@ de la machine. --capture ecran garde l'ancien enregistrement d'écran (repli).
 Usage : python scripts/video_simulation.py [--lang fr|en] [--uid UID] [--seed N] [--carte] [--sortie dossier]
 --carte : la carte de stats du match (PNG 1080×1350) au lieu de la vidéo.
 La page est servie en local depuis algo/ (algo/donnees.json doit exister : simulateur/vitrine.py).
+
+18/11/2026 (paquet 276) — VIDÉO EN 3D (par défaut, --rendu 3d) : les moments forts du match représentatif joués
+dans le stade 3D du site (plan derrière le serveur, vue télé, gros plans, ralenti de la balle de match), habillage
+télé, son de stade. Rendu sans carte graphique (SwiftShader) : l'image 3D est calculée à 67 % puis agrandie, les
+textes restent nets. Sans WebGL ou sans scénario tiré, la page repasse seule à la vidéo 2D (borne d'arcade).
+--rendu 2d garde l'ancienne vidéo.
 """
 import argparse
 import functools
@@ -34,6 +40,8 @@ LARGEUR, HAUTEUR = 1080, 1920
 FORMATS = {'9x16': (1080, 1920), '4x5': (1080, 1350)}
 DEBUT_COUPE = 0.4                    # secondes coupées au début (page blanche)
 IPS = 30                             # images par seconde de la capture image par image
+# WebGL sans carte graphique (SwiftShader) : nécessaire à la 3D dans Chromium sans écran
+NAV_ARGS = ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist']
 
 # Horloge virtuelle injectée avant tout script de la page : le temps n'avance que quand le script le demande.
 HORLOGE = r"""
@@ -104,8 +112,9 @@ def enregistrer(url, dossier_tmp, max_s=120, taille=(LARGEUR, HAUTEUR)):
     return chemin, [(e['t'] / 1000 - t0, e['type']) for e in sons]
 
 
-def enregistrer_images(url, mp4, ips=IPS, max_s=150, taille=(LARGEUR, HAUTEUR)):
-    """Capture image par image (horloge virtuelle) → MP4 muet ; renvoie (durée en s, événements sonores [(s, nom)])."""
+def enregistrer_images(url, mp4, ips=IPS, max_s=150, taille=(LARGEUR, HAUTEUR), attendre_pret=False):
+    """Capture image par image (horloge virtuelle) → MP4 muet ; renvoie (durée en s, événements sonores [(s, nom)],
+    ambiance sonore). attendre_pret : le temps virtuel avance sans capture tant que la page charge (3D)."""
     from playwright.sync_api import sync_playwright
     ff = subprocess.Popen(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', str(ips), '-c:v', 'mjpeg',
                            '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p',
@@ -113,7 +122,7 @@ def enregistrer_images(url, mp4, ips=IPS, max_s=150, taille=(LARGEUR, HAUTEUR)):
     n = 0
     try:
         with sync_playwright() as p:
-            nav = p.chromium.launch()
+            nav = p.chromium.launch(args=NAV_ARGS)
             page = nav.new_page(viewport={'width': taille[0], 'height': taille[1]}, device_scale_factor=1)
             page.add_init_script(HORLOGE)
             page.goto(url)
@@ -124,6 +133,13 @@ def enregistrer_images(url, mp4, ips=IPS, max_s=150, taille=(LARGEUR, HAUTEUR)):
                 if time.time() > limite:
                     raise RuntimeError('la page vidéo ne démarre pas')
                 time.sleep(0.1)
+            if attendre_pret:                    # modèles 3D et polices : le temps avance, rien n'est filmé
+                limite = time.time() + 90
+                while not page.evaluate('window.__pret === true || window.__fini === true'):
+                    if time.time() > limite:
+                        raise RuntimeError('la vidéo 3D ne démarre pas')
+                    page.evaluate('ms => window.__horloge.avance(ms)', 50)
+            debut = page.evaluate('Date.now()')
             pas = 1000.0 / ips
             while n < max_s * ips:
                 ff.stdin.write(page.screenshot(type='jpeg', quality=92))
@@ -131,15 +147,16 @@ def enregistrer_images(url, mp4, ips=IPS, max_s=150, taille=(LARGEUR, HAUTEUR)):
                 if page.evaluate('window.__fini === true'):
                     break
                 page.evaluate('ms => window.__horloge.avance(ms)', pas)
-            t0 = page.evaluate('window.__horloge.t0')
+            t0 = debut if attendre_pret else page.evaluate('window.__horloge.t0')
             sons = page.evaluate('window.__sons || []')
+            ambiance = page.evaluate("window.__ambiance || 'arcade'")
             nav.close()
     finally:
         ff.stdin.close()
         ff.wait()
     if ff.returncode:
         raise RuntimeError('ffmpeg a échoué (capture image par image)')
-    return n / ips, [((e['t'] - t0) / 1000.0, e['type']) for e in sons]
+    return n / ips, [((e['t'] - t0) / 1000.0, e['type']) for e in sons], ambiance
 
 
 def carte(url, chemin):
@@ -185,6 +202,8 @@ def main(argv):
     ap.add_argument('--capture', default='images', choices=['images', 'ecran'],
                     help="images : image par image, sans saccade (défaut) ; ecran : ancien enregistrement d'écran")
     ap.add_argument('--format', default='9x16', choices=sorted(FORMATS), help='9x16 (défaut) ou 4x5 (fil de X)')
+    ap.add_argument('--rendu', default='3d', choices=['3d', '2d'], help='3d : le stade (défaut) ; 2d : la borne d\'arcade')
+    ap.add_argument('--ips', type=int, default=IPS, help='images par seconde (30 par défaut)')
     ap.add_argument('--sortie', default=os.path.join(RACINE, 'videos'))
     a = ap.parse_args(argv[1:])
     algo = os.path.join(RACINE, 'algo')
@@ -223,7 +242,7 @@ def main(argv):
         return 0
     q = (f"video=1&lang={a.lang}&vitesse={a.vitesse}" + (f"&seed={a.seed}" if str(a.seed).strip() else '')
          + (f"&uid={a.uid}" if a.uid else '')
-         + ('&adresse=1' if a.adresse else ''))
+         + ('&adresse=1' if a.adresse else '') + ('&rendu=3d' if a.rendu == '3d' else ''))
     url = f"http://127.0.0.1:{srv.server_address[1]}/index.html?{q}"
     tmp = os.path.join(a.sortie, '_brut')
     os.makedirs(tmp, exist_ok=True)
@@ -233,7 +252,7 @@ def main(argv):
     if a.capture == 'images':
         try:
             muet = os.path.join(tmp, 'images.mp4')
-            duree, sons = enregistrer_images(url, muet, taille=taille)
+            duree, sons, ambiance = enregistrer_images(url, muet, ips=a.ips, taille=taille, attendre_pret=a.rendu == '3d')
         finally:
             srv.shutdown()
         if a.muet:
@@ -241,12 +260,12 @@ def main(argv):
         else:
             import sons as SN
             wav = os.path.join(tmp, 'son.wav')
-            SN.piste(sons, duree, wav)
+            SN.piste(sons, duree, wav, ambiance=ambiance)
             subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', muet, '-i', wav, '-map', '0:v', '-map', '1:a',
                             '-c:v', 'copy', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', mp4],
                            check=True)
         shutil.rmtree(tmp, ignore_errors=True)
-        print(f"Vidéo : {mp4} ({os.path.getsize(mp4) / 1e6:.1f} Mo, {duree:.1f} s, image par image à {IPS} i/s)")
+        print(f"Vidéo : {mp4} ({os.path.getsize(mp4) / 1e6:.1f} Mo, {duree:.1f} s, image par image à {a.ips} i/s, son {ambiance})")
         return 0
     try:
         webm, sons = enregistrer(url, tmp, taille=taille)
