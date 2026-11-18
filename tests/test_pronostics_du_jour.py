@@ -42,7 +42,7 @@ class Pronostics(unittest.TestCase):
         json.dump({'mu': {'ATP Hard': 0.6}, 'joueurs': {'1': {'nom': 'Arthur Fils', 'service': 0.2, 'retour': 0.05, 'points': 900}}},
                   open(os.path.join(d, 'simulateur', 'notes_joueurs.json'), 'w'))
         json.dump([match('Arthur Fils', 'Hugo Gaston', 3, pin=(1.30, 3.70)), match('A B', 'C D', 5),
-                   match('Trop Tard', 'Deja Joue', -1), match('Trop Loin', 'Plus Tard', 60)],
+                   match('Trop Tard', 'Deja Joue', -1), match('Trop Loin', 'Plus Tard', 80)],     # 18/11 (paquet 269) : fenêtre de 72 h
                   open(os.path.join(d, 'matches_oddspapi.json'), 'w'))
         json.dump({}, open(os.path.join(d, 'set_results.json'), 'w'))
 
@@ -51,7 +51,7 @@ class Pronostics(unittest.TestCase):
 
     def test_stats_sans_marche(self):
         doc = P.construire(self.d, NOW)
-        self.assertEqual([m['home'] for m in doc['matchs']], ['Arthur Fils', 'A B'])     # ni commencé, ni au-delà de 36 h
+        self.assertEqual([m['home'] for m in doc['matchs']], ['Arthur Fils', 'A B'])     # ni commencé, ni au-delà de 72 h
         m = doc['matchs'][0]
         self.assertGreater(m['stats']['p_home'], 0.9)                                      # Elo : 30 victoires
         self.assertNotIn('marche', m)                                                      # Pinnacle présent en entrée, mais ignoré

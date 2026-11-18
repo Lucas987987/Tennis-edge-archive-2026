@@ -137,6 +137,7 @@ table.sheet thead th.c1{color:var(--p1)} table.sheet thead th.c2{color:var(--p2)
 .match-open:hover,.match-open:focus-visible{background:rgba(var(--wv),.035)}
 .match-open:active{transform:scale(.995)}
 .list .time{font-family:var(--cond);font-weight:600;font-size:1.1rem;color:var(--dim);padding-top:2px}
+.list .time .jour{display:block;font-size:.72rem;font-weight:500;line-height:1.2;color:var(--ball)}
 .list .tour{font-size:.85rem;color:var(--dim)}
 .list .pl{display:flex;justify-content:space-between;gap:10px;font-weight:500}
 .list .pl b{font-family:var(--disp);font-weight:400;font-size:1.05rem;font-variant-numeric:tabular-nums}
@@ -1315,6 +1316,8 @@ function dateLong(s){ return new Date(s+'T12:00:00Z').toLocaleDateString(loc(),{
 function dateHeure(s){ return utc(s).toLocaleString(loc(),{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); }
 function heure(s){ return utc(s).toLocaleTimeString(loc(),{hour:'2-digit',minute:'2-digit'}); }
 function jourCourt(s){ return utc(s).toLocaleDateString(loc(),{weekday:'short',day:'numeric'}); }
+// 18/11/2026 (paquet 269) : les matchs arrivent jusqu'à 3 jours avant → le jour s'affiche s'il ne s'agit pas d'aujourd'hui
+function quand(s){ const d = utc(s), a = new Date(); return d.toDateString() === a.toDateString() ? esc(heure(s)) : `<small class="jour">${esc(jourCourt(s))}</small>${esc(heure(s))}`; }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function hm(min){ const h=Math.floor(min/60), m=Math.round(min%60); return L==='fr' ? `${h} h ${String(m).padStart(2,'0')}` : `${h}h ${String(m).padStart(2,'0')}m`; }
 // 05/11/2026 — « Demande à l'algo » (idée reprise de Stokastic) : réponses précalculées par vitrine.questions sur la
@@ -5944,7 +5947,7 @@ function rendListe(){
   }
   const ligneMatch = m=>{ const p=m.p_home, star=m.uid===mdj, selection=m.uid===(selectionId||mdj);
     return `<li class="${star?'star ':''}${selection?'selectionne':''}"><a class="match-open" href="${m.uid===mdj?'#':'#match='+encodeURIComponent(m.uid)}" data-uid="${esc(m.uid)}" data-circuit="${esc(m.circuit)}" aria-current="${selection?'true':'false'}" aria-label="${esc(t('voir_simulation'))} ${esc(m.home)} – ${esc(m.away)}">
-      <span class="time">${esc(heure(m.debut))}</span><span>
+      <span class="time">${quand(m.debut)}</span><span>
       <span class="tour">${esc(m.tournoi)} · ${esc(SURF[L][m.surface]||m.surface||'')}${star ? `<span class="badge">${esc(L==='fr'?'du jour':'of the day')}</span>` : ''}${peuDocumentes(m).length ? `<span class="badge peu" title="${esc(t('es_badge_aide'))}">${esc(t('es_badge'))}</span>` : ''}</span>
       <span class="pl a"><span>${esc(m.home)}</span><b>${pc0(p)}</b></span>
       <span class="pl b"><span>${esc(m.away)}</span><b>${pc0(1-p)}</b></span>
