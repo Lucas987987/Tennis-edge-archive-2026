@@ -1214,6 +1214,13 @@
    "paquet": 270,
    "quoi": "CORRECTION DU NIVEAU « CORRECT » EN CHALLENGER (paquet 270, décision de Lucas après l'étude par niveau de fiabilité du paquet 269). Sur nos pronostics en direct, les matchs Challenger notés « correct » se réalisent un peu mieux qu'annoncé : l'algo y est trop prudent. La pente 1,142, apprise sur la 1re moitié (167 matchs) et vérifiée sur la 2de (167 matchs, log loss −0,0026), écarte un peu le % de 50 % : un 65 % devient 67 %, un 80 % devient 83 %. Elle s'applique en dernier, avant la simulation, donc les sets, les scores et la feuille de match suivent. Le niveau retenu est celui du pronostic sans la correction. Les deux % (avec et sans) sont gardés dans chaque fiche. ATP, WTA et les autres niveaux ne changent pas (trop tôt ou pas de correction). Le % de victoire change sur ces matchs.",
    "garde_fou": "Retrait automatique (etude_niveaux_fiabilite.py, chaque lundi) : avec au moins 100 matchs corrigés jugés, si la log loss avec la correction dépasse celle sans d'au moins 0,001, « retiree » passe à true dans simulateur/correction_niveaux.json. Retrait à la main : mettre « retiree » à true dans ce fichier."
+  },
+  {
+   "date": "2026-11-18",
+   "statut": "production",
+   "paquet": 271,
+   "quoi": "« MATCHS TERMINÉS » ET JOURNAL DES CHANGEMENTS REPLIÉS PAR DÉFAUT (paquet 271, remarque de Lucas). Un match commencé depuis plus de 3 h et absent du direct compte désormais comme terminé, même si son résultat n'est pas encore reçu ou s'il a été reprogrammé sous un autre horaire. Avant, ces matchs restaient affichés sous le groupe replié, comme s'il ne se repliait pas. Le groupe est replié par défaut et ne reste ouvert que si le visiteur l'ouvre. Le journal des changements est lui aussi replié par défaut (« Voir le journal »). Le % de victoire ne change pas.",
+   "garde_fou": "Retrait : remettre algo/index.html du paquet 270."
   }
  ]
 }
