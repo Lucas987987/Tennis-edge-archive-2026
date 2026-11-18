@@ -2,13 +2,13 @@
  "dernier_passage": {
   "arret": null,
   "codes": {
-   "200": 26
+   "200": 20
   },
   "debut": "2026-11-16",
   "fin": "2026-11-18",
-  "le": "2026-11-18T05:45:48+00:00",
-  "quota_restant": 14223,
-  "requetes": 26
+  "le": "2026-11-18T07:48:42+00:00",
+  "quota_restant": 14980,
+  "requetes": 20
  },
  "jours": {
   "2026-06-01": {
@@ -3669,7 +3669,7 @@
     }
    },
    "complet": false,
-   "maj": "2026-11-18T05:45:35+00:00",
+   "maj": "2026-11-18T07:48:33+00:00",
    "matchs": 76
   },
   "2026-11-17": {
@@ -3690,15 +3690,15 @@
     }
    },
    "complet": false,
-   "maj": "2026-11-18T05:45:37+00:00",
+   "maj": "2026-11-18T07:48:37+00:00",
    "matchs": 78
   },
   "2026-11-18": {
-   "a_reessayer": 4,
-   "avec_stats": 11,
+   "a_reessayer": 0,
+   "avec_stats": 15,
    "categories": {
     "Challenger": {
-     "avec_stats": 10,
+     "avec_stats": 14,
      "matchs": 14
     },
     "WTA 125": {
@@ -3707,12 +3707,12 @@
     }
    },
    "complet": false,
-   "maj": "2026-11-18T05:45:48+00:00",
+   "maj": "2026-11-18T07:48:42+00:00",
    "matchs": 15
   }
  },
  "total": {
-  "avec_stats": 11174,
+  "avec_stats": 11178,
   "jours": 171,
   "matchs": 11316
  }
