@@ -17,7 +17,9 @@ class VersionEtModeles(unittest.TestCase):
         self.assertIn("MOD.etat = 'absent'; MOD.erreur", BLOC)
 
     def test_etiquette(self):
-        self.assertIn("const VERSION_3D = 'v281';", BLOC)
+        self.assertIn("const VERSION_3D = 'v283';", BLOC)
+        self.assertIn('stop.abort(), 25000', BLOC)                                # un essai bloqué abandonne
+        self.assertIn("MOD.etat === 'absent' && MOD.erreur ?", BLOC)            # la cause s'affiche
         self.assertIn("verEl.className = 'g3d-ver'", BLOC)
         for k in ('g3_mod_ok', 'g3_mod_charge', 'g3_mod_absent'):
             self.assertEqual(HTML.count(k + ':'), 2, k)                          # français et anglais
@@ -26,7 +28,7 @@ class VersionEtModeles(unittest.TestCase):
 
     def test_rapport(self):
         d = json.loads((RACINE / 'simulateur' / 'rapport_3d_site.json').read_text(encoding='utf-8'))
-        self.assertGreaterEqual(d['paquet'], 281); self.assertEqual(d['version_3d'], 'v281')
+        self.assertGreaterEqual(d['paquet'], 281); self.assertEqual(d['version_3d'], 'v283')
 
 
 if __name__ == '__main__':
