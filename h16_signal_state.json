@@ -35,15 +35,6 @@
   "envoye": true,
   "doublon": ""
  },
- "2026-11-17_moez_echargui_otto_virtanen": {
-  "t": "2026-11-17T11:28:26",
-  "commence": "2026-11-17T15:30:00",
-  "cote": 1.14,
-  "pin_open": 1.144,
-  "book": "888sport",
-  "envoye": true,
-  "doublon": ""
- },
  "2026-11-17_genaro_alberto_olivieri_gonzalo_villanueva": {
   "t": "2026-11-17T11:58:17",
   "commence": "2026-11-17T17:40:00",
@@ -157,6 +148,15 @@
   "commence": "2026-11-19T17:10:00",
   "cote": 1.41,
   "pin_open": 1.396,
+  "book": "unibet",
+  "envoye": true,
+  "doublon": ""
+ },
+ "2026-11-19_daniel_milavsky_liam_draxl": {
+  "t": "2026-11-19T15:28:36",
+  "commence": "2026-11-19T23:30:00",
+  "cote": 1.64,
+  "pin_open": 1.636,
   "book": "unibet",
   "envoye": true,
   "doublon": ""
