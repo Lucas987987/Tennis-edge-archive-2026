@@ -1,6 +1,6 @@
 {
- "paquet": 285,
- "version_3d": "v285",
+ "paquet": 288,
+ "version_3d": "v288",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
@@ -23,5 +23,18 @@
   "tangage_rad": 0.33,
   "distance_m": 23.5
  },
- "replacement": "entre deux frappes, retour vers le milieu jusqu'à la frappe adverse"
+ "replacement": "entre deux frappes, retour vers le milieu jusqu'à la frappe adverse",
+ "ramasseurs_du_fond": "aux coins du fond du court, hors du cadre de la caméra télé",
+ "poussiere_terre_battue": "9 grains clairs qui montent et s'effacent en 0,9 s",
+ "video": {
+  "definition": "pleine (échelle 1 au lieu de 0,67)",
+  "camera_tv": {
+   "tangage_rad": 0.27,
+   "distance_m": 22.5,
+   "suit_la_balle": "de côté et un peu en profondeur"
+  },
+  "balle_de_match": "rejouée deux fois : du bout opposé, puis caméra basse derrière le gagnant du point",
+  "gros_plans": "un officiel posé entre la caméra et le joueur filmé n'est pas dessiné ; caméra du vainqueur côté intérieur du court",
+  "temps_de_rendu_local": "+55 % par image (0,37 s → 0,57 s) ; le run GitHub prenait 26 min pour une limite de 100"
+ }
 }
