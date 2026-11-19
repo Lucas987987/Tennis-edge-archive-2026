@@ -1,6 +1,6 @@
 {
- "paquet": 295,
- "version_3d": "v295",
+ "paquet": 296,
+ "version_3d": "v296",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
@@ -64,5 +64,14 @@
   "entre_les_points": "relâché : debout, raquette le long du corps, respiration et poids qui passe d'un pied à l'autre",
   "passage": "0,6 s pour se mettre en place au début du point, 0,8 s pour se relâcher après",
   "pas_chasses": "gardent la raquette devant, à deux mains"
+ },
+ "frappes": {
+  "lissage_pendant_la_frappe": "constante de temps 14 ms (avant 62 ms : raquette encore en préparation au contact)",
+  "hauteur": "balle basse : le joueur descend (genoux, buste) ; balle haute : il se grandit ; le reste par l'épaule",
+  "placement": "point de contact mesuré sur le modèle 3D pour chaque frappe (pose ajustée à la hauteur), décalage tourné avec le joueur",
+  "ecart_vertical_tamis_balle_m": {
+   "avant": "0,1 à 0,8 (tamis trop bas)",
+   "apres": "0 à 0,17"
+  }
  }
 }

@@ -4395,20 +4395,29 @@ const G3D = (() => {
     const al = Math.atan2(v[2], v[1]) - Math.atan2(az, ay * Math.cos(th));
     return [[Math.atan2(Math.sin(al), Math.cos(al)), 0, -th], ge];
   }
-  function poseCle(nom, u) {
+  // paquet 296 : dy = hauteur de la balle au contact − hauteur du tamis de la pose clé. Balle basse : le joueur
+  // descend (genoux, buste) ; balle haute : il se grandit ; le reste par l'épaule (−0,3 rad ≈ +15 cm de tamis).
+  // Seulement autour de la frappe (cloche centrée sur u = 0,55).
+  function poseCle(nom, u, dy = 0) {
     const C = CLES_COUPS[nom], x = cl(u, 0, 1), v = C.v[0].map((_, i) => hermite(x, C.u, C.v.map(r => r[i])));
     const p = poseAttente(0); let i = 0;
     const lit = n => { const o = v.slice(i, i + n); i += n; return n === 1 ? o[0] : o; };
     p.tronc = lit(3); p.bassin = lit(3); p.accroupi = lit(1); p.lat = lit(1); p.avance = lit(1);
     p.epD = lit(3); p.coudeD = lit(1); p.poignetD = lit(3); p.epG = lit(3); p.coudeG = lit(1);
     const pd = lit(2), pg = lit(2);
+    if (dy) {
+      const b = Math.exp(-(((x - 0.55) / 0.16) ** 2)), bas = cl(-dy, 0, 0.5), haut = cl(dy, 0, 0.6), baisse = (bas * 0.45 - haut * 0.2) * 1.4;
+      p.accroupi = Math.max(0, p.accroupi + baisse / 1.4 * b); p.tronc = [p.tronc[0] + bas * 0.35 * b, p.tronc[1], p.tronc[2]];
+      p.epD = [p.epD[0] + cl(-2 * (dy + baisse), -0.6, 0.6) * b, p.epD[1], p.epD[2]];
+    }
     [p.hancheD, p.genouD] = jambe(p, -1, pd); [p.hancheG, p.genouG] = jambe(p, 1, pg);
     p.piedD = p.piedG = 0;
     return p;
   }
   // frappe à u = 0,55 (coups du fond, volées), 0,625 (service)
-  const poseCoupDroit = u => poseCle('cd', u), poseRevers = u => poseCle('rv', u), poseSlice = u => poseCle('sl', u);
-  const poseVolee = (u, cd) => poseCle(cd ? 'vd' : 'vr', u), poseService = u => poseCle('sv', u);
+  const poseCoupDroit = (u, dy) => poseCle('cd', u, dy), poseRevers = (u, dy) => poseCle('rv', u, dy), poseSlice = (u, dy) => poseCle('sl', u, dy);
+  const poseVolee = (u, cd, dy) => poseCle(cd ? 'vd' : 'vr', u, dy), poseService = u => poseCle('sv', u);
+  const HAUT_TAMIS = { cd: 1.0, rv: 1.03, sl: 0.99, vd: 1.38, vr: 1.4 };              // hauteur du tamis à la frappe (modèle)
   // ── LES GESTES APRÈS LE POINT (paquet 266) : poing serré, « allez ! » sur les grands points ; tête basse, main sur la
   // hanche, bras écartés puis mains sur la tête après une faute. Même méthode que les coups ; seul le haut du corps
   // bouge, les jambes continuent de marcher vers la place suivante.
@@ -4962,13 +4971,29 @@ const G3D = (() => {
   // où se placer pour frapper : la balle à 0,75 m sur le côté (coup droit à droite, revers à gauche)
   // 18/11/2026 (paquet 275) : le joueur se place pour que la TÊTE DE RAQUETTE soit sur la balle au moment de la frappe :
   // point de contact de chaque coup (repère du joueur : x vers sa gauche, z devant lui), tiré des poses clés
-  const CONTACT = { cd: [-0.88, 0.49], rv: [0.53, 0.61], sl: [0.60, 0.65], vd: [-0.67, 0.79], vr: [0.42, 0.81] };
+  // paquet 296 : mesuré sur les modèles 3D (centre du tamis, raquette dans le poing) — l'ancien squelette plaçait le
+  // tamis 5 à 15 cm plus loin : le joueur se mettait trop loin de la balle
+  const CONTACTS = { H: { cd: [-0.77, 0.45], rv: [0.44, 0.58], sl: [0.51, 0.48], vd: [-0.52, 0.68], vr: [0.40, 0.62] },
+                     F: { cd: [-0.72, 0.37], rv: [0.44, 0.50], sl: [0.42, 0.49], vd: [-0.51, 0.60], vr: [0.34, 0.57] } };
+  // paquet 296 : point de contact mesuré sur le modèle 3D, pour CE coup (pose ajustée à la hauteur de la balle) —
+  // une fois par frappe ; si les modèles ne sont pas chargés : les valeurs mesurées ci-dessus
+  function contactModele(k, y, sexe) {
+    if (MOD.etat !== 'pret' || !MOD.corps[sexe]) return null;
+    const { raquette } = osModele({ x: 0, z: 0, cap: 0 }, poseCle(k, 0.55, y - HAUT_TAMIS[k]), null, sexe);
+    if (!raquette) return null;
+    const c = M4.pt(raquette, [0, 0.46, 0]); return [c[0], c[2]];
+  }
   function coupDe(i, v) {
     const j = J[i], face = i === 0 ? 1 : -1, droiteX = -face;
     const cd = v.cd !== undefined ? v.cd : (v.a.x - j.x) * droiteX >= -0.2;
     const volee = Math.abs(v.a.z) < 4.5 && v.a.y > 0.8;
-    const k = volee ? (cd ? 'vd' : 'vr') : cd ? 'cd' : (v.genre === 'slice' ? 'sl' : 'rv'), o = CONTACT[k];
-    return { cd, x: v.a.x - face * o[0], z: v.a.z - face * o[1] };
+    const k = volee ? (cd ? 'vd' : 'vr') : cd ? 'cd' : (v.genre === 'slice' ? 'sl' : 'rv');
+    const sexe = (ALLURE[i] || (MATCH && (ALLURE[i] = allure(MATCH, i))) || {}).sexe === 'F' ? 'F' : 'H';
+    if (v.ock !== k) { v.oc = contactModele(k, v.a.y, sexe) || CONTACTS[sexe][k]; v.ock = k; }
+    const o = v.oc;
+    // paquet 296 : le décalage tourne avec le joueur (il est souvent de biais au moment de frapper)
+    const c = (j.cap || 0) - (i === 0 ? 0 : Math.PI), ox = face * o[0], oz = face * o[1];
+    return { cd, x: v.a.x - (ox * Math.cos(c) + oz * Math.sin(c)), z: v.a.z - (-ox * Math.sin(c) + oz * Math.cos(c)) };
   }
   // places entre deux points : le serveur à sa ligne de fond, du bon côté ; le relanceur en face, en diagonale
   function placesAttente(i) {
@@ -5070,7 +5095,8 @@ const G3D = (() => {
         if (u > 0 && u < 1) {
           const cd = vol.cd !== undefined ? vol.cd : (vol.cd = coupDe(i, vol).cd);
           if (vol.genre === undefined) vol.genre = genreCoup(vol, cd);
-          const c = vol.genre === 'volee' ? poseVolee(u, cd) : cd ? poseCoupDroit(u) : vol.genre === 'slice' ? poseSlice(u) : poseRevers(u); c.coup = 1;
+          const k = vol.genre === 'volee' ? (cd ? 'vd' : 'vr') : cd ? 'cd' : vol.genre === 'slice' ? 'sl' : 'rv', dy = vol.a.y - HAUT_TAMIS[k];
+          const c = vol.genre === 'volee' ? poseVolee(u, cd, dy) : cd ? poseCoupDroit(u, dy) : vol.genre === 'slice' ? poseSlice(u, dy) : poseRevers(u, dy); c.coup = 1;
           return melange(p, c, cl(Math.min(u * 4, (1 - u) * 5), 0, 1));
         }
       }
@@ -5103,7 +5129,9 @@ const G3D = (() => {
       if (v.qui === 1 - i && v.type !== 'service' && Math.abs(t - v.t) < 0.18) cible.saut = Math.max(cible.saut || 0, 0.07 * Math.cos((t - v.t) / 0.18 * Math.PI / 2));
       if (v.qui === i && v.type === 'service') { const u = (t - v.t) / 0.35; if (u > -0.3 && u < 1) cible.saut = Math.max(cible.saut || 0, 0.22 * Math.sin(cl(u + 0.3, 0, 1) / 1.3 * Math.PI)); }
     }
-    const p = LISSE[i], k = dt > 0 ? 1 - Math.exp(-dt * 16) : 1;
+    // paquet 296 : pendant une frappe, le lissage suit le geste de près (avant : 60 ms de retard — au moment du contact,
+    // la raquette était encore en haut de la préparation) ; les entrées et sorties de frappe restent fondues
+    const p = LISSE[i], k = dt > 0 ? 1 - Math.exp(-dt * (cible.coup >= 0.5 && !cible.geste ? 70 : 16)) : 1;
     if (!p) return (LISSE[i] = cible);
     for (const c in cible) p[c] = Array.isArray(cible[c]) ? p[c].map((v, n) => lerp(v, cible[c][n], k)) : lerp(p[c] || 0, cible[c] || 0, k);
     return p;
@@ -5678,7 +5706,7 @@ const G3D = (() => {
     nuit: { fond: [0.06, 0.05, 0.16], ciel: [0.62, 0.64, 0.82], sol: [0.28, 0.26, 0.36], brume: [0.08, 0.07, 0.2], lum: [0.95, 0.912, 0.836] },
     jour: { fond: [0.53, 0.71, 0.92], ciel: [0.78, 0.86, 1.0], sol: [0.46, 0.42, 0.36], brume: [0.64, 0.76, 0.93], lum: [1.32, 1.24, 1.08] },
   };
-  const VERSION_3D = 'v295';
+  const VERSION_3D = 'v296';
   // ── LE FILM (paquet 276) : la vidéo du jour en 3D. La page choisit les moments forts du match simulé et les fait
   // jouer ici un par un ; public en panneaux et image un peu réduite (la vidéo est rendue sans carte graphique).
   const FILM = { actif: false, echelle: 1, son: null, cam: null, t: 0, focale: 0 };
