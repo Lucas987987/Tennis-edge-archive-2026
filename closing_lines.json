@@ -250,7 +250,7 @@
         "s1a": 1.598
       }
     ],
-    "absent_count": 869,
+    "absent_count": 909,
     "pinnacle_t25": {
       "home": 2.56,
       "away": 1.555,
@@ -569,7 +569,7 @@
         "s1a": 2.65
       }
     ],
-    "absent_count": 732,
+    "absent_count": 772,
     "schedule_changes": 7,
     "pinnacle_t25": {
       "home": 1.418,
@@ -889,7 +889,7 @@
         "s1a": 1.666
       }
     ],
-    "absent_count": 361,
+    "absent_count": 401,
     "schedule_changes": 11,
     "pinnacle_t25": {
       "home": 2.51,
@@ -1209,7 +1209,7 @@
         "s1a": 1.375
       }
     ],
-    "absent_count": 790,
+    "absent_count": 830,
     "schedule_changes": 27,
     "pinnacle_t25": {
       "home": 4.0,
@@ -1513,7 +1513,7 @@
         "s1a": 1.729
       }
     ],
-    "absent_count": 878,
+    "absent_count": 918,
     "pinnacle_t25": {
       "home": 2.22,
       "away": 1.714,
@@ -1832,7 +1832,7 @@
         "s1a": 1.416
       }
     ],
-    "absent_count": 328,
+    "absent_count": 368,
     "schedule_changes": 24,
     "pinnacle_t25": {
       "home": 3.56,
@@ -2152,7 +2152,7 @@
         "s1a": 1.943
       }
     ],
-    "absent_count": 807,
+    "absent_count": 847,
     "pinnacle_t25": {
       "home": 1.99,
       "away": 1.917,
@@ -2472,7 +2472,7 @@
         "s1a": 2.49
       }
     ],
-    "absent_count": 684,
+    "absent_count": 724,
     "pinnacle_t25": {
       "home": 1.485,
       "away": 2.84,
@@ -2728,7 +2728,7 @@
         "s1a": 1.917
       }
     ],
-    "absent_count": 1094,
+    "absent_count": 1134,
     "pinnacle_t25": {
       "home": 1.925,
       "away": 1.909,
@@ -3031,7 +3031,7 @@
         "s1a": 2.53
       }
     ],
-    "absent_count": 1026,
+    "absent_count": 1066,
     "pinnacle_t25": {
       "home": 1.442,
       "away": 2.86,
@@ -3351,7 +3351,7 @@
         "s1a": 3.08
       }
     ],
-    "absent_count": 977,
+    "absent_count": 1017,
     "schedule_changes": 17,
     "pinnacle_t7": {
       "home": 1.247,
@@ -3655,7 +3655,7 @@
         "s1a": 1.869
       }
     ],
-    "absent_count": 1026,
+    "absent_count": 1066,
     "pinnacle_t25": {
       "home": 2.01,
       "away": 1.826,
@@ -3967,7 +3967,7 @@
         "s1a": 2.6
       }
     ],
-    "absent_count": 960,
+    "absent_count": 1000,
     "schedule_changes": 10,
     "pinnacle_t25": {
       "home": 1.411,
@@ -4287,7 +4287,7 @@
         "s1a": 1.14
       }
     ],
-    "absent_count": 977,
+    "absent_count": 1017,
     "schedule_changes": 24,
     "pinnacle_t25": {
       "home": 10.13,
@@ -4599,7 +4599,7 @@
         "s1a": 2.78
       }
     ],
-    "absent_count": 0,
+    "absent_count": 1,
     "schedule_changes": 20,
     "clv_home": {
       "open": 1.307,
@@ -4839,7 +4839,7 @@
         "s1a": 3.48
       }
     ],
-    "absent_count": 1040,
+    "absent_count": 1080,
     "pinnacle_t25": {
       "home": 1.224,
       "away": 4.42,
@@ -5118,7 +5118,7 @@
         "s1a": 1.564
       }
     ],
-    "absent_count": 983,
+    "absent_count": 1023,
     "schedule_changes": 9,
     "pinnacle_t7": {
       "home": 2.64,
@@ -5382,7 +5382,7 @@
         "s1a": 3.04
       }
     ],
-    "absent_count": 1026,
+    "absent_count": 1066,
     "pinnacle_t25": {
       "home": 1.298,
       "away": 3.66,
@@ -5517,7 +5517,7 @@
         "s1a": 1.473
       }
     ],
-    "absent_count": 966,
+    "absent_count": 1006,
     "pinnacle_t7": {
       "home": 3.29,
       "away": 1.353,
@@ -5653,7 +5653,7 @@
         "s1a": 1.454
       }
     ],
-    "absent_count": 941,
+    "absent_count": 981,
     "schedule_changes": 11,
     "pinnacle_t3": {
       "home": 3.29,
@@ -5797,7 +5797,7 @@
         "s1a": 1.335
       }
     ],
-    "absent_count": 941,
+    "absent_count": 981,
     "schedule_changes": 15,
     "pinnacle_t15": {
       "home": 3.96,
@@ -5973,7 +5973,7 @@
         "s1a": 1.666
       }
     ],
-    "absent_count": 1126,
+    "absent_count": 1166,
     "pinnacle_t25": {
       "home": 2.41,
       "away": 1.595,
@@ -6140,7 +6140,7 @@
         "s1a": 3.95
       }
     ],
-    "absent_count": 1126,
+    "absent_count": 1166,
     "pinnacle_t25": {
       "home": 1.151,
       "away": 5.61,
@@ -6332,7 +6332,7 @@
         "s1a": 2.12
       }
     ],
-    "absent_count": 1076,
+    "absent_count": 1116,
     "pinnacle_t25": {
       "home": 1.724,
       "away": 2.16,
@@ -6532,7 +6532,7 @@
         "s1a": 1.487
       }
     ],
-    "absent_count": 1086,
+    "absent_count": 1126,
     "pinnacle_t25": {
       "home": 3.35,
       "away": 1.342,
@@ -6780,7 +6780,7 @@
         "s1a": 1.245
       }
     ],
-    "absent_count": 2,
+    "absent_count": 0,
     "schedule_changes": 24,
     "clv_home": {
       "open": 5.48,
@@ -7004,7 +7004,7 @@
         "s1a": 2.03
       }
     ],
-    "absent_count": 1026,
+    "absent_count": 1066,
     "pinnacle_t25": {
       "home": 1.763,
       "away": 2.1,
@@ -7203,7 +7203,7 @@
         "s1a": 1.549
       }
     ],
-    "absent_count": 1087,
+    "absent_count": 1127,
     "pinnacle_t25": {
       "home": 2.7,
       "away": 1.487,
@@ -7442,7 +7442,7 @@
         "s1a": 1.689
       }
     ],
-    "absent_count": 1026,
+    "absent_count": 1066,
     "pinnacle_t25": {
       "home": 2.31,
       "away": 1.641,
@@ -7698,7 +7698,7 @@
         "s1a": 1.377
       }
     ],
-    "absent_count": 1026,
+    "absent_count": 1066,
     "schedule_changes": 14,
     "pinnacle_t25": {
       "home": 3.87,
@@ -7866,7 +7866,7 @@
         "s1a": 3.88
       }
     ],
-    "absent_count": 1132,
+    "absent_count": 1172,
     "schedule_changes": 23,
     "pinnacle_t25": {
       "home": 1.161,
@@ -8026,7 +8026,7 @@
         "s1a": 1.531
       }
     ],
-    "absent_count": 1131,
+    "absent_count": 1171,
     "pinnacle_t25": {
       "home": 2.82,
       "away": 1.452,
@@ -8218,7 +8218,7 @@
         "s1a": 5.12
       }
     ],
-    "absent_count": 1108,
+    "absent_count": 1148,
     "schedule_changes": 17,
     "pinnacle_t25": {
       "home": 1.063,
@@ -8426,7 +8426,7 @@
         "s1a": 1.662
       }
     ],
-    "absent_count": 1070,
+    "absent_count": 1110,
     "schedule_changes": 22,
     "clv_home": {
       "open": 2.35,
@@ -8593,7 +8593,7 @@
         "s1a": 1.781
       }
     ],
-    "absent_count": 1076,
+    "absent_count": 1116,
     "pinnacle_t25": {
       "home": 2.06,
       "away": 1.793,
@@ -8808,7 +8808,7 @@
         "s1a": 1.775
       }
     ],
-    "absent_count": 1056,
+    "absent_count": 1096,
     "pinnacle_t25": {
       "home": 2.14,
       "away": 1.735,
@@ -9048,7 +9048,7 @@
         "s1a": 1.246
       }
     ],
-    "absent_count": 1064,
+    "absent_count": 1104,
     "pinnacle_t25": {
       "home": 5.35,
       "away": 1.163,
@@ -9312,7 +9312,7 @@
         "s1a": 1.806
       }
     ],
-    "absent_count": 1026,
+    "absent_count": 1066,
     "pinnacle_t25": {
       "home": 2.06,
       "away": 1.793,
@@ -9464,7 +9464,7 @@
         "s1a": 2.0
       }
     ],
-    "absent_count": 970,
+    "absent_count": 1010,
     "schedule_changes": 10,
     "pinnacle_t25": {
       "home": 2.14,
@@ -9648,7 +9648,7 @@
         "s1a": 1.26
       }
     ],
-    "absent_count": 940,
+    "absent_count": 980,
     "schedule_changes": 21,
     "pinnacle_t25": {
       "home": 5.74,
@@ -9840,7 +9840,7 @@
         "s1a": 1.336
       }
     ],
-    "absent_count": 903,
+    "absent_count": 943,
     "schedule_changes": 23,
     "pinnacle_t25": {
       "home": 4.2,
@@ -10088,7 +10088,7 @@
         "s1a": 1.37
       }
     ],
-    "absent_count": 837,
+    "absent_count": 877,
     "pinnacle_t25": {
       "home": 4.65,
       "away": 1.221,
@@ -10343,7 +10343,7 @@
         "s1a": 3.14
       }
     ],
-    "absent_count": 848,
+    "absent_count": 888,
     "pinnacle_t25": {
       "home": 1.301,
       "away": 3.77,
@@ -10590,7 +10590,7 @@
         "s1a": 1.465
       }
     ],
-    "absent_count": 852,
+    "absent_count": 892,
     "pinnacle_t25": {
       "home": 3.44,
       "away": 1.346,
@@ -10853,7 +10853,7 @@
         "s1a": 5.35
       }
     ],
-    "absent_count": 808,
+    "absent_count": 848,
     "schedule_changes": 20,
     "pinnacle_t25": {
       "home": 1.07,
@@ -11141,7 +11141,7 @@
         "s1a": 1.74
       }
     ],
-    "absent_count": 813,
+    "absent_count": 853,
     "schedule_changes": 25,
     "pinnacle_t25": {
       "home": 2.24,
@@ -11445,7 +11445,7 @@
         "s1a": 1.735
       }
     ],
-    "absent_count": 782,
+    "absent_count": 822,
     "schedule_changes": 36,
     "pinnacle_t25": {
       "home": 2.2,
@@ -11765,7 +11765,7 @@
         "s1a": 1.195
       }
     ],
-    "absent_count": 757,
+    "absent_count": 797,
     "pinnacle_t25": {
       "home": 7.33,
       "away": 1.107,
@@ -12084,7 +12084,7 @@
         "s1a": 1.458
       }
     ],
-    "absent_count": 724,
+    "absent_count": 764,
     "schedule_changes": 33,
     "pinnacle_t25": {
       "home": 3.33,
@@ -12404,7 +12404,7 @@
         "s1a": 1.395
       }
     ],
-    "absent_count": 379,
+    "absent_count": 419,
     "schedule_changes": 5,
     "pinnacle_t25": {
       "home": 4.15,
@@ -12724,7 +12724,7 @@
         "s1a": 1.657
       }
     ],
-    "absent_count": 322,
+    "absent_count": 362,
     "schedule_changes": 18,
     "pinnacle_t25": {
       "home": 2.48,
@@ -13044,7 +13044,7 @@
         "s1a": 4.2
       }
     ],
-    "absent_count": 282,
+    "absent_count": 322,
     "schedule_changes": 5,
     "pinnacle_t25": {
       "home": 1.156,
@@ -13123,7 +13123,7 @@
     "commence_time": "2026-11-16T23:00:00Z",
     "fixture_id": "id1200946176881242",
     "history": [],
-    "absent_count": 1094,
+    "absent_count": 1134,
     "clv_home": {
       "open": 10.1,
       "close": 18.29,
@@ -13290,7 +13290,7 @@
         "s1a": 1.555
       }
     ],
-    "absent_count": 831,
+    "absent_count": 871,
     "pinnacle_t25": {
       "home": 2.81,
       "away": 1.465,
@@ -13522,7 +13522,7 @@
         "s1a": 2.7
       }
     ],
-    "absent_count": 793,
+    "absent_count": 833,
     "schedule_changes": 31,
     "pinnacle_t25": {
       "home": 1.418,
@@ -13810,7 +13810,7 @@
         "s1a": 1.8
       }
     ],
-    "absent_count": 763,
+    "absent_count": 803,
     "schedule_changes": 30,
     "pinnacle_t15": {
       "home": 2.14,
@@ -14002,7 +14002,7 @@
         "s1a": 1.543
       }
     ],
-    "absent_count": 780,
+    "absent_count": 820,
     "pinnacle_t25": {
       "home": 2.71,
       "away": 1.473,
@@ -14186,7 +14186,7 @@
         "s1a": 1.173
       }
     ],
-    "absent_count": 768,
+    "absent_count": 808,
     "pinnacle_t25": {
       "home": 7.61,
       "away": 1.082,
@@ -14394,7 +14394,7 @@
         "s1a": 1.354
       }
     ],
-    "absent_count": 738,
+    "absent_count": 778,
     "schedule_changes": 20,
     "pinnacle_t25": {
       "home": 4.06,
@@ -14602,7 +14602,7 @@
         "s1a": 3.57
       }
     ],
-    "absent_count": 725,
+    "absent_count": 765,
     "schedule_changes": 27,
     "pinnacle_t25": {
       "home": 1.192,
@@ -14874,7 +14874,7 @@
         "s1a": 6.82
       }
     ],
-    "absent_count": 675,
+    "absent_count": 715,
     "schedule_changes": 48,
     "pinnacle_t25": {
       "home": 1.033,
@@ -15130,7 +15130,7 @@
         "s1a": 4.24
       }
     ],
-    "absent_count": 728,
+    "absent_count": 768,
     "schedule_changes": 32,
     "pinnacle_t25": {
       "home": 1.176,
@@ -15450,7 +15450,7 @@
         "s1a": 3.34
       }
     ],
-    "absent_count": 624,
+    "absent_count": 664,
     "schedule_changes": 17,
     "pinnacle_t25": {
       "home": 1.24,
@@ -15754,7 +15754,7 @@
         "s1a": 1.943
       }
     ],
-    "absent_count": 640,
+    "absent_count": 680,
     "schedule_changes": 21,
     "pinnacle_t25": {
       "home": 1.892,
@@ -16074,7 +16074,7 @@
         "s1a": 1.74
       }
     ],
-    "absent_count": 580,
+    "absent_count": 620,
     "schedule_changes": 14,
     "pinnacle_t25": {
       "home": 2.17,
@@ -16394,7 +16394,7 @@
         "s1a": 1.336
       }
     ],
-    "absent_count": 554,
+    "absent_count": 594,
     "schedule_changes": 43,
     "pinnacle_t15": {
       "home": 4.28,
@@ -16594,7 +16594,7 @@
         "s1a": 1.564
       }
     ],
-    "absent_count": 765,
+    "absent_count": 805,
     "pinnacle_t25": {
       "home": 2.8,
       "away": 1.448,
@@ -16842,7 +16842,7 @@
         "s1a": 1.495
       }
     ],
-    "absent_count": 751,
+    "absent_count": 791,
     "pinnacle_t25": {
       "home": 3.09,
       "away": 1.38,
@@ -17082,7 +17082,7 @@
         "s1a": 1.68
       }
     ],
-    "absent_count": 731,
+    "absent_count": 771,
     "schedule_changes": 26,
     "pinnacle_t25": {
       "home": 2.39,
@@ -17282,7 +17282,7 @@
         "s1a": 1.917
       }
     ],
-    "absent_count": 734,
+    "absent_count": 774,
     "schedule_changes": 25,
     "pinnacle_t25": {
       "home": 1.884,
@@ -17562,7 +17562,7 @@
         "s1a": 1.315
       }
     ],
-    "absent_count": 710,
+    "absent_count": 750,
     "schedule_changes": 38,
     "pinnacle_t25": {
       "home": 4.64,
@@ -17818,7 +17818,7 @@
         "s1a": 2.16
       }
     ],
-    "absent_count": 701,
+    "absent_count": 741,
     "schedule_changes": 37,
     "pinnacle_t25": {
       "home": 1.68,
@@ -18074,7 +18074,7 @@
         "s1a": 1.387
       }
     ],
-    "absent_count": 676,
+    "absent_count": 716,
     "schedule_changes": 47,
     "pinnacle_t25": {
       "home": 3.63,
@@ -18394,7 +18394,7 @@
         "s1a": 3.21
       }
     ],
-    "absent_count": 626,
+    "absent_count": 666,
     "pinnacle_t25": {
       "home": 1.235,
       "away": 4.28,
@@ -18698,7 +18698,7 @@
         "s1a": 1.8
       }
     ],
-    "absent_count": 660,
+    "absent_count": 700,
     "pinnacle_t25": {
       "home": 2.2,
       "away": 1.699,
@@ -18977,7 +18977,7 @@
         "s1a": 1.854
       }
     ],
-    "absent_count": 675,
+    "absent_count": 715,
     "schedule_changes": 23,
     "pinnacle_t25": {
       "home": 1.98,
@@ -19201,7 +19201,7 @@
         "s1a": 5.07
       }
     ],
-    "absent_count": 713,
+    "absent_count": 753,
     "schedule_changes": 10,
     "pinnacle_t25": {
       "home": 1.083,
@@ -19521,7 +19521,7 @@
         "s1a": 1.884
       }
     ],
-    "absent_count": 566,
+    "absent_count": 606,
     "schedule_changes": 37,
     "pinnacle_t3": {
       "home": 1.925,
@@ -19729,7 +19729,7 @@
         "s1a": 1.515
       }
     ],
-    "absent_count": 748,
+    "absent_count": 788,
     "pinnacle_t25": {
       "home": 2.91,
       "away": 1.42,
@@ -20049,7 +20049,7 @@
         "s1a": 1.645
       }
     ],
-    "absent_count": 564,
+    "absent_count": 604,
     "schedule_changes": 36,
     "pinnacle_t25": {
       "home": 2.56,
@@ -20233,7 +20233,7 @@
         "s1a": 1.961
       }
     ],
-    "absent_count": 725,
+    "absent_count": 765,
     "pinnacle_t25": {
       "home": 1.787,
       "away": 2.05,
@@ -20521,7 +20521,7 @@
         "s1a": 1.529
       }
     ],
-    "absent_count": 590,
+    "absent_count": 630,
     "pinnacle_t25": {
       "home": 2.72,
       "away": 1.48,
@@ -20705,7 +20705,7 @@
         "s1a": 2.55
       }
     ],
-    "absent_count": 770,
+    "absent_count": 810,
     "pinnacle_t25": {
       "home": 1.38,
       "away": 3.09,
@@ -20953,7 +20953,7 @@
         "s1a": 2.58
       }
     ],
-    "absent_count": 683,
+    "absent_count": 723,
     "schedule_changes": 14,
     "pinnacle_t25": {
       "home": 1.48,
@@ -21193,7 +21193,7 @@
         "s1a": 4.9
       }
     ],
-    "absent_count": 719,
+    "absent_count": 759,
     "schedule_changes": 15,
     "pinnacle_t25": {
       "home": 1.076,
@@ -21505,7 +21505,7 @@
         "s1a": 1.224
       }
     ],
-    "absent_count": 636,
+    "absent_count": 676,
     "schedule_changes": 30,
     "pinnacle_t7": {
       "home": 5.84,
@@ -21761,7 +21761,7 @@
         "s1a": 2.96
       }
     ],
-    "absent_count": 647,
+    "absent_count": 687,
     "pinnacle_t25": {
       "home": 1.323,
       "away": 3.47,
@@ -22080,7 +22080,7 @@
         "s1a": 1.591
       }
     ],
-    "absent_count": 566,
+    "absent_count": 606,
     "schedule_changes": 34,
     "pinnacle_t25": {
       "home": 2.69,
@@ -22280,7 +22280,7 @@
         "s1a": 2.75
       }
     ],
-    "absent_count": 703,
+    "absent_count": 743,
     "schedule_changes": 24,
     "pinnacle_t25": {
       "home": 1.354,
@@ -22600,7 +22600,7 @@
         "s1a": 3.19
       }
     ],
-    "absent_count": 345,
+    "absent_count": 385,
     "pinnacle_t25": {
       "home": 1.266,
       "away": 4.26,
@@ -22919,7 +22919,7 @@
         "s1a": 1.751
       }
     ],
-    "absent_count": 215,
+    "absent_count": 255,
     "pinnacle_t25": {
       "home": 2.24,
       "away": 1.729,
@@ -23135,7 +23135,7 @@
         "s1a": 2.27
       }
     ],
-    "absent_count": 606,
+    "absent_count": 646,
     "pinnacle_t25": {
       "home": 1.574,
       "away": 2.45,
@@ -23415,7 +23415,7 @@
         "s1a": 2.59
       }
     ],
-    "absent_count": 561,
+    "absent_count": 601,
     "pinnacle_t25": {
       "home": 1.476,
       "away": 2.74,
@@ -23687,7 +23687,7 @@
         "s1a": 1.316
       }
     ],
-    "absent_count": 564,
+    "absent_count": 604,
     "pinnacle_t25": {
       "home": 4.85,
       "away": 1.195,
@@ -23999,7 +23999,7 @@
         "s1a": 2.71
       }
     ],
-    "absent_count": 526,
+    "absent_count": 566,
     "schedule_changes": 15,
     "pinnacle_t25": {
       "home": 1.393,
@@ -24279,7 +24279,7 @@
         "s1a": 1.448
       }
     ],
-    "absent_count": 563,
+    "absent_count": 603,
     "pinnacle_t25": {
       "home": 2.97,
       "away": 1.414,
@@ -24598,7 +24598,7 @@
         "s1a": 1.436
       }
     ],
-    "absent_count": 554,
+    "absent_count": 594,
     "schedule_changes": 9,
     "pinnacle_t25": {
       "home": 3.58,
@@ -24902,7 +24902,7 @@
         "s1a": 5.14
       }
     ],
-    "absent_count": 554,
+    "absent_count": 594,
     "schedule_changes": 16,
     "pinnacle_t25": {
       "home": 1.082,
@@ -25166,7 +25166,7 @@
         "s1a": 3.02
       }
     ],
-    "absent_count": 568,
+    "absent_count": 608,
     "pinnacle_t25": {
       "home": 1.272,
       "away": 3.88,
@@ -25486,7 +25486,7 @@
         "s1a": 1.568
       }
     ],
-    "absent_count": 89,
+    "absent_count": 129,
     "pinnacle_t25": {
       "home": 2.58,
       "away": 1.526,
@@ -25805,7 +25805,7 @@
         "s1a": 1.617
       }
     ],
-    "absent_count": 80,
+    "absent_count": 120,
     "pinnacle_t25": {
       "home": 2.58,
       "away": 1.526,
@@ -26124,7 +26124,7 @@
         "s1a": 1.555
       }
     ],
-    "absent_count": 152,
+    "absent_count": 192,
     "pinnacle_t25": {
       "home": 2.72,
       "away": 1.483,
@@ -26444,7 +26444,7 @@
         "s1a": 2.47
       }
     ],
-    "absent_count": 75,
+    "absent_count": 115,
     "pinnacle_t25": {
       "home": 1.454,
       "away": 2.81,
@@ -26955,7 +26955,7 @@
         "s1a": 1.284
       }
     ],
-    "absent_count": 22,
+    "absent_count": 62,
     "schedule_changes": 35,
     "pinnacle_t25": {
       "home": 4.89,
@@ -27185,7 +27185,7 @@
         "s1a": 1.549
       }
     ],
-    "absent_count": 365,
+    "absent_count": 405,
     "pinnacle_t25": {
       "home": 3.04,
       "away": 1.418,
@@ -27456,7 +27456,7 @@
         "s1a": 1.781
       }
     ],
-    "absent_count": 366,
+    "absent_count": 406,
     "pinnacle_t25": {
       "home": 2.23,
       "away": 1.709,
@@ -27751,7 +27751,7 @@
         "s1a": 1.478
       }
     ],
-    "absent_count": 323,
+    "absent_count": 363,
     "pinnacle_t25": {
       "home": 3.53,
       "away": 1.332,
@@ -28007,7 +28007,7 @@
         "s1a": 2.67
       }
     ],
-    "absent_count": 404,
+    "absent_count": 444,
     "schedule_changes": 11,
     "pinnacle_t25": {
       "home": 1.371,
@@ -28327,7 +28327,7 @@
         "s1a": 2.43
       }
     ],
-    "absent_count": 262,
+    "absent_count": 302,
     "pinnacle_t25": {
       "home": 1.473,
       "away": 2.82,
@@ -28412,7 +28412,7 @@
         "away": 26.27
       }
     ],
-    "absent_count": 632,
+    "absent_count": 672,
     "schedule_changes": 4,
     "pinnacle_t7": {
       "home": 1.009,
@@ -28640,7 +28640,7 @@
         "s1a": 2.1
       }
     ],
-    "absent_count": 345,
+    "absent_count": 385,
     "schedule_changes": 10,
     "pinnacle_t25": {
       "home": 1.719,
@@ -28880,7 +28880,7 @@
         "s1a": 1.183
       }
     ],
-    "absent_count": 303,
+    "absent_count": 343,
     "schedule_changes": 18,
     "pinnacle_t25": {
       "home": 7.48,
@@ -29144,7 +29144,7 @@
         "s1a": 2.64
       }
     ],
-    "absent_count": 250,
+    "absent_count": 290,
     "schedule_changes": 19,
     "pinnacle_t25": {
       "home": 1.395,
@@ -29336,7 +29336,7 @@
         "s1a": 1.925
       }
     ],
-    "absent_count": 284,
+    "absent_count": 324,
     "pinnacle_t25": {
       "home": 1.884,
       "away": 1.934,
@@ -29512,7 +29512,7 @@
         "s1a": 2.28
       }
     ],
-    "absent_count": 288,
+    "absent_count": 328,
     "pinnacle_t25": {
       "home": 1.564,
       "away": 2.45,
@@ -29744,7 +29744,7 @@
         "s1a": 3.17
       }
     ],
-    "absent_count": 240,
+    "absent_count": 280,
     "schedule_changes": 11,
     "pinnacle_t25": {
       "home": 1.238,
@@ -30024,7 +30024,7 @@
         "s1a": 1.671
       }
     ],
-    "absent_count": 179,
+    "absent_count": 219,
     "schedule_changes": 27,
     "pinnacle_t25": {
       "home": 2.39,
@@ -30208,7 +30208,7 @@
         "s1a": 3.95
       }
     ],
-    "absent_count": 272,
+    "absent_count": 312,
     "pinnacle_t25": {
       "home": 1.127,
       "away": 6.13,
@@ -30408,7 +30408,7 @@
         "s1a": 1.909
       }
     ],
-    "absent_count": 242,
+    "absent_count": 282,
     "pinnacle_t25": {
       "home": 1.917,
       "away": 1.9,
@@ -30671,7 +30671,7 @@
         "s1a": 1.606
       }
     ],
-    "absent_count": 162,
+    "absent_count": 202,
     "schedule_changes": 30,
     "pinnacle_t25": {
       "home": 2.56,
@@ -30863,7 +30863,7 @@
         "s1a": 2.33
       }
     ],
-    "absent_count": 274,
+    "absent_count": 314,
     "pinnacle_t25": {
       "home": 1.588,
       "away": 2.39,
@@ -31071,7 +31071,7 @@
         "s1a": 2.45
       }
     ],
-    "absent_count": 202,
+    "absent_count": 242,
     "schedule_changes": 11,
     "pinnacle_t25": {
       "home": 1.471,
@@ -31335,7 +31335,7 @@
         "s1a": 1.112
       }
     ],
-    "absent_count": 196,
+    "absent_count": 236,
     "schedule_changes": 23,
     "pinnacle_t25": {
       "home": 11.79,
@@ -31615,7 +31615,7 @@
         "s1a": 1.507
       }
     ],
-    "absent_count": 155,
+    "absent_count": 195,
     "schedule_changes": 11,
     "pinnacle_t7": {
       "home": 2.82,
@@ -31919,7 +31919,7 @@
         "s1a": 2.59
       }
     ],
-    "absent_count": 136,
+    "absent_count": 176,
     "pinnacle_t25": {
       "home": 1.392,
       "away": 3.07,
@@ -32223,7 +32223,7 @@
         "s1a": 2.4
       }
     ],
-    "absent_count": 103,
+    "absent_count": 143,
     "schedule_changes": 26,
     "pinnacle_t25": {
       "home": 1.505,
@@ -32543,7 +32543,7 @@
         "s1a": 2.25
       }
     ],
-    "absent_count": 95,
+    "absent_count": 135,
     "schedule_changes": 18,
     "pinnacle_t25": {
       "home": 1.578,
@@ -32823,7 +32823,7 @@
         "s1a": 1.952
       }
     ],
-    "absent_count": 137,
+    "absent_count": 177,
     "pinnacle_t25": {
       "home": 1.826,
       "away": 2.02,
@@ -33143,7 +33143,7 @@
         "s1a": 1.714
       }
     ],
-    "absent_count": 40,
+    "absent_count": 80,
     "schedule_changes": 30,
     "pinnacle_t25": {
       "home": 2.28,
@@ -33439,7 +33439,7 @@
         "s1a": 3.7
       }
     ],
-    "absent_count": 98,
+    "absent_count": 138,
     "pinnacle_t25": {
       "home": 1.172,
       "away": 5.28,
@@ -33759,7 +33759,7 @@
         "s1a": 3.35
       }
     ],
-    "absent_count": 79,
+    "absent_count": 119,
     "schedule_changes": 39,
     "pinnacle_t25": {
       "home": 1.208,
@@ -34079,7 +34079,7 @@
         "s1a": 2.02
       }
     ],
-    "absent_count": 75,
+    "absent_count": 115,
     "schedule_changes": 23,
     "pinnacle_t25": {
       "home": 1.787,
@@ -34301,6 +34301,54 @@
         "away": 3.18,
         "s1h": 1.571,
         "s1a": 2.55
+      },
+      {
+        "t": "2026-11-19T08:06:44.248560",
+        "mins_before": 293,
+        "home": 1.408,
+        "away": 3.18,
+        "s1h": 1.564,
+        "s1a": 2.56
+      },
+      {
+        "t": "2026-11-19T08:15:45.532845",
+        "mins_before": 284,
+        "home": 1.4,
+        "away": 3.23,
+        "s1h": 1.552,
+        "s1a": 2.59
+      },
+      {
+        "t": "2026-11-19T08:33:48.274794",
+        "mins_before": 266,
+        "home": 1.392,
+        "away": 3.27,
+        "s1h": 1.54,
+        "s1a": 2.63
+      },
+      {
+        "t": "2026-11-19T08:48:45.499370",
+        "mins_before": 251,
+        "home": 1.384,
+        "away": 3.31,
+        "s1h": 1.534,
+        "s1a": 2.65
+      },
+      {
+        "t": "2026-11-19T09:18:45.843805",
+        "mins_before": 221,
+        "home": 1.384,
+        "away": 3.31,
+        "s1h": 1.534,
+        "s1a": 2.65
+      },
+      {
+        "t": "2026-11-19T09:36:44.730501",
+        "mins_before": 203,
+        "home": 1.37,
+        "away": 3.39,
+        "s1h": 1.523,
+        "s1a": 2.68
       }
     ],
     "absent_count": 0
@@ -34450,23 +34498,55 @@
         "away": 3.18,
         "s1h": 1.529,
         "s1a": 2.67
+      },
+      {
+        "t": "2026-11-19T08:06:44.248560",
+        "mins_before": 683,
+        "home": 1.408,
+        "away": 3.18,
+        "s1h": 1.529,
+        "s1a": 2.67
+      },
+      {
+        "t": "2026-11-19T08:36:46.070655",
+        "mins_before": 653,
+        "home": 1.408,
+        "away": 3.18,
+        "s1h": 1.529,
+        "s1a": 2.67
+      },
+      {
+        "t": "2026-11-19T09:09:46.418895",
+        "mins_before": 620,
+        "home": 1.408,
+        "away": 3.18,
+        "s1h": 1.529,
+        "s1a": 2.67
+      },
+      {
+        "t": "2026-11-19T09:39:49.705334",
+        "mins_before": 590,
+        "home": 1.408,
+        "away": 3.18,
+        "s1h": 1.529,
+        "s1a": 2.67
       }
     ],
     "absent_count": 0
   },
   "atp_challenger_sydney_enzo_aguiard_vs_philip_sekulic": {
-    "date": "2026-11-19",
+    "date": "2026-11-20",
     "home": "Philip Sekulic",
     "away": "Enzo Aguiard",
     "tournament": "ATP Challenger Sydney",
     "sport_key": "oddspapi_9461",
     "niveau": "autre",
-    "commence_time": "2026-11-19T23:00:00Z",
+    "commence_time": "2026-11-20T01:10:00Z",
     "fixture_id": "id1200946176687402",
     "history": [
       {
         "t": "2026-11-18T15:30:49.415343",
-        "mins_before": 1889,
+        "mins_before": 2019,
         "home": 1.436,
         "away": 2.92,
         "s1h": 1.546,
@@ -34474,7 +34554,7 @@
       },
       {
         "t": "2026-11-18T21:33:47.329444",
-        "mins_before": 1526,
+        "mins_before": 1656,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34482,7 +34562,7 @@
       },
       {
         "t": "2026-11-18T21:33:47.329444",
-        "mins_before": 1526,
+        "mins_before": 1656,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34490,7 +34570,7 @@
       },
       {
         "t": "2026-11-18T21:33:47.329444",
-        "mins_before": 1526,
+        "mins_before": 1656,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34498,7 +34578,7 @@
       },
       {
         "t": "2026-11-18T23:36:45.835597",
-        "mins_before": 1403,
+        "mins_before": 1533,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34506,7 +34586,7 @@
       },
       {
         "t": "2026-11-19T01:36:46.715544",
-        "mins_before": 1283,
+        "mins_before": 1413,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34514,7 +34594,7 @@
       },
       {
         "t": "2026-11-19T03:39:45.725292",
-        "mins_before": 1160,
+        "mins_before": 1290,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34522,7 +34602,7 @@
       },
       {
         "t": "2026-11-19T04:09:45.780443",
-        "mins_before": 1130,
+        "mins_before": 1260,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34530,7 +34610,7 @@
       },
       {
         "t": "2026-11-19T04:42:48.975538",
-        "mins_before": 1097,
+        "mins_before": 1227,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34538,7 +34618,7 @@
       },
       {
         "t": "2026-11-19T05:15:48.768933",
-        "mins_before": 1064,
+        "mins_before": 1194,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34546,7 +34626,7 @@
       },
       {
         "t": "2026-11-19T05:48:39.826303",
-        "mins_before": 1031,
+        "mins_before": 1161,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34554,7 +34634,7 @@
       },
       {
         "t": "2026-11-19T06:18:42.801449",
-        "mins_before": 1001,
+        "mins_before": 1131,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34562,7 +34642,7 @@
       },
       {
         "t": "2026-11-19T06:48:55.416379",
-        "mins_before": 971,
+        "mins_before": 1101,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
@@ -34570,29 +34650,61 @@
       },
       {
         "t": "2026-11-19T07:21:45.439327",
-        "mins_before": 938,
+        "mins_before": 1068,
         "home": 1.4,
         "away": 3.08,
         "s1h": 1.507,
         "s1a": 2.63
+      },
+      {
+        "t": "2026-11-19T07:48:50.832685",
+        "mins_before": 1041,
+        "home": 1.403,
+        "away": 3.12,
+        "s1h": 1.512,
+        "s1a": 2.65
+      },
+      {
+        "t": "2026-11-19T08:21:46.365143",
+        "mins_before": 1008,
+        "home": 1.403,
+        "away": 3.12,
+        "s1h": 1.512,
+        "s1a": 2.65
+      },
+      {
+        "t": "2026-11-19T08:54:46.170632",
+        "mins_before": 975,
+        "home": 1.403,
+        "away": 3.12,
+        "s1h": 1.512,
+        "s1a": 2.65
+      },
+      {
+        "t": "2026-11-19T09:25:00.923603",
+        "mins_before": 945,
+        "home": 1.403,
+        "away": 3.12,
+        "s1h": 1.512,
+        "s1a": 2.65
       }
     ],
     "absent_count": 0,
-    "schedule_changes": 6
+    "schedule_changes": 11
   },
   "atp_challenger_sydney_hiroki_moriya_vs_omar_jasika": {
-    "date": "2026-11-19",
+    "date": "2026-11-20",
     "home": "Hiroki Moriya",
     "away": "Omar Jasika",
     "tournament": "ATP Challenger Sydney",
     "sport_key": "oddspapi_9461",
     "niveau": "autre",
-    "commence_time": "2026-11-19T23:00:00Z",
+    "commence_time": "2026-11-20T01:10:00Z",
     "fixture_id": "id1200946176687416",
     "history": [
       {
         "t": "2026-11-18T21:33:47.329444",
-        "mins_before": 1526,
+        "mins_before": 1656,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34600,7 +34712,7 @@
       },
       {
         "t": "2026-11-18T21:33:47.329444",
-        "mins_before": 1526,
+        "mins_before": 1656,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34608,7 +34720,7 @@
       },
       {
         "t": "2026-11-18T21:33:47.329444",
-        "mins_before": 1526,
+        "mins_before": 1656,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34616,7 +34728,7 @@
       },
       {
         "t": "2026-11-18T21:33:47.329444",
-        "mins_before": 1526,
+        "mins_before": 1656,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34624,7 +34736,7 @@
       },
       {
         "t": "2026-11-18T23:36:45.835597",
-        "mins_before": 1403,
+        "mins_before": 1533,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34632,7 +34744,7 @@
       },
       {
         "t": "2026-11-19T01:36:46.715544",
-        "mins_before": 1283,
+        "mins_before": 1413,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34640,7 +34752,7 @@
       },
       {
         "t": "2026-11-19T03:39:45.725292",
-        "mins_before": 1160,
+        "mins_before": 1290,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34648,7 +34760,7 @@
       },
       {
         "t": "2026-11-19T04:09:45.780443",
-        "mins_before": 1130,
+        "mins_before": 1260,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34656,7 +34768,7 @@
       },
       {
         "t": "2026-11-19T04:42:48.975538",
-        "mins_before": 1097,
+        "mins_before": 1227,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34664,7 +34776,7 @@
       },
       {
         "t": "2026-11-19T05:15:48.768933",
-        "mins_before": 1064,
+        "mins_before": 1194,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34672,7 +34784,7 @@
       },
       {
         "t": "2026-11-19T05:48:39.826303",
-        "mins_before": 1031,
+        "mins_before": 1161,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34680,7 +34792,7 @@
       },
       {
         "t": "2026-11-19T06:18:42.801449",
-        "mins_before": 1001,
+        "mins_before": 1131,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34688,7 +34800,7 @@
       },
       {
         "t": "2026-11-19T06:48:55.416379",
-        "mins_before": 971,
+        "mins_before": 1101,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
@@ -34696,15 +34808,47 @@
       },
       {
         "t": "2026-11-19T07:21:45.439327",
-        "mins_before": 938,
+        "mins_before": 1068,
         "home": 3.2,
         "away": 1.377,
         "s1h": 2.69,
         "s1a": 1.49
+      },
+      {
+        "t": "2026-11-19T07:48:50.832685",
+        "mins_before": 1041,
+        "home": 3.22,
+        "away": 1.381,
+        "s1h": 2.71,
+        "s1a": 1.495
+      },
+      {
+        "t": "2026-11-19T08:21:46.365143",
+        "mins_before": 1008,
+        "home": 3.22,
+        "away": 1.381,
+        "s1h": 2.71,
+        "s1a": 1.495
+      },
+      {
+        "t": "2026-11-19T08:54:46.170632",
+        "mins_before": 975,
+        "home": 3.22,
+        "away": 1.381,
+        "s1h": 2.71,
+        "s1a": 1.495
+      },
+      {
+        "t": "2026-11-19T09:25:00.923603",
+        "mins_before": 945,
+        "home": 3.22,
+        "away": 1.381,
+        "s1h": 2.71,
+        "s1a": 1.495
       }
     ],
     "absent_count": 0,
-    "schedule_changes": 6
+    "schedule_changes": 11
   },
   "atp_challenger_helsinki_dalibor_svrcina_vs_stefano_travaglia": {
     "date": "2026-11-19",
@@ -34827,10 +34971,58 @@
         "away": 2.58,
         "s1h": 1.641,
         "s1a": 2.28
+      },
+      {
+        "t": "2026-11-19T08:09:45.867180",
+        "mins_before": 270,
+        "home": 1.537,
+        "away": 2.58,
+        "s1h": 1.641,
+        "s1a": 2.28
+      },
+      {
+        "t": "2026-11-19T08:15:45.532845",
+        "mins_before": 264,
+        "home": 1.529,
+        "away": 2.6,
+        "s1h": 1.641,
+        "s1a": 2.28
+      },
+      {
+        "t": "2026-11-19T08:18:48.108075",
+        "mins_before": 261,
+        "home": 1.546,
+        "away": 2.55,
+        "s1h": 1.649,
+        "s1a": 2.27
+      },
+      {
+        "t": "2026-11-19T08:27:46.221738",
+        "mins_before": 252,
+        "home": 1.564,
+        "away": 2.5,
+        "s1h": 1.662,
+        "s1a": 2.25
+      },
+      {
+        "t": "2026-11-19T09:00:46.854206",
+        "mins_before": 219,
+        "home": 1.564,
+        "away": 2.5,
+        "s1h": 1.662,
+        "s1a": 2.25
+      },
+      {
+        "t": "2026-11-19T09:30:48.606132",
+        "mins_before": 189,
+        "home": 1.564,
+        "away": 2.5,
+        "s1h": 1.662,
+        "s1a": 2.25
       }
     ],
     "absent_count": 0,
-    "schedule_changes": 9
+    "schedule_changes": 11
   },
   "atp_challenger_helsinki_alexander_ritschard_vs_otto_virtanen": {
     "date": "2026-11-19",
@@ -34943,6 +35135,46 @@
         "mins_before": 494,
         "home": 4.06,
         "away": 1.262,
+        "s1h": 3.17,
+        "s1a": 1.364
+      },
+      {
+        "t": "2026-11-19T07:48:50.832685",
+        "mins_before": 461,
+        "home": 4.06,
+        "away": 1.262,
+        "s1h": 3.17,
+        "s1a": 1.364
+      },
+      {
+        "t": "2026-11-19T08:21:46.365143",
+        "mins_before": 428,
+        "home": 4.06,
+        "away": 1.262,
+        "s1h": 3.17,
+        "s1a": 1.364
+      },
+      {
+        "t": "2026-11-19T08:54:46.170632",
+        "mins_before": 395,
+        "home": 4.06,
+        "away": 1.262,
+        "s1h": 3.17,
+        "s1a": 1.364
+      },
+      {
+        "t": "2026-11-19T09:12:45.564372",
+        "mins_before": 377,
+        "home": 4.04,
+        "away": 1.263,
+        "s1h": 3.17,
+        "s1a": 1.364
+      },
+      {
+        "t": "2026-11-19T09:42:51.705678",
+        "mins_before": 347,
+        "home": 4.04,
+        "away": 1.263,
         "s1h": 3.17,
         "s1a": 1.364
       }
@@ -35063,6 +35295,46 @@
         "away": 1.591,
         "s1h": 2.24,
         "s1a": 1.666
+      },
+      {
+        "t": "2026-11-19T07:54:55.009002",
+        "mins_before": 215,
+        "home": 2.44,
+        "away": 1.591,
+        "s1h": 2.24,
+        "s1a": 1.666
+      },
+      {
+        "t": "2026-11-19T08:03:46.778117",
+        "mins_before": 206,
+        "home": 2.45,
+        "away": 1.598,
+        "s1h": 2.25,
+        "s1a": 1.671
+      },
+      {
+        "t": "2026-11-19T08:33:48.274794",
+        "mins_before": 176,
+        "home": 2.45,
+        "away": 1.598,
+        "s1h": 2.25,
+        "s1a": 1.671
+      },
+      {
+        "t": "2026-11-19T09:03:48.449821",
+        "mins_before": 146,
+        "home": 2.45,
+        "away": 1.598,
+        "s1h": 2.25,
+        "s1a": 1.671
+      },
+      {
+        "t": "2026-11-19T09:33:54.116481",
+        "mins_before": 116,
+        "home": 2.45,
+        "away": 1.598,
+        "s1h": 2.25,
+        "s1a": 1.671
       }
     ],
     "absent_count": 0
@@ -35180,10 +35452,50 @@
         "away": 1.662,
         "s1h": 2.28,
         "s1a": 1.641
+      },
+      {
+        "t": "2026-11-19T07:54:55.009002",
+        "mins_before": 355,
+        "home": 2.29,
+        "away": 1.662,
+        "s1h": 2.28,
+        "s1a": 1.641
+      },
+      {
+        "t": "2026-11-19T08:27:46.221738",
+        "mins_before": 322,
+        "home": 2.29,
+        "away": 1.662,
+        "s1h": 2.28,
+        "s1a": 1.641
+      },
+      {
+        "t": "2026-11-19T09:00:46.854206",
+        "mins_before": 289,
+        "home": 2.29,
+        "away": 1.662,
+        "s1h": 2.28,
+        "s1a": 1.641
+      },
+      {
+        "t": "2026-11-19T09:12:45.564372",
+        "mins_before": 277,
+        "home": 2.31,
+        "away": 1.653,
+        "s1h": 2.28,
+        "s1a": 1.641
+      },
+      {
+        "t": "2026-11-19T09:42:51.705678",
+        "mins_before": 247,
+        "home": 2.31,
+        "away": 1.653,
+        "s1h": 2.28,
+        "s1a": 1.641
       }
     ],
     "absent_count": 0,
-    "schedule_changes": 9
+    "schedule_changes": 11
   },
   "atp_challenger_metz_arthur_nagel_vs_sascha_gueymard_wayenburg": {
     "date": "2026-11-19",
@@ -35306,10 +35618,50 @@
         "away": 4.61,
         "s1h": 1.316,
         "s1a": 3.47
+      },
+      {
+        "t": "2026-11-19T07:54:55.009002",
+        "mins_before": 285,
+        "home": 1.217,
+        "away": 4.61,
+        "s1h": 1.316,
+        "s1a": 3.47
+      },
+      {
+        "t": "2026-11-19T08:27:46.221738",
+        "mins_before": 252,
+        "home": 1.217,
+        "away": 4.61,
+        "s1h": 1.316,
+        "s1a": 3.47
+      },
+      {
+        "t": "2026-11-19T09:00:46.854206",
+        "mins_before": 219,
+        "home": 1.217,
+        "away": 4.61,
+        "s1h": 1.316,
+        "s1a": 3.47
+      },
+      {
+        "t": "2026-11-19T09:30:48.606132",
+        "mins_before": 189,
+        "home": 1.217,
+        "away": 4.61,
+        "s1h": 1.316,
+        "s1a": 3.47
+      },
+      {
+        "t": "2026-11-19T09:33:54.116481",
+        "mins_before": 186,
+        "home": 1.218,
+        "away": 4.69,
+        "s1h": 1.318,
+        "s1a": 3.51
       }
     ],
     "absent_count": 0,
-    "schedule_changes": 7
+    "schedule_changes": 9
   },
   "atp_challenger_helsinki_edas_butvilas_vs_eero_vasa": {
     "date": "2026-11-19",
@@ -35408,10 +35760,42 @@
         "away": 1.269,
         "s1h": 3.21,
         "s1a": 1.358
+      },
+      {
+        "t": "2026-11-19T07:54:55.009002",
+        "mins_before": 285,
+        "home": 3.98,
+        "away": 1.269,
+        "s1h": 3.21,
+        "s1a": 1.358
+      },
+      {
+        "t": "2026-11-19T08:27:46.221738",
+        "mins_before": 252,
+        "home": 3.98,
+        "away": 1.269,
+        "s1h": 3.21,
+        "s1a": 1.358
+      },
+      {
+        "t": "2026-11-19T09:00:46.854206",
+        "mins_before": 219,
+        "home": 3.98,
+        "away": 1.269,
+        "s1h": 3.21,
+        "s1a": 1.358
+      },
+      {
+        "t": "2026-11-19T09:30:48.606132",
+        "mins_before": 189,
+        "home": 3.98,
+        "away": 1.269,
+        "s1h": 3.21,
+        "s1a": 1.358
       }
     ],
     "absent_count": 0,
-    "schedule_changes": 6
+    "schedule_changes": 8
   },
   "atp_challenger_helsinki_svyatoslav_gulin_vs_toby_samuel": {
     "date": "2026-11-20",
@@ -35466,6 +35850,14 @@
       {
         "t": "2026-11-19T07:42:46.372960",
         "mins_before": 1667,
+        "home": 5.24,
+        "away": 1.187,
+        "s1h": 3.62,
+        "s1a": 1.303
+      },
+      {
+        "t": "2026-11-19T09:42:51.705678",
+        "mins_before": 1547,
         "home": 5.24,
         "away": 1.187,
         "s1h": 3.62,
@@ -35547,6 +35939,38 @@
         "away": 1.248,
         "s1h": 3.41,
         "s1a": 1.324
+      },
+      {
+        "t": "2026-11-19T07:54:55.009002",
+        "mins_before": 215,
+        "home": 4.21,
+        "away": 1.248,
+        "s1h": 3.41,
+        "s1a": 1.324
+      },
+      {
+        "t": "2026-11-19T08:18:48.108075",
+        "mins_before": 191,
+        "home": 4.26,
+        "away": 1.251,
+        "s1h": 3.42,
+        "s1a": 1.331
+      },
+      {
+        "t": "2026-11-19T08:51:43.739498",
+        "mins_before": 158,
+        "home": 4.26,
+        "away": 1.251,
+        "s1h": 3.42,
+        "s1a": 1.331
+      },
+      {
+        "t": "2026-11-19T09:21:46.203320",
+        "mins_before": 128,
+        "home": 4.26,
+        "away": 1.251,
+        "s1h": 3.42,
+        "s1a": 1.331
       }
     ],
     "absent_count": 0
@@ -35640,9 +36064,407 @@
         "away": 1.465,
         "s1h": 2.44,
         "s1a": 1.581
+      },
+      {
+        "t": "2026-11-19T07:54:55.009002",
+        "mins_before": 965,
+        "home": 2.81,
+        "away": 1.465,
+        "s1h": 2.44,
+        "s1a": 1.581
+      },
+      {
+        "t": "2026-11-19T08:27:46.221738",
+        "mins_before": 932,
+        "home": 2.81,
+        "away": 1.465,
+        "s1h": 2.44,
+        "s1a": 1.581
+      },
+      {
+        "t": "2026-11-19T09:00:46.854206",
+        "mins_before": 899,
+        "home": 2.81,
+        "away": 1.465,
+        "s1h": 2.44,
+        "s1a": 1.581
+      },
+      {
+        "t": "2026-11-19T09:30:48.606132",
+        "mins_before": 869,
+        "home": 2.81,
+        "away": 1.465,
+        "s1h": 2.44,
+        "s1a": 1.581
       }
     ],
     "absent_count": 0,
     "schedule_changes": 1
+  },
+  "atp_challenger_champaign_alastair_gray_vs_bor_artnak": {
+    "date": "2026-11-19",
+    "home": "Bor Artnak",
+    "away": "Alastair Gray",
+    "tournament": "ATP Challenger Champaign",
+    "sport_key": "oddspapi_3975",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T16:00:00Z",
+    "fixture_id": "id1200397576683748",
+    "history": [
+      {
+        "t": "2026-11-19T09:30:48.606132",
+        "mins_before": 389,
+        "home": 2.84,
+        "away": 1.436,
+        "s1h": 2.56,
+        "s1a": 1.51
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_champaign_gavin_young_vs_sebastian_dominko": {
+    "date": "2026-11-19",
+    "home": "Sebastian Dominko",
+    "away": "Gavin Young",
+    "tournament": "ATP Challenger Champaign",
+    "sport_key": "oddspapi_3975",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T17:00:00Z",
+    "fixture_id": "id1200397576683762",
+    "history": [
+      {
+        "t": "2026-11-19T09:30:48.606132",
+        "mins_before": 449,
+        "home": 1.531,
+        "away": 2.53,
+        "s1h": 1.625,
+        "s1a": 2.29
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_champaign_geoffrey_blancaneaux_vs_harry_wendelken": {
+    "date": "2026-11-19",
+    "home": "Harry Wendelken",
+    "away": "Geoffrey Blancaneaux",
+    "tournament": "ATP Challenger Champaign",
+    "sport_key": "oddspapi_3975",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T17:10:00Z",
+    "fixture_id": "id1200397576683738",
+    "history": [
+      {
+        "t": "2026-11-19T09:30:48.606132",
+        "mins_before": 459,
+        "home": 1.396,
+        "away": 3.01,
+        "s1h": 1.507,
+        "s1a": 2.57
+      }
+    ],
+    "absent_count": 0,
+    "schedule_changes": 2
+  },
+  "atp_challenger_metz_pierre-hugues_herbert_vs_zsombor_piros": {
+    "date": "2026-11-19",
+    "home": "Pierre-Hugues Herbert",
+    "away": "Zsombor Piros",
+    "tournament": "ATP Challenger Metz",
+    "sport_key": "oddspapi_52106",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T18:10:00Z",
+    "fixture_id": "id1205210676694522",
+    "history": [
+      {
+        "t": "2026-11-19T09:30:48.606132",
+        "mins_before": 519,
+        "home": 1.8,
+        "away": 2.07,
+        "s1h": 1.854,
+        "s1a": 1.961
+      }
+    ],
+    "absent_count": 0,
+    "schedule_changes": 2
+  },
+  "atp_challenger_champaign_andres_martin_vs_jordan_lee": {
+    "date": "2026-11-19",
+    "home": "Jordan Lee",
+    "away": "Andres Martin",
+    "tournament": "ATP Challenger Champaign",
+    "sport_key": "oddspapi_3975",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T18:20:00Z",
+    "fixture_id": "id1200397576683756",
+    "history": [
+      {
+        "t": "2026-11-19T09:30:48.606132",
+        "mins_before": 529,
+        "home": 2.47,
+        "away": 1.555,
+        "s1h": 2.37,
+        "s1a": 1.588
+      },
+      {
+        "t": "2026-11-19T09:33:54.116481",
+        "mins_before": 526,
+        "home": 2.14,
+        "away": 1.724,
+        "s1h": 2.1,
+        "s1a": 1.735
+      },
+      {
+        "t": "2026-11-19T09:36:44.730501",
+        "mins_before": 523,
+        "home": 2.2,
+        "away": 1.684,
+        "s1h": 2.14,
+        "s1a": 1.709
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_drummondville_stefan_kozlov_vs_vignesh_gogineni": {
+    "date": "2026-11-19",
+    "home": "Stefan Kozlov",
+    "away": "Vignesh Gogineni",
+    "tournament": "ATP Challenger Drummondville",
+    "sport_key": "oddspapi_12291",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T16:00:00Z",
+    "fixture_id": "id1201229176683326",
+    "history": [
+      {
+        "t": "2026-11-19T09:33:54.116481",
+        "mins_before": 386,
+        "home": 1.227,
+        "away": 4.29,
+        "s1h": 1.311,
+        "s1a": 3.44
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_drummondville_clement_chidekh_vs_patrick_zahraj": {
+    "date": "2026-11-19",
+    "home": "Patrick Zahraj",
+    "away": "Clement Chidekh",
+    "tournament": "ATP Challenger Drummondville",
+    "sport_key": "oddspapi_12291",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T16:00:00Z",
+    "fixture_id": "id1201229176683328",
+    "history": [
+      {
+        "t": "2026-11-19T09:33:54.116481",
+        "mins_before": 386,
+        "home": 8.24,
+        "away": 1.072,
+        "s1h": 5.29,
+        "s1a": 1.153
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_drummondville_aidan_mayo_vs_hynek_barton": {
+    "date": "2026-11-19",
+    "home": "Aidan Mayo",
+    "away": "Hynek Barton",
+    "tournament": "ATP Challenger Drummondville",
+    "sport_key": "oddspapi_12291",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T17:10:00Z",
+    "fixture_id": "id1201229176683302",
+    "history": [
+      {
+        "t": "2026-11-19T09:33:54.116481",
+        "mins_before": 456,
+        "home": 1.367,
+        "away": 3.15,
+        "s1h": 1.473,
+        "s1a": 2.67
+      }
+    ],
+    "absent_count": 0,
+    "schedule_changes": 1
+  },
+  "atp_challenger_drummondville_james_kent_trotter_vs_louis_wessels": {
+    "date": "2026-11-19",
+    "home": "Louis Wessels",
+    "away": "James Kent Trotter",
+    "tournament": "ATP Challenger Drummondville",
+    "sport_key": "oddspapi_12291",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T17:10:00Z",
+    "fixture_id": "id1201229176683314",
+    "history": [
+      {
+        "t": "2026-11-19T09:33:54.116481",
+        "mins_before": 456,
+        "home": 3.85,
+        "away": 1.268,
+        "s1h": 3.07,
+        "s1a": 1.374
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_drummondville_dylan_dietrich_vs_justin_boulais": {
+    "date": "2026-11-19",
+    "home": "Dylan Dietrich",
+    "away": "Justin Boulais",
+    "tournament": "ATP Challenger Drummondville",
+    "sport_key": "oddspapi_12291",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T21:00:00Z",
+    "fixture_id": "id1201229176683308",
+    "history": [
+      {
+        "t": "2026-11-19T09:33:54.116481",
+        "mins_before": 686,
+        "home": 1.122,
+        "away": 6.13,
+        "s1h": 1.229,
+        "s1a": 4.18
+      },
+      {
+        "t": "2026-11-19T09:36:44.730501",
+        "mins_before": 683,
+        "home": 1.124,
+        "away": 6.05,
+        "s1h": 1.229,
+        "s1a": 4.18
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_drummondville_daniel_milavsky_vs_liam_draxl": {
+    "date": "2026-11-19",
+    "home": "Daniel Milavsky",
+    "away": "Liam Draxl",
+    "tournament": "ATP Challenger Drummondville",
+    "sport_key": "oddspapi_12291",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T23:30:00Z",
+    "fixture_id": "id1201229176683306",
+    "history": [
+      {
+        "t": "2026-11-19T09:33:54.116481",
+        "mins_before": 836,
+        "home": 2.27,
+        "away": 1.645,
+        "s1h": 2.15,
+        "s1a": 1.709
+      },
+      {
+        "t": "2026-11-19T09:36:44.730501",
+        "mins_before": 833,
+        "home": 2.29,
+        "away": 1.636,
+        "s1h": 2.15,
+        "s1a": 1.704
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_montevideo_carlos_sanchez_jover_vs_thiago_seyboth_wild": {
+    "date": "2026-11-19",
+    "home": "Carlos Sanchez Jover",
+    "away": "Thiago Seyboth Wild",
+    "tournament": "ATP Challenger Montevideo",
+    "sport_key": "oddspapi_3867",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T17:40:00Z",
+    "fixture_id": "id1200386776694752",
+    "history": [
+      {
+        "t": "2026-11-19T09:36:44.730501",
+        "mins_before": 483,
+        "home": 6.74,
+        "away": 1.105,
+        "s1h": 4.95,
+        "s1a": 1.176
+      },
+      {
+        "t": "2026-11-19T09:39:49.705334",
+        "mins_before": 480,
+        "home": 6.8,
+        "away": 1.103,
+        "s1h": 5.01,
+        "s1a": 1.173
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_montevideo_guido_ivan_justo_vs_henrique_rocha": {
+    "date": "2026-11-19",
+    "home": "Henrique Rocha",
+    "away": "Guido Ivan Justo",
+    "tournament": "ATP Challenger Montevideo",
+    "sport_key": "oddspapi_3867",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T21:00:00Z",
+    "fixture_id": "id1200386776694758",
+    "history": [
+      {
+        "t": "2026-11-19T09:36:44.730501",
+        "mins_before": 683,
+        "home": 1.361,
+        "away": 3.19,
+        "s1h": 1.452,
+        "s1a": 2.75
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_montevideo_franco_roncadelli_vs_juan_manuel_la_serna": {
+    "date": "2026-11-19",
+    "home": "Franco Roncadelli",
+    "away": "Juan Manuel La Serna",
+    "tournament": "ATP Challenger Montevideo",
+    "sport_key": "oddspapi_3867",
+    "niveau": "autre",
+    "commence_time": "2026-11-19T23:00:00Z",
+    "fixture_id": "id1200386776694760",
+    "history": [
+      {
+        "t": "2026-11-19T09:36:44.730501",
+        "mins_before": 803,
+        "home": 2.05,
+        "away": 1.787,
+        "s1h": 2.06,
+        "s1a": 1.763
+      }
+    ],
+    "absent_count": 0
+  },
+  "atp_challenger_kobe_kasidit_samrej_vs_liam_broady": {
+    "date": "2026-11-20",
+    "home": "Kasidit Samrej",
+    "away": "Liam Broady",
+    "tournament": "ATP Challenger Kobe",
+    "sport_key": "oddspapi_13167",
+    "niveau": "autre",
+    "commence_time": "2026-11-20T02:00:00Z",
+    "fixture_id": "id1201316776695078",
+    "history": [
+      {
+        "t": "2026-11-19T09:36:44.730501",
+        "mins_before": 983,
+        "home": 2.89,
+        "away": 1.444,
+        "s1h": 2.48,
+        "s1a": 1.564
+      },
+      {
+        "t": "2026-11-19T09:39:49.705334",
+        "mins_before": 980,
+        "home": 3.06,
+        "away": 1.406,
+        "s1h": 2.63,
+        "s1a": 1.507
+      }
+    ],
+    "absent_count": 0
   }
 }
