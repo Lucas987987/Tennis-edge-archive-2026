@@ -1,6 +1,6 @@
 {
- "paquet": 291,
- "version_3d": "v290",
+ "paquet": 292,
+ "version_3d": "v292",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
@@ -49,5 +49,7 @@
  },
  "ombre_de_contact": "tache douce sous chaque joueur",
  "mise_au_point_video": "distance gardée dans l'image elle-même : le premier gros plan n'est plus flou",
- "temps_de_rendu_local_290": "+12 % par image (reflets)"
+ "temps_de_rendu_local_290": "+12 % par image (reflets)",
+ "filet": "mailles carrées de 4,5 cm : un voile sombre régulier, sans rayures",
+ "eclair_d_impact": "0,12 s au contact de la raquette (frappes et services)"
 }

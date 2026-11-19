@@ -3959,10 +3959,10 @@ const G3D = (() => {
     });
   }
   function texFilet() {
-    return toile(512, 64, (c, w, h) => {
-      c.clearRect(0, 0, w, h); c.strokeStyle = 'rgba(20,20,26,.9)'; c.lineWidth = 1.4;
-      for (let x = 0; x <= w; x += 6) { c.beginPath(); c.moveTo(x, 0); c.lineTo(x, h); c.stroke(); }
-      for (let y = 0; y <= h; y += 6) { c.beginPath(); c.moveTo(0, y); c.lineTo(w, y); c.stroke(); }
+    // paquet 292 : 4 × 4 mailles carrées de 4,5 cm (une maille = 16 px) ; de loin, un voile sombre régulier, sans rayures
+    return toile(64, 64, (c, w, h) => {
+      c.clearRect(0, 0, w, h); c.fillStyle = 'rgba(16,16,22,.92)';
+      for (let k = 0; k < 4; k++) { c.fillRect(k * 16, 0, 3, h); c.fillRect(0, k * 16, w, 3); }
     });
   }
   function texCordage() {
@@ -4093,8 +4093,9 @@ const G3D = (() => {
     for (let k = 0; k < N; k++) {
       const x0 = -xP + 2 * xP * k / N, x1 = -xP + 2 * xP * (k + 1) / N, h = x => 0.88 + 0.156 * Math.pow(Math.abs(x) / xP, 2);
       const b = mailles.p.length / 3;
-      mailles.v([x0, 0, 0], [0, 0, 1], BLANC, [k * 8 / N * 3, 0]); mailles.v([x1, 0, 0], [0, 0, 1], BLANC, [(k + 1) * 8 / N * 3, 0]);
-      mailles.v([x1, h(x1), 0], [0, 0, 1], BLANC, [(k + 1) * 8 / N * 3, 1]); mailles.v([x0, h(x0), 0], [0, 0, 1], BLANC, [k * 8 / N * 3, 1]);
+      const U = x => (x + xP) / 0.18, V = y => y / 0.18;                           // une répétition = 4 mailles de 4,5 cm
+      mailles.v([x0, 0, 0], [0, 0, 1], BLANC, [U(x0), 0]); mailles.v([x1, 0, 0], [0, 0, 1], BLANC, [U(x1), 0]);
+      mailles.v([x1, h(x1), 0], [0, 0, 1], BLANC, [U(x1), V(h(x1))]); mailles.v([x0, h(x0), 0], [0, 0, 1], BLANC, [U(x0), V(h(x0))]);
       mailles.i.push(b, b + 1, b + 2, b, b + 2, b + 3);
     }
     scene.transp.push({ m: maillage(mailles), tex: TX.filet, alpha: 0.95, spec: 0, ombre: true });
@@ -5448,6 +5449,17 @@ const G3D = (() => {
     for (const j of J) passe({ m: PLAQUE, tex: tc, col: [0, 0, 0], alpha: 0.4, spec: 0, recoit: false }, chaine(M4.tr(j.x, 0.006, j.z), M4.sc(1.0, 1, 0.8)));
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, TX.cordage);
     for (const [m, mat, tr] of dyn) if (tr) passe({ m, tex: TX.cordage, alpha: 0.8, spec: 0 }, mat);
+    // paquet 292 : éclair bref au contact de la raquette (0,12 s), en lumière ajoutée
+    if (R && R.vols) {
+      gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE, gl.ZERO, gl.ONE);
+      for (const v of R.vols) {
+        if (!(v.qui >= 0)) continue;                                              // frappes et services seulement
+        const u = (t - v.t) / 0.12; if (u < 0 || u >= 1) continue;
+        const p0 = v.pts ? { x: v.pts[0][1], y: v.pts[0][2], z: v.pts[0][3] } : v.a, k = 1.6 + 5 * u;
+        passe({ m: BALLE, col: [1, 1, 0.9], alpha: 0.55 * (1 - u) * (1 - u), emis: 1.5, spec: 0, recoit: false }, chaine(M4.tr(p0.x, p0.y, p0.z), M4.sc(k, k, k)));
+      }
+      gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ZERO, gl.ONE);
+    }
     TRACE.forEach((p, k) => passe({ m: BALLE, alpha: 0.05 + 0.3 * k / TRACE.length, emis: 0.8, spec: 0, recoit: false }, chaine(M4.tr(p.x, p.y, p.z), M4.sc(0.8, 0.8, 0.8))));
     // rebonds : marque au sol (terre battue) et petit nuage de poussière (terre battue, gazon)
     if (R && R.rebonds) for (const rb of R.rebonds) {
@@ -5585,7 +5597,7 @@ const G3D = (() => {
     nuit: { fond: [0.06, 0.05, 0.16], ciel: [0.62, 0.64, 0.82], sol: [0.28, 0.26, 0.36], brume: [0.08, 0.07, 0.2], lum: [0.95, 0.912, 0.836] },
     jour: { fond: [0.53, 0.71, 0.92], ciel: [0.78, 0.86, 1.0], sol: [0.46, 0.42, 0.36], brume: [0.64, 0.76, 0.93], lum: [1.32, 1.24, 1.08] },
   };
-  const VERSION_3D = 'v290';
+  const VERSION_3D = 'v292';
   // ── LE FILM (paquet 276) : la vidéo du jour en 3D. La page choisit les moments forts du match simulé et les fait
   // jouer ici un par un ; public en panneaux et image un peu réduite (la vidéo est rendue sans carte graphique).
   const FILM = { actif: false, echelle: 1, son: null, cam: null, t: 0, focale: 0 };
