@@ -1,6 +1,6 @@
 {
- "paquet": 292,
- "version_3d": "v292",
+ "paquet": 293,
+ "version_3d": "v293",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
@@ -51,5 +51,11 @@
  "mise_au_point_video": "distance gardée dans l'image elle-même : le premier gros plan n'est plus flou",
  "temps_de_rendu_local_290": "+12 % par image (reflets)",
  "filet": "mailles carrées de 4,5 cm : un voile sombre régulier, sans rayures",
- "eclair_d_impact": "0,12 s au contact de la raquette (frappes et services)"
+ "eclair_d_impact": "0,12 s au contact de la raquette (frappes et services)",
+ "mains": {
+  "doigts": "bouts des doigts restés en place dans le fichier des modèles : ramenés dans le poing, de voisin en voisin (121 sommets par main chez l'homme, 131 chez la femme)",
+  "raquette": "le manche passe dans le poing (avant : au poignet)",
+  "front": "plus de rayures roses ou blanches entre peau et bandeau",
+  "bandeau_femmes": "remonté au-dessus des sourcils (1,705 m au repos au lieu de 1,668)"
+ }
 }
