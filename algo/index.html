@@ -325,16 +325,17 @@ body.video #video{display:block;width:100vw;height:100vh}
 /* 18/11/2026 (paquet 276) — vidéo du jour en 3D : l'image 3D plein cadre, l'habillage télé par-dessus */
 body.video .film{position:relative;width:100vw;height:100vh;overflow:hidden;background:#07061a;container-type:size}
 body.video .film [hidden]{display:none!important}
-body.video .film{--vue:min(125cqw, calc(100cqh - 46cqw));--marge:calc(100cqh - var(--vue));--haut:calc(var(--marge) * .36);background:radial-gradient(120% 60% at 50% 0%,#241a5c 0%,#0E0A24 55%,#07061a 100%)}
+body.video .film{--vue:min(108cqw, calc(100cqh - 46cqw));--marge:calc(100cqh - var(--vue));--haut:13cqw;background:radial-gradient(120% 60% at 50% 0%,#241a5c 0%,#0E0A24 55%,#07061a 100%)}
 body.video .film .f3-hote{position:absolute;left:0;right:0;top:var(--haut);height:var(--vue);box-shadow:0 0 0 .35cqw rgba(46,230,255,.35),0 0 6cqw rgba(46,230,255,.18)}
 body.video .film .g3d{position:absolute;inset:0}
 body.video .film .g3d > :not(canvas){display:none}
 body.video .film .g3d-cv{width:100cqw;height:var(--vue);aspect-ratio:auto;max-height:none}
 .film{--f3-ink:#F4F1FF;font-family:Barlow,system-ui,sans-serif;color:var(--f3-ink)}
-.film .f3-haut{position:absolute;left:4cqw;right:4cqw;top:calc(var(--haut) / 2 - 3.5cqw);display:flex;justify-content:space-between;align-items:center;gap:2cqw;font-weight:700;font-size:3.2cqw;text-transform:uppercase;letter-spacing:.04em}
+.film .f3-haut{position:absolute;left:4cqw;right:4cqw;top:2.6cqw;display:flex;justify-content:space-between;align-items:center;gap:2cqw;font-weight:700;font-size:3.2cqw;text-transform:uppercase;letter-spacing:.04em}
+.film .f3-haut .f3-tn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .film .f3-haut span{background:rgba(7,6,26,.72);border:1px solid rgba(255,255,255,.14);border-radius:1.4cqw;padding:1cqw 2cqw;backdrop-filter:blur(4px)}
 .film .f3-sim b{color:#D4FF3A}
-.film .f3-bug{position:absolute;left:4cqw;right:4cqw;top:calc(var(--haut) + var(--vue) + 3cqw);background:linear-gradient(180deg,rgba(14,10,36,.92),rgba(7,6,26,.92));border:1px solid rgba(255,255,255,.16);border-radius:2cqw;padding:1.2cqw 2cqw;box-shadow:0 1.5cqw 5cqw rgba(0,0,0,.45)}
+.film .f3-bug{position:absolute;left:4cqw;right:4cqw;top:calc(var(--haut) + var(--vue) + 2.4cqw);background:linear-gradient(180deg,rgba(14,10,36,.92),rgba(7,6,26,.92));border:1px solid rgba(255,255,255,.16);border-radius:2cqw;padding:1.2cqw 2cqw;box-shadow:0 1.5cqw 5cqw rgba(0,0,0,.45)}
 .film .f3-l{display:flex;align-items:center;gap:1.6cqw;font-weight:800;font-size:5cqw;line-height:1.35;border-left:1cqw solid var(--c);padding-left:2cqw}
 .film .f3-l + .f3-l{margin-top:.6cqw}
 .film .f3-srv{width:3cqw;color:#D4FF3A;font-size:3.4cqw}
@@ -360,6 +361,21 @@ body.video .film .g3d-cv{width:100cqw;height:var(--vue);aspect-ratio:auto;max-he
 .film .f3-volet{position:absolute;inset:-10cqh -40cqw;pointer-events:none;background:linear-gradient(100deg,transparent 30%,#2EE6FF 30%,#2EE6FF 38%,#0E0A24 38%,#0E0A24 62%,#FF4FAE 62%,#FF4FAE 70%,transparent 70%);transform:translateX(-140%);opacity:0}
 .film .f3-volet.on{animation:f3volet .6s ease-in-out both}
 @keyframes f3volet{0%{transform:translateX(-120%);opacity:1}100%{transform:translateX(120%);opacity:1}}
+.film .f3-bas{position:absolute;left:4cqw;right:4cqw;top:calc(var(--haut) + var(--vue) + 20.4cqw);bottom:1.2cqw;display:flex;flex-direction:column;gap:1.3cqw}
+.film .f3-lg{min-height:6cqw;font-weight:700;font-size:3.7cqw;line-height:1.25;color:#F4F1FF;background:rgba(14,10,36,.85);border:1px solid rgba(255,255,255,.12);border-left:1cqw solid var(--c,#D4FF3A);border-radius:1.4cqw;padding:1cqw 2.4cqw;display:flex;align-items:center}
+.film .f3-lg:empty{visibility:hidden}.film .f3-lg b{color:var(--c,#D4FF3A)}
+.film .f3-lg.on{animation:f3gauche .45s cubic-bezier(.2,1.2,.4,1) both}
+.film .f3-cartes{display:grid;grid-template-columns:1fr 1fr;gap:1.3cqw}
+.film .f3-cartes div{display:flex;justify-content:space-between;align-items:center;gap:1cqw;background:rgba(14,10,36,.85);border:1px solid rgba(255,255,255,.12);border-radius:1.4cqw;padding:1.1cqw 2.2cqw;font-weight:700;font-size:3.2cqw;line-height:1.2;color:#ABA3D6;transition:all .3s}
+.film .f3-cartes b{font-family:var(--disp);font-size:3.8cqw;color:#F4F1FF;white-space:nowrap}
+.film .f3-cartes .oui{border-color:#D4FF3A;color:#F4F1FF;box-shadow:0 0 2.5cqw rgba(212,255,58,.25)}.film .f3-cartes .oui b{color:#D4FF3A}
+.film .f3-cartes .non{opacity:.45}
+.film .f3-pied{margin-top:auto;text-align:center;font-weight:700;font-size:3.2cqw;color:#ABA3D6;letter-spacing:.03em}
+.film.compact .f3-cartes{display:none}
+.film .f3-fin-lg{display:grid;grid-template-columns:1fr;gap:1.2cqw;width:100%;margin-top:1cqw}
+.film .f3-fin-lg div{display:flex;justify-content:space-between;font-weight:700;font-size:4cqw;padding:1.2cqw 2.4cqw;border-radius:1.2cqw;background:rgba(255,255,255,.06);color:#ABA3D6}
+.film .f3-fin-lg .oui{color:#D4FF3A}.film .f3-fin-lg b{color:#F4F1FF}
+.film .f3-fin-pied{font-weight:700;font-size:3.4cqw;color:#ABA3D6;margin-top:2cqw}
 .film .f3-pres{position:absolute;left:5cqw;right:5cqw;top:calc(var(--haut) + var(--vue) - 30cqw);padding:2.4cqw 3.4cqw;background:linear-gradient(90deg,rgba(7,6,26,.92),rgba(7,6,26,.55));border-left:1.4cqw solid #D4FF3A;border-radius:1cqw}
 .film .f3-pres-n{font-family:var(--disp);font-size:8.6cqw;color:var(--c);text-shadow:0 0 3cqw var(--c);text-transform:uppercase;line-height:1.1}
 .film .f3-pres-p{font-weight:700;font-size:4.2cqw;color:#ABA3D6;text-transform:uppercase;letter-spacing:.05em;margin-top:1cqw}.film .f3-pres-p b{color:#F4F1FF;font-family:var(--disp);font-size:6cqw}
@@ -4824,6 +4840,7 @@ const G3D = (() => {
           rebonds: vols.filter(v => v.b.y === 0 && v.type !== 'fin' && Math.abs(v.b.z) < HL + 3).map(v => ({ x: v.b.x, z: v.b.z, t: v.t + v.d, a: Math.atan2(v.b.x - v.a.x, v.b.z - v.a.z) })),
           grand: P.grand };
     if (FILM.actif) {
+      FILM.dernier = { fin, frappes: vols.filter(v => v.qui >= 0).length };          // paquet 287 : pour la ligne de commentaire
       // plan de service : derrière le serveur pendant qu'il fait rebondir la balle, puis la vue télé au service
       const v0 = vols[0];
       if (v0 && v0.type === 'service') PLANS.push({ type: 'dos', i: s, t0, t1: v0.t - 0.12 });
@@ -5640,7 +5657,7 @@ const G3D = (() => {
       },
       score(m, r, fini) { E.avant = null; maj(m, r, !!fini); E.avant = null; },
       camera(nom, d, i) { FILM.cam = nom ? { nom, d: d || 1, i: i || 0, t0: FILM.t } : null; },
-      etat() { return { t: FILM.t, R: !!R, ralenti: RAL.actif || !!RAL.prevu, actif: RAL.actif, file: FILE.length,
+      etat() { return { dernier: FILM.dernier || null, t: FILM.t, R: !!R, ralenti: RAL.actif || !!RAL.prevu, actif: RAL.actif, file: FILE.length,
         plans: PLANS.reduce((x, p) => Math.max(x, p.t1), 0), gestes: GESTE.reduce((x, g) => Math.max(x, g ? g.t0 + g.d : 0), 0) }; },
     },
     _modeles: () => MOD.etat,
@@ -6681,17 +6698,55 @@ async function filmDuJour(V, m, son){
   const rDe = S => { const sets = [0,1].map(i => [...S.histo.map(x => x[i]), ...(S.fini ? [] : [S.jeux[i]])]);
     return { inverse: false, x: { serveur: M.serveur(S) === 0 ? 'home' : 'away', score_home: { sets: sets[0], point: affPts(S,0) }, score_away: { sets: sets[1], point: affPts(S,1) } } }; };
   window.__ambiance = 'stade';
+  // 19/11/2026 (paquet 287) — comme la vidéo 2D : les 4 lignes de l'algo (ses seuls %), cochées dès que le match
+  // simulé les atteint, une ligne de commentaire après chaque point, et le pied « une parmi 20 000 »
+  const LG = (() => { const k = m.lignes_algo; if (!k) return [];
+    const proche = pre => Object.keys(k).filter(x => x.startsWith(pre)).sort((a, b) => Math.abs(k[a] - .5) - Math.abs(k[b] - .5))[0];
+    const out = [], tt = proche('total_plus_'), hh = proche('handicap_favori_'), fv = k.favori === 'home' ? 0 : 1, bo = m.meilleur_des || 3;
+    if (tt) out.push({ cle: 'total', n: parseFloat(tt.slice(11)), p: k[tt], lib: t('lg_total', tt.slice(11).replace('.', L === 'fr' ? ',' : '.')) });
+    if (k.tie_break != null) out.push({ cle: 'tb', p: k.tie_break, lib: t('lg_tb') });
+    if (k.set_decisif != null) out.push({ cle: 'decisif', p: k.set_decisif, lib: t('lg_3s', bo) });
+    if (hh) out.push({ cle: 'hand', n: parseFloat(hh.slice(16)), fav: fv, p: k[hh], lib: t('lg_hand', court(fv === 0 ? m.home : m.away), hh.slice(16).replace('.', L === 'fr' ? ',' : '.')) });
+    return out; })();
+  const lignesFaites = (S, fin) => {
+    const jeux = S.histo.reduce((a, x) => a + x[0] + x[1], 0) + (S.fini ? 0 : S.jeux[0] + S.jeux[1]);
+    const tb = S.histo.some(x => Math.max(x[0], x[1]) === 7 && Math.min(x[0], x[1]) === 6) || S.tb;
+    const N = (m.simulation && m.simulation.sets_gagnants) || 2, dec = S.sets[0] === N - 1 && S.sets[1] === N - 1;
+    return LG.map(x => { let ok = x.cle === 'total' ? jeux > x.n : x.cle === 'tb' ? tb : x.cle === 'decisif' ? dec || (S.fini && S.histo.length === 2 * N - 1) : null;
+      if (x.cle === 'hand' && fin) ok = S.histo.reduce((a, y) => a + y[x.fav] - y[1 - x.fav], 0) > x.n;
+      return ok ? 'oui' : (fin ? 'non' : ''); });
+  };
   { const g = rng([...String(m.uid || '')].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 277)); Math.random = g; }   // mêmes échanges en FR et en EN
   V.innerHTML = `<div class="film"><div class="f3-hote"></div>
     <div class="f3-haut"><span class="f3-tn">${esc(m.tournoi || '')}</span><span class="f3-sim">${esc(t('a_sim'))} <b>${esc(t('a_fois', nSim))}</b></span></div>
     <div class="f3-cap" hidden><div class="f3-cap-t"></div><div class="f3-cap-s"></div></div>
     <div class="f3-bug" hidden></div>
+    <div class="f3-bas"><div class="f3-lg"></div>
+      <div class="f3-cartes">${LG.map((x, i) => `<div data-lg="${i}"><span>${esc(x.lib)}</span><b>${pc0(x.p)}</b></div>`).join('')}</div>
+      <div class="f3-pied">${esc(t('a_pied', nSim))}</div></div>
     <div class="f3-vs"><div class="f3-vs-tn">${esc(m.tournoi || '')}</div>
       ${[0,1].map(i => `<div class="f3-vs-j j${i}"><span class="f3-vs-n">${drap[i]} ${esc(noms[i])}</span><span class="f3-vs-p">${pc0(i ? 1 - p : p)}</span></div>${i ? '' : '<div class="f3-vs-x">VS</div>'}`).join('')}
       <div class="f3-vs-l">${esc(t('f3_proba'))}</div><div class="f3-vs-s">${esc(t('f3_sim', nSim))}</div></div>
     <div class="f3-pres" hidden></div><div class="f3-volet"></div><div class="f3-fin" hidden></div></div>`;
   const $ = s => V.querySelector(s), z = ms => dort(ms);
   const coul = i => i === 0 ? '#2EE6FF' : '#FF4FAE';
+  if (innerHeight / innerWidth < 1.5) V.querySelector('.film').classList.add('compact');   // format 4:5 : pas la place des 4 lignes
+  const etatLignes = (S, fin) => lignesFaites(S, fin).forEach((c, i) => { const el = $(`[data-lg="${i}"]`); if (el) el.className = c; });
+  const commente = x => {                                                       // le fait le plus marquant du point (comme la 2D)
+    const nom = i => esc(noms[i]), sv = x.srv, h = x.h, d = G3D.film.etat().dernier || {}, A = x.avant, S = x.apres;
+    const setFini = S.sets[0] + S.sets[1] > A.sets[0] + A.sets[1], jeuFini = setFini || S.jeux[0] + S.jeux[1] > A.jeux[0] + A.jeux[1];
+    let lg;
+    if (setFini) { const hs = S.histo[S.histo.length - 1] || [0, 0]; lg = t('lg_set', nom(h), `${hs[h]}-${hs[1 - h]}`); }
+    else if (jeuFini && !A.tb && h !== sv) lg = t('lg_break', nom(h), nom(sv));
+    else if (x.e && x.e.k === 1 && h === sv) lg = t('lg_sauve', nom(sv));
+    else if (d.fin === 'aces' && h === sv) lg = t('lg_ace', nom(sv));
+    else if (d.fin === 'doubles_fautes_adverses' && h !== sv) lg = t('lg_df', nom(sv));
+    else if (d.frappes === 1) lg = t('lg_srv', nom(h));
+    else if (d.frappes === 2) lg = t('lg_ret', nom(h));
+    else if (d.frappes >= 3) lg = t('lg_ech', nom(h), d.frappes);
+    else lg = t('lg_pt', nom(h));
+    const el = $('.f3-lg'); el.innerHTML = `<span>${lg}</span>`; el.style.setProperty('--c', coul(h)); el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
+  };
   // l'arbitre de chaise (voix de synthèse ajoutée par le script vidéo) : comme sur le court, le serveur d'abord
   const arbitre = (() => {
     const fr = L === 'fr', N = ['zéro', 'quinze', 'trente', 'quarante'], E2 = ['love', 'fifteen', 'thirty', 'forty'], ord = ['premier', 'deuxième', 'troisième', 'quatrième', 'cinquième'], ordEn = ['first', 'second', 'third', 'fourth', 'fifth'];
@@ -6742,7 +6797,7 @@ async function filmDuJour(V, m, son){
   for (let k = 0; k < n; k++){
     const x = F.choix[k], dernier = x.quoi === 'match';
     if (k) { volet(); await z(300); }
-    bug(x.avant, false);
+    bug(x.avant, false); etatLignes(x.avant, false);
     const titre = x.e ? [null, t('a_bb'), t('a_bs'), t('a_bm')][x.e.k] : x.quoi === 'echange' ? t('f3_echange') : x.avant.tb ? t('f3_jd') : t('f3_set_n', x.set + 1);
     const pour = x.e ? noms[x.e.h] : '';
     legende(titre, pour, x.e ? coul(x.e.h) : '#D4FF3A', 2000);
@@ -6753,7 +6808,7 @@ async function filmDuJour(V, m, son){
     await attendre(e => e.R, 4000);
     await attendre(e => !e.R, 30000);
     // le résultat du point
-    bug(x.apres, x.apres.fini);
+    bug(x.apres, x.apres.fini); commente(x); etatLignes(x.apres, x.apres.fini);
     { const j = x.apres.jeux[0] + x.apres.jeux[1] + x.apres.sets[0] + x.apres.sets[1] > x.avant.jeux[0] + x.avant.jeux[1] + x.avant.sets[0] + x.avant.sets[1];
       if (j) son('voix', 700, { texte: arbitre.jeu(x.h, x.quoi === 'set' ? x.set + 1 : 0, x.apres.fini) }); }
     if (x.apres.fini) legende(t('a_fin'), noms[x.h], coul(x.h), 2600);
@@ -6776,7 +6831,9 @@ async function filmDuJour(V, m, son){
   const fin = $('.f3-fin');
   fin.innerHTML = `<div class="f3-fin-t">${esc(t('a_fin'))}</div><div class="f3-fin-w" style="color:${coul(w)}">${esc(t('a_gagne', noms[w]))}</div>
     <div class="f3-fin-s">${esc(scoreTxt(F.final, w === 1))}</div><div class="f3-fin-p">${t('a_fin_p', esc(noms[fav]), Math.max(p, 1 - p) * 100, nSim)}</div>
-    ${fp && fp[1] != null ? `<div class="f3-fin-p">${t('a_fin_top', esc(sc.score), fp[1] * 100, nSim)}</div>` : ''}`;
+    ${fp && fp[1] != null ? `<div class="f3-fin-p">${t('a_fin_top', esc(sc.score), fp[1] * 100, nSim)}</div>` : ''}
+    ${LG.length ? `<div class="f3-fin-lg">${lignesFaites(F.final, true).map((c, i) => `<div class="${c}"><span>${c === 'oui' ? '✓' : '✗'} ${esc(LG[i].lib)}</span><b>${pc0(LG[i].p)}</b></div>`).join('')}</div>` : ''}
+    <div class="f3-fin-pied">${esc(t('a_pied', nSim))}</div>`;
   $('.f3-cap').hidden = true; fin.hidden = false; son('fin', 0); son('musique_fin', 300, { duree: 5.2 });
   G3D.film.camera('stade', 5);
   await z(4800);

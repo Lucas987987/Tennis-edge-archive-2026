@@ -1319,6 +1319,13 @@
    "paquet": 286,
    "quoi": "LE PIPELINE DU SOIR NE PERD PLUS SES RÉSULTATS SUR UN PUSH REFUSÉ (paquet 286). Alerte Telegram du 18/11 : « Verdicts en direct : pas de mise à jour depuis 36 h ». Le run « Steam Pipeline » du 18/11 avait bien calculé les verdicts et les journaux, mais son unique tentative d'envoi a été refusée parce qu'un autre workflow venait de pousser sur le dépôt ; le commit est parti avec la machine du run (le message « récupérable au prochain run » était faux). L'envoi est maintenant retenté jusqu'à 6 fois (nouvelle synchro, puis envoi, attente croissante) ; jamais de push forcé ; en cas de conflit, arrêt sans rien écraser. Le prochain run régénère les verdicts. Note : le run reste rouge pour une autre raison, l'alerte de taille du dépôt (6,97 Go pour un seuil de 4 Go) du verrou qualité, sans lien avec les verdicts.",
    "garde_fou": "Vérification : dans le journal du prochain run, « ✅ PUSH OK (essai n) » et l'alerte Telegram des verdicts disparaît. Retrait : remettre .github/workflows/steam_pipeline.yml du paquet 285."
+  },
+  {
+   "date": "2026-11-19",
+   "statut": "production",
+   "paquet": 287,
+   "quoi": "VIDÉO 3D : LE BANDEAU DU BAS ET LES LIGNES DE L'ALGO (paquet 287, Lucas : « il manque le bandeau en bas de la vidéo… reprendre les informations de ces stats… le scénario doit coller à la réalité »). Sous le tableau de score : une ligne de commentaire après chaque point, comme dans la vidéo 2D (« Break ! X prend le service de Y », « X sauve la balle de break », « X remporte le set 6-4 », ace, double faute, échange en n frappes) ; les 4 lignes de l'algo de la vidéo 2D (plus de N jeux, un tie-break, 3 sets, handicap de jeux du favori ; les % de l'algo, aucune cote), cochées dès que le match simulé les atteint ; le pied « Simulation point par point · une parmi 20 000 ». L'écran de fin reprend le score du match simulé et les 4 lignes, ✓ ou ✗ selon ce score : le scénario et les chiffres racontent la même histoire. Image 3D un peu moins haute pour laisser la place ; au format 4:5, les 4 lignes ne s'affichent qu'à la fin. Le % ne change pas.",
+   "garde_fou": "Retrait : remettre algo/index.html du paquet 285."
   }
  ]
 }
