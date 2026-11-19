@@ -1326,6 +1326,13 @@
    "paquet": 287,
    "quoi": "VIDÉO 3D : LE BANDEAU DU BAS ET LES LIGNES DE L'ALGO (paquet 287, Lucas : « il manque le bandeau en bas de la vidéo… reprendre les informations de ces stats… le scénario doit coller à la réalité »). Sous le tableau de score : une ligne de commentaire après chaque point, comme dans la vidéo 2D (« Break ! X prend le service de Y », « X sauve la balle de break », « X remporte le set 6-4 », ace, double faute, échange en n frappes) ; les 4 lignes de l'algo de la vidéo 2D (plus de N jeux, un tie-break, 3 sets, handicap de jeux du favori ; les % de l'algo, aucune cote), cochées dès que le match simulé les atteint ; le pied « Simulation point par point · une parmi 20 000 ». L'écran de fin reprend le score du match simulé et les 4 lignes, ✓ ou ✗ selon ce score : le scénario et les chiffres racontent la même histoire. Image 3D un peu moins haute pour laisser la place ; au format 4:5, les 4 lignes ne s'affichent qu'à la fin. Le % ne change pas.",
    "garde_fou": "Retrait : remettre algo/index.html du paquet 285."
+  },
+  {
+   "date": "2026-11-19",
+   "statut": "production",
+   "paquet": 288,
+   "quoi": "3D : FINITIONS DE LA VIDÉO ET DU DIRECT (paquet 288, Lucas : « on est bon sur le temps de création des vidéos. On doit encore améliorer la 3D »). La vidéo passe en pleine définition (le temps gagné le permet : +55 % par image en local, le run prenait 26 min pour une limite de 100). Caméra télé plus basse et plus proche, qui glisse de côté et un peu en profondeur avec la balle : les joueurs sont plus grands à l'écran. La balle de match est rejouée deux fois : du bout opposé, puis caméra basse derrière le gagnant du point. Dans les gros plans, un juge de ligne ou un ramasseur posé entre la caméra et le joueur n'est plus dessiné, et la caméra du vainqueur se place côté intérieur du court. Ramasseurs du fond déplacés aux coins, contre le mur du fond (ils n'encombrent plus le bas de l'image). Poussière de terre battue plus fine et plus claire, qui monte et s'efface. Étiquette du direct : v288. Affichage seulement : le % ne change pas.",
+   "garde_fou": "Retrait : remettre algo/index.html, tests/test_direct_3d_version.py et simulateur/rapport_3d_site.json du paquet 287 (et supprimer tests/test_video_3d_finitions.py) si le run vidéo dépasse 60 min ou si une image est jugée moins bonne ; pour garder le reste, remettre seulement l'échelle à 0,67."
   }
  ]
 }
