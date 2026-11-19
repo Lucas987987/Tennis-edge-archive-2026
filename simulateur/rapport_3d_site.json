@@ -1,5 +1,5 @@
 {
- "paquet": 290,
+ "paquet": 291,
  "version_3d": "v290",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
@@ -27,7 +27,7 @@
  "ramasseurs_du_fond": "aux coins du fond du court, hors du cadre de la caméra télé",
  "poussiere_terre_battue": "9 grains clairs qui montent et s'effacent en 0,9 s",
  "video": {
-  "definition": "pleine (échelle 1 au lieu de 0,67)",
+  "definition": "échelle 0,67 (paquet 291 : retrait de l'échelle 1 du paquet 288, run de 65 min au-delà des 60 prévus)",
   "camera_tv": {
    "tangage_rad": 0.27,
    "distance_m": 22.5,
@@ -35,7 +35,8 @@
   },
   "balle_de_match": "rejouée deux fois : du bout opposé, puis caméra basse derrière le gagnant du point",
   "gros_plans": "un officiel posé entre la caméra et le joueur filmé n'est pas dessiné ; caméra du vainqueur côté intérieur du court",
-  "temps_de_rendu_local": "+55 % par image (0,37 s → 0,57 s) ; le run GitHub prenait 26 min pour une limite de 100"
+  "temps_de_rendu_local": "+55 % par image (0,37 s → 0,57 s) ; le run GitHub prenait 26 min pour une limite de 100",
+  "taille_max_telegram_octets": 48000000
  },
  "reflets": {
   "surfaces": {
