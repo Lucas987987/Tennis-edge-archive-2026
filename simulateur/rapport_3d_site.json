@@ -1,6 +1,6 @@
 {
- "paquet": 293,
- "version_3d": "v293",
+ "paquet": 294,
+ "version_3d": "v294",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
@@ -56,6 +56,7 @@
   "doigts": "bouts des doigts restés en place dans le fichier des modèles : ramenés dans le poing, de voisin en voisin (121 sommets par main chez l'homme, 131 chez la femme)",
   "raquette": "le manche passe dans le poing (avant : au poignet)",
   "front": "plus de rayures roses ou blanches entre peau et bandeau",
-  "bandeau_femmes": "remonté au-dessus des sourcils (1,705 m au repos au lieu de 1,668)"
+  "bandeau_femmes": "remonté au-dessus des sourcils (1,705 m au repos au lieu de 1,668)",
+  "pouce": "replié contre le dessous des doigts, vers l'auriculaire (avant : tout droit hors du poing)"
  }
 }
