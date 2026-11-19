@@ -37,7 +37,7 @@ class Reflets(unittest.TestCase):
 
     def test_rapport(self):
         d = json.loads((RACINE / 'simulateur' / 'rapport_3d_site.json').read_text(encoding='utf-8'))
-        self.assertEqual(d['paquet'], 290)
+        self.assertGreaterEqual(d['paquet'], 290)
         self.assertEqual(d['version_3d'], 'v290')
         self.assertIn('reflets', d)
 

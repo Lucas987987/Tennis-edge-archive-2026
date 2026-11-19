@@ -1347,6 +1347,13 @@
    "paquet": 290,
    "quoi": "3D : REFLETS AU SOL ET GROS PLANS NETS (paquet 290, Lucas : « améliorons encore la 3D »). 1) Sur les courts durs et les moquettes, les joueurs, les officiels et la balle se reflètent dans le sol, comme sur un court verni de salle : reflet léger, éclairé comme l'objet, qui s'efface en s'éloignant du sol ; rien sur terre battue ni sur gazon. 2) Une ombre de contact douce sous chaque joueur : les pieds paraissent posés au sol. 3) Correction : dans la vidéo, le premier gros plan (présentation du premier joueur) était entièrement flou, et le public derrière les joueurs n'était flou que par accident ; la mise au point lisait une 2e image que le moteur de rendu du serveur ne remplissait pas toujours. La distance est maintenant gardée dans l'image elle-même : le joueur est net, l'arrière-plan flou selon sa distance. Rendu un peu plus long (+12 % par image en local). Étiquette du direct : v290. Affichage seulement : le % ne change pas.",
    "garde_fou": "Retrait : remettre algo/index.html, tests/test_direct_3d_version.py, tests/test_video_3d_finitions.py et simulateur/rapport_3d_site.json du paquet 288 (et supprimer tests/test_direct_3d_reflets.py) si une image du direct ou de la vidéo est jugée moins bonne, ou si le run vidéo dépasse 60 min."
+  },
+  {
+   "date": "2026-11-19",
+   "statut": "production",
+   "paquet": 291,
+   "quoi": "VIDÉO DU JOUR : RUN ROUGE DU 19/11 CORRIGÉ (paquet 291). Les deux vidéos 3D étaient faites, mais Telegram les a refusées (« HTTP 413 ») : 73,6 Mo, alors que la limite est de 50 Mo. Cause : l'image plus nette du paquet 288 et le grain léger de l'étalonnage demandent beaucoup plus de données. Correction : au-delà de 48 Mo, la vidéo est réencodée au débit qui la fait tenir sous 48 Mo (son inchangé). Et la règle de retrait écrite au paquet 288 s'applique : la vidéo française a mis 65 min à se fabriquer (plus de 60 min) ; l'échelle de l'image 3D revient à 0,67, le reste du paquet 288 (caméra, double ralenti, ramasseurs, poussière) et le paquet 290 restent. Le % ne change pas.",
+   "garde_fou": "Retrait : remettre scripts/video_simulation.py du paquet 290 si une vidéo sous 48 Mo est abîmée par le réencodage (le réencodage ne touche que les vidéos de plus de 48 Mo)."
   }
  ]
 }
