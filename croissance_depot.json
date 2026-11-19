@@ -1,56 +1,56 @@
 {
- "genere_le": "2026-11-18T16:41:32+00:00",
+ "genere_le": "2026-11-19T16:44:57+00:00",
  "fenetre_heures": 24,
- "commits": 877,
- "versions": 2560,
- "octets_bruts": 418779954,
+ "commits": 904,
+ "versions": 2586,
+ "octets_bruts": 367839259,
  "top": [
   {
    "fichier": "Tennis_Edge_Lab/live/pronostics_resultats.json",
-   "versions": 13,
-   "octets": 94529279,
+   "versions": 12,
+   "octets": 89460264,
    "taille_inconnue": 0
   },
   {
    "fichier": "simulateur/pronostics_log.jsonl",
-   "versions": 10,
-   "octets": 83250270,
+   "versions": 8,
+   "octets": 67409304,
    "taille_inconnue": 0
   },
   {
    "fichier": "algo/donnees.json",
-   "versions": 13,
-   "octets": 59133035,
+   "versions": 12,
+   "octets": 41364312,
    "taille_inconnue": 0
   },
   {
    "fichier": "clv_history/clv_history_*.jsonl",
    "versions": 4,
-   "octets": 29564368,
+   "octets": 31867064,
    "taille_inconnue": 0
   },
   {
    "fichier": "odds_alerts_log/odds_alerts_log_*.jsonl",
-   "versions": 41,
-   "octets": 17829629,
+   "versions": 31,
+   "octets": 14000902,
    "taille_inconnue": 0
   },
   {
    "fichier": "simulateur/journal_pronostics/styles_global_v1.jsonl",
-   "versions": 10,
-   "octets": 14523920,
+   "versions": 8,
+   "octets": 11769792,
+   "taille_inconnue": 0
+  },
+  {
+   "fichier": "closing_lines.json",
+   "versions": 12,
+   "octets": 10964556,
    "taille_inconnue": 0
   },
   {
    "fichier": "simulateur/journal_pronostics/styles_ajustes_v1.jsonl",
-   "versions": 10,
-   "octets": 12176050,
-   "taille_inconnue": 0
-  },
-  {
-   "fichier": "simulateur/journal_pronostics/statistiques_styles_dur_v1.jsonl",
-   "versions": 10,
-   "octets": 12033550,
+   "versions": 8,
+   "octets": 9899968,
    "taille_inconnue": 0
   }
  ]
