@@ -4489,6 +4489,25 @@ const G3D = (() => {
         if (!fait.length) break;
         for (const [v, u] of fait) { for (let k = 0; k < 3; k++) { pos[v * 3 + k] = pos[u * 3 + k]; nor[v * 3 + k] = nor[u * 3 + k]; } reste.delete(v); }
       }
+      // paquet 294 : le pouce pendait tout droit hors du poing (« pouce levé » fin et long). Il est replié contre le
+      // dessous des doigts, vers l'auriculaire : rotation autour de l'axe de la main (x), à partir de sa base, en
+      // douceur sur les 12 premiers millimètres. Direction d'origine : du centre des sommets situés à 3–4,5 cm du bout.
+      const T = [orig[pouce * 3], orig[pouce * 3 + 1], orig[pouce * 3 + 2]];
+      let my = 0, mz = 0, nb = 0;
+      for (const v of main) { const dy = orig[v * 3 + 1] - T[1], dz = orig[v * 3 + 2] - T[2], d = Math.hypot(dy, dz);
+        if (Math.abs(orig[v * 3] - T[0]) < 0.02 && d >= 0.03 && d <= 0.045) { my += orig[v * 3 + 1]; mz += orig[v * 3 + 2]; nb++; } }
+      if (!nb) return;
+      let uy = T[1] - my / nb, uz = T[2] - mz / nb; const L = Math.hypot(uy, uz) || 1; uy /= L; uz /= L;
+      const by = T[1] - 0.035 * uy, bz = T[2] - 0.035 * uz;
+      let th = Math.atan2(-0.94, -0.35) - Math.atan2(uz, uy); th = ((th + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI;
+      for (const v of main) {
+        const y = pos[v * 3 + 1] - by, z = pos[v * 3 + 2] - bz, d = y * uy + z * uz;
+        if (d <= 0 || Math.abs(orig[v * 3] - T[0]) >= 0.025) continue;
+        let k = Math.min(1, d / 0.012); k = k * k * (3 - 2 * k);
+        const c = Math.cos(th * k), sn = Math.sin(th * k), ny = nor[v * 3 + 1], nz = nor[v * 3 + 2];
+        pos[v * 3 + 1] = by + y * c - z * sn; pos[v * 3 + 2] = bz + y * sn + z * c;
+        nor[v * 3 + 1] = Math.round(ny * c - nz * sn); nor[v * 3 + 2] = Math.round(ny * sn + nz * c);
+      }
     });
   }
   async function chargerModeles() {
@@ -5637,7 +5656,7 @@ const G3D = (() => {
     nuit: { fond: [0.06, 0.05, 0.16], ciel: [0.62, 0.64, 0.82], sol: [0.28, 0.26, 0.36], brume: [0.08, 0.07, 0.2], lum: [0.95, 0.912, 0.836] },
     jour: { fond: [0.53, 0.71, 0.92], ciel: [0.78, 0.86, 1.0], sol: [0.46, 0.42, 0.36], brume: [0.64, 0.76, 0.93], lum: [1.32, 1.24, 1.08] },
   };
-  const VERSION_3D = 'v293';
+  const VERSION_3D = 'v294';
   // ── LE FILM (paquet 276) : la vidéo du jour en 3D. La page choisit les moments forts du match simulé et les fait
   // jouer ici un par un ; public en panneaux et image un peu réduite (la vidéo est rendue sans carte graphique).
   const FILM = { actif: false, echelle: 1, son: null, cam: null, t: 0, focale: 0 };

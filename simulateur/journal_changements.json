@@ -1368,6 +1368,13 @@
    "paquet": 293,
    "quoi": "3D : MAINS, RAQUETTE ET FRONT (paquet 293, Lucas : « gros problème au niveau des mains, de la raquette, des doigts »). 1) Les « griffes » : dans le fichier des modèles, les doigts avaient été repliés en poing, mais les sommets du bout des doigts étaient restés à leur place d'origine ; de longues pointes fines partaient du poing. À la lecture du fichier, chacun de ces sommets rejoint son voisin resté dans le poing, de proche en proche (121 sommets par main chez les hommes, 131 chez les femmes) : la main est un poing fermé. 2) La raquette était tenue au poignet, les doigts à côté : le manche passe maintenant dans le poing (centre du poing mesuré sur chaque modèle). 3) Le front : entre la peau et le bandeau, la couleur passait par celles du maillot et du short (rayures roses et blanches) ; au-dessus du cou, seuls la peau et le bandeau existent. 4) Chez les femmes, le bandeau était posé sur les sourcils : il est remonté sur le front. Direct et vidéo. Étiquette du direct : v293. Le % ne change pas.",
    "garde_fou": "Retrait : remettre algo/index.html, tests/test_direct_3d_version.py, tests/test_direct_3d_reflets.py et simulateur/rapport_3d_site.json du paquet 292 (et supprimer tests/test_direct_3d_mains.py) si les mains ou la raquette sont jugées moins bonnes."
+  },
+  {
+   "date": "2026-11-19",
+   "statut": "production",
+   "paquet": 294,
+   "quoi": "3D : LE POUCE (paquet 294, Lucas : « fais-le »). Après le paquet 293, le pouce restait tout droit hors du poing, fin et long. Il est maintenant replié contre le dessous des doigts, vers l'auriculaire, comme dans un vrai poing fermé : rotation autour de l'axe de la main à partir de sa base, en douceur sur les 12 premiers millimètres (aucune déchirure). Hommes et femmes, deux mains. Direct et vidéo. Étiquette du direct : v294. Le % ne change pas.",
+   "garde_fou": "Retrait : remettre algo/index.html, tests/test_direct_3d_version.py, tests/test_direct_3d_reflets.py, tests/test_direct_3d_mains.py et simulateur/rapport_3d_site.json du paquet 293 si le pouce est jugé moins bon."
   }
  ]
 }
