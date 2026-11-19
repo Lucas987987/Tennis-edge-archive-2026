@@ -7,6 +7,10 @@
     "tour": "atp",
     "id": 22207
   },
+  "ATP Metz Challenger": {
+    "tour": "atp",
+    "id": 22204
+  },
   "ATP Champaign Challenger": {
     "tour": "atp",
     "id": 22209
@@ -14,6 +18,10 @@
   "ATP Helsinki Challenger": {
     "tour": "atp",
     "id": 22203
+  },
+  "ATP Drummondville Challenger": {
+    "tour": "atp",
+    "id": 22205
   },
   "ATP Kobe Challenger": {
     "tour": "atp",
@@ -23,17 +31,9 @@
     "tour": "atp",
     "id": 22208
   },
-  "ATP Drummondville Challenger": {
-    "tour": "atp",
-    "id": 22205
-  },
-  "ATP Metz Challenger": {
-    "tour": "atp",
-    "id": 22204
-  },
   "WTA LP Open by IND - Colina": {
     "tour": "wta",
     "id": 17382
   },
-  "_discovered_at": "2026-11-19T12:56:40.928861"
+  "_discovered_at": "2026-11-19T23:01:43.529310"
 }
