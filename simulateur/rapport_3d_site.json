@@ -1,6 +1,6 @@
 {
- "paquet": 288,
- "version_3d": "v288",
+ "paquet": 290,
+ "version_3d": "v290",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
@@ -36,5 +36,17 @@
   "balle_de_match": "rejouée deux fois : du bout opposé, puis caméra basse derrière le gagnant du point",
   "gros_plans": "un officiel posé entre la caméra et le joueur filmé n'est pas dessiné ; caméra du vainqueur côté intérieur du court",
   "temps_de_rendu_local": "+55 % par image (0,37 s → 0,57 s) ; le run GitHub prenait 26 min pour une limite de 100"
- }
+ },
+ "reflets": {
+  "surfaces": {
+   "dur": 0.2,
+   "moquette": 0.22
+  },
+  "terre_battue_et_gazon": "aucun",
+  "objets": "joueurs, officiels, balle",
+  "effacement": "s'efface sur 1,9 m sous le sol"
+ },
+ "ombre_de_contact": "tache douce sous chaque joueur",
+ "mise_au_point_video": "distance gardée dans l'image elle-même : le premier gros plan n'est plus flou",
+ "temps_de_rendu_local_290": "+12 % par image (reflets)"
 }
