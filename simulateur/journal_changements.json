@@ -1375,6 +1375,13 @@
    "paquet": 294,
    "quoi": "3D : LE POUCE (paquet 294, Lucas : « fais-le »). Après le paquet 293, le pouce restait tout droit hors du poing, fin et long. Il est maintenant replié contre le dessous des doigts, vers l'auriculaire, comme dans un vrai poing fermé : rotation autour de l'axe de la main à partir de sa base, en douceur sur les 12 premiers millimètres (aucune déchirure). Hommes et femmes, deux mains. Direct et vidéo. Étiquette du direct : v294. Le % ne change pas.",
    "garde_fou": "Retrait : remettre algo/index.html, tests/test_direct_3d_version.py, tests/test_direct_3d_reflets.py, tests/test_direct_3d_mains.py et simulateur/rapport_3d_site.json du paquet 293 si le pouce est jugé moins bon."
+  },
+  {
+   "date": "2026-11-19",
+   "statut": "production",
+   "paquet": 295,
+   "quoi": "3D : POSITION D'ATTENTE ET POSITION DE PAUSE (paquet 295, Lucas : « il faut améliorer les mouvements et déplacements ; la position de pause n'est pas bonne »). 1) Pendant l'échange, la position d'attente est celle d'un joueur de tennis : appuis plus larges que les épaules, genoux fléchis avec les pieds posés au sol (calculés), buste penché vers l'avant, regard vers le filet, raquette DEVANT tenue à deux mains (poing gauche sur le cœur de la raquette), tête de raquette vers le filet ; petit rebond sur la pointe des pieds. Avant : jambes presque tendues, raquette pendante sur le côté. Les angles des bras ont été calculés une fois par cinématique inverse sur le modèle 3D lui-même. Les pas chassés gardent cette tenue de raquette. 2) Entre les points, le joueur se relâche : debout, raquette le long du corps tête vers le sol, respiration, poids qui passe d'un pied à l'autre ; passage en douceur (0,6 s pour se mettre en place au début du point, 0,8 s pour se relâcher après). Direct et vidéo. Étiquette du direct : v295. Le % ne change pas.",
+   "garde_fou": "Retrait : remettre algo/index.html, tests/test_direct_3d_version.py, tests/test_direct_3d_reflets.py, tests/test_direct_3d_webgl.py et simulateur/rapport_3d_site.json du paquet 294 (et supprimer tests/test_direct_3d_positions.py) si les positions sont jugées moins bonnes."
   }
  ]
 }
