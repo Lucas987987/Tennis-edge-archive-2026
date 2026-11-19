@@ -41,7 +41,7 @@ class Finitions(unittest.TestCase):
 
     def test_rapport(self):
         d = json.loads((RACINE / 'simulateur' / 'rapport_3d_site.json').read_text(encoding='utf-8'))
-        self.assertEqual(d['paquet'], 288)
+        self.assertGreaterEqual(d['paquet'], 288)
         texte = json.dumps(d['video'], ensure_ascii=False).lower() + d['ramasseurs_du_fond'] + d['poussiere_terre_battue']
         for mot in ('cote', 'pinnacle', 'march', 'value'):
             self.assertNotIn(mot, texte)

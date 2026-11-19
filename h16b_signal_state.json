@@ -1,13 +1,4 @@
 {
- "2026-11-17_benjamin_bonzi_sascha_gueymard_wayenburg": {
-  "t": "2026-11-15T20:31:29",
-  "commence": "2026-11-17T10:00:00",
-  "cote": 1.4,
-  "pin_open": 1.473,
-  "book": "888sport",
-  "envoye": true,
-  "doublon": ""
- },
  "2026-11-17_alexander_zverev_ben_shelton": {
   "t": "2026-11-17T09:46:22",
   "commence": "2026-11-17T19:30:00",
@@ -104,6 +95,15 @@
   "cote": 1.39,
   "pin_open": 1.425,
   "book": "betsson",
+  "envoye": true,
+  "doublon": ""
+ },
+ "2026-11-19_dalibor_svrcina_stefano_travaglia": {
+  "t": "2026-11-19T10:10:28",
+  "commence": "2026-11-19T12:50:00",
+  "cote": 1.52,
+  "pin_open": 1.558,
+  "book": "unibet",
   "envoye": true,
   "doublon": ""
  }
