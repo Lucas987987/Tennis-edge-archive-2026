@@ -1,7 +1,7 @@
 {
   "schema": "recap_apprentissage_v1",
   "semaine": "2026-W47",
-  "genere_le": "2026-11-19T10:40:26+00:00",
+  "genere_le": "2026-11-19T12:40:21+00:00",
   "statut": "a_verifier",
   "lecture_seule": true,
   "modifie_apprentissage": false,
@@ -33,7 +33,7 @@
     },
     "gouvernance": {
       "disponible": true,
-      "genere_le": "2026-11-19T10:40:26.139473+00:00"
+      "genere_le": "2026-11-19T12:40:21.095231+00:00"
     }
   },
   "sources_manquantes": [],
@@ -193,8 +193,8 @@
   "champion": {
     "statut_gouvernance": "a_verifier",
     "initialisation": false,
-    "empreinte_avant": "669e1058284f86a21d846be876e1400b27a09a79ec3bc29ab864771ec556a074",
-    "empreinte_apres": "fb37d4af7f3c725ba7993fde7e7390b3635458c38a110af057e4689d740b53af",
+    "empreinte_avant": "fb37d4af7f3c725ba7993fde7e7390b3635458c38a110af057e4689d740b53af",
+    "empreinte_apres": "d09b547fb2866d55f874b519f9d96eaa932bf2494b8e70a3b3d751c50b96c0e6",
     "modifie_cette_semaine": true,
     "promotions_demande_es": [],
     "promotions_retenues": [],
