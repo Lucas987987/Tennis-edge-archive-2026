@@ -123,6 +123,25 @@ ETALONNAGE = ('unsharp=5:5:0.45:5:5:0.0,eq=contrast=1.045:saturation=1.07:gamma=
               'colorbalance=rs=0.015:bs=-0.012:rh=0.02:bh=-0.02,noise=alls=2:allf=t')
 
 
+# 19/11/2026 (paquet 291) : Telegram refuse une vidéo de plus de 50 Mo (HTTP 413 : 73,6 Mo le 19/11, image 3D plus
+# nette + grain de l'étalonnage). Au-dessus de 48 Mo, la vidéo est réencodée au débit qui la fait tenir sous 48 Mo.
+TAILLE_MAX = 48_000_000
+
+
+def plafonner(mp4, duree, limite=TAILLE_MAX, son_kbps=192):
+    """Réencode la vidéo (son copié) si elle dépasse `limite` octets ; renvoie True si elle a été réencodée."""
+    if os.path.getsize(mp4) <= limite or not duree or duree <= 0:
+        return False
+    kbps = max(300, int(limite * 8 * 0.93 / duree / 1000) - son_kbps)
+    tmp = mp4 + '.plafond.mp4'
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', mp4, '-map', '0', '-c:v', 'libx264', '-preset', 'medium',
+                    '-b:v', f'{kbps}k', '-maxrate', f'{kbps}k', '-bufsize', f'{2 * kbps}k', '-pix_fmt', 'yuv420p',
+                    '-c:a', 'copy', '-movflags', '+faststart', tmp], check=True)
+    os.replace(tmp, mp4)
+    print(f"Vidéo réencodée à {kbps} kb/s pour Telegram (limite {limite / 1e6:.0f} Mo)")
+    return True
+
+
 def enregistrer_images(url, mp4, ips=IPS, max_s=150, taille=(LARGEUR, HAUTEUR), attendre_pret=False, filtre=None):
     """Capture image par image (horloge virtuelle) → MP4 muet ; renvoie (durée en s, événements sonores [(s, nom)],
     ambiance sonore). attendre_pret : le temps virtuel avance sans capture tant que la page charge (3D)."""
@@ -298,6 +317,7 @@ def main(argv):
                             '-c:v', 'copy', *(['-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-ar', '48000'] if stade else []),
                             '-c:a', 'aac', '-b:a', '192k' if stade else '160k', '-shortest', '-movflags', '+faststart', mp4],
                            check=True)
+        plafonner(mp4, duree)
         shutil.rmtree(tmp, ignore_errors=True)
         print(f"Vidéo : {mp4} ({os.path.getsize(mp4) / 1e6:.1f} Mo, {duree:.1f} s, image par image à {a.ips} i/s, son {ambiance})")
         return 0

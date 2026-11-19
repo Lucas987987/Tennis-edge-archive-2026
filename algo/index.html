@@ -5674,7 +5674,7 @@ const G3D = (() => {
     // ── la vidéo du jour en 3D (paquet 276)
     film: {
       demarrer(hote, m, r, o = {}) {
-        FILM.actif = true; FILM.echelle = o.echelle || 1; FILM.son = o.son || null; QUALITE = 'haute';
+        FILM.actif = true; FILM.echelle = o.echelle || 0.67;   // paquet 291 : retrait du paquet 288 (run vidéo de 65 min) — échelle 0,67 FILM.son = o.son || null; QUALITE = 'haute';
         Object.assign(VUES.tv, { pitch: 0.27, dist: 22.5 }); Object.assign(cam, VUES.tv);              // cadre vertical : plus près
         if (!essaye) { essaye = true; try { ok = creer(); } catch (e) { ok = false; } }
         if (!ok) return false;
@@ -6809,7 +6809,7 @@ async function filmDuJour(V, m, son){
     el.style.setProperty('--c', c || '#D4FF3A'); el.hidden = false; el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
     if (ms) setTimeout(() => { el.hidden = true; }, ms); };
   const volet = () => { const v = $('.f3-volet'); v.classList.remove('on', 'fini'); void v.offsetWidth; v.classList.add('on'); son('volet'); setTimeout(() => v.classList.add('fini'), 650); };
-  if (!G3D.film.demarrer($('.f3-hote'), m, rDe(SC), { echelle: Number(Q.get('echelle') || 1), son: (type, ms, plus) => son(type, ms, plus) })){ window.__fini = true; return; }
+  if (!G3D.film.demarrer($('.f3-hote'), m, rDe(SC), { echelle: Number(Q.get('echelle') || 0.67), son: (type, ms, plus) => son(type, ms, plus) })){ window.__fini = true; return; }
   // attendre les modèles des joueurs (fichier du site) et les polices
   for (let k = 0; k < 120 && !G3D.film.pret(); k++) await z(100);
   await Promise.race([(document.fonts && document.fonts.load ? document.fonts.load('40px Bungee') : Promise.resolve()), z(3000)]);
