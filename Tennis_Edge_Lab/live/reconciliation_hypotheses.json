@@ -1,15 +1,15 @@
 {
  "schema_version": 2,
- "generated_at": "2026-11-18T13:45:52+00:00",
+ "generated_at": "2026-11-19T13:53:51+00:00",
  "sources": {
   "worker": {
    "source": "API Worker D1 /api/hypotheses (fetch_worker_snapshot.py)",
    "fichier": "worker_hypotheses_capture.json",
    "status": "ok",
-   "fetched_at": "2026-11-18T13:45:44Z",
+   "fetched_at": "2026-11-19T13:53:45Z",
    "worker_generated_at": "2026-11-17T08:28:18Z"
   },
-  "suivi_officiel": "alertes en direct : h*_signal_log.jsonl + suivi_direct/resultats.json (verdicts_direct.json du 2026-11-18T13:45:52Z)",
+  "suivi_officiel": "alertes en direct : h*_signal_log.jsonl + suivi_direct/resultats.json (verdicts_direct.json du 2026-11-19T13:53:51Z)",
   "reconstruction": "moves_detail_hist.csv filtré par les règles gelées de validation_report.py (lignes jusqu'au 2026-11-01) — contrôle, ne juge pas",
   "rapprochement": "uid + joueur normalisé ; à défaut paire de joueurs + date ±1 jour"
  },
@@ -120,15 +120,15 @@
      -2.5,
      -0.9
     ],
-    "clv_n": 389,
-    "n_detectees": 395,
-    "n_envoyees": 394,
+    "clv_n": 392,
+    "n_detectees": 397,
+    "n_envoyees": 396,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 48.1,
-    "statut": "en attente de résultats (48,1 % sans résultat)",
+    "sans_resultat_pct": 48.5,
+    "statut": "en attente de résultats (48,5 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-18T13:45:52Z"
+    "genere_le": "2026-11-19T13:53:51Z"
    },
    "reconstruction": {
     "n": 243,
@@ -146,8 +146,8 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 395,
-    "direct_envoyees": 394,
+    "direct_detectees": 397,
+    "direct_envoyees": 396,
     "direct_doublons": 0,
     "direct_non_envoyees_autres": 1,
     "direct_denouees": 204,
@@ -159,12 +159,12 @@
      "apres_coup": 349,
      "cote_opposee_live": 1
     },
-    "direct_seule": 256,
+    "direct_seule": 258,
     "direct_seule_raisons": {
      "absent_reconstruction": 102,
      "cote_opposee_reco": 62,
      "prix_different": 11,
-     "pas_encore_reconstruit": 81
+     "pas_encore_reconstruit": 83
     },
     "inexpliques": 0
    },
@@ -8718,6 +8718,34 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Gonzalo Bueno – Elmer Moller",
+     "joueur": "Gonzalo Bueno",
+     "uid": "2026-11-18_elmer_moller_gonzalo_bueno",
+     "cote": 2.6,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Jordan Lee – Andres Martin",
+     "joueur": "Jordan Lee",
+     "uid": "2026-11-19_jordan_lee_andres_martin",
+     "cote": 2.5,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -8764,20 +8792,20 @@
     "gagnes": 4,
     "roi": -13.8,
     "pts": 4.0,
-    "clv_pin": -0.2,
+    "clv_pin": -0.0,
     "clv_pin_ic95": [
-     -1.9,
-     1.4
+     -1.7,
+     1.6
     ],
-    "clv_n": 149,
-    "n_detectees": 152,
+    "clv_n": 153,
+    "n_detectees": 155,
     "n_envoyees": 53,
-    "n_doublons": 99,
+    "n_doublons": 102,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 93.3,
-    "statut": "en attente de résultats (93,3 % sans résultat)",
+    "sans_resultat_pct": 93.5,
+    "statut": "en attente de résultats (93,5 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-18T13:45:52Z"
+    "genere_le": "2026-11-19T13:53:51Z"
    },
    "reconstruction": {
     "n": 193,
@@ -8795,9 +8823,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 152,
+    "direct_detectees": 155,
     "direct_envoyees": 53,
-    "direct_doublons": 99,
+    "direct_doublons": 102,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 10,
     "reconstruction_detectees": 335,
@@ -8809,12 +8837,12 @@
      "avant_canal": 189,
      "cote_opposee_live": 3
     },
-    "direct_seule": 128,
+    "direct_seule": 131,
     "direct_seule_raisons": {
      "cote_opposee_reco": 14,
      "absent_reconstruction": 37,
      "prix_different": 14,
-     "pas_encore_reconstruit": 63
+     "pas_encore_reconstruit": 66
     },
     "inexpliques": 0
    },
@@ -15006,6 +15034,20 @@
     {
      "sens": "direct seule",
      "date": "2026-11-18",
+     "match": "Aidan McHugh – Shunsuke Mitsui",
+     "joueur": "Aidan McHugh",
+     "uid": "2026-11-18_aidan_mchugh_shunsuke_mitsui",
+     "cote": 3.25,
+     "book": "bwin",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
      "match": "Genaro Alberto Olivieri – Tristan Boyer",
      "joueur": "Genaro Alberto Olivieri",
      "uid": "2026-11-18_genaro_alberto_olivieri_tristan_boyer",
@@ -15029,6 +15071,34 @@
      "raison": "pas_encore_reconstruit",
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Gonzalo Bueno – Elmer Moller",
+     "joueur": "Gonzalo Bueno",
+     "uid": "2026-11-18_elmer_moller_gonzalo_bueno",
+     "cote": 2.6,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Jordan Lee – Andres Martin",
+     "joueur": "Jordan Lee",
+     "uid": "2026-11-19_jordan_lee_andres_martin",
+     "cote": 2.5,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
      "explique": true
     }
    ]
@@ -15081,15 +15151,15 @@
      -2.8,
      -0.4
     ],
-    "clv_n": 133,
-    "n_detectees": 136,
+    "clv_n": 135,
+    "n_detectees": 138,
     "n_envoyees": 0,
-    "n_doublons": 136,
+    "n_doublons": 138,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 74.1,
-    "statut": "en attente de résultats (74,1 % sans résultat)",
+    "sans_resultat_pct": 74.5,
+    "statut": "en attente de résultats (74,5 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-18T13:45:52Z"
+    "genere_le": "2026-11-19T13:53:51Z"
    },
    "reconstruction": {
     "n": 96,
@@ -15107,9 +15177,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 136,
+    "direct_detectees": 138,
     "direct_envoyees": 0,
-    "direct_doublons": 136,
+    "direct_doublons": 138,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 35,
     "reconstruction_detectees": 181,
@@ -15119,12 +15189,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 137
     },
-    "direct_seule": 92,
+    "direct_seule": 94,
     "direct_seule_raisons": {
      "absent_reconstruction": 24,
      "cote_opposee_reco": 16,
      "prix_different": 6,
-     "pas_encore_reconstruit": 46
+     "pas_encore_reconstruit": 48
     },
     "inexpliques": 0
    },
@@ -18400,6 +18470,34 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Gonzalo Bueno – Elmer Moller",
+     "joueur": "Gonzalo Bueno",
+     "uid": "2026-11-18_elmer_moller_gonzalo_bueno",
+     "cote": 2.6,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Jordan Lee – Andres Martin",
+     "joueur": "Jordan Lee",
+     "uid": "2026-11-19_jordan_lee_andres_martin",
+     "cote": 2.5,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -18448,18 +18546,18 @@
     "pts": 1.9,
     "clv_pin": -0.5,
     "clv_pin_ic95": [
-     -1.0,
+     -0.9,
      -0.0
     ],
-    "clv_n": 338,
-    "n_detectees": 341,
-    "n_envoyees": 340,
+    "clv_n": 340,
+    "n_detectees": 347,
+    "n_envoyees": 345,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 65.7,
-    "statut": "en attente de résultats (65,7 % sans résultat)",
+    "sans_resultat_pct": 66.0,
+    "statut": "en attente de résultats (66,0 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-18T13:45:52Z"
+    "genere_le": "2026-11-19T13:53:51Z"
    },
    "reconstruction": {
     "n": 264,
@@ -18477,10 +18575,10 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 341,
-    "direct_envoyees": 340,
+    "direct_detectees": 347,
+    "direct_envoyees": 345,
     "direct_doublons": 0,
-    "direct_non_envoyees_autres": 1,
+    "direct_non_envoyees_autres": 2,
     "direct_denouees": 117,
     "reconstruction_detectees": 424,
     "reconstruction_reglees": 264,
@@ -18489,12 +18587,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 321
     },
-    "direct_seule": 238,
+    "direct_seule": 244,
     "direct_seule_raisons": {
      "cote_opposee_reco": 55,
      "absent_reconstruction": 62,
      "prix_different": 7,
-     "pas_encore_reconstruit": 114
+     "pas_encore_reconstruit": 120
     },
     "inexpliques": 0
    },
@@ -26390,6 +26488,90 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Frances Tiafoe – Flavio Cobolli",
+     "joueur": "Frances Tiafoe",
+     "uid": "2026-11-18_flavio_cobolli_frances_tiafoe",
+     "cote": 1.73,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Ben Shelton – Rafael Jodar",
+     "joueur": "Ben Shelton",
+     "uid": "2026-11-19_ben_shelton_rafael_jodar",
+     "cote": 1.49,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Alexander Zverev – Arthur Fils",
+     "joueur": "Alexander Zverev",
+     "uid": "2026-11-19_alexander_zverev_arthur_fils",
+     "cote": 1.39,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Dalibor Svrcina – Stefano Travaglia",
+     "joueur": "Dalibor Svrcina",
+     "uid": "2026-11-19_dalibor_svrcina_stefano_travaglia",
+     "cote": 1.52,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Dylan Dietrich – Justin Boulais",
+     "joueur": "Dylan Dietrich",
+     "uid": "2026-11-19_dylan_dietrich_justin_boulais",
+     "cote": 1.11,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Hugo Gaston – Harold Mayot",
+     "joueur": "Hugo Gaston",
+     "uid": "2026-11-19_harold_mayot_hugo_gaston",
+     "cote": 1.66,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -26441,15 +26623,15 @@
      -1.1,
      -0.1
     ],
-    "clv_n": 290,
-    "n_detectees": 291,
-    "n_envoyees": 291,
+    "clv_n": 292,
+    "n_detectees": 296,
+    "n_envoyees": 295,
     "n_doublons": 0,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
-    "sans_resultat_pct": 66.0,
-    "statut": "en attente de résultats (66,0 % sans résultat)",
+    "sans_resultat_pct": 66.3,
+    "statut": "en attente de résultats (66,3 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-18T13:45:52Z"
+    "genere_le": "2026-11-19T13:53:51Z"
    },
    "reconstruction": {
     "n": 225,
@@ -26467,10 +26649,10 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 291,
-    "direct_envoyees": 291,
+    "direct_detectees": 296,
+    "direct_envoyees": 295,
     "direct_doublons": 0,
-    "direct_non_envoyees_autres": 0,
+    "direct_non_envoyees_autres": 1,
     "direct_denouees": 99,
     "reconstruction_detectees": 348,
     "reconstruction_reglees": 225,
@@ -26479,12 +26661,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 257
     },
-    "direct_seule": 200,
+    "direct_seule": 205,
     "direct_seule_raisons": {
      "cote_opposee_reco": 50,
      "prix_different": 7,
      "absent_reconstruction": 50,
-     "pas_encore_reconstruit": 93
+     "pas_encore_reconstruit": 98
     },
     "inexpliques": 0
    },
@@ -32952,6 +33134,76 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-18",
+     "match": "Frances Tiafoe – Flavio Cobolli",
+     "joueur": "Frances Tiafoe",
+     "uid": "2026-11-18_flavio_cobolli_frances_tiafoe",
+     "cote": 1.73,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-18, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Ben Shelton – Rafael Jodar",
+     "joueur": "Ben Shelton",
+     "uid": "2026-11-19_ben_shelton_rafael_jodar",
+     "cote": 1.49,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Alexander Zverev – Arthur Fils",
+     "joueur": "Alexander Zverev",
+     "uid": "2026-11-19_alexander_zverev_arthur_fils",
+     "cote": 1.39,
+     "book": "betsson",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Dalibor Svrcina – Stefano Travaglia",
+     "joueur": "Dalibor Svrcina",
+     "uid": "2026-11-19_dalibor_svrcina_stefano_travaglia",
+     "cote": 1.52,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Hugo Gaston – Harold Mayot",
+     "joueur": "Hugo Gaston",
+     "uid": "2026-11-19_harold_mayot_hugo_gaston",
+     "cote": 1.66,
+     "book": "unibet",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -33004,14 +33256,14 @@
      3.8
     ],
     "clv_n": 110,
-    "n_detectees": 111,
+    "n_detectees": 112,
     "n_envoyees": 70,
-    "n_doublons": 41,
+    "n_doublons": 42,
     "source": "verdicts_direct.json (recalculé : journal plus récent)",
     "sans_resultat_pct": 64.0,
     "statut": "en attente de résultats (64,0 % sans résultat)",
     "verrouillable": false,
-    "genere_le": "2026-11-18T13:45:52Z"
+    "genere_le": "2026-11-19T13:53:51Z"
    },
    "reconstruction": {
     "n": 112,
@@ -33029,9 +33281,9 @@
     "egal_validation_report": true
    },
    "entonnoir": {
-    "direct_detectees": 111,
+    "direct_detectees": 112,
     "direct_envoyees": 70,
-    "direct_doublons": 41,
+    "direct_doublons": 42,
     "direct_non_envoyees_autres": 0,
     "direct_denouees": 40,
     "reconstruction_detectees": 198,
@@ -33041,12 +33293,12 @@
     "reconstruction_seule_raisons": {
      "apres_coup": 184
     },
-    "direct_seule": 97,
+    "direct_seule": 98,
     "direct_seule_raisons": {
      "absent_reconstruction": 17,
      "prix_different": 35,
      "cote_opposee_reco": 11,
-     "pas_encore_reconstruit": 34
+     "pas_encore_reconstruit": 35
     },
     "inexpliques": 0
    },
@@ -37050,6 +37302,20 @@
      "libelle": "Pas encore dans la reconstruction",
      "detail": "match du 2026-11-17, reconstruction arrêtée au 2026-11-01",
      "explique": true
+    },
+    {
+     "sens": "direct seule",
+     "date": "2026-11-19",
+     "match": "Jordan Lee – Andres Martin",
+     "joueur": "Jordan Lee",
+     "uid": "2026-11-19_jordan_lee_andres_martin",
+     "cote": 2.5,
+     "book": "bet365",
+     "statut": "non dénouée",
+     "raison": "pas_encore_reconstruit",
+     "libelle": "Pas encore dans la reconstruction",
+     "detail": "match du 2026-11-19, reconstruction arrêtée au 2026-11-01",
+     "explique": true
     }
    ]
   },
@@ -37106,7 +37372,7 @@
     "sans_resultat_pct": 0.0,
     "statut": "verrouillable (résultats complets à 100 %)",
     "verrouillable": true,
-    "genere_le": "2026-11-18T13:45:52Z"
+    "genere_le": "2026-11-19T13:53:51Z"
    },
    "reconstruction": {
     "n": 51,
