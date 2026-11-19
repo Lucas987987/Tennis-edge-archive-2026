@@ -159,12 +159,14 @@ const M4mul = (a, b) => { const o = new Array(16).fill(0); for (let c = 0; c < 4
 const rep = G3D._squelette().M; let ecart = 0;
 for (const m of rep) { const p = M4mul(m, G3D._inverse(m)); for (let k = 0; k < 16; k++) ecart = Math.max(ecart, Math.abs(p[k] - (k % 5 === 0 ? 1 : 0))); }
 const att = G3D._squelette(G3D._poses.poseAttente(0)).M, x = k => att[k][12];
-console.log(JSON.stringify({ n: rep.length, ecart, sym: [x(10) + x(13), x(11) + x(14), x(4) + x(7), x(5) + x(8)] }));
+console.log(JSON.stringify({ n: rep.length, ecart, sym: [x(10) + x(13), x(11) + x(14)], devant: [att[5][14], att[8][14]] }));
 ''', str(RACINE / 'algo' / 'index.html')], capture_output=True, text=True, check=True).stdout)
         self.assertEqual(S['n'], 15)
         self.assertLess(S['ecart'], 1e-5)
         for v in S['sym']:
-            self.assertLess(abs(v), 0.03)                                                   # gauche = miroir de droite
+            self.assertLess(abs(v), 0.03)                                                   # jambes : gauche = miroir de droite
+        for z in S['devant']:                                       # paquet 295 : raquette devant, tenue à deux mains
+            self.assertGreater(z, 0.15)
         for x in ('uniform mat4 uOs[24]', 'aWt / max(dot(aWt', 'function poseLisse'):
             self.assertIn(x, BLOC)
 

@@ -1,6 +1,6 @@
 {
- "paquet": 294,
- "version_3d": "v294",
+ "paquet": 295,
+ "version_3d": "v295",
  "essais_de_chargement_des_modeles": 3,
  "attentes_s": [
   1.5,
@@ -58,5 +58,11 @@
   "front": "plus de rayures roses ou blanches entre peau et bandeau",
   "bandeau_femmes": "remonté au-dessus des sourcils (1,705 m au repos au lieu de 1,668)",
   "pouce": "replié contre le dessous des doigts, vers l'auriculaire (avant : tout droit hors du poing)"
+ },
+ "positions": {
+  "attente": "appuis larges, genoux fléchis (pieds posés au sol, calculés), buste penché, raquette devant tenue à deux mains, tête de raquette vers le filet",
+  "entre_les_points": "relâché : debout, raquette le long du corps, respiration et poids qui passe d'un pied à l'autre",
+  "passage": "0,6 s pour se mettre en place au début du point, 0,8 s pour se relâcher après",
+  "pas_chasses": "gardent la raquette devant, à deux mains"
  }
 }
