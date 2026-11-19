@@ -3820,6 +3820,9 @@ const G3D = (() => {
     bool tissu = false;
     if (uHabit == 1) {
       int k = int(vCls + 0.5);
+      // paquet 292 : sur la tête, la classe interpolée entre peau (0) et bandeau (7) passait par 1…6 (maillot, short,
+      // liseré…) : rayures roses et blanches sur le front. Au-dessus du cou, seuls la peau et le bandeau existent.
+      if (vB.y > uTenue[0].y - 0.08 && k > 0 && k < 7) k = 0;
       // bords nets du maillot (col rond, manches) et du short, calculés sur la pose de repos (bras en croix)
       float ax = abs(vB.x), rCou = length(vec2(vB.x, vB.z + 0.03));
       bool torse = ax < 0.355 && vB.y > 0.99 && (vB.y < 1.43 || (rCou > 0.088 && vB.y < 1.56));
@@ -4460,6 +4463,34 @@ const G3D = (() => {
     O.noms.forEach((_, k) => { const p = O.parents[k]; MOD.os.reposMonde[k] = p < 0 ? MOD.os.repos[k] : mul3(MOD.os.reposMonde[p], MOD.os.repos[k]); });
     MOD.ref = os({ x: 0, z: 0, cap: 0 }, POSE_T()).M.map(rot3);         // mon squelette, bras en croix
   }
+  // paquet 292 (Lucas : « gros problème au niveau des mains, de la raquette, des doigts ») — dans le fichier des
+  // modèles, les doigts ont été repliés en poing, mais les sommets du BOUT des doigts sont restés à leur place
+  // d'origine : de longues pointes partaient du poing (les « griffes »). Chaque sommet de la main situé au-delà du
+  // poing (plus de 1,5 cm après le bout du pouce, qui pend sous la main) rejoint son voisin le plus proche resté dans
+  // le poing, de proche en proche : les triangles étirés se replient dans le poing.
+  function corrigerMains(pos, nor, jnt, wgt, idx, mains) {
+    const n = pos.length / 3;
+    mains.forEach((h, c) => {
+      if (h < 0) return;
+      const sg = c === 0 ? -1 : 1, main = [];
+      for (let v = 0; v < n; v++) { let w = 0; for (let k = 0; k < 4; k++) if (jnt[v * 4 + k] === h) w += wgt[v * 4 + k] / 255; if (w > 0.5) main.push(v); }
+      if (!main.length) return;
+      let pouce = main[0]; for (const v of main) if (pos[v * 3 + 1] < pos[pouce * 3 + 1]) pouce = v;
+      const seuil = pos[pouce * 3] * sg + 0.015, reste = new Set(main.filter(v => pos[v * 3] * sg > seuil));
+      if (!reste.size) return;
+      const vois = new Map([...reste].map(v => [v, new Set()]));
+      for (let t = 0; t < idx.length; t += 3) for (let a = 0; a < 3; a++) { const V = vois.get(idx[t + a]); if (V) for (let b = 0; b < 3; b++) if (b !== a) V.add(idx[t + b]); }
+      const orig = pos.slice();
+      for (let tour = 0; tour < 40 && reste.size; tour++) {
+        const fait = [];
+        for (const v of reste) { let u = -1, du = 1e9;
+          for (const x of vois.get(v)) if (!reste.has(x)) { const d = (orig[v * 3] - orig[x * 3]) ** 2 + (orig[v * 3 + 1] - orig[x * 3 + 1]) ** 2 + (orig[v * 3 + 2] - orig[x * 3 + 2]) ** 2; if (d < du) { du = d; u = x; } }
+          if (u >= 0) fait.push([v, u]); }
+        if (!fait.length) break;
+        for (const [v, u] of fait) { for (let k = 0; k < 3; k++) { pos[v * 3 + k] = pos[u * 3 + k]; nor[v * 3 + k] = nor[u * 3 + k]; } reste.delete(v); }
+      }
+    });
+  }
   async function chargerModeles() {
     if (MOD.etat !== 'rien') return; MOD.etat = 'charge';
     try {
@@ -4478,11 +4509,14 @@ const G3D = (() => {
       const buf = MOD.buf, dv = new DataView(buf); MOD.buf = null;
       if (String.fromCharCode(...new Uint8Array(buf, 0, 4)) !== 'TEJ3') throw new Error('format');
       const n = dv.getUint32(4, true), J = JSON.parse(new TextDecoder().decode(new Uint8Array(buf, 8, n))), B = 8 + n;
-      const prim = q => {
+      const prim = (q, mains) => {
         const vao = gl.createVertexArray(); gl.bindVertexArray(vao);
-        const att = (loc, Type, off, nb, typeGl, norm) => { const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
-          gl.bufferData(gl.ARRAY_BUFFER, new Type(buf, B + off, q.n * nb), gl.STATIC_DRAW); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, nb, typeGl, norm, 0, 0); };
-        att(0, Float32Array, q.pos, 3, gl.FLOAT, false); att(1, Int8Array, q.nor, 3, gl.BYTE, true); att(3, Uint16Array, q.uv, 2, gl.UNSIGNED_SHORT, true);
+        const att = (loc, Type, off, nb, typeGl, norm, donnees) => { const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
+          gl.bufferData(gl.ARRAY_BUFFER, donnees || new Type(buf, B + off, q.n * nb), gl.STATIC_DRAW); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, nb, typeGl, norm, 0, 0); };
+        const pos = new Float32Array(buf.slice(B + q.pos, B + q.pos + q.n * 12)), nor = new Int8Array(buf.slice(B + q.nor, B + q.nor + q.n * 3));
+        if (mains) corrigerMains(pos, nor, new Uint8Array(buf, B + q.jnt, q.n * 4), new Uint8Array(buf, B + q.wgt, q.n * 4),
+          q.i32 ? new Uint32Array(buf.slice(B + q.idx, B + q.idx + q.ni * 4)) : new Uint16Array(buf.slice(B + q.idx, B + q.idx + q.ni * 2)), mains);
+        att(0, Float32Array, q.pos, 3, gl.FLOAT, false, pos); att(1, Int8Array, q.nor, 3, gl.BYTE, true, nor); att(3, Uint16Array, q.uv, 2, gl.UNSIGNED_SHORT, true);
         att(6, Uint8Array, q.jnt, 4, gl.UNSIGNED_BYTE, false); att(7, Uint8Array, q.wgt, 4, gl.UNSIGNED_BYTE, true); att(8, Uint8Array, q.cls, 1, gl.UNSIGNED_BYTE, false);
         gl.vertexAttrib3f(2, 1, 1, 1); gl.vertexAttrib4f(4, 0, 0, 0, 1); gl.vertexAttrib3f(5, 1, 1, 1);
         const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib);
@@ -4490,7 +4524,8 @@ const G3D = (() => {
         gl.bindVertexArray(null);
         return { vao, n: q.ni, type: q.i32 ? gl.UNSIGNED_INT : gl.UNSIGNED_SHORT, tex: q.tex };
       };
-      for (const s in J.corps) MOD.corps[s] = { corps: prim(J.corps[s].corps), yeux: prim(J.corps[s].yeux) };
+      const mains = [J.os.noms.indexOf('hand_r'), J.os.noms.indexOf('hand_l')];
+      for (const s in J.corps) MOD.corps[s] = { corps: prim(J.corps[s].corps, mains), yeux: prim(J.corps[s].yeux) };
       for (const c in J.cheveux) MOD.cheveux[c] = prim(J.cheveux[c]);
       for (const [nom, [off, len]] of Object.entries(J.images)) {
         const img = await createImageBitmap(new Blob([new Uint8Array(buf, B + off, len)], { type: 'image/jpeg' }));
@@ -4513,7 +4548,7 @@ const G3D = (() => {
     const T = i === 0 ? ['#20bcd6', '#0d6f80', '#16244f', '#7fe9ff', '#f4f4f8', '#2f2f3a', '#f4f4f8']
                       : ['#e0479a', '#8c1d58', '#f2f2f6', '#ff9fd0', '#f4f4f8', '#2f2f3a', '#f4f4f8'];
     return { sexe, peau: `peau_${sexe}_${fonce ? 'fonce' : 'clair'}`, coiffe, sourcils: 'sourcils_' + sexe,
-             tenue: [[femme ? 0.66 : 0.6, femme ? 1.668 : 1.752, 0], ...T.map(hex)], bandeau: (h >>> 3) % 2 === 0,
+             tenue: [[femme ? 0.66 : 0.6, femme ? 1.705 : 1.752, 0], ...T.map(hex)], bandeau: (h >>> 3) % 2 === 0,
              cheveux: hex(['#3a2618', '#1b1410', '#5a3a1e', '#b88a4a', '#2a1a10'][(h >>> 5) % 5]).map(v => v * 1.9) };   // texture grise teintée
   }
   // matrices de peau du modèle pour une pose de mon squelette
@@ -4542,7 +4577,7 @@ const G3D = (() => {
     if (enJeu) { const s = cl((v - 5.4) / 2.8, 0, 1); return [['Jog_Fwd_Loop', 1 - s], ['Sprint_Loop', s]]; }
     const s = cl((v - 1.2) / 2.5, 0, 1); return [['Walk_Loop', 1 - s], ['Jog_Fwd_Loop', s]];
   }
-  function osModele(j, pose, loco) {
+  function osModele(j, pose, loco, sexe) {
     const O = MOD.os, n = O.noms.length;
     const mien = os({ x: 0, z: 0, cap: 0 }, pose), R = mien.M.map(rot3);
     const delta = k => mul3(R[k], trans3(MOD.ref[k]));
@@ -4595,6 +4630,11 @@ const G3D = (() => {
       m[12] = main[12]; m[13] = main[13]; m[14] = main[14];
       raquette = M4.mul(m, L);
     }
+    // paquet 292 : le manche passe dans le poing (avant : au poignet, doigts à côté). G : centre du poing dans le repère
+    // de l'os de la main (x hors de la paume, y vers les doigts), mesuré sur chaque modèle ; (0 ; 0,06 ; 0) : le grip.
+    if (raquette) { const G = sexe === 'F' ? [-0.065, 0.01, 0.023] : [-0.038, 0.106, 0.016], main = monde[O.noms.indexOf('hand_r')];
+      const voulu = M4.pt(main, G), actuel = M4.pt(raquette, [0, 0.06, 0]);
+      for (let k = 0; k < 3; k++) raquette[12 + k] += voulu[k] - actuel[k]; }
     return { skin, raquette };
   }
 
@@ -5249,7 +5289,7 @@ const G3D = (() => {
       const pose = o.juge ? poseJuge() : poseRamasseur(o.acc), { skin } = osModele(o, pose, null);
       return { skin: new Float32Array(skin), sexe: o.sexe, peau: `peau_${o.sexe}_${o.k % 3 === 1 ? 'fonce' : 'clair'}`,
         coiffe: coiffes[o.sexe][o.k % 2], sourcils: 'sourcils_' + o.sexe, cheveux: hex(chev[o.k % 5]).map(v => v * 1.9),
-        tenue: [[o.sexe === 'F' ? 0.66 : 0.6, o.sexe === 'F' ? 1.668 : 1.752, 0], ...(o.juge ? TENUE_JUGE : TENUE_RAM)].map((c, k) => k === 7 ? [-1, -1, -1] : c) };
+        tenue: [[o.sexe === 'F' ? 0.66 : 0.6, o.sexe === 'F' ? 1.705 : 1.752, 0], ...(o.juge ? TENUE_JUGE : TENUE_RAM)].map((c, k) => k === 7 ? [-1, -1, -1] : c) };
     });
     return OFF_POSES;
   }
@@ -5359,7 +5399,7 @@ const G3D = (() => {
     for (const i of [0, 1]) {
       const pose = poseLisse(i, t, dt);
       if (MOD.etat === 'pret' && MATCH) {
-        const A = ALLURE[i] || (ALLURE[i] = allure(MATCH, i)), { skin, raquette } = osModele(J[i], pose, LOCO[i]), C = MOD.corps[A.sexe];
+        const A = ALLURE[i] || (ALLURE[i] = allure(MATCH, i)), { skin, raquette } = osModele(J[i], pose, LOCO[i], A.sexe), C = MOD.corps[A.sexe];
         const tenue = A.tenue.map((c, k) => k === 7 && !A.bandeau ? [-1, -1, -1] : c);
         dyn.push([C.corps, M4.id(), false, skin, { tex: MOD.tex[A.peau], tenue }], [C.yeux, M4.id(), false, skin, { tex: MOD.tex.yeux }]);
         for (const c of [A.coiffe, A.sourcils]) { const H = MOD.cheveux[c]; if (H) dyn.push([H, M4.id(), false, skin, { tex: MOD.tex[H.tex], col: A.cheveux }]); }
@@ -5597,7 +5637,7 @@ const G3D = (() => {
     nuit: { fond: [0.06, 0.05, 0.16], ciel: [0.62, 0.64, 0.82], sol: [0.28, 0.26, 0.36], brume: [0.08, 0.07, 0.2], lum: [0.95, 0.912, 0.836] },
     jour: { fond: [0.53, 0.71, 0.92], ciel: [0.78, 0.86, 1.0], sol: [0.46, 0.42, 0.36], brume: [0.64, 0.76, 0.93], lum: [1.32, 1.24, 1.08] },
   };
-  const VERSION_3D = 'v292';
+  const VERSION_3D = 'v293';
   // ── LE FILM (paquet 276) : la vidéo du jour en 3D. La page choisit les moments forts du match simulé et les fait
   // jouer ici un par un ; public en panneaux et image un peu réduite (la vidéo est rendue sans carte graphique).
   const FILM = { actif: false, echelle: 1, son: null, cam: null, t: 0, focale: 0 };
