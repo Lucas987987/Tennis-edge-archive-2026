@@ -4,8 +4,8 @@
 sons_stade.py — la bande-son « stade » de la vidéo du jour en 3D (paquet 277, 18/11/2026), en STÉRÉO.
 
 Tout est fabriqué ici (numpy, scipy) : aucun enregistrement, aucune musique d'autrui.
-  — le public : brouhaha de milliers de voix (bruits filtrés modulés au rythme de la parole), applaudissements
-    (des milliers de claquements), « ooooh » quand l'échange s'allonge, ovation sur les grands points ;
+  — le public (paquet 300) : voix synthétiques qui parlent entre les points, applaudissements au rythme de chaque
+    spectateur, « ooooh » quand l'échange s'allonge, cris et sifflets sur les grands points ;
   — le court : « pock » de la raquette (plus fort au service), rebonds, filet, crissement des semelles sur le dur,
     placés à gauche ou à droite selon l'image ;
   — l'habillage : souffle des transitions, impact du face-à-face, jingles télé courts, nappe musicale en ouverture
@@ -89,63 +89,200 @@ def crisse(r=None):
     return 0.07 * np.sin(ph) * np.abs(np.sin(np.pi * t / t[-1])) ** 0.6
 
 
+def _somme(a, b):
+    n = max(len(a), len(b))
+    return np.pad(a, ((0, n - len(a)), (0, 0))) + np.pad(b, ((0, n - len(b)), (0, 0)))
+
+
 # ── le public ───────────────────────────────────────────────────────────────────────────────────────────────
-def brouhaha(duree, r=None, niveau=0.06):
-    """Milliers de conversations : bandes de bruit modulées au rythme de la parole (3–7 Hz), en stéréo."""
-    r = r or _rng(5)
+# 19/11/2026 (paquet 300, Lucas : « le bruit du public, ce n'est pas du tout clair ») : l'ancien public était fait de
+# bruit filtré (souffle, pluie) : on n'y reconnaissait ni des voix ni des mains. Il est maintenant fait de VOIX
+# synthétiques (cordes vocales : impulsions à la hauteur de chaque voix ; bouche : trois formants de voyelle ;
+# syllabes, consonnes, pauses) et de VRAIS RYTHMES D'APPLAUDISSEMENTS (chaque spectateur frappe 3 à 5,5 fois par
+# seconde, avec la résonance de ses mains, puis s'arrête à son moment). Toujours rien d'enregistré.
+VOYELLES = {'a': (730, 1090, 2440), 'e': (530, 1840, 2480), 'i': (300, 2250, 3000), 'o': (570, 840, 2410),
+            'u': (320, 870, 2240), 'eu': (480, 1350, 2400), 'ou': (350, 750, 2300)}
+
+
+def _source(n, f0, r, souffle=0.04):
+    """Cordes vocales : train d'impulsions à la hauteur f0 (tableau ou nombre), un peu irrégulier, + souffle."""
+    f0 = np.broadcast_to(np.asarray(f0, dtype=float), (n,)) * (1 + 0.012 * (_lisse(n, 6, r) - 0.5))
+    ph = np.cumsum(f0 / TAUX) % 1.0
+    impulsion = np.where(ph < 0.6, np.sin(np.pi * ph / 0.6) ** 2, 0.0)
+    x = np.diff(impulsion, prepend=0.0)
+    x /= np.sqrt((x ** 2).mean()) + 1e-12                                     # puissance 1, puis un peu de souffle
+    return x + souffle * r.standard_normal(n)
+
+
+def _bouche(x, formants, femme=False):
+    """Trois résonances (formants) d'une voyelle, en parallèle."""
+    k = 1.17 if femme else 1.0
+    out = np.zeros_like(x)
+    for f, g, q in zip(formants, (1.0, 0.55, 0.28), (7, 11, 14)):
+        b, a = signal.iirpeak(min(f * k, TAUX / 2 - 100), q, fs=TAUX)
+        out += g * signal.lfilter(b, a, x)
+    return out
+
+
+def _parleur(n, r):
+    """Une personne qui parle : syllabes (voyelle + parfois consonne), pauses, intonation."""
+    femme = r.random() < 0.45
+    f0 = r.uniform(175, 245) if femme else r.uniform(95, 140)
+    out = np.zeros(n)
+    i = int(r.uniform(0, 0.6) * TAUX)
+    while i < n:
+        if r.random() < 0.18:                                               # respiration, silence
+            i += int(r.uniform(0.25, 0.8) * TAUX)
+            continue
+        lg = int(r.uniform(0.11, 0.26) * TAUX)
+        if i + lg >= n:
+            break
+        t = np.arange(lg) / lg
+        hauteur = f0 * (1 + 0.12 * (r.random() - 0.5) - 0.06 * t)              # l'intonation retombe un peu
+        v = _bouche(_source(lg, hauteur, r), VOYELLES[r.choice(list(VOYELLES))], femme)
+        v /= np.sqrt((v ** 2).mean()) + 1e-12
+        env = np.sin(np.pi * np.minimum(1, t * 1.15)) ** 1.5
+        syl = v * env * r.uniform(0.5, 1.0)
+        if r.random() < 0.4:                                                 # consonne : s, ch, t, k… (discrète)
+            lc = int(r.uniform(0.02, 0.045) * TAUX)
+            c = _bande(r.standard_normal(lc), r.uniform(2500, 4500), 7500) * np.hanning(lc) * 0.12
+            syl[:lc] += c[:lg]
+        out[i:i + lg] += syl
+        i += lg + int(r.uniform(0.0, 0.07) * TAUX)
+    return out
+
+
+def _boucle_brouhaha(duree, nb, r):
+    """nb personnes qui parlent, réparties dans la salle (stéréo), un peu lointaines."""
     n = int(duree * TAUX)
     out = np.zeros((n, 2))
-    for k in range(8):
-        voix = _bande(r.standard_normal(n), r.uniform(250, 500), r.uniform(1400, 2600))
-        mod = _lisse(n, r.uniform(3, 7), r) ** 2
-        out += _st(voix * mod, r.uniform(-0.9, 0.9))
-    out += _st(_bande(r.standard_normal(n), 80, 600), 0) * 0.5
-    fondu = int(1.0 * TAUX)
-    rampe = np.minimum(1, np.minimum(np.arange(n), n - 1 - np.arange(n)) / fondu)
-    return niveau * out / (np.abs(out).max() + 1e-9) * 3 * rampe[:, None]
+    for _ in range(nb):
+        x = _parleur(n, r)
+        loin = r.uniform(0.35, 1.0)
+        x = _bande(x, 200, 2600 + 2400 * loin)                                 # pas de grondement ; les voix lointaines perdent leurs aigus
+        out += _st(x * loin, r.uniform(-0.95, 0.95))
+    return out / (np.sqrt((out ** 2).mean()) + 1e-9)
+
+
+def brouhaha(duree, r=None, niveau=0.06):
+    """Le stade qui parle à voix basse entre les points : trois boucles de 9 s de 40 voix, enchaînées en fondu, gauche
+    et droite décalées (pas de répétition audible)."""
+    r = r or _rng(5)
+    n = int(duree * TAUX)
+    boucles = [_boucle_brouhaha(9.0, 40, r) for _ in range(3)]
+    L = len(boucles[0])
+    fondu = int(1.5 * TAUX)
+    rampe = np.linspace(0, 1, fondu)[:, None]
+    out = np.zeros((n + L, 2))
+    pos, k = 0, 0
+    while pos < n:
+        b = boucles[k % 3].copy()
+        b[:fondu] *= rampe
+        b[-fondu:] *= rampe[::-1]
+        out[pos:pos + L] += b
+        pos += L - fondu
+        k += 1
+    out = out[:n]
+    out[:, 1] = np.roll(out[:, 1], int(3.1 * TAUX))                          # gauche et droite jamais en même temps
+    debut = int(min(1.0, duree / 3) * TAUX)
+    env = np.minimum(1, np.minimum(np.arange(n), n - 1 - np.arange(n)) / max(1, debut))
+    return niveau * 0.42 * out * env[:, None]                               # un peu plus bas qu'avant : le court s'entend mieux
+
+
+def _claquement(r):
+    """Une paire de mains : choc bref + résonance du creux des mains (800–2 300 Hz selon la personne)."""
+    lg = int(0.03 * TAUX)
+    t = np.arange(lg) / TAUX
+    choc = r.standard_normal(lg) * np.exp(-t / r.uniform(0.0025, 0.005))
+    b, a = signal.iirpeak(r.uniform(800, 2300), r.uniform(2.0, 4.0), fs=TAUX)
+    x = 0.65 * signal.lfilter(b, a, choc) + 0.35 * _bande(choc, 1500, 9000)
+    return x / (np.abs(x).max() + 1e-9)
 
 
 def applaudir(duree=2.6, densite=900, vol=0.5, r=None):
-    """Applaudissements : chaque claquement est un éclat de bruit de 6–12 ms, placé au hasard dans la salle."""
+    """Applaudissements : densite/4 spectateurs, chacun à son rythme (3–5,5 frappes par seconde), qui commencent
+    presque ensemble et s'arrêtent peu à peu ; proches (nets) ou lointains (plus sourds)."""
     r = r or _rng(6)
     n = int(duree * TAUX)
     out = np.zeros((n, 2))
-    nb = int(densite * duree)
-    temps = (r.beta(1.3, 2.6, nb) * n).astype(int)
-    lg = int(0.012 * TAUX)
-    gabarit = _bande(r.standard_normal((16, lg)).T, 900, 5200).T * np.exp(-np.arange(lg) / (0.0022 * TAUX))
-    for k, d0 in enumerate(temps):
-        c = gabarit[k % 16] * r.uniform(0.3, 1.0)
-        fin = min(n, d0 + lg)
+    mains = [_claquement(r) for _ in range(24)]
+    lg = len(mains[0])
+    gens = max(8, int(densite / 4))
+    for _ in range(gens):
+        rythme = r.uniform(3.0, 5.5)
+        t = r.beta(1.5, 6) * 0.5
+        fin = duree * r.uniform(0.45, 1.0)
+        m = mains[r.integers(len(mains))]
+        loin = r.uniform(0.25, 1.0)
         p = r.uniform(-1, 1)
-        out[d0:fin] += _st(c[:fin - d0], p)
-    env = np.minimum(1, np.arange(n) / (0.15 * TAUX))[:, None]
+        g = np.array([np.cos((p + 1) * np.pi / 4), np.sin((p + 1) * np.pi / 4)]) * loin
+        while t < fin:
+            d0 = int(t * TAUX)
+            if d0 + lg >= n:
+                break
+            out[d0:d0 + lg] += np.outer(m * r.uniform(0.7, 1.0), g)
+            t += (1 / rythme) * r.uniform(0.92, 1.08)
+    out = _bande(out, 250, 9000)
+    env = np.minimum(1, np.arange(n) / (0.08 * TAUX))[:, None]
     return vol * env * out / (np.abs(out).max() + 1e-9)
 
 
-def clameur(duree=3.0, vol=0.4, r=None, voyelle=(700, 1150)):
-    """Cris du public : bruit passé dans deux formants (une voyelle), qui gonfle puis retombe."""
-    r = r or _rng(7)
+def _voix_foule(duree, nb, voyelles, f0_h, f0_f, profil, r, vol):
+    """nb voix qui tiennent une voyelle ensemble (cri, « oooh ») ; profil(t 0→1) → (hauteur relative, volume)."""
     n = int(duree * TAUX)
-    b = r.standard_normal((n, 2))
-    x = _bande(b, voyelle[0] * 0.8, voyelle[0] * 1.2) + 0.7 * _bande(b, voyelle[1] * 0.85, voyelle[1] * 1.15)
+    out = np.zeros((n, 2))
     t = np.arange(n) / n
-    env = (np.minimum(1, t / 0.18) * (1 - t) ** 1.3)[:, None]
-    return vol * env * x / (np.abs(x).max() + 1e-9)
+    haut, force = profil(t)
+    for _ in range(nb):
+        femme = r.random() < 0.45
+        f0 = r.uniform(*(f0_f if femme else f0_h))
+        retard = int(r.uniform(0, 0.15) * n)
+        x = np.zeros(n)
+        m = n - retard
+        v = _bouche(_source(m, f0 * haut[:m] * (1 + 0.02 * np.sin(2 * np.pi * r.uniform(4, 6) * np.arange(m) / TAUX)), r, 0.06),
+                    VOYELLES[r.choice(voyelles)], femme)
+        x[retard:] = v / (np.sqrt((v ** 2).mean()) + 1e-12) * force[:m]
+        x = _bande(x, 180, 6000)
+        out += _st(x * r.uniform(0.4, 1.0), r.uniform(-0.95, 0.95))
+    return vol * out / (np.abs(out).max() + 1e-9)
+
+
+def clameur(duree=3.0, vol=0.4, r=None, voyelle=None):
+    """Le public crie sa joie : « ouais ! », « aaah ! » — monte vite, retombe."""
+    r = r or _rng(7)
+    def profil(t):
+        return 1 + 0.25 * np.minimum(1, t / 0.15) - 0.15 * t, np.minimum(1, t / 0.08) * (1 - t) ** 1.2
+    return _voix_foule(duree, 70, ['a', 'e', 'o', 'eu'], (150, 230), (260, 380), profil, r, vol)
 
 
 def houle(r=None):
-    """« Ooooh » : le public retient son souffle quand l'échange dure."""
+    """« Ooooh » : le public retient son souffle quand l'échange dure (la hauteur monte, puis retombe)."""
     r = r or _rng(8)
-    n = int(1.8 * TAUX)
-    t = np.arange(n) / n
-    x = clameur(1.8, 0.33, r, voyelle=(380, 820))
-    return x * (np.sin(np.pi * t) ** 1.5)[:, None] / (np.abs(x).max() + 1e-9) * 0.3
+    def profil(t):
+        return 1 + 0.18 * np.sin(np.pi * np.minimum(1, t * 1.2)), np.sin(np.pi * t) ** 1.4
+    return _voix_foule(1.8, 60, ['ou', 'o', 'u'], (110, 160), (200, 280), profil, r, 0.3)
+
+
+def sifflet(duree=1.2, r=None):
+    """Un spectateur qui siffle (deux doigts) : glissando aigu."""
+    r = r or _rng(13)
+    n = int(duree * TAUX)
+    t = np.arange(n) / TAUX
+    f = r.uniform(2300, 2900) + 500 * np.sin(np.pi * np.minimum(1, t / duree)) + 25 * np.sin(2 * np.pi * 6 * t)
+    x = np.sin(2 * np.pi * np.cumsum(f) / TAUX) + 0.04 * r.standard_normal(n)
+    env = np.minimum(1, t / 0.05) * np.minimum(1, (duree - t) / 0.2)
+    return x * env
 
 
 def ovation(duree=3.8, r=None):
     r = r or _rng(9)
-    return applaudir(duree, 1900, 0.55, r) + clameur(duree, 0.32, r)
+    out = _somme(applaudir(duree, 1900, 0.5, r), clameur(duree * 0.8, 0.3, r))
+    for _ in range(2):                                                       # deux sifflets dans la salle
+        s = sifflet(r.uniform(0.8, 1.3), r) * 0.07
+        d0 = int(r.uniform(0.2, 1.2) * TAUX)
+        fin = min(len(out), d0 + len(s))
+        out[d0:fin] += _st(s[:fin - d0], r.uniform(-0.8, 0.8))
+    return out
 
 
 # ── l'habillage ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -227,11 +364,6 @@ def sono(x):
     """La voix de l'arbitre dans les haut-parleurs du stade : bande étroite, un peu saturée."""
     x = _bande(x, 280, 4800, 2)
     return np.tanh(2.2 * x / (np.abs(x).max() + 1e-9)) * 0.42
-
-
-def _somme(a, b):
-    n = max(len(a), len(b))
-    return np.pad(a, ((0, n - len(a)), (0, 0))) + np.pad(b, ((0, n - len(b)), (0, 0)))
 
 
 SONS = {
