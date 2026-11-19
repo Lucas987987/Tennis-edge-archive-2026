@@ -4,8 +4,8 @@
   "codes": {
    "200": 6
   },
-  "le": "2026-11-19T03:12:54+00:00",
-  "quota_restant": 14240,
+  "le": "2026-11-19T05:16:01+00:00",
+  "quota_restant": 14218,
   "requetes": 6
  },
  "jours": {
@@ -3611,11 +3611,11 @@
   },
   "2026-11-18": {
    "complet": false,
-   "matchs": 164
+   "matchs": 167
   }
  },
  "total": {
   "jours": 901,
-  "matchs": 80954
+  "matchs": 80957
  }
 }
