@@ -216,6 +216,110 @@
    "release": "ticks-2026-10",
    "sha256": "b466157270294dfba1c7e3ed5e7ae2fa09cf87dc0e7fc547f061141029574244"
   },
+  "kx_ticks_2026-10-08.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:00+00:00",
+   "etat": "copie",
+   "lignes": 126912,
+   "octets": 5834623,
+   "release": "ticks-2026-10",
+   "sha256": "e025e43a1aa775cdafc0e85ea3b89e0070e53296447316a6fecf31fc640d801e"
+  },
+  "kx_ticks_2026-10-09.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:03+00:00",
+   "etat": "copie",
+   "lignes": 107902,
+   "octets": 4876383,
+   "release": "ticks-2026-10",
+   "sha256": "9229872929ce15f02299724d1c897d68515af217019c1ef0acfc609bca7e21cc"
+  },
+  "kx_ticks_2026-10-10.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:06+00:00",
+   "etat": "copie",
+   "lignes": 93336,
+   "octets": 4122614,
+   "release": "ticks-2026-10",
+   "sha256": "4f64d6093f9fa48dbe33016c254b0f8e0c7c98d93ae8def23b035bb85c142d32"
+  },
+  "kx_ticks_2026-10-11.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:10+00:00",
+   "etat": "copie",
+   "lignes": 160840,
+   "octets": 7998639,
+   "release": "ticks-2026-10",
+   "sha256": "47a42f96a65f08b602552c73a8f4a2ac78117d314994cda4370dec1544a49fac"
+  },
+  "kx_ticks_2026-10-12.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:14+00:00",
+   "etat": "copie",
+   "lignes": 176760,
+   "octets": 9170842,
+   "release": "ticks-2026-10",
+   "sha256": "38bd97422c0929b0a9d4aa8b72d5a4713f40432f4ab63a52f416380793fe81f8"
+  },
+  "kx_ticks_2026-10-13.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:18+00:00",
+   "etat": "copie",
+   "lignes": 162461,
+   "octets": 8103555,
+   "release": "ticks-2026-10",
+   "sha256": "93e10acccee8cec1d2651f551a21486685633fbeb271b0f6d872748daa67cbca"
+  },
+  "kx_ticks_2026-10-14.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:21+00:00",
+   "etat": "copie",
+   "lignes": 119292,
+   "octets": 4927092,
+   "release": "ticks-2026-10",
+   "sha256": "bcf51d047f9d75ebe465c52a78a1e9d4f4536da62a31054ccc9b57b5c00b9781"
+  },
+  "kx_ticks_2026-10-15.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:25+00:00",
+   "etat": "copie",
+   "lignes": 113870,
+   "octets": 4173255,
+   "release": "ticks-2026-10",
+   "sha256": "8cecd49373298fa82b1e53284629fe25a314e9765263e7523b5ecf109d31f32b"
+  },
+  "kx_ticks_2026-10-16.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:29+00:00",
+   "etat": "copie",
+   "lignes": 125430,
+   "octets": 4576750,
+   "release": "ticks-2026-10",
+   "sha256": "3c5ef5acb5b823e2df764f974f45a1fcb9f35301a188621519ffcffc73d3ca0e"
+  },
+  "kx_ticks_2026-10-17.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:32+00:00",
+   "etat": "copie",
+   "lignes": 180538,
+   "octets": 6771338,
+   "release": "ticks-2026-10",
+   "sha256": "e401a3de9a8dea019d16831a69774326dcc6138afc1e2762a6bf446afa701618"
+  },
+  "kx_ticks_2026-10-18.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:37+00:00",
+   "etat": "copie",
+   "lignes": 260160,
+   "octets": 13265410,
+   "release": "ticks-2026-10",
+   "sha256": "e70d5d6077450d126f0b80e3978e73393f1f64fcc48d214b67513ae45c63b3cd"
+  },
+  "kx_ticks_2026-10-19.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:42+00:00",
+   "etat": "copie",
+   "lignes": 390982,
+   "octets": 20405774,
+   "release": "ticks-2026-10",
+   "sha256": "8a6a5fc639258e0cc05d2b39f84b1532d942ba6957ddc5e388f2841e82a654ca"
+  },
+  "kx_ticks_2026-10-20.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:47+00:00",
+   "etat": "copie",
+   "lignes": 352294,
+   "octets": 18439009,
+   "release": "ticks-2026-10",
+   "sha256": "f9bf76cd4448b7d1898040639984c29ce1721b9a30b226504c06286ec21a815e"
+  },
   "pm_ticks_2026-08-19.jsonl.gz": {
    "copie_le": "2026-10-16T06:49:03+00:00",
    "etat": "copie",
@@ -559,7 +663,111 @@
    "octets": 2929784,
    "release": "ticks-2026-10",
    "sha256": "6c9744620e404ce1712c5e6f877886f20b8ec08b9552adfbd56b4b54cc4b2ba0"
+  },
+  "pm_ticks_2026-10-08.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:01+00:00",
+   "etat": "copie",
+   "lignes": 152161,
+   "octets": 2841545,
+   "release": "ticks-2026-10",
+   "sha256": "1b608feba2b1a0247e553c0a3ce64a19d584f3c3df28317ca3be453a796dd295"
+  },
+  "pm_ticks_2026-10-09.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:04+00:00",
+   "etat": "copie",
+   "lignes": 329337,
+   "octets": 5287512,
+   "release": "ticks-2026-10",
+   "sha256": "2f00c70d9e94d20935b06e8be3cb634494084c893d115ce154bae8e2b4ca1b46"
+  },
+  "pm_ticks_2026-10-10.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:08+00:00",
+   "etat": "copie",
+   "lignes": 365208,
+   "octets": 6640906,
+   "release": "ticks-2026-10",
+   "sha256": "9f6c4966ae2b3fa7bfc7d2309ef42a11792b318a4f9c3b62a7238aa52aa79ff0"
+  },
+  "pm_ticks_2026-10-11.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:12+00:00",
+   "etat": "copie",
+   "lignes": 394087,
+   "octets": 7229559,
+   "release": "ticks-2026-10",
+   "sha256": "35cb438fa9ff25d0c8c7bf74677b63ad4e326efabd2b43fb33bee698dc32f010"
+  },
+  "pm_ticks_2026-10-12.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:16+00:00",
+   "etat": "copie",
+   "lignes": 269294,
+   "octets": 4920505,
+   "release": "ticks-2026-10",
+   "sha256": "7f88a1957ce2a47112ad1d2bad016e1ad469fdb5188f7db5f8c96f463b38d5be"
+  },
+  "pm_ticks_2026-10-13.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:20+00:00",
+   "etat": "copie",
+   "lignes": 242826,
+   "octets": 4607237,
+   "release": "ticks-2026-10",
+   "sha256": "d1d9f2760eb26fd6f4a2d7af02eaca6ea741a883b0f91d2190043315502a19f2"
+  },
+  "pm_ticks_2026-10-14.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:23+00:00",
+   "etat": "copie",
+   "lignes": 361069,
+   "octets": 6913214,
+   "release": "ticks-2026-10",
+   "sha256": "03b8a520a678856b26309efa6d96f739dbd80676ad7946dbf02a95b52baff752"
+  },
+  "pm_ticks_2026-10-15.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:27+00:00",
+   "etat": "copie",
+   "lignes": 345560,
+   "octets": 6837167,
+   "release": "ticks-2026-10",
+   "sha256": "2e52bde94e83c14e06f3ab7d5b933cb2db1cb7be5e3a6b123035e1f4ffd2e64e"
+  },
+  "pm_ticks_2026-10-16.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:30+00:00",
+   "etat": "copie",
+   "lignes": 270724,
+   "octets": 5323197,
+   "release": "ticks-2026-10",
+   "sha256": "0f57bc280be083b9239882fd46b8e0cbdda8cae06a035ed96852f984977253f3"
+  },
+  "pm_ticks_2026-10-17.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:34+00:00",
+   "etat": "copie",
+   "lignes": 982500,
+   "octets": 16613140,
+   "release": "ticks-2026-10",
+   "sha256": "3469fb66f27a96be209eadb382d516347ba03af4d88ff2e0d7aaadeb86ab4d4c"
+  },
+  "pm_ticks_2026-10-18.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:39+00:00",
+   "etat": "copie",
+   "lignes": 818962,
+   "octets": 13506472,
+   "release": "ticks-2026-10",
+   "sha256": "ab9f22316fbf24f275df8a18d25b24cfc78ae748a84d83f9b5ccf8564f7becfc"
+  },
+  "pm_ticks_2026-10-19.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:44+00:00",
+   "etat": "copie",
+   "lignes": 670560,
+   "octets": 11046346,
+   "release": "ticks-2026-10",
+   "sha256": "4a093a7f6e47ab275f7a10c7667c724ad639da72540f117c13b55b556a89bafc"
+  },
+  "pm_ticks_2026-10-20.jsonl.gz": {
+   "copie_le": "2026-11-19T06:21:50+00:00",
+   "etat": "copie",
+   "lignes": 598813,
+   "octets": 9488545,
+   "release": "ticks-2026-10",
+   "sha256": "286449820d35dbf356674447e0749169e80be237cd4343dd55104e21b752b0e3"
   }
  },
- "maj": "2026-10-16T06:57:44+00:00"
+ "maj": "2026-11-19T06:21:50+00:00"
 }

@@ -40,6 +40,29 @@ clv_history/*.bak
 # AJOUTÉ LE 16/10/2026 : cache des champs volatils des registres de marchés
 # (liquidity, volume…) — reconstruit à chaque run, jamais committé.
 registres_marches/.volatil_*
+# >>> coffre privé (23/10/2026) — rangés dans R2 (prive/), jamais dans ce dépôt public : scripts/coffre.py
+/h18_signal_log.jsonl
+/h18_signal_state.json
+/h19_signal_log.jsonl
+/h19_signal_state.json
+/h20_signal_log.jsonl
+/h20_signal_state.json
+/Tennis_Edge_Lab/live/valeur.json
+/Tennis_Edge_Lab/live/h20.json
+/Tennis_Edge_Lab/live/pronostics.json
+/simulateur/rapport_roi_algo.json
+/simulateur/rapport_desaccords.json
+# <<< coffre privé
+
+# Bilans descriptifs régénérés à chaque run ; seule leur fusion dans algo/donnees.json est publiée.
+/simulateur/styles_descriptifs.json
+/simulateur/profil_rythme.json
+/simulateur/evolution_statistiques_joueurs.json
+
+# 29/10/2026 : Elo de référence du modèle fantôme, recalculé à chaque passage (jamais commité)
+simulateur/elo_etat_reference.json
+simulateur/elo_etat_sans_itf_femmes.json
+simulateur/suivi_desaccords_pinnacle.json
 
 # >>> hist_r2 : partitions historiques FIGÉES, servies par R2 (scripts/hist_r2.py) — ne pas éditer à la main
 /parts/hist_book_2026-06.jsonl.gz
@@ -70,6 +93,17 @@ registres_marches/.volatil_*
 /parts/hist_book_2026-W41.jsonl.gz
 /parts/hist_book_2026-W41_2.jsonl.gz
 /parts/hist_book_2026-W41_3.jsonl.gz
+/parts/hist_book_2026-W42.jsonl.gz
+/parts/hist_book_2026-W42_2.jsonl.gz
+/parts/hist_book_2026-W43.jsonl.gz
+/parts/hist_book_2026-W43_2.jsonl.gz
+/parts/hist_book_2026-W43_3.jsonl.gz
+/parts/hist_book_2026-W43_4.jsonl.gz
+/parts/hist_book_2026-W44.jsonl.gz
+/parts/hist_book_2026-W44_2.jsonl.gz
+/parts/hist_book_2026-W44_3.jsonl.gz
+/parts/hist_book_2026-W45.jsonl.gz
+/parts/hist_book_2026-W46.jsonl
 /parts/hist_set1_2026-06.jsonl.gz
 /parts/hist_set1_2026-07.jsonl.gz
 /parts/hist_set1_2026-08.jsonl.gz
@@ -83,6 +117,12 @@ registres_marches/.volatil_*
 /parts/hist_set1_2026-W39.jsonl.gz
 /parts/hist_set1_2026-W40.jsonl.gz
 /parts/hist_set1_2026-W41.jsonl.gz
+/parts/hist_set1_2026-W42.jsonl.gz
+/parts/hist_set1_2026-W43.jsonl.gz
+/parts/hist_set1_2026-W44.jsonl.gz
+/parts/hist_set1_2026-W44_2.jsonl
+/parts/hist_set1_2026-W45.jsonl.gz
+/parts/hist_set1_2026-W46.jsonl
 /parts/hist_set2_2026-06.jsonl.gz
 /parts/hist_set2_2026-07.jsonl.gz
 /parts/hist_set2_2026-08.jsonl.gz
@@ -96,28 +136,11 @@ registres_marches/.volatil_*
 /parts/hist_set2_2026-W39.jsonl.gz
 /parts/hist_set2_2026-W40.jsonl.gz
 /parts/hist_set2_2026-W41.jsonl.gz
+/parts/hist_set2_2026-W42.jsonl.gz
+/parts/hist_set2_2026-W43.jsonl.gz
+/parts/hist_set2_2026-W43_2.jsonl.gz
+/parts/hist_set2_2026-W44.jsonl.gz
+/parts/hist_set2_2026-W44_2.jsonl
+/parts/hist_set2_2026-W45.jsonl.gz
+/parts/hist_set2_2026-W46.jsonl
 # <<< hist_r2
-
-# >>> coffre privé (23/10/2026) — rangés dans R2 (prive/), jamais dans ce dépôt public : scripts/coffre.py
-/h18_signal_log.jsonl
-/h18_signal_state.json
-/h19_signal_log.jsonl
-/h19_signal_state.json
-/h20_signal_log.jsonl
-/h20_signal_state.json
-/Tennis_Edge_Lab/live/valeur.json
-/Tennis_Edge_Lab/live/h20.json
-/Tennis_Edge_Lab/live/pronostics.json
-/simulateur/rapport_roi_algo.json
-/simulateur/rapport_desaccords.json
-# <<< coffre privé
-
-# Bilans descriptifs régénérés à chaque run ; seule leur fusion dans algo/donnees.json est publiée.
-/simulateur/styles_descriptifs.json
-/simulateur/profil_rythme.json
-/simulateur/evolution_statistiques_joueurs.json
-
-# 29/10/2026 : Elo de référence du modèle fantôme, recalculé à chaque passage (jamais commité)
-simulateur/elo_etat_reference.json
-simulateur/elo_etat_sans_itf_femmes.json
-simulateur/suivi_desaccords_pinnacle.json
