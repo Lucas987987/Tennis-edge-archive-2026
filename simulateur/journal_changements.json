@@ -1354,6 +1354,13 @@
    "paquet": 291,
    "quoi": "VIDÉO DU JOUR : RUN ROUGE DU 19/11 CORRIGÉ (paquet 291). Les deux vidéos 3D étaient faites, mais Telegram les a refusées (« HTTP 413 ») : 73,6 Mo, alors que la limite est de 50 Mo. Cause : l'image plus nette du paquet 288 et le grain léger de l'étalonnage demandent beaucoup plus de données. Correction : au-delà de 48 Mo, la vidéo est réencodée au débit qui la fait tenir sous 48 Mo (son inchangé). Et la règle de retrait écrite au paquet 288 s'applique : la vidéo française a mis 65 min à se fabriquer (plus de 60 min) ; l'échelle de l'image 3D revient à 0,67, le reste du paquet 288 (caméra, double ralenti, ramasseurs, poussière) et le paquet 290 restent. Le % ne change pas.",
    "garde_fou": "Retrait : remettre scripts/video_simulation.py du paquet 290 si une vidéo sous 48 Mo est abîmée par le réencodage (le réencodage ne touche que les vidéos de plus de 48 Mo)."
+  },
+  {
+   "date": "2026-11-19",
+   "statut": "production",
+   "paquet": 292,
+   "quoi": "3D : FILET ET IMPACTS (paquet 292, Lucas : « continue les améliorations »). 1) Le filet était dessiné avec des mailles beaucoup trop serrées en largeur et trop grandes en hauteur : de loin, il ressemblait à des rayures horizontales. Les mailles sont maintenant carrées, de 4,5 cm comme un vrai filet : de loin, un voile sombre régulier, la bande blanche par-dessus. 2) Un éclair bref (0,12 s) au contact de la raquette, à chaque frappe et à chaque service : on voit mieux qui frappe, surtout le joueur du fond. Direct et vidéo. Étiquette du direct : v292. Coût de rendu négligeable. Le % ne change pas.",
+   "garde_fou": "Retrait : remettre algo/index.html, tests/test_direct_3d_version.py, tests/test_direct_3d_reflets.py et simulateur/rapport_3d_site.json du paquet 291 (et supprimer tests/test_direct_3d_filet_impact.py) si le filet ou l'éclair est jugé moins bon."
   }
  ]
 }
