@@ -13,9 +13,9 @@ FILM = HTML[HTML.index('async function filmDuJour('):HTML.index('/* ────
 
 class Finitions(unittest.TestCase):
     def test_pleine_definition(self):
-        self.assertIn('FILM.echelle = o.echelle || 1;', G3D)
-        self.assertIn("echelle: Number(Q.get('echelle') || 1)", FILM)
-        self.assertNotIn('|| 0.67', G3D + FILM)
+        self.assertIn('FILM.echelle = o.echelle || 0.67;', G3D)
+        self.assertIn("echelle: Number(Q.get('echelle') || 0.67)", FILM)
+        self.assertNotIn('|| 1;', G3D[G3D.index('FILM.echelle ='):][:40])
 
     def test_camera_tele(self):
         self.assertIn('Object.assign(VUES.tv, { pitch: 0.27, dist: 22.5 });', G3D)
