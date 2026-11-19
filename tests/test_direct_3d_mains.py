@@ -54,6 +54,11 @@ class Mains(unittest.TestCase):
         self.assertIn("femme ? 1.705 : 1.752", G3D)
         self.assertNotIn('1.668', G3D)
 
+    def test_pouce_replie(self):                                                    # paquet 294
+        self.assertIn('let th = Math.atan2(-0.94, -0.35) - Math.atan2(uz, uy);', G3D)
+        self.assertIn('let k = Math.min(1, d / 0.012); k = k * k * (3 - 2 * k);', G3D)
+        self.assertIn('if (d <= 0 || Math.abs(orig[v * 3] - T[0]) >= 0.025) continue;', G3D)
+
     def test_rapport(self):
         d = json.loads((RACINE / 'simulateur' / 'rapport_3d_site.json').read_text(encoding='utf-8'))
         self.assertGreaterEqual(d['paquet'], 293)
