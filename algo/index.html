@@ -4119,7 +4119,7 @@ const G3D = (() => {
       off.ajoute(sphere(0.11, 8, hex('#c99474')), M4.tr(x, 0.88 + y, z));
       off.ajoute(boite(0.32, accroupi ? 0.34 : 0.7, 0.3, hex('#151530')), M4.tr(x, accroupi ? 0.17 : 0.35, z));
     };
-    for (const s of [-1, 1]) { ram(s * (W / 2 + 1.1), 0.6, true); ram(s * (W / 2 + 1.1), -0.6, true); ram(s * 3.2, HL + 4.6, false); ram(s * 3.2, -HL - 4.6, false); }
+    for (const s of [-1, 1]) { ram(s * (W / 2 + 1.1), 0.6, true); ram(s * (W / 2 + 1.1), -0.6, true); ram(s * (W / 2 + 0.9), HL + 4.6, false); ram(s * (W / 2 + 0.9), -HL - 4.6, false); }
     // juges de ligne assis le long du court
     for (const [x, z] of [[-(W / 2 + 2.6), -SL], [W / 2 + 2.6, SL], [-(W / 2 + 2.6), HL - 1], [W / 2 + 2.6, -HL + 1]]) {
       ch.ajoute(boite(0.45, 0.45, 0.45, hex('#2b2b55')), M4.tr(x, 0.22, z));
@@ -5052,25 +5052,29 @@ const G3D = (() => {
   const RAL = { actif: false, prevu: null, t0: 0, base: 0, fin: 0, cam: null };
   const VITESSE_RALENTI = 0.42;
   function debutRalenti(t) {
-    const src = RAL.prevu.R; RAL.prevu = null;
+    const src = RAL.prevu.R, angle = RAL.prevu.angle || 1; RAL.prevu = null;
     src.J0.forEach((p, i) => Object.assign(J[i], p, { vx: 0, vz: 0 }));
     R = { ...src, annonce: true, ralenti: true };
-    Object.assign(RAL, { actif: true, t0: t, base: src.debut + 0.25, fin: src.finT - 0.5, cam: { ...cam } });
-    if (FILM.actif) RAL.base = Math.max(RAL.base, RAL.fin - 3.4);                       // film : les 3 dernières secondes du point
+    Object.assign(RAL, { actif: true, t0: t, base: src.debut + 0.25, fin: src.finT - 0.5, cam: { ...cam }, src, angle });
+    if (FILM.actif) RAL.base = Math.max(RAL.base, RAL.fin - (angle === 2 ? 2.6 : 3.4));   // film : les 3 dernières secondes du point
     const s = Math.random() < 0.5 ? -1 : 1;
     Object.assign(cam, { fov: 0.5, suivre: false, balle: true, cote: s, haut: rnd(1.4, 2.4) });
-    if (FILM.actif) { cam.balle = false; cam.inverse = true; }                      // film : ralenti vu de l'autre bout du court          // caméra basse, au bord du court
+    if (FILM.actif && angle === 1) { cam.balle = false; cam.inverse = true; }
+    if (FILM.actif && angle === 2) { cam.balle = false; delete cam.inverse; cam.dos2 = src.gagnant === 1 ? 1 : -1; }   // paquet 288 : 2e angle, bas, derrière le gagnant du point                      // film : ralenti vu de l'autre bout du court          // caméra basse, au bord du court
     delete cam.focus;
   }
-  function finRalenti() {
+  function finRalenti(t) {
     RAL.actif = false; R = null;
+    // paquet 288 : film — la balle de match est rejouée une 2e fois, caméra basse au bord du court qui suit la balle
     if (RAL.cam) { for (const k of Object.keys(cam)) delete cam[k]; Object.assign(cam, RAL.cam); RAL.cam = null; }
+    if (FILM.actif && RAL.angle === 1 && RAL.src && RAL.src.grand && RAL.src.rejouer && !FILE.length && t !== undefined) RAL.prevu = { at: t, R: RAL.src, angle: 2 };
+    RAL.angle = 0;
   }
   // le temps du jeu : le vrai temps, ou le temps ralenti pendant un ralenti
   function horloge(t, dt) {
     if (RAL.actif) {
       const tj = RAL.base + (t - RAL.t0) * VITESSE_RALENTI;
-      if (FILE.length || tj > RAL.fin || E.fini) finRalenti();
+      if (FILE.length || tj > RAL.fin || E.fini) finRalenti(t);
       else return [tj, dt * VITESSE_RALENTI];
     }
     if (RAL.prevu && !R && !FILE.length && !E.fini && t >= RAL.prevu.at) { debutRalenti(t); return [RAL.base, 0]; }
@@ -5231,7 +5235,7 @@ const G3D = (() => {
   const OFFICIELS = [
     ...[[-(W / 2 + 2.6), -SL], [W / 2 + 2.6, SL], [-(W / 2 + 2.6), HL - 1], [W / 2 + 2.6, -HL + 1]].map(([x, z], k) =>
       ({ x, z, cap: x < 0 ? Math.PI / 2 : -Math.PI / 2, vx: 0, vz: 0, juge: true, sexe: k % 2 ? 'F' : 'H', k })),
-    ...[-1, 1].flatMap(s => [[s * (W / 2 + 1.1), 0.6, true], [s * (W / 2 + 1.1), -0.6, true], [s * 3.2, HL + 4.6, false], [s * 3.2, -HL - 4.6, false]])
+    ...[-1, 1].flatMap(s => [[s * (W / 2 + 1.1), 0.6, true], [s * (W / 2 + 1.1), -0.6, true], [s * (W / 2 + 0.9), HL + 4.6, false], [s * (W / 2 + 0.9), -HL - 4.6, false]])
       .map(([x, z, acc], k) => ({ x, z, cap: acc ? (x < 0 ? Math.PI / 2 : -Math.PI / 2) : (z > 0 ? Math.PI : 0), vx: 0, vz: 0, acc, sexe: k % 3 ? 'H' : 'F', k: k + 4 })),
   ];
   let OFF_POSES = null;
@@ -5286,8 +5290,8 @@ const G3D = (() => {
       const C = FILM.cam, u = cl((t - C.t0) / C.d, 0, 1), e = lisse(u);
       if (C.nom === 'orbite') { const a = 2.5 - 2.3 * e, r = 34 - 9 * e, y = 15 - 7 * e;
         return projeter(w, h, [Math.sin(a) * r, y, -Math.cos(a) * r], [0, 0.4, 0], 0.62); }
-      if (C.nom === 'heros') { const j = J[C.i], f = C.i === 0 ? 1 : -1, a = 0.9 - 0.7 * e;
-        FILM.focale = 4.6; return projeter(w, h, tremble([j.x + Math.sin(a) * 4.6, 1.55, j.z + f * Math.cos(a) * 4.6]), [j.x, 1.25, j.z], 0.42); }
+      if (C.nom === 'heros') { const j = J[C.i], f = C.i === 0 ? 1 : -1, a = 0.9 - 0.7 * e, sx = j.x > 0.5 ? -1 : 1;   // paquet 288 : côté intérieur du court
+        FILM.focale = 4.6; return projeter(w, h, tremble([j.x + sx * Math.sin(a) * 4.6, 1.55, j.z + f * Math.cos(a) * 4.6]), [j.x, 1.25, j.z], 0.42); }
       if (C.nom === 'portrait') { const j = J[C.i], f = C.i === 0 ? 1 : -1, d = 3.9 - 0.8 * e, a = (C.i ? -0.35 : 0.35) * (1 - 0.4 * e);   // présentation : de face, on s'approche
         FILM.focale = d; return projeter(w, h, tremble([j.x + Math.sin(a) * d, 1.62, j.z + f * Math.cos(a) * d]), [j.x, 1.45, j.z], 0.36); }
       if (C.nom === 'stade') { const a = 0.35 + 0.25 * e;
@@ -5298,7 +5302,7 @@ const G3D = (() => {
       if (FILM.actif && pl.type !== 'public') { const c = pl.type === 'dos' ? [J[pl.i].x, 1.2, J[pl.i].z] : v.cible; FILM.focale = Math.hypot(v.eye[0] - c[0], v.eye[1] - c[1], v.eye[2] - c[2]); }
       return projeter(w, h, FILM.actif && pl.type !== 'dos' ? tremble(v.eye) : v.eye, v.cible, v.fov); }
     const cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
-    let cible = [cam.cx || 0, 0, -1.5 + Math.sin(cam.pitch) * 0.8 + (FILM.actif ? -2.6 : -1.6)];          // film : le joueur du bas dans le cadre
+    let cible = [cam.cx || 0, 0, -1.5 + Math.sin(cam.pitch) * 0.8 + (FILM.actif ? -2.6 + (cam.cz || 0) : -1.6)];          // film : le joueur du bas dans le cadre
     if (cam.focus !== undefined) {                                                // vue « près » : derrière le joueur proche
       const j = J[cam.focus]; cam.fx = lerp(cam.fx ?? j.x, j.x, 0.08); cam.fz = lerp(cam.fz ?? j.z, j.z, 0.08);
       cible = [cam.fx * 0.8, 0.9, cam.fz + 5];
@@ -5307,6 +5311,8 @@ const G3D = (() => {
     if (cam.balle) cible = [cam.bx || 0, 0.7, cam.bz || 0];                              // ralenti : la caméra suit la balle
     let eye = [cible[0] + cam.dist * cp * Math.sin(cam.yaw), cam.dist * sp + 0.5, cible[2] - cam.dist * cp * Math.cos(cam.yaw)];
     if (cam.balle) eye = [cam.cote * 8.4, cam.haut, cl((cam.bz || 0) * 0.45, -7, 7)];
+    if (cam.dos2) { const b = posBalle(t), x = b ? cl(b.x * 0.6, -3.5, 3.5) : 0, s = cam.dos2; FILM.rx = lerp(FILM.rx || 0, x, 0.07);
+      FILM.focale = 0; return projeter(w, h, [FILM.rx * 0.5, 2.0, s * (HL + 7)], [FILM.rx, 0.9, -s * 3], 0.56); }
     if (cam.inverse) { const b = posBalle(t), x = b ? cl(b.x * 0.5, -3, 3) : 0; FILM.rx = lerp(FILM.rx || 0, x, 0.06);
       return projeter(w, h, [FILM.rx * 0.6, 5.4, HL + 13], [FILM.rx, 0.4, -2.5], 0.6); }
     if (cam.vise) eye[1] = cible[1] + cam.dist * sp;           // ralenti : depuis le bord du court
@@ -5316,7 +5322,7 @@ const G3D = (() => {
     const vp = M4.mul(M4.persp(fov, w / h, 0.5, 200), M4.look(eye, cible, [0, 1, 0]));
     const lc = [SOLEIL[0] * 40, SOLEIL[1] * 40, SOLEIL[2] * 40];
     const lvp = M4.mul(M4.ortho(-22, 22, -26, 26, 1, 100), M4.look(lc, [0, 0, 0], [0, 1, 0]));
-    return { vp, lvp, eye };
+    return { vp, lvp, eye, cible };
   }
   function uniformes(o, inst) {
     gl.uniform3fv(U.uCol, o.col || [1, 1, 1]); gl.uniform1f(U.uAlpha, o.alpha || 1); gl.uniform1f(U.uSpec, o.spec ?? 0.2);
@@ -5334,10 +5340,15 @@ const G3D = (() => {
     if (cam.balle) { const c = bv || { x: (J[0].x + J[1].x) / 2, z: 0 }; cam.bx = lerp(cam.bx ?? c.x, c.x, 0.08); cam.bz = lerp(cam.bz ?? c.z, c.z, 0.08); }
     if (bv) { if (FILM.actif && TRACE.length) { const q = TRACE[TRACE.length - 1]; TRACE.push({ x: (q.x + bv.x) / 2, y: (q.y + bv.y) / 2, z: (q.z + bv.z) / 2 }); }
       TRACE.push(bv); while (TRACE.length > (FILM.actif ? 16 : 9)) TRACE.shift(); } else TRACE.length = 0;
-    cam.cx = lerp(cam.cx || 0, cam.suivre && bv ? cl(bv.x * 0.35, -3, 3) : 0, 0.04);
+    cam.cx = lerp(cam.cx || 0, cam.suivre && bv ? (FILM.actif ? cl(bv.x * 0.5, -3.4, 3.4) : cl(bv.x * 0.35, -3, 3)) : 0, 0.04);
+    if (FILM.actif) cam.cz = lerp(cam.cz || 0, cam.suivre && bv ? cl(bv.z * 0.1, -1.2, 1.2) : 0, 0.03);   // paquet 288 : la caméra télé glisse aussi vers la balle
     message(t, tReel);
     sonsDuPoint(t);
-    const { vp, lvp, eye } = matrices(w, h, t);
+    const { vp, lvp, eye, cible: visee } = matrices(w, h, t);
+    // paquet 288 : film — un officiel posé entre la caméra (à moins de 8 m) et ce qu'elle filme n'est pas dessiné (gros plans masqués)
+    const masque = (x, z) => { if (!FILM.actif) return false; const dx = visee[0] - eye[0], dz = visee[2] - eye[2], L2 = dx * dx + dz * dz; if (L2 < 1) return false;
+      const u = ((x - eye[0]) * dx + (z - eye[2]) * dz) / L2; if (u <= 0 || u >= 0.9 || u * Math.sqrt(L2) > 8) return false;
+      const px = eye[0] + u * dx - x, pz = eye[2] + u * dz - z; return px * px + pz * pz < 0.81; };
     // ce qui bouge : les deux joueurs, la balle
     const dyn = [];
     for (const i of [0, 1]) {
@@ -5356,11 +5367,11 @@ const G3D = (() => {
       const A = ALLURE_ARBITRE, { skin } = osModele(ARBITRE, pa, null), C = MOD.corps.H;
       dyn.push([C.corps, M4.id(), false, skin, { tex: MOD.tex[A.peau], tenue: A.tenue.map((c, k) => k === 7 ? [-1, -1, -1] : c) }], [C.yeux, M4.id(), false, skin, { tex: MOD.tex.yeux }]);
       for (const c of [A.coiffe, A.sourcils]) { const H = MOD.cheveux[c]; if (H) dyn.push([H, M4.id(), false, skin, { tex: MOD.tex[H.tex], col: A.cheveux }]); }
-      for (const o of officielsPoses()) {
+      officielsPoses().forEach((o, k) => { if (masque(OFFICIELS[k].x, OFFICIELS[k].z)) return;
         const Co = MOD.corps[o.sexe] || C;
         dyn.push([Co.corps, M4.id(), false, o.skin, { tex: MOD.tex[o.peau], tenue: o.tenue }], [Co.yeux, M4.id(), false, o.skin, { tex: MOD.tex.yeux }]);
         for (const c of [o.coiffe, o.sourcils]) { const H = MOD.cheveux[c]; if (H) dyn.push([H, M4.id(), false, o.skin, { tex: MOD.tex[H.tex], col: o.cheveux }]); }
-      }
+      });
     }
     // 1) ombres
     gl.bindFramebuffer(gl.FRAMEBUFFER, smFbo); gl.viewport(0, 0, SM, SM); gl.clear(gl.DEPTH_BUFFER_BIT);
@@ -5419,10 +5430,10 @@ const G3D = (() => {
       if (t < rb.t) continue;
       if (E.surface === 'Clay') passe({ m: BALLE, col: [0.55, 0.24, 0.12], alpha: 0.55, spec: 0, recoit: false }, chaine(M4.tr(rb.x, 0.004, rb.z), M4.ry(rb.a), M4.sc(1.3, 0.03, 2.2)));
       const age = t - rb.t; if (age > 0.9 || E.surface === 'Hard' || E.surface === 'Carpet') continue;
-      const col = E.surface === 'Clay' ? [0.85, 0.48, 0.3] : [0.75, 0.85, 0.6];
-      for (let k = 0; k < 5; k++) { const a = k * 1.256 + rb.a, r = 0.08 + age * 0.5;
-        passe({ m: BALLE, col, alpha: 0.35 * (1 - age / 0.9), spec: 0, recoit: false },
-          chaine(M4.tr(rb.x + Math.cos(a) * r, 0.04 + age * 0.25, rb.z + Math.sin(a) * r), M4.sc(1.5 + age * 6, 1.2 + age * 4, 1.5 + age * 6))); }
+      const col = E.surface === 'Clay' ? [0.93, 0.6, 0.42] : [0.8, 0.88, 0.66], vie = 0.9;     // paquet 288 : poussière plus fine, qui monte et s'efface
+      for (let k = 0; k < 9; k++) { const a = k * 0.698 + rb.a, r = 0.04 + age * (0.3 + 0.22 * (k % 3)), f = 1 - age / vie;
+        passe({ m: BALLE, col, alpha: 0.3 * f * f, emis: 0.45, spec: 0, recoit: false },
+          chaine(M4.tr(rb.x + Math.cos(a) * r, 0.03 + age * (0.16 + 0.12 * (k % 2)), rb.z + Math.sin(a) * r), M4.sc(0.7 + age * (2.6 + k % 3), 0.5 + age * 2.2, 0.7 + age * (2.6 + k % 3)))); }
     }
     if (scene.faisceaux && QUALITE === 'haute' && !E.jour) {                         // de jour : pas de faisceaux
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE); gl.uniform1i(U.uFaisceau, 1);
@@ -5550,7 +5561,7 @@ const G3D = (() => {
     nuit: { fond: [0.06, 0.05, 0.16], ciel: [0.62, 0.64, 0.82], sol: [0.28, 0.26, 0.36], brume: [0.08, 0.07, 0.2], lum: [0.95, 0.912, 0.836] },
     jour: { fond: [0.53, 0.71, 0.92], ciel: [0.78, 0.86, 1.0], sol: [0.46, 0.42, 0.36], brume: [0.64, 0.76, 0.93], lum: [1.32, 1.24, 1.08] },
   };
-  const VERSION_3D = 'v285';
+  const VERSION_3D = 'v288';
   // ── LE FILM (paquet 276) : la vidéo du jour en 3D. La page choisit les moments forts du match simulé et les fait
   // jouer ici un par un ; public en panneaux et image un peu réduite (la vidéo est rendue sans carte graphique).
   const FILM = { actif: false, echelle: 1, son: null, cam: null, t: 0, focale: 0 };
@@ -5639,8 +5650,8 @@ const G3D = (() => {
     // ── la vidéo du jour en 3D (paquet 276)
     film: {
       demarrer(hote, m, r, o = {}) {
-        FILM.actif = true; FILM.echelle = o.echelle || 0.67; FILM.son = o.son || null; QUALITE = 'haute';
-        Object.assign(VUES.tv, { pitch: 0.3, dist: 25 }); Object.assign(cam, VUES.tv);              // cadre vertical : plus près
+        FILM.actif = true; FILM.echelle = o.echelle || 1; FILM.son = o.son || null; QUALITE = 'haute';
+        Object.assign(VUES.tv, { pitch: 0.27, dist: 22.5 }); Object.assign(cam, VUES.tv);              // cadre vertical : plus près
         if (!essaye) { essaye = true; try { ok = creer(); } catch (e) { ok = false; } }
         if (!ok) return false;
         E.id = null; maj(m, r, false); E.avant = null;
@@ -6774,7 +6785,7 @@ async function filmDuJour(V, m, son){
     el.style.setProperty('--c', c || '#D4FF3A'); el.hidden = false; el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
     if (ms) setTimeout(() => { el.hidden = true; }, ms); };
   const volet = () => { const v = $('.f3-volet'); v.classList.remove('on', 'fini'); void v.offsetWidth; v.classList.add('on'); son('volet'); setTimeout(() => v.classList.add('fini'), 650); };
-  if (!G3D.film.demarrer($('.f3-hote'), m, rDe(SC), { echelle: Number(Q.get('echelle') || 0.67), son: (type, ms, plus) => son(type, ms, plus) })){ window.__fini = true; return; }
+  if (!G3D.film.demarrer($('.f3-hote'), m, rDe(SC), { echelle: Number(Q.get('echelle') || 1), son: (type, ms, plus) => son(type, ms, plus) })){ window.__fini = true; return; }
   // attendre les modèles des joueurs (fichier du site) et les polices
   for (let k = 0; k < 120 && !G3D.film.pret(); k++) await z(100);
   await Promise.race([(document.fonts && document.fonts.load ? document.fonts.load('40px Bungee') : Promise.resolve()), z(3000)]);
@@ -6822,7 +6833,7 @@ async function filmDuJour(V, m, son){
   }
   // 3) la fin : ralenti de la balle de match, puis le vainqueur et le verdict des simulations
   await attendre(e => e.actif || !e.ralenti, 6000);
-  if (G3D.film.etat().actif){ legende(t('a_ralenti'), '', '#F4F1FF', 0); await attendre(e => !e.ralenti, 16000); $('.f3-cap').hidden = true; }
+  if (G3D.film.etat().actif){ legende(t('a_ralenti'), '', '#F4F1FF', 0); await attendre(e => !e.ralenti, 26000); $('.f3-cap').hidden = true; }
   G3D.film.score(m, rDe(F.final), true); bug(F.final, true);
   G3D.film.camera('heros', 4.2, w); son('ovation', 0);
   legende(t('a_fin'), t('a_gagne', noms[w]), coul(w), 0);
