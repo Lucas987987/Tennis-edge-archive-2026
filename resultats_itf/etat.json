@@ -2,11 +2,11 @@
  "dernier_passage": {
   "arret": null,
   "codes": {
-   "200": 6
+   "200": 8
   },
-  "le": "2026-11-19T23:13:10+00:00",
-  "quota_restant": 14527,
-  "requetes": 6
+  "le": "2026-11-20T01:16:17+00:00",
+  "quota_restant": 14438,
+  "requetes": 8
  },
  "jours": {
   "2024-06-01": {
@@ -3602,7 +3602,7 @@
    "matchs": 299
   },
   "2026-11-16": {
-   "complet": false,
+   "complet": true,
    "matchs": 200
   },
   "2026-11-17": {
@@ -3612,10 +3612,14 @@
   "2026-11-18": {
    "complet": false,
    "matchs": 170
+  },
+  "2026-11-19": {
+   "complet": false,
+   "matchs": 127
   }
  },
  "total": {
-  "jours": 901,
-  "matchs": 80960
+  "jours": 902,
+  "matchs": 81087
  }
 }
