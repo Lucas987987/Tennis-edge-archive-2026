@@ -1,5 +1,5 @@
 {
-  "empreinte": "b829a7825f8f06d5ae89daf322a6292428f4589703c5e42c7fdedc9d3ce563f1",
+  "empreinte": "800f3df3717aff93e482b74d7c3b684c861c1112364f3c3245638ed9281618f5",
   "choix": {
     "combinaison": {
       "adopte": true,
@@ -31,12 +31,33 @@
       "stabilite": "en place"
     },
     "combinaison_continue": {
-      "n": 1435,
+      "n": 1437,
       "min": 400,
-      "adopte": false,
-      "juge_jusqua": "2026-11-18T19:30",
-      "raison": "en attente : 28 nouveaux matchs depuis le dernier jugement (il en faut 30)",
-      "genere_le": "2026-11-19T22:58:24+00:00"
+      "adopte": true,
+      "poids": {
+        "elo": 0.7363,
+        "simulation": 0.4176
+      },
+      "poids_appris": {
+        "elo": 0.7228,
+        "simulation": 0.4113
+      },
+      "jugement": {
+        "n": 30,
+        "depuis": "2026-11-18T21:00",
+        "jusqua": "2026-11-19T17:00",
+        "log_loss_continu": 0.49187,
+        "log_loss_poids_archive": 0.50389,
+        "log_loss_elo_seul": 0.50754,
+        "brier_continu": 0.15881,
+        "brier_poids_archive": 0.16282,
+        "brier_elo_seul": 0.16382,
+        "gain_log_loss": 0.012019,
+        "marge_requise": 0.001
+      },
+      "juge_jusqua": "2026-11-19T17:00",
+      "raison": "sur les 30 matchs joués les plus récents : poids appris sur nos matchs 0.4919 contre poids de l'archive 0.5039 (Elo seul 0.5075) ; marge exigée 0.001 et Brier non dégradé",
+      "genere_le": "2026-11-20T01:00:36+00:00"
     },
     "combinaison_feuilles": {
       "adopte": false,
