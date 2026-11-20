@@ -98,7 +98,7 @@ jobs:
           echo "Étape « $ETAPE » dans $SELF (cible : $CIBLE)"
 
       - uses: actions/checkout@v5
-        if: env.ETAPE == 'controle' || env.ETAPE == 'copier' || env.ETAPE == 'verifier'
+        if: env.ETAPE == 'controle' || env.ETAPE == 'geler' || env.ETAPE == 'copier' || env.ETAPE == 'verifier'
         with:
           token: ${{ secrets.PAQUET_TOKEN }}
 
@@ -124,21 +124,41 @@ jobs:
         run: |
           set -e
           geles="$WORKFLOWS_GELES"
+          echecs=""
+          # 20/11/2026 (paquet 303) : les workflows « automatiques » de GitHub (chemin dynamic/…, ex. la
+          # publication Pages) ne se mettent pas en pause (HTTP 422) : on les saute. Une pause refusée
+          # n'arrête plus la boucle : la liste est d'abord mémorisée, l'erreur vient après.
           while IFS=$'\t' read -r id chemin etat; do
+            case "$chemin" in dynamic/*) echo "↷  $chemin (automatique, laissé tel quel)"; continue ;; esac
             nom=$(basename "$chemin")
             case " $GARDES " in *" $nom "*) continue ;; esac
             if [ "$etat" = "active" ]; then
-              gh api -X PUT "repos/$SELF/actions/workflows/$id/disable" >/dev/null
-              echo "⏸  $nom"
-              case " $geles " in *" $nom "*) ;; *) geles="$geles $nom" ;; esac
+              if gh api -X PUT "repos/$SELF/actions/workflows/$id/disable" >/dev/null; then
+                echo "⏸  $nom"
+                case " $geles " in *" $nom "*) ;; *) geles="$geles $nom" ;; esac
+              else
+                echo "::warning::$nom : pause refusée"
+                echecs="$echecs $nom"
+              fi
             fi
           done < <(gh api "repos/$SELF/actions/workflows" --paginate \
                      --jq '.workflows[] | "\(.id)\t\(.path)\t\(.state)"')
+          # Les workflows mis en pause par un run interrompu avant d'avoir mémorisé sa liste (20/11/2026 :
+          # 142 workflows) sont repris de docs/depot_neuf_geles.txt, sinon « degeler » les oublierait.
+          if [ -f docs/depot_neuf_geles.txt ]; then
+            while read -r nom; do
+              [ -n "$nom" ] || continue
+              case " $geles " in *" $nom "*) ;; *) geles="$geles $nom" ;; esac
+            done < docs/depot_neuf_geles.txt
+          fi
           geles=$(echo $geles)
           # Mémorisé pour « degeler » et « retour_arriere » (union : relancer
           # « geler » n'efface jamais la liste).
           gh variable set DEPOT_NEUF_WORKFLOWS -R "$SELF" --body "$geles"
           echo "$(echo $geles | wc -w) workflow(s) gelé(s), liste mémorisée dans la variable DEPOT_NEUF_WORKFLOWS."
+          if [ -n "$echecs" ]; then
+            echo "::error::Pause refusée pour :$echecs — relancer « geler » (sans danger)."; exit 1
+          fi
 
       - name: Attendre la fin des runs en cours
         if: env.ETAPE == 'geler'
@@ -177,7 +197,7 @@ jobs:
             exit 1
           fi
           actifs=$(gh api "repos/$SELF/actions/workflows" --paginate \
-                     --jq '.workflows[] | select(.state == "active") | .path' \
+                     --jq '.workflows[] | select(.state == "active") | select(.path | startswith("dynamic/") | not) | .path' \
                    | xargs -r -n1 basename | grep -vxF -e depot_neuf.yml -e appliquer_paquet.yml || true)
           if [ -n "$actifs" ]; then
             echo "::error::Workflows encore actifs ici : $actifs — lancer « geler » d'abord."

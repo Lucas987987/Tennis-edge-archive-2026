@@ -169,3 +169,32 @@ class InstantaneEtVerifier(Base):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+RACINE = Path(__file__).resolve().parents[1]
+
+
+class GelerRobuste(unittest.TestCase):
+    """20/11/2026 (paquet 303) : le 1er « geler » réel s'est arrêté sur la publication Pages (workflow automatique
+    « dynamic/… », HTTP 422) après 142 pauses, sans mémoriser sa liste."""
+    def setUp(self):
+        self.yml = (RACINE / '.github' / 'workflows' / 'depot_neuf.yml').read_text(encoding='utf-8')
+
+    def test_workflows_automatiques_sautes(self):
+        self.assertIn('case "$chemin" in dynamic/*)', self.yml)
+        self.assertIn('select(.path | startswith("dynamic/") | not)', self.yml)
+
+    def test_liste_memorisee_avant_l_erreur(self):
+        i = self.yml.index('gh variable set DEPOT_NEUF_WORKFLOWS')
+        self.assertLess(i, self.yml.index('Pause refusée pour :'))
+        self.assertIn('echo "::warning::$nom : pause refusée"', self.yml)
+
+    def test_liste_du_20_11_reprise(self):
+        noms = (RACINE / 'docs' / 'depot_neuf_geles.txt').read_text(encoding='utf-8').split()
+        self.assertEqual(len(noms), 142)
+        for n in ('capture_closing.yml', 'steam_pipeline.yml', 'video_simulation.yml', 'pages.yml'):
+            self.assertIn(n, noms)
+        self.assertNotIn('depot_neuf.yml', noms)
+        self.assertNotIn('appliquer_paquet.yml', noms)
+        self.assertIn('done < docs/depot_neuf_geles.txt', self.yml)
+        self.assertIn("env.ETAPE == 'controle' || env.ETAPE == 'geler' || env.ETAPE == 'copier'", self.yml)
