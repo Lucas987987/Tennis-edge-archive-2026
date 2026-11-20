@@ -3,10 +3,12 @@
 """
 sons_stade.py — la bande-son « stade » de la vidéo du jour en 3D (paquet 277, 18/11/2026), en STÉRÉO.
 
-Tout est fabriqué ici (numpy, scipy) : aucun enregistrement, aucune musique d'autrui.
-  — le public (paquet 300) : voix synthétiques qui parlent entre les points, applaudissements au rythme de chaque
-    spectateur, « ooooh » quand l'échange s'allonge, cris et sifflets sur les grands points ;
-  — le court : « pock » de la raquette (plus fort au service), rebonds, filet, crissement des semelles sur le dur,
+Paquet 302 : frappes, services, rebonds et public sont de VRAIS ENREGISTREMENTS sous licence Creative Commons 0
+(domaine public, freesound.org ; dossier sons/, sources dans sons/SOURCES.md). Le reste est fabriqué ici (numpy,
+scipy), aucune musique d'autrui ; les sons synthétiques d'avant restent en secours si un fichier manque.
+  — le public : un vrai stade entre les points, vrais applaudissements, vraie clameur sur les grands points ;
+    « ooooh » encore synthétique ;
+  — le court : vraies frappes (services à part) et vrais rebonds ; filet et crissement des semelles synthétiques,
     placés à gauche ou à droite selon l'image ;
   — l'habillage : souffle des transitions, impact du face-à-face, jingles télé courts, nappe musicale en ouverture
     et en fin ;
@@ -15,6 +17,10 @@ Tout est fabriqué ici (numpy, scipy) : aucun enregistrement, aucune musique d'a
   — une réverbération de grande salle sur le tout, puis un limiteur.
 Repli : si numpy ou scipy manque, scripts/video_simulation.py garde la bande-son de scripts/sons.py.
 """
+import json
+import os
+from math import gcd
+
 import numpy as np
 from scipy import signal
 from scipy.io import wavfile
@@ -55,22 +61,46 @@ def _lisse(n, freq, r):
 
 
 # ── le court ────────────────────────────────────────────────────────────────────────────────────────────────
-def pock(fort=1.0, r=None):
+# 19/11/2026 (paquet 301, Lucas : « la balle ne fait pas le bruit d'une balle de tennis qui frappe ») : l'ancien
+# « pock » tenait une note pure 18 ms (un « bip ») sur un « boum » grave. Une vraie frappe est un choc très bref et
+# CREUX : la coque de la balle sonne quelques millisecondes (trois résonances qui ne sont pas des harmoniques, la
+# hauteur baisse un peu en s'éteignant), le tamis donne un « ping » court vers 550 Hz, le cadre un petit coup sourd.
+def _mode(t, f, chute, glisse=0.05, phase=0.0):
+    """Une résonance amortie dont la hauteur baisse un peu en s'éteignant."""
+    fi = f * (1 - glisse * (1 - np.exp(-t / max(chute, 1e-4))))
+    return np.sin(2 * np.pi * np.cumsum(fi) / TAUX + phase) * np.exp(-t / chute)
+
+
+def _pock_synth(fort=1.0, r=None):
+    """Frappe de raquette (fort > 1 : service, plus sec et plus brillant)."""
     r = r or _rng(1)
-    n = int(0.12 * TAUX)
-    t = np.arange(n) / TAUX
-    clic = _bande(r.standard_normal(n), 1800, None) * np.exp(-t / 0.0025)
-    f = r.uniform(1050, 1350) * (1.08 if fort > 1 else 1)
-    corde = np.sin(2 * np.pi * f * t) * np.exp(-t / 0.018)
-    corps = np.sin(2 * np.pi * r.uniform(170, 220) * t) * np.exp(-t / 0.03)
-    return fort * (0.5 * clic + 0.42 * corde + 0.35 * corps)
-
-
-def rebond(r=None):
-    r = r or _rng(2)
     n = int(0.09 * TAUX)
     t = np.arange(n) / TAUX
-    return 0.22 * (np.sin(2 * np.pi * r.uniform(160, 230) * t) * np.exp(-t / 0.02) + 0.5 * _bande(r.standard_normal(n), 900, 4000) * np.exp(-t / 0.004))
+    sec = 1.0 if fort <= 1 else 0.8                                         # le service : sons encore plus courts
+    contact = _bande(r.standard_normal(n), 1500, 9000) * np.exp(-t / (0.0011 * sec))
+    f1 = r.uniform(1150, 1450) * (1.06 if fort > 1 else 1.0)
+    coque = (_mode(t, f1, 0.0055 * sec, phase=r.uniform(0, 6.28))
+             + 0.45 * _mode(t, f1 * r.uniform(1.9, 2.1), 0.0035 * sec, phase=r.uniform(0, 6.28))
+             + 0.22 * _mode(t, f1 * r.uniform(2.9, 3.2), 0.0024 * sec, phase=r.uniform(0, 6.28)))
+    tamis = _mode(t, r.uniform(500, 620), 0.009, 0.02)
+    cadre = _mode(t, r.uniform(140, 190), 0.012, 0.0)
+    x = 0.55 * contact + coque + 0.28 * tamis + 0.15 * cadre
+    x *= np.minimum(1, t / 0.0002)                                          # attaque franche, sans clic numérique
+    return 0.9 * fort * x / (np.abs(x).max() + 1e-9)
+
+
+def _rebond_synth(r=None):
+    """La balle sur le court : choc mat, coque plus grave et plus courte qu'à la frappe, petit coup du sol."""
+    r = r or _rng(2)
+    n = int(0.07 * TAUX)
+    t = np.arange(n) / TAUX
+    contact = _bande(r.standard_normal(n), 700, 5000) * np.exp(-t / 0.0014)
+    f1 = r.uniform(880, 1100)
+    coque = _mode(t, f1, 0.004, phase=r.uniform(0, 6.28)) + 0.35 * _mode(t, f1 * r.uniform(1.9, 2.1), 0.0025)
+    sol = _mode(t, r.uniform(120, 170), 0.012, 0.0)
+    x = 0.6 * contact + 0.75 * coque + 0.5 * sol
+    x *= np.minimum(1, t / 0.0003)
+    return 0.26 * x / (np.abs(x).max() + 1e-9)
 
 
 def filet(r=None):
@@ -164,7 +194,7 @@ def _boucle_brouhaha(duree, nb, r):
     return out / (np.sqrt((out ** 2).mean()) + 1e-9)
 
 
-def brouhaha(duree, r=None, niveau=0.06):
+def _brouhaha_synth(duree, r=None, niveau=0.06):
     """Le stade qui parle à voix basse entre les points : trois boucles de 9 s de 40 voix, enchaînées en fondu, gauche
     et droite décalées (pas de répétition audible)."""
     r = r or _rng(5)
@@ -199,7 +229,7 @@ def _claquement(r):
     return x / (np.abs(x).max() + 1e-9)
 
 
-def applaudir(duree=2.6, densite=900, vol=0.5, r=None):
+def _applaudir_synth(duree=2.6, densite=900, vol=0.5, r=None):
     """Applaudissements : densite/4 spectateurs, chacun à son rythme (3–5,5 frappes par seconde), qui commencent
     presque ensemble et s'arrêtent peu à peu ; proches (nets) ou lointains (plus sourds)."""
     r = r or _rng(6)
@@ -274,9 +304,9 @@ def sifflet(duree=1.2, r=None):
     return x * env
 
 
-def ovation(duree=3.8, r=None):
+def _ovation_synth(duree=3.8, r=None):
     r = r or _rng(9)
-    out = _somme(applaudir(duree, 1900, 0.5, r), clameur(duree * 0.8, 0.3, r))
+    out = _somme(_applaudir_synth(duree, 1900, 0.5, r), clameur(duree * 0.8, 0.3, r))
     for _ in range(2):                                                       # deux sifflets dans la salle
         s = sifflet(r.uniform(0.8, 1.3), r) * 0.07
         d0 = int(r.uniform(0.2, 1.2) * TAUX)
@@ -364,6 +394,122 @@ def sono(x):
     """La voix de l'arbitre dans les haut-parleurs du stade : bande étroite, un peu saturée."""
     x = _bande(x, 280, 4800, 2)
     return np.tanh(2.2 * x / (np.abs(x).max() + 1e-9)) * 0.42
+
+
+# ── vrais sons (paquet 302) ────────────────────────────────────────────────────────────────────────────────
+# 20/11/2026 (Lucas : « On doit pouvoir récupérer des sons déjà faits ») : frappes, services, rebonds et public
+# ENREGISTRÉS, tous sous licence Creative Commons 0 (domaine public), pris sur freesound.org, découpés et égalisés une
+# fois (dossier sons/, sources dans sons/SOURCES.md). S'il manque un fichier, le son synthétique d'avant prend le relais.
+DOSSIER_SONS = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'sons')
+_BANQUE = None
+
+
+def banque():
+    """{nom: liste d'extraits mono (frappes, services, rebonds) ou tableau stéréo (public)}, au taux du mixage."""
+    global _BANQUE
+    if _BANQUE is not None:
+        return _BANQUE
+    _BANQUE = {}
+    try:
+        with open(os.path.join(DOSSIER_SONS, 'banque.json'), encoding='utf-8') as f:
+            meta = json.load(f)
+    except (OSError, ValueError):
+        return _BANQUE
+    for nom, m in meta.items():
+        try:
+            sr, x = wavfile.read(os.path.join(DOSSIER_SONS, nom + '.wav'))
+        except (OSError, ValueError):
+            continue
+        x = x.astype(np.float64) / 32767
+        if sr != TAUX:
+            g = gcd(TAUX, sr)
+            x = signal.resample_poly(x, TAUX // g, sr // g, axis=0)
+        if 'case_s' in m:
+            lg = int(round(m['case_s'] * TAUX))
+            mono = x if x.ndim == 1 else x.mean(axis=1)
+            _BANQUE[nom] = [mono[k * lg:(k + 1) * lg] for k in range(len(mono) // lg)]
+        else:
+            _BANQUE[nom] = x if x.ndim == 2 else np.stack([x, x], axis=1)
+    return _BANQUE
+
+
+def _extrait(x, duree, r, debut=None, fondu_entree=0.12, fondu_sortie=0.8):
+    """Un morceau stéréo de `duree` s d'un enregistrement (bouclé en fondu s'il est trop court)."""
+    n = int(duree * TAUX)
+    if len(x) < n + 1:
+        fo = int(1.0 * TAUX)
+        rampe = np.linspace(0, 1, fo)[:, None]
+        out = np.zeros((n + len(x), 2))
+        pos = 0
+        while pos < n:
+            b = x.copy()
+            b[:fo] *= rampe
+            b[-fo:] *= rampe[::-1]
+            out[pos:pos + len(b)] += b[:len(out) - pos]
+            pos += len(x) - fo
+        x = out
+    d = int(r.integers(0, max(1, len(x) - n))) if debut is None else min(int(debut * TAUX), len(x) - n)
+    y = x[d:d + n].copy()
+    fe, fs = int(fondu_entree * TAUX), int(min(fondu_sortie, duree / 2) * TAUX)
+    if fe:
+        y[:fe] *= np.linspace(0, 1, fe)[:, None]
+    if fs:
+        y[-fs:] *= np.linspace(1, 0, fs)[:, None] ** 1.5
+    return y
+
+
+def pock(fort=1.0, r=None):
+    """Frappe : un vrai enregistrement (service si fort > 1), sinon la frappe synthétique du paquet 301."""
+    r = r or _rng(1)
+    b = banque().get('services' if fort > 1 else 'frappes')
+    if not b:
+        return _pock_synth(fort, r)
+    x = b[int(r.integers(len(b)))]
+    return 0.9 * fort * x / (np.abs(x).max() + 1e-9)
+
+
+def rebond(r=None):
+    r = r or _rng(2)
+    b = banque().get('rebonds')
+    if not b:
+        return _rebond_synth(r)
+    x = b[int(r.integers(len(b)))]
+    return 0.26 * x / (np.abs(x).max() + 1e-9)
+
+
+def brouhaha(duree, r=None, niveau=0.06):
+    """Le public entre les points : un vrai stade enregistré (même niveau moyen que l'ancien), sinon les voix
+    synthétiques du paquet 300."""
+    r = r or _rng(5)
+    x = banque().get('public_murmure')
+    if x is None:
+        return _brouhaha_synth(duree, r, niveau)
+    y = _extrait(x, duree, r, fondu_entree=min(1.0, duree / 3), fondu_sortie=min(1.0, duree / 3))
+    return niveau * 0.42 * y / (np.sqrt((y ** 2).mean()) + 1e-9)
+
+
+def applaudir(duree=2.6, densite=900, vol=0.5, r=None):
+    """Applaudissements enregistrés (deux couches décalées si le public est nombreux), sinon synthétiques."""
+    r = r or _rng(6)
+    x = banque().get('public_applaudissements')
+    if x is None:
+        return _applaudir_synth(duree, densite, vol, r)
+    y = _extrait(x, duree, r, fondu_sortie=duree * 0.45)
+    if densite > 1500:
+        y = y + 0.8 * _extrait(x, duree, r, fondu_sortie=duree * 0.45)[:, ::-1]
+    return vol * y / (np.abs(y).max() + 1e-9)
+
+
+def ovation(duree=3.8, r=None):
+    """Grand point : la clameur d'un vrai stade (deux enregistrements au choix) sur des applaudissements."""
+    r = r or _rng(9)
+    B = banque()
+    choix = [B[k] for k in ('public_ovation', 'public_ovation2') if k in B]
+    if not choix:
+        return _ovation_synth(duree, r)
+    cri = _extrait(choix[int(r.integers(len(choix)))], duree, r, debut=0.0, fondu_entree=0.02, fondu_sortie=duree * 0.4)
+    cri = cri / (np.abs(cri).max() + 1e-9)
+    return 0.8 * cri + applaudir(duree, 1900, 0.35, r)
 
 
 SONS = {
