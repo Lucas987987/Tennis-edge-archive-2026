@@ -3171,6 +3171,14 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H13|2026-11-19_jordan_lee_andres_martin|home": {
+   "gagne": 1,
+   "pnl": 1.5,
+   "pin_close": 2.16,
+   "pin_close_adv": 1.719,
+   "clv_pin": 9.831,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H13|2026-11-20_harry_wendelken_jordan_lee|away": {
    "gagne": null,
    "pnl": null,
    "pin_close": null,
@@ -4411,6 +4419,14 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H14|2026-11-19_jordan_lee_andres_martin|home": {
+   "gagne": 1,
+   "pnl": 1.5,
+   "pin_close": 2.16,
+   "pin_close_adv": 1.719,
+   "clv_pin": 9.831,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H14|2026-11-20_carlos_alcaraz_flavio_cobolli|away": {
    "gagne": null,
    "pnl": null,
    "pin_close": null,
@@ -4418,7 +4434,31 @@
    "clv_pin": null,
    "source_resultat": "inconnu"
   },
-  "H14|2026-11-20_carlos_alcaraz_flavio_cobolli|away": {
+  "H14|2026-11-20_guido_ivan_justo_franco_roncadelli|home": {
+   "gagne": null,
+   "pnl": null,
+   "pin_close": null,
+   "pin_close_adv": null,
+   "clv_pin": null,
+   "source_resultat": "inconnu"
+  },
+  "H14|2026-11-20_harry_wendelken_jordan_lee|away": {
+   "gagne": null,
+   "pnl": null,
+   "pin_close": null,
+   "pin_close_adv": null,
+   "clv_pin": null,
+   "source_resultat": "inconnu"
+  },
+  "H14|2026-11-20_oliver_tarvet_spencer_johnson|away": {
+   "gagne": null,
+   "pnl": null,
+   "pin_close": null,
+   "pin_close_adv": null,
+   "clv_pin": null,
+   "source_resultat": "inconnu"
+  },
+  "H14|2026-11-21_liam_broady_jay_friend|home": {
    "gagne": null,
    "pnl": null,
    "pin_close": null,
@@ -5523,12 +5563,12 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H15|2026-11-19_jordan_lee_andres_martin|home": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 1,
+   "pnl": 1.5,
+   "pin_close": 2.16,
+   "pin_close_adv": 1.719,
+   "clv_pin": 9.831,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-10-01_abdullah_shelbayh_daniil_ostapenkov|home": {
    "gagne": 1,
@@ -7867,12 +7907,12 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-11-19_alexander_zverev_arthur_fils|home": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 1,
+   "pnl": 0.39,
    "pin_close": 1.317,
    "pin_close_adv": 3.77,
    "clv_pin": 4.252,
-   "source_resultat": "inconnu"
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-11-19_ben_shelton_rafael_jodar|home": {
    "gagne": 1,
@@ -7891,12 +7931,12 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-11-19_daniel_milavsky_liam_draxl|away": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 1,
+   "pnl": 0.64,
+   "pin_close": 1.719,
+   "pin_close_adv": 2.17,
+   "clv_pin": -7.881,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-11-19_harold_mayot_hugo_gaston|away": {
    "gagne": 0,
@@ -7907,11 +7947,19 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H16B|2026-11-19_harry_wendelken_geoffrey_blancaneaux|home": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 1,
+   "pnl": 0.41,
    "pin_close": 1.349,
    "pin_close_adv": 3.31,
    "clv_pin": 2.145,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16B|2026-11-20_sascha_gueymard_wayenburg_luca_nardi|away": {
+   "gagne": null,
+   "pnl": null,
+   "pin_close": null,
+   "pin_close_adv": null,
+   "clv_pin": null,
    "source_resultat": "inconnu"
   },
   "H16|2026-09-26_anna_bondar_elena_gabriela_ruse|away": {
@@ -10651,12 +10699,12 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-19_alexander_zverev_arthur_fils|home": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 1,
+   "pnl": 0.39,
    "pin_close": 1.317,
    "pin_close_adv": 3.77,
    "clv_pin": 4.252,
-   "source_resultat": "inconnu"
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-19_ben_shelton_rafael_jodar|home": {
    "gagne": 1,
@@ -10675,20 +10723,20 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-19_daniel_milavsky_liam_draxl|away": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 1,
+   "pnl": 0.64,
+   "pin_close": 1.719,
+   "pin_close_adv": 2.17,
+   "clv_pin": -7.881,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-19_dylan_dietrich_justin_boulais|home": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 1,
+   "pnl": 0.11,
+   "pin_close": 1.095,
+   "pin_close_adv": 7.19,
+   "clv_pin": -0.14,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-19_harold_mayot_hugo_gaston|away": {
    "gagne": 0,
@@ -10699,11 +10747,19 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H16|2026-11-19_harry_wendelken_geoffrey_blancaneaux|home": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 1,
+   "pnl": 0.41,
    "pin_close": 1.349,
    "pin_close_adv": 3.31,
    "clv_pin": 2.145,
+   "source_resultat": "feuille de match (TennisApi)"
+  },
+  "H16|2026-11-20_sascha_gueymard_wayenburg_luca_nardi|away": {
+   "gagne": null,
+   "pnl": null,
+   "pin_close": null,
+   "pin_close_adv": null,
+   "clv_pin": null,
    "source_resultat": "inconnu"
   },
   "H17|2026-09-27_luca_staeheli_bruno_kuzuhara|away": {
@@ -11595,28 +11651,28 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H17|2026-11-19_daniel_milavsky_liam_draxl|away": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 1,
+   "pnl": 0.64,
+   "pin_close": 1.719,
+   "pin_close_adv": 2.17,
+   "clv_pin": -7.881,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H17|2026-11-19_harry_wendelken_geoffrey_blancaneaux|home": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 1,
+   "pnl": 0.41,
    "pin_close": 1.349,
    "pin_close_adv": 3.31,
    "clv_pin": 2.145,
-   "source_resultat": "inconnu"
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H17|2026-11-19_jordan_lee_andres_martin|home": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 1,
+   "pnl": 1.5,
+   "pin_close": 2.16,
+   "pin_close_adv": 1.719,
+   "clv_pin": 9.831,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H18|2026-10-01_henry_bernet_dominic_stricker|away": {
    "gagne": 0,
@@ -11955,20 +12011,20 @@
    "source_resultat": "feuille de match (TennisApi)"
   },
   "H18|2026-11-19_daniel_milavsky_liam_draxl|away": {
-   "gagne": null,
-   "pnl": null,
-   "pin_close": null,
-   "pin_close_adv": null,
-   "clv_pin": null,
-   "source_resultat": "inconnu"
+   "gagne": 1,
+   "pnl": 0.64,
+   "pin_close": 1.719,
+   "pin_close_adv": 2.17,
+   "clv_pin": -7.881,
+   "source_resultat": "feuille de match (TennisApi)"
   },
   "H18|2026-11-19_harry_wendelken_geoffrey_blancaneaux|home": {
-   "gagne": null,
-   "pnl": null,
+   "gagne": 1,
+   "pnl": 0.41,
    "pin_close": 1.349,
    "pin_close_adv": 3.31,
    "clv_pin": 2.145,
-   "source_resultat": "inconnu"
+   "source_resultat": "feuille de match (TennisApi)"
   }
  }
 }
