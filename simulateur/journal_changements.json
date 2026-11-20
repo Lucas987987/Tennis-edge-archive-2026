@@ -1431,6 +1431,13 @@
    "paquet": 302,
    "quoi": "VIDÉO 3D — VRAIS SONS (paquet 302, Lucas : « On doit pouvoir récupérer des sons déjà faits »). La bande-son (scripts/sons_stade.py) utilise maintenant de vrais enregistrements, tous sous licence Creative Commons 0 (domaine public), pris sur freesound.org par Lucas et découpés une fois (nouveau dossier sons/, sources dans sons/SOURCES.md) : 24 frappes, 19 services et 20 rebonds (jamesdrake89), le murmure et deux clameurs d'une vraie tribune (OroborosNZ), des applaudissements (thesandro). Mêmes niveaux qu'avant dans le mixage. Restent synthétiques : le « ooooh » du public, le filet, les semelles, les jingles. Si un fichier manque, les sons synthétiques des paquets 300 et 301 reprennent. Le workflow vidéo récupère aussi le dossier sons/.",
    "garde_fou": "Retrait : supprimer le dossier sons/ (la bande-son repasse seule aux sons synthétiques), ou remettre scripts/sons_stade.py, tests/test_public_stade.py et .github/workflows/video_simulation.yml du paquet 301."
+  },
+  {
+   "date": "2026-11-20",
+   "statut": "production",
+   "paquet": 303,
+   "quoi": "DÉPÔT NEUF — « geler » réparé (paquet 303). Le premier « geler » réel (20/11) a mis 142 workflows en pause puis s'est arrêté sur la publication Pages, un workflow automatique de GitHub (chemin dynamic/…) qui ne se met jamais en pause (HTTP 422) ; la liste des workflows gelés n'avait donc pas été mémorisée. Désormais : les workflows automatiques sont sautés (aussi dans la vérification de « copier ») ; une pause refusée n'arrête plus la boucle (la liste est mémorisée d'abord, l'erreur vient après) ; les 142 workflows gelés le 20/11 sont repris de docs/depot_neuf_geles.txt, pour que « degeler » les réactive tous dans le nouveau dépôt.",
+   "garde_fou": "Aucun changement hors du workflow « Dépôt neuf ». Retrait : remettre .github/workflows/depot_neuf.yml et tests/test_depot_neuf.py d'avant ce paquet, supprimer docs/depot_neuf_geles.txt."
   }
  ]
 }
