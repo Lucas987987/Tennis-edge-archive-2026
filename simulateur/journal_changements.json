@@ -1417,6 +1417,20 @@
    "paquet": 300,
    "quoi": "VIDÉO 3D — PUBLIC PLUS CLAIR (paquet 300, Lucas : « le bruit du public, ce n'est pas du tout clair »). Le public de la bande-son (scripts/sons_stade.py) était du bruit filtré : on n'y reconnaissait ni des voix ni des mains. Il est refait, toujours sans aucun enregistrement : (1) entre les points, 40 personnes qui parlent (voix synthétiques : hauteur d'homme ou de femme, voyelles, syllabes, consonnes discrètes, pauses), lointaines, sans grondement grave, un peu plus bas qu'avant pour laisser entendre le court et l'arbitre ; (2) applaudissements : chaque spectateur frappe à son rythme (3 à 5,5 fois par seconde) avec la résonance de ses mains, puis s'arrête à son moment ; (3) « ooooh » et cris de joie chantés par 60 à 70 voix sur une voyelle, deux sifflets dans les ovations. Le reste de la bande-son (raquette, rebonds, arbitre, jingles, salle) ne change pas.",
    "garde_fou": "Retrait : remettre scripts/sons_stade.py du paquet 277 (ou d'avant ce paquet) et supprimer tests/test_public_stade.py. Sans numpy ou scipy, la vidéo garde l'ancienne bande-son (scripts/sons.py) comme avant."
+  },
+  {
+   "date": "2026-11-19",
+   "statut": "production",
+   "paquet": 301,
+   "quoi": "VIDÉO 3D — BRUIT DE LA FRAPPE (paquet 301, Lucas : « la balle ne fait pas le bruit d'une balle de tennis qui frappe »). L'ancien « pock » de scripts/sons_stade.py tenait une note pure pendant 18 ms (un « bip ») sur un « boum » grave. La frappe est refaite comme un choc bref et creux : contact sec, coque de la balle qui sonne quelques millisecondes (trois résonances non harmoniques, hauteur qui baisse en s'éteignant), « ping » court du tamis vers 550 Hz, petit coup sourd du cadre ; le service est plus sec et plus brillant. Le rebond suit la même logique, plus mat et plus grave. Mesuré : −20 dB en moins de 20 ms. Rien d'enregistré ; le reste de la bande-son ne change pas.",
+   "garde_fou": "Retrait : remettre scripts/sons_stade.py et tests/test_public_stade.py du paquet 300."
+  },
+  {
+   "date": "2026-11-20",
+   "statut": "production",
+   "paquet": 302,
+   "quoi": "VIDÉO 3D — VRAIS SONS (paquet 302, Lucas : « On doit pouvoir récupérer des sons déjà faits »). La bande-son (scripts/sons_stade.py) utilise maintenant de vrais enregistrements, tous sous licence Creative Commons 0 (domaine public), pris sur freesound.org par Lucas et découpés une fois (nouveau dossier sons/, sources dans sons/SOURCES.md) : 24 frappes, 19 services et 20 rebonds (jamesdrake89), le murmure et deux clameurs d'une vraie tribune (OroborosNZ), des applaudissements (thesandro). Mêmes niveaux qu'avant dans le mixage. Restent synthétiques : le « ooooh » du public, le filet, les semelles, les jingles. Si un fichier manque, les sons synthétiques des paquets 300 et 301 reprennent. Le workflow vidéo récupère aussi le dossier sons/.",
+   "garde_fou": "Retrait : supprimer le dossier sons/ (la bande-son repasse seule aux sons synthétiques), ou remettre scripts/sons_stade.py, tests/test_public_stade.py et .github/workflows/video_simulation.yml du paquet 301."
   }
  ]
 }

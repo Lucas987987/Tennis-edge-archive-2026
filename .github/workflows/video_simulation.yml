@@ -76,6 +76,7 @@ jobs:
             /scripts/sons.py
             /scripts/sons_stade.py
             /scripts/voix.py
+            /sons/
 
       - uses: actions/setup-python@v6
         with:
