@@ -2,11 +2,11 @@
  "dernier_passage": {
   "arret": null,
   "codes": {
-   "200": 8
+   "200": 6
   },
-  "le": "2026-11-20T01:16:17+00:00",
-  "quota_restant": 14438,
-  "requetes": 8
+  "le": "2026-11-20T03:18:57+00:00",
+  "quota_restant": 14373,
+  "requetes": 6
  },
  "jours": {
   "2024-06-01": {
